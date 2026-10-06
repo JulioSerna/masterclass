@@ -1,0 +1,27 @@
+{
+  "assets": [
+    {
+      "file": "vauxoo-academy-logo-white.svg",
+      "source_ai": "vauxoo-academy-logo-white.ai",
+      "description": "Vauxoo Academy wordmark + isotipo, solid white. Canonical dark-background logo.",
+      "format": "svg (vector)",
+      "viewBox": "0 0 510.52 158.8",
+      "background": "transparent",
+      "status": "confirmed",
+      "keywords": ["academy", "logo", "wordmark", "white", "dark background"],
+      "canonical_source_folder": "C:\\Users\\jomdu\\Documents\\Vauxoo\\Vauxoo-academy\\Identidad",
+      "use": "Place on the azul-academy gradient (assets/backgrounds/vauxoo-academy-gradient-bg.svg) or any dark surface."
+    },
+    {
+      "file": "vauxoo-academy-logo-light.svg",
+      "description": "Vauxoo Academy wordmark + isotipo, color. Canonical light-background logo. Isotipo carries a diagonal gradient (#393B4B -> #8D1C3A -> #DE002B); 'VAUXOO' wordmark in #A20029; 'ACADEMY' wordmark in #3C3C3B.",
+      "format": "svg (vector)",
+      "viewBox": "0 0 510.52 158.8",
+      "background": "transparent",
+      "status": "confirmed",
+      "keywords": ["academy", "logo", "wordmark", "color", "light background", "white background"],
+      "canonical_source_folder": "C:\\Users\\jomdu\\Documents\\Vauxoo\\Vauxoo-academy\\Identidad",
+      "use": "Place on plain white background only."
+    }
+  ]
+}

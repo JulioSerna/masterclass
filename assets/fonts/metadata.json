@@ -1,0 +1,13 @@
+{
+  "assets": [
+    { "file": "sora-regular.woff2", "family": "Sora", "weight": 400, "role": "primary" },
+    { "file": "sora-semibold.woff2", "family": "Sora", "weight": 600, "role": "primary" },
+    { "file": "sora-bold.woff2", "family": "Sora", "weight": 700, "role": "primary" },
+    { "file": "sora-extrabold.woff2", "family": "Sora", "weight": 800, "role": "primary" },
+    { "file": "manrope-light.woff2", "family": "Manrope", "weight": 300, "role": "secondary" },
+    { "file": "manrope-regular.woff2", "family": "Manrope", "weight": 400, "role": "secondary" },
+    { "file": "manrope-semibold.woff2", "family": "Manrope", "weight": 600, "role": "secondary" }
+  ],
+  "license": "SIL Open Font License 1.1 (see sora-ofl.txt / manrope-ofl.txt)",
+  "note": "Vendored from agents-brand-guide-vauxoo/assets/fonts/ on 2026-09-16 so this repo has zero filesystem dependency on the parent brand repo. Both fonts are OFL-licensed and freely redistributable."
+}

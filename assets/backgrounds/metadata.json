@@ -1,0 +1,15 @@
+{
+  "assets": [
+    {
+      "file": "vauxoo-academy-gradient-bg.svg",
+      "source_ai": "vauxoo-academy-gradient-bg.ai",
+      "description": "Full Academy hero background: azul-academy gradient (#345D90 left to #172A45 right, horizontal) plus a low-opacity layered vertical-bar/line-art texture.",
+      "format": "svg (vector)",
+      "viewBox": "0 0 1920 1080",
+      "status": "confirmed",
+      "keywords": ["academy", "background", "gradient", "texture", "hero"],
+      "canonical_source_folder": "C:\\Users\\jomdu\\Documents\\Vauxoo\\Vauxoo-academy\\Identidad",
+      "use": "Inline this SVG as the background for hero sections, title slides, and banners. If the deliverable format can't embed a complex SVG, fall back to the flat gradient (linear-gradient(90deg, #345D90 0%, #172A45 100%)) instead of fabricating a different texture."
+    }
+  ]
+}

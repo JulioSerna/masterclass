@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.DS_Store
+vauxoo-academy-brand/
+generate_assets_helper.py
+generate_full_html.py
+generate_hub.py
+generate_suite.py
+builder.py
+builder_core.py
+*.ai
+build_full_site.py
+make_masterclass_hub.py
