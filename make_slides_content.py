@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 # Content for all 18 slides of the Masterclass 2026
-# EXACT EXECUTION OF PLAN FINAL FUSIONADO V2 (plan_v2_critico.md + setup_masterclass.py)
-# - No MRP / Manufactura
-# - Mega-Caso: Importación, USD y Pedimentos (30 min)
-# - Descuadre real: Cuenta 115.01.01 ($487,200 MXN) vs Reporte ($200 MXN) -> Descuadre de $487,000 MXN
-# - Casos de prueba reales: WIDGET-MX, SENSOR-USD, VALVULA-NEG, MCU-TC-ERR, CABLE-MERMA, TARJETA-OBS, LANDED-COST
+# STRICTLY FOLLOWING masterclass-plan-final.md (Plan Definitivo v4)
+# - Marco Narrativo: Las 3 Causas Raíz (Configuración, Operación, Auditoría)
+# - Números reales: Cuenta 115.01.01 ($487,200.00 MXN) vs Existencias ($75,925.00 MXN) -> Descuadre $411,275.00 MXN
+# - Póliza manual intrusa: MISC/2026/09/0001 por $487,000.00 MXN
+# - Bloque 1 (7 min): Hook real
+# - Bloque 2 (10 min): Odoo 19 AVCO + Alerta: Cambios de Configuración en Caliente ("Dos malas no hacen una buena")
+# - Bloque 3 (20 min): Caso 1 WIDGET-MX ($160 MXN) + Caso 2 Compras USD & Landed Costs ($1,850 -> $2,100 MXN)
+# - Bloque 4 (16 min, 4 min c/u): VALVULA-NEG, TC erróneo DOF, CABLE-MERMA (15m @ $85 MXN a gasto), TARJETA-OBS (cuenta 108.02.01)
+# - Bloque 5 (14 min): Matriz de Cadencia + Caza de MISC/2026/09/0001 + 3 Reglas Blindadas
+# - Bloque 6 (23 min): Q&A Hot Seat de consultoría
 
 def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_light):
     return [
@@ -15,7 +20,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "bg": "gradient",
             "time": "00:00",
             "block": "Apertura",
-            "notes": "Bienvenida formal de Julio Serna (PM y Experto Funcional en Vauxoo). Contexto de Vauxoo Academy. Reglas de la sesión: 90 minutos de pura trinchera contable y logística en México, sin teoría vacía. Enfoque exclusivo en Odoo 19.0, Costo Promedio (AVCO) y desastres de importación.",
+            "notes": "Bienvenida de Julio Serna (PM y Experto Funcional en Vauxoo). Masterclass 2026 de Vauxoo Academy. Reglas de la sesión: 90 minutos estrictos enfocados en la trinchera contable y logística mexicana en Odoo 19.0 Enterprise. Enfoque exclusivo en Costo Promedio (AVCO) perpetuo.",
             "html": f'''
             <div class="slide-content cover-slide">
               <div class="cover-logo-wrap">
@@ -23,19 +28,19 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
               </div>
               <div class="cover-badge-row">
                 <span class="pill-badge">MASTERCLASS 2026</span>
-                <span class="pill-badge-outline">ODOO 19.0 · MÉXICO</span>
-                <span class="pill-badge-outline">90 MINUTOS</span>
+                <span class="pill-badge-outline">ODOO 19.0 ENTERPRISE · MÉXICO</span>
+                <span class="pill-badge-outline">90 MINUTOS ESTRICTOS</span>
               </div>
               <h1 class="cover-title">
                 De la Logística a la Contabilidad:
                 <span class="doodle-wrap">
-                  Domina AVCO y Desastres de Importación
+                  Domina la Valoración de Inventarios
                   {doodle_underline}
                 </span>
                 en Odoo 19.0
               </h1>
               <p class="cover-subtitle">
-                Arquitectura de Costo Promedio, Compras en USD, Pedimentos Aduanales (Landed Costs), Resolución de Desastres Reales y Cierre Contable SAT.
+                Arquitectura de Costo Promedio (AVCO), Compras en USD, Landed Costs y Blindaje Contable-Fiscal ante el SAT.
               </p>
               <div class="cover-footer">
                 <div class="speaker-card">
@@ -47,26 +52,68 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 </div>
                 <div class="cover-price-tag">
                   <span class="price-val">$100 USD</span>
-                  <span class="price-label">Acceso Total · Grabación · Entregables</span>
+                  <span class="price-label">Acceso Total · Grabación HD · Entregables</span>
                 </div>
               </div>
             </div>
             '''
         },
-        # Slide 2: Mapa de Ruta Minuto a Minuto
+        # Slide 2: El Marco Narrativo - Las 3 Causas Raíz
         {
             "id": 2,
-            "title": "Mapa de Ruta (90 Minutos)",
+            "title": "Las 3 Causas Raíz del Divorcio",
             "bg": "white",
-            "time": "00:00 - 00:03",
-            "block": "Estructura",
-            "notes": "Presentar los 6 bloques cronometrados del Plan Final Fusionado v2. Enfatizar que se eliminó el relleno y la manufactura para dedicar 30 minutos completos al Mega-Caso de Importaciones en USD, que es donde el 90% de las empresas mexicanas tienen contingencias con el SAT.",
+            "time": "00:01 - 00:03",
+            "block": "Marco Narrativo",
+            "notes": "Presentar el hilo conductor de toda la masterclass: las 3 causas raíz detectadas en más de una década de implementaciones en México. 1. Configuración errática; 2. Parches operativos manuales; 3. Auditoría tardía por falta de cadencia.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">AGENDA EJECUTIVA</span>
-                  <h2 class="slide-title">Cronograma de Batalla: 90 Minutos</h2>
+                  <span class="pill-badge">MARCO NARRATIVO</span>
+                  <h2 class="slide-title">Las 3 Causas Raíz del Divorcio Almacén-Contabilidad</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">Más de una década de auditorías de inventario en México demuestran que el descuadre nace de 3 vicios:</p>
+              
+              <div class="agenda-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="agenda-card" style="border-top: 4px solid #1E293B;">
+                  <div class="agenda-time">BLOQUE 2</div>
+                  <div class="agenda-num">01</div>
+                  <div class="agenda-title">CONFIGURACIÓN ERRÁTICA</div>
+                  <p class="agenda-desc"><strong>"Dos malas no hacen una buena."</strong> Cambiar métodos en caliente (periódico ↔ perpetuo o standard ↔ AVCO) sin saber que Odoo 19 no genera pólizas retroactivas automáticas.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid var(--rojo-vauxoo);">
+                  <div class="agenda-time">BLOQUES 1 Y 5</div>
+                  <div class="agenda-num">02</div>
+                  <div class="agenda-title">PARCHES OPERATIVOS</div>
+                  <p class="agenda-desc"><strong>"La aspirina manual."</strong> El contador, presionado por el cierre mensual, mete pólizas manuales ciegas a la cuenta 1150 rompiendo la paridad con el kardex físico.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #475569;">
+                  <div class="agenda-time">BLOQUE 5</div>
+                  <div class="agenda-num">03</div>
+                  <div class="agenda-title">AUDITORÍA TARDÍA</div>
+                  <p class="agenda-desc"><strong>"El costo de la infrecuencia."</strong> Esperar al cierre anual cuando hay miles de movimientos acumulados hace que encontrar la desviación sea una pesadilla de semanas.</p>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+        # Slide 3: Cronograma de Batalla Rebalanceado
+        {
+            "id": 3,
+            "title": "Cronograma de Batalla (90 min)",
+            "bg": "white",
+            "time": "00:03 - 00:07",
+            "block": "Estructura",
+            "notes": "Mostrar el cronograma rebalanceado de 90 minutos exactos: Bloque 1 (7 min), Bloque 2 (10 min con +2 min para la trampa de configuración), Bloque 3 (20 min con flujos limpios), Bloque 4 (16 min con 4 min exactos por desastre), Bloque 5 (14 min con cadencia y caza de póliza) y Bloque 6 (23 min de Hot Seat).",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge">AGENDA REBALANCEADA</span>
+                  <h2 class="slide-title">Estructura Minuto a Minuto (90 Minutos Estrictos)</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
@@ -74,61 +121,61 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 <div class="agenda-card">
                   <div class="agenda-time">00:00 – 00:07 (7 min)</div>
                   <div class="agenda-num">01</div>
-                  <div class="agenda-title">EL HOOK: El Dolor que Todos Conocen</div>
-                  <p class="agenda-desc">Pantalla dividida: Cuenta 115.01.01 vs Reporte de Valoración. Descuadre real de casi medio millón de pesos.</p>
+                  <div class="agenda-title">EL HOOK: El Dolor Real</div>
+                  <p class="agenda-desc">Balanza 115.01.01 vs Reporte de Existencias. Descuadre en vivo de $411,275.00 MXN.</p>
                 </div>
                 <div class="agenda-card">
-                  <div class="agenda-time">00:07 – 00:15 (8 min)</div>
+                  <div class="agenda-time">00:07 – 00:17 (10 min)</div>
                   <div class="agenda-num">02</div>
-                  <div class="agenda-title">EL NUEVO PARADIGMA: Odoo 19.0</div>
-                  <p class="agenda-desc">Foco 100% en AVCO. Adiós SVL, adiós cuentas puente interim. Interfaz guiada de valoración y corte.</p>
+                  <div class="agenda-title">EL NUEVO PARADIGMA</div>
+                  <p class="agenda-desc">Odoo 19 AVCO + La alerta técnica: Cambios de método en caliente y sus vacíos.</p>
                 </div>
-                <div class="agenda-card" style="border: 2px solid var(--rojo-vauxoo);">
-                  <div class="agenda-time">00:15 – 00:45 (30 min)</div>
+                <div class="agenda-card">
+                  <div class="agenda-time">00:17 – 00:37 (20 min)</div>
                   <div class="agenda-num">03</div>
-                  <div class="agenda-title">EL MEGA-CASO: USD Y PEDIMENTOS</div>
-                  <p class="agenda-desc">El núcleo de la sesión: Anticipos en USD, recepción aduanal vs factura, Landed Costs del pedimento y CFDI de pago.</p>
+                  <div class="agenda-title">CASOS PRÁCTICOS EN VIVO</div>
+                  <p class="agenda-desc">Flujo limpio en MXN ($160 MXN) y Compras en USD con Landed Costs ($1,850 → $2,100 MXN).</p>
                 </div>
                 <div class="agenda-card">
-                  <div class="agenda-time">00:45 – 01:05 (20 min)</div>
+                  <div class="agenda-time">00:37 – 00:53 (16 min)</div>
                   <div class="agenda-num">04</div>
-                  <div class="agenda-title">LA CLÍNICA DE DESASTRES</div>
-                  <p class="agenda-desc">Stock negativo con AVCO, ajustes físicos por merma (gastos no deducibles) y provisión de inventario obsoleto.</p>
+                  <div class="agenda-title">CLÍNICA DE DESASTRES</div>
+                  <p class="agenda-desc">4 min c/u: Stock negativo, TC erróneo DOF, Mermas a gasto y Obsolescencia NIF C-4.</p>
                 </div>
                 <div class="agenda-card">
-                  <div class="agenda-time">01:05 – 01:15 (10 min)</div>
+                  <div class="agenda-time">00:53 – 01:07 (14 min)</div>
                   <div class="agenda-num">05</div>
                   <div class="agenda-title">EL MOMENTO DE LA VERDAD</div>
-                  <p class="agenda-desc">Auditoría en vivo: rastreo y reversa del asiento manual intruso de $487,000 MXN. Las 3 Reglas de Oro.</p>
+                  <p class="agenda-desc">Matriz de Cadencia + Caza de la póliza MISC/2026/09/0001 ($487k) + 3 Reglas de Oro.</p>
                 </div>
                 <div class="agenda-card">
-                  <div class="agenda-time">01:15 – 01:30 (15 min)</div>
+                  <div class="agenda-time">01:07 – 01:30 (23 min)</div>
                   <div class="agenda-num">06</div>
-                  <div class="agenda-title">HOT SEAT & ENTREGABLES</div>
-                  <p class="agenda-desc">Consultoría en directo con preguntas de la audiencia. Distribución de Checklist y Tabla de Mapeo 18→19.</p>
+                  <div class="agenda-title">HOT SEAT & CONSULTORÍA</div>
+                  <p class="agenda-desc">23 minutos de consultoría directa sobre casos y dudas reales de los asistentes.</p>
                 </div>
               </div>
             </div>
             '''
         },
-        # Slide 3: Bloque 1 - El Hook: "El Descuadre que Todos Conocen"
+        # Slide 4: Bloque 1 - El Hook: "El Descuadre que Todos Conocen"
         {
-            "id": 3,
-            "title": "El Descuadre que Todos Conocen",
+            "id": 4,
+            "title": "El Hook: Descuadre de $411,275 MXN",
             "bg": "white",
             "time": "00:00 - 00:07",
             "block": "Bloque 1",
-            "notes": "Mostrar el split view con los datos EXACTOS de la base de datos de Masterclass México SA de CV. Preguntar en el chat: '¿A quién le ha tocado ver esto al final de mes? Pongan 🔥 en el chat'. Enfatizar el dolor del director contable ante una auditoría del SAT.",
+            "notes": "Mostrar el split view con los números exactos del Plan Final v4: Balanza 115.01.01 ($487,200.00 MXN) vs Reporte de Existencias ($75,925.00 MXN) -> Descuadre real de $411,275.00 MXN. Lanzar la pregunta al chat.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
                   <span class="pill-badge">BLOQUE 1 · 00:00 - 00:07</span>
-                  <h2 class="slide-title">El Dolor que Todos Conocen (Caso Real)</h2>
+                  <h2 class="slide-title">El Dolor que Todos Conocen (Caso Real en Vivo)</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead">Compañía: <strong>Masterclass México, S.A. de C.V.</strong> (RFC: EKU9003173C9). Cierre mensual en Odoo 19.0:</p>
+              <p class="slide-lead">Cierre contable de mes. Dos reportes oficiales en la misma base de datos arrojando datos incompatibles:</p>
               
               <div class="split-audit-container">
                 <div class="audit-col audit-contable">
@@ -136,91 +183,36 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                   <h3 class="audit-col-title">Balanza de Comprobación SAT</h3>
                   <div class="audit-code">Cuenta 115.01.01 · Mercancías en Almacén</div>
                   <div class="audit-amount">$487,200.00 MXN</div>
-                  <div class="audit-detail">Saldo deudor contable al cierre de periodo</div>
-                  <div class="audit-status audit-err">⚠️ Generado por apuntes contables</div>
+                  <div class="audit-detail">Saldo deudor contable al corte mensual</div>
+                  <div class="audit-status audit-err">⚠️ Generado por libro mayor contable</div>
                 </div>
 
                 <div class="audit-vs">
                   <div class="audit-diff-card">
-                    <span class="diff-label">DESCUADRE CRÍTICO</span>
+                    <span class="diff-label">DESCUADRE REAL</span>
                     <span class="diff-amount doodle-wrap">
-                      $487,000.00 MXN
+                      $411,275.00 MXN
                       {doodle_oval}
                     </span>
-                    <span class="diff-warn">Casi medio millón de pesos sin cuadrar</span>
+                    <span class="diff-warn">¿Cómo se explica esto en auditoría?</span>
                   </div>
                 </div>
 
                 <div class="audit-col audit-logistica">
                   <div class="audit-col-badge">Módulo de Inventario</div>
-                  <h3 class="audit-col-title">Reporte de Valoración</h3>
-                  <div class="audit-code">Valoración Física de Stock (Valuation)</div>
-                  <div class="audit-amount">$200.00 MXN</div>
-                  <div class="audit-detail">Suma real de existencias en almacén</div>
-                  <div class="audit-status audit-ok">📦 Generado por Stock Moves</div>
+                  <h3 class="audit-col-title">Reporte de Existencias / Valoración</h3>
+                  <div class="audit-code">Valoración de Stock (Valuation)</div>
+                  <div class="audit-amount">$75,925.00 MXN</div>
+                  <div class="audit-detail">Valoración real de los productos en almacén</div>
+                  <div class="audit-status audit-ok">📦 Generado por Stock Moves físicos</div>
                 </div>
               </div>
 
               <div class="interactive-chat-prompt">
                 <span class="prompt-icon">💬</span>
                 <span class="prompt-text">
-                  <strong>Pregunta al chat:</strong> "¿A quién le ha tocado explicarle este descuadre de casi medio millón de pesos al SAT o a los socios de la empresa? Pongan 🔥 en el chat."
+                  <strong>Pregunta al chat:</strong> "¿A quién le ha tocado explicarle este descuadre de $411,275 pesos al Director General, al auditor externo o peor… al SAT? Pongan 🔥 en el chat."
                 </span>
-              </div>
-            </div>
-            '''
-        },
-        # Slide 4: ¿Por qué esta Masterclass vale $100 USD?
-        {
-            "id": 4,
-            "title": "¿Por qué vale $100 USD?",
-            "bg": "gradient",
-            "time": "00:05 - 00:07",
-            "block": "Bloque 1",
-            "notes": "Establecer la enorme diferencia entre contenido genérico y conocimiento de trinchera. Por qué se descartó la manufactura para enfocarse al 100% en importaciones, pedimentos aduanales y el nuevo motor de Odoo 19.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">VALOR ESTRATÉGICO</span>
-                  <h2 class="slide-title" style="color: #fff;">¿Por qué esta Masterclass vale $100 USD?</h2>
-                </div>
-                <div class="slide-header-logo">{logo_white}</div>
-              </div>
-              <p class="slide-lead" style="color: rgba(255,255,255,0.9);">
-                Conocimiento especializado para consultores, directores financieros y contadores en México:
-              </p>
-              <div class="value-cards-grid">
-                <div class="value-card">
-                  <div class="value-icon">🏗️</div>
-                  <h4>Arquitectura Odoo 19.0 Real</h4>
-                  <p>Muerte definitiva de Stock Valuation Layers (SVL) y cuentas intermedias interim. Los Stock Moves gobiernan la valoración directa.</p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon">🇲🇽</div>
-                  <h4>Especialización México & AVCO</h4>
-                  <p>Por qué en México ignoramos FIFO y Estándar. Costo Promedio Ponderado alineado con NIF C-4 y Art. 41 de la Ley del ISR.</p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon">💵</div>
-                  <h4>El Mega-Caso: USD y Pedimentos</h4>
-                  <p>30 minutos analizando anticipos en USD, tipos de cambio DOF (Art. 20 CFF), facturas extranjeras y Landed Costs del pedimento.</p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon">🛡️</div>
-                  <h4>Mermas y Obsolescencia SAT</h4>
-                  <p>Cómo registrar mermas como no deducibles y provisiones de lento movimiento sin corromper el AVCO del inventario activo.</p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon">🔍</div>
-                  <h4>Auditoría y Corrección en Vivo</h4>
-                  <p>Localización con bisturí de la póliza manual intrusa de $487,000 MXN en la cuenta 115.01.01 y su reversión sin tocar código.</p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon">📋</div>
-                  <h4>Entregables Profesionales</h4>
-                  <p>Checklist de Cierre Mensual imprimible y Tabla de Mapeo conceptual Odoo 18 vs 19 para usar de inmediato en tu empresa.</p>
-                </div>
               </div>
             </div>
             '''
@@ -230,54 +222,54 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "id": 5,
             "title": "El Nuevo Paradigma en Odoo 19.0",
             "bg": "white",
-            "time": "00:07 - 00:15",
+            "time": "00:07 - 00:13",
             "block": "Bloque 2",
-            "notes": "Explicar el cambio estructural. En Odoo 19.0 stock.valuation.layer ya no es la tabla independiente; el valor reside en stock.move. Las cuentas interim (Stock Input/Output) desaparecen del catálogo estándar.",
+            "notes": "Detallar el cambio de arquitectura: Adiós SVL (stock.valuation.layer) -> la valoración vive integrada en stock.move. Adiós cuentas puente interim -> asiento contable automático y directo a 115.01.01. De Anglo-Sajona a Periódico vs Perpetuo. Nuevo menú en Contabilidad > Informes > Inventario / Existencias.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 2 · 00:07 - 00:15</span>
-                  <h2 class="slide-title">El Gran Cambio Arquitectónico en Odoo 19.0</h2>
+                  <span class="pill-badge">BLOQUE 2 · 00:07 - 00:17</span>
+                  <h2 class="slide-title">La Revolución Arquitectónica de Odoo 19.0</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead">Odoo 19 simplifica radicalmente el motor contable-logístico eliminando capas intermedias:</p>
+              <p class="slide-lead">Odoo 19 simplifica el motor contable-logístico eliminando capas intermedias:</p>
               
               <div class="paradigm-table-container">
                 <table class="paradigm-table">
                   <thead>
                     <tr>
                       <th>Dimensión</th>
-                      <th>Odoo 18 e Histórico</th>
+                      <th>Odoo ≤ 18 (Arquitectura Clásica)</th>
                       <th>Odoo 19.0 (Nuevo Paradigma)</th>
                       <th>Impacto en México</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><strong>Capa de Valoración</strong></td>
-                      <td><span class="tag-old">stock.valuation.layer (SVL)</span><br><small>Tabla separada que a menudo se desincronizaba</small></td>
+                      <td><strong>Motor de Valoración</strong></td>
+                      <td><span class="tag-old">stock.valuation.layer (SVL)</span><br><small>Tabla separada propensa a desincronizarse</small></td>
                       <td><span class="tag-new">Directo en stock.move</span><br><small>El movimiento físico ES el registro de valor</small></td>
-                      <td>Trazabilidad 1 a 1 por CFDI y póliza sin discrepancias de tablas</td>
+                      <td>Menor peso en base de datos; rastreo directo 1 a 1 por póliza</td>
                     </tr>
                     <tr>
                       <td><strong>Cuentas Puente</strong></td>
-                      <td><span class="tag-old">Interim Input / Output</span><br><small>Cuentas temporales que acumulaban basura</small></td>
-                      <td><span class="tag-new">Asiento Directo</span><br><small>Afectación directa a cuenta 115.01.01</small></td>
-                      <td>Balanza de comprobación del SAT infinitamente más limpia</td>
+                      <td><span class="tag-old">Interim Input / Output</span><br><small>Cuentas temporales con conciliaciones infinitas</small></td>
+                      <td><span class="tag-new">Asiento Directo a 1150</span><br><small>Desaparecen en el flujo estándar</small></td>
+                      <td>Balanza del SAT limpia; cero saldos huérfanos a fin de año</td>
                     </tr>
                     <tr>
-                      <td><strong>Modelo Contable</strong></td>
-                      <td><span class="tag-old">Continental vs Anglo-Sajón</span><br><small>Confuso para implementadores de LATAM</small></td>
-                      <td><span class="tag-new">Periódico vs Perpetuo</span><br><small>Terminología contable internacional estándar</small></td>
-                      <td>Claridad absoluta: en México siempre usamos Perpetuo con AVCO</td>
+                      <td><strong>Terminología</strong></td>
+                      <td><span class="tag-old">Continental / Anglo-Sajona</span><br><small>Confuso para implementadores de LATAM</small></td>
+                      <td><span class="tag-new">Periódico vs Perpetuo</span><br><small>Estándar internacional formal</small></td>
+                      <td>Alineado formalmente con NIF C-4 y Art. 41 de la Ley del ISR</td>
                     </tr>
                     <tr>
-                      <td><strong>Auditoría & Cierre</strong></td>
-                      <td><span class="tag-old">Vistas dispersas</span><br><small>Revisión manual en múltiples menús</small></td>
-                      <td><span class="tag-new">Contabilidad > Revisión y Cierre</span><br><small>Menú: Valoración de inventario (guiado)</small></td>
-                      <td>Bloqueo formal de movimientos posteriores a la fecha de corte</td>
+                      <td><strong>Panel de Control</strong></td>
+                      <td><span class="tag-old">Informes dispersos</span><br><small>Revisión manual y hojas de cálculo</small></td>
+                      <td><span class="tag-new">Contabilidad > Informes > Existencias</span><br><small>Panel centralizado de valoración y cierre</small></td>
+                      <td>Validación de consistencia rápida previa a estados financieros</td>
                     </tr>
                   </tbody>
                 </table>
@@ -285,235 +277,45 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             </div>
             '''
         },
-        # Slide 6: Bloque 2 - Dominio de AVCO en México
+        # Slide 6: Bloque 2 - Causa Raíz #1: La Trampa de las Configuraciones en Caliente
         {
             "id": 6,
-            "title": "Por qué AVCO es el Rey en México",
+            "title": "Causa Raíz #1: Cambios en Caliente",
             "bg": "white",
-            "time": "00:10 - 00:15",
+            "time": "00:13 - 00:17",
             "block": "Bloque 2",
-            "notes": "Fundamento legal mexicano: NIF C-4 y Art. 41 de la Ley del ISR. Demostrar matemáticamente por qué el Costo Promedio es el único método viable y por qué FIFO y Estándar generan problemas fiscales.",
+            "notes": "ALERTA TÉCNICA CLAVE: Demostrar la lección de laboratorio en Odoo 19: 'Dos configuraciones malas no hacen una buena'. Cambiar categorías de Periódico a Perpetuo o de Standard a FIFO a AVCO cuando ya hay stock NO genera asientos retroactivos automáticos en Odoo 19. El stock anterior queda flotando sin soporte contable.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 2 · AVCO Y SAT</span>
-                  <h2 class="slide-title">Por qué en México Ignoramos FIFO y Estándar</h2>
+                  <span class="pill-badge" style="background:#B91C1C;">CAUSA RAÍZ #1 · CONFIGURACIÓN</span>
+                  <h2 class="slide-title">La Trampa de los Cambios de Configuración en Caliente</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              
-              <div class="avco-comparison-grid">
-                <div class="avco-card avco-winner">
-                  <div class="avco-card-badge">👑 ESTÁNDAR DE FACTO</div>
-                  <h3>Costo Promedio (AVCO)</h3>
-                  <div class="avco-legal">NIF C-4 · Art. 41 Ley del ISR</div>
-                  <p>Es el método por excelencia aceptado por el SAT. Suaviza picos inflacionarios y tipos de cambio volátiles. En Odoo 19.0 recalcula dinámicamente en cada recepción.</p>
-                  <div class="avco-formula-box">
-                    <span class="formula-label">FÓRMULA MATEMÁTICA AVCO:</span>
-                    <div class="formula-math">
-                      Nuevo AVCO = [ (Stock Actual &times; AVCO Actual) + (Qty Recibida &times; Costo Unitario Factura) ] &divide; [ Stock Actual + Qty Recibida ]
-                    </div>
-                  </div>
-                </div>
-
-                <div class="avco-card avco-discarded">
-                  <div class="avco-card-badge">🚫 NO RECOMENDADO</div>
-                  <h3>FIFO (PEPS)</h3>
-                  <p>Genera capas complejas que ante devoluciones parciales, notas de crédito o cancelaciones de pedimentos en México generan distorsiones en el kardex fiscal.</p>
-                  <hr style="border:0; border-top: 1px solid #E2E8F0; margin: 12px 0;">
-                  <div class="avco-card-badge">🚫 NO RECOMENDADO</div>
-                  <h3>Costo Estándar</h3>
-                  <p>Genera cuentas de variación en costo de ventas (501.01.02) que requieren reclasificación fiscal para no ser rechazadas en la Declaración Anual del SAT.</p>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-        # Slide 7: Bloque 3 - El Mega-Caso: Introducción (30 min)
-        {
-            "id": 7,
-            "title": "El Mega-Caso: Importación, USD y Pedimentos",
-            "bg": "gradient",
-            "time": "00:15 - 00:20",
-            "block": "Bloque 3",
-            "notes": "EL NÚCLEO DE LA MASTERCLASS (30 minutos). Presentar a la empresa: Masterclass México SA de CV (MXN base). Compra a Global Supply Tech LLC en USD del producto SENSOR-USD. Explicar los 4 pasos que se recorrerán en vivo.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">BLOQUE 3 · EL NÚCLEO DE LA SESIÓN (30 MIN)</span>
-                  <h2 class="slide-title" style="color: #fff;">El Mega-Caso: Importación, USD y Pedimentos</h2>
-                </div>
-                <div class="slide-header-logo">{logo_white}</div>
-              </div>
-              <p class="slide-lead" style="color: rgba(255,255,255,0.9);">
-                El escenario real que vive el 90% de las empresas en México y que los tutoriales nunca muestran:
-              </p>
-              
-              <div class="value-cards-grid" style="grid-template-columns: repeat(4, 1fr);">
-                <div class="value-card">
-                  <div class="value-icon">1️⃣</div>
-                  <h4>Paso 1: Anticipo USD</h4>
-                  <p>Pago anticipado a proveedor extranjero. Tipo de cambio DOF según Art. 20 del CFF.</p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon">2️⃣</div>
-                  <h4>Paso 2: Recepción vs Factura</h4>
-                  <p>Mercancía ingresa a un TC y la factura extranjera llega a otro TC. Efecto en AVCO.</p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon">3️⃣</div>
-                  <h4>Paso 3: Pedimento & Landed Cost</h4>
-                  <p>Agencia Aduanal del Norte: DTA, IGI e incremento de costo unitario en MXN.</p>
-                </div>
-                <div class="value-card">
-                  <div class="value-icon">4️⃣</div>
-                  <h4>Paso 4: CFDI de Pago</h4>
-                  <p>Complemento de Pago, fluctuación cambiaria realizada y ajuste de IVA acreditable.</p>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-        # Slide 8: Bloque 3 - Paso 1: Anticipo y Tipo de Cambio DOF
-        {
-            "id": 8,
-            "title": "Paso 1: Anticipo y Tipo de Cambio DOF",
-            "bg": "white",
-            "time": "00:20 - 00:27",
-            "block": "Bloque 3",
-            "notes": "Mostrar el registro del anticipo en Odoo 19. Fundamento legal: Art. 20 del Código Fiscal de la Federación (CFF) y NIF B-15. Un anticipo en USD fija el tipo de cambio para la proporción pagada de los bienes futuros.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">BLOQUE 3 · PASO 1</span>
-                  <h2 class="slide-title">Anticipo en USD y Tipo de Cambio Oficial (Art. 20 CFF)</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">Orden de Compra por <strong>$10,000 USD</strong> con Global Supply Tech LLC. Se emite un anticipo del 30% ($3,000 USD):</p>
+              <p class="slide-lead">Historia de guerra de implementadores: <strong>"Dos configuraciones malas no hacen una buena."</strong></p>
               
               <div class="two-col-grid">
                 <div class="disaster-col-card">
-                  <div class="card-pill">NORMATIVA FISCAL MÉXICO</div>
-                  <h3>Artículo 20 del Código Fiscal de la Federación</h3>
+                  <div class="card-pill">EL ERROR DE TRINCHERA</div>
+                  <h3>El "Juego" de Cambiar Métodos</h3>
                   <div class="detail-box">
-                    <em>"Para determinar las contribuciones y sus accesorios se considerará el tipo de cambio a que se haya adquirido la moneda extranjera de que se trate y no habiendo adquisición, se estará al tipo de cambio que el Banco de México publique en el Diario Oficial de la Federación..."</em>
+                    Arrancar una empresa con valoración periódica (manual). A los 4 meses ver números extraños, cambiar la categoría a perpetua. Cambiarla luego a FIFO "para ver qué pasa", y finalmente a AVCO.
                     <br><br>
-                    <strong>Criterio NIF B-15:</strong> Los anticipos a proveedores en moneda extranjera se consideran <strong>partidas no monetarias</strong> que fijan el tipo de cambio histórico para la porción anticipada.
+                    <strong>La creencia ingenua:</strong> Creer que Odoo 19 recalculará mágicamente el pasado y generará las pólizas contables retroactivas.
                   </div>
                 </div>
 
-                <div class="disaster-col-card">
-                  <div class="card-pill">REGISTRO EN ODOO 19.0</div>
-                  <h3>Asiento Contable de Anticipo</h3>
+                <div class="disaster-col-card" style="border: 2px solid var(--rojo-vauxoo);">
+                  <div class="card-pill" style="color:var(--rojo-vauxoo);">EVIDENCIA DE LABORATORIO ODOO 19</div>
+                  <h3>Odoo 19 NO Genera Asientos Retroactivos</h3>
                   <div class="detail-box">
-                    Fecha 01/09/2026 · TC DOF: <strong>$18.22 MXN/USD</strong>
-                    <div class="asiento-box">
-                      <div class="asiento-row"><span class="cargo">CARGO</span> 205.01.01 Anticipo a Proveedores Extranjeros <strong>$54,660.00 MXN</strong> ($3,000 × 18.22)</div>
-                      <div class="asiento-row"><span class="abono">ABONO</span> 102.01.01 Banco Moneda Extranjera <strong>$54,660.00 MXN</strong></div>
-                    </div>
-                    <strong>Resultado:</strong> El saldo queda fijado en pesos a $18.22 sin fluctuación no realizada sobre el anticipo.
-                  </div>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-        # Slide 9: Bloque 3 - Paso 2: Recepción vs Factura (Vendor Bill)
-        {
-            "id": 9,
-            "title": "Paso 2: Recepción Aduanal vs Factura",
-            "bg": "white",
-            "time": "00:27 - 00:34",
-            "block": "Bloque 3",
-            "notes": "Mostrar el momento en que llega la mercancía a aduana y se valida la recepción. Días después llega la factura comercial. Cómo Odoo 19 calcula el AVCO con base en la recepción física y qué sucede con la diferencia contra la factura.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">BLOQUE 3 · PASO 2</span>
-                  <h2 class="slide-title">Recepción Aduanal vs Factura Extranjera (Invoice)</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">La mercancía cruza la frontera física el Día 10. La factura comercial del proveedor se recibe el Día 15:</p>
-              
-              <div class="two-col-grid">
-                <div class="flow-step-card">
-                  <div class="step-badge">DÍA 10: RECEPCIÓN FÍSICA (STOCK MOVE)</div>
-                  <h4>Recepción en Aduana de 100 Sensores USD</h4>
-                  <p>TC DOF del día de entrada: <strong>$18.05 MXN/USD</strong>.</p>
-                  <div class="asiento-box">
-                    <div class="asiento-row"><span class="cargo">CARGO</span> 115.01.01 Inventarios <strong>$180,500.00 MXN</strong> (100u × $100 × 18.05)</div>
-                    <div class="asiento-row"><span class="abono">ABONO</span> 2110 Proveedores Extranjeros (Tránsito) <strong>$180,500.00 MXN</strong></div>
-                  </div>
-                  <div class="step-avco">Costo Unitario AVCO Inicial: <strong>$1,805.00 MXN / unidad</strong></div>
-                </div>
-
-                <div class="flow-step-card">
-                  <div class="step-badge">DÍA 15: FACTURA PROVEEDOR (VENDOR BILL)</div>
-                  <h4>Registro de Invoice Comercial</h4>
-                  <p>TC Fecha de Factura: <strong>$18.50 MXN/USD</strong>.</p>
-                  <div class="asiento-box">
-                    <div class="asiento-row"><span class="cargo">CARGO</span> 2110 Tránsito Proveedores <strong>$180,500.00 MXN</strong></div>
-                    <div class="asiento-row"><span class="cargo">CARGO</span> 701.01.01 Fluctuación Cambiaria <strong>$4,500.00 MXN</strong></div>
-                    <div class="asiento-row"><span class="abono">ABONO</span> 201.01.02 Proveedores Extranjeros <strong>$185,000.00 MXN</strong></div>
-                  </div>
-                  <div class="step-avco">✅ El AVCO del producto se mantiene blindado al costo de recepción fiscal.</div>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-        # Slide 10: Bloque 3 - Paso 3: El Pedimento Aduanal (Landed Costs)
-        {
-            "id": 10,
-            "title": "Paso 3: El Pedimento Aduanal (Landed Costs)",
-            "bg": "white",
-            "time": "00:34 - 00:40",
-            "block": "Bloque 3",
-            "notes": "LLEGA EL PEDIMENTO. Factura de Agencia Aduanal del Norte, SC con Landed Cost de $5,000 MXN más IGI/DTA. Cómo vincularlo en Odoo 19 sin duplicar cuentas contables para que el AVCO suba a su costo de importación real.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">BLOQUE 3 · PASO 3</span>
-                  <h2 class="slide-title">El Pedimento Aduanal y Gastos en Destino (Landed Costs)</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">Factura del Agente Aduanal (Agencia Aduanal del Norte, S.C.): Honorarios, DTA e impuestos aduanales.</p>
-              
-              <div class="mrp-split">
-                <div class="mrp-diagram">
-                  <div class="mrp-box mrp-mat">
-                    <span class="mrp-tag">1. FACTURA DE SERVICIO ADUANAL</span>
-                    <p>Producto: <code>LANDED-COST</code> (Gastos Aduanales y Flete)<br>Monto: <strong>$5,000.00 MXN</strong></p>
-                  </div>
-                  <div class="mrp-arrow">⬇️ Botón: Crear Costo en Destino (Landed Cost)</div>
-                  <div class="mrp-box mrp-wip">
-                    <span class="mrp-tag">2. ASIGNACIÓN AL ALBARÁN DE IMPORTACIÓN</span>
-                    <p>Método de reparto: <em>Por Costo Actual</em> (split_method_landed_cost)</p>
-                    <strong style="color: #AC0340;">Prorrateo de $5,000 MXN sobre las 100 piezas recibidas</strong>
-                  </div>
-                  <div class="mrp-arrow">⬇️ Validación del Costo en Destino</div>
-                  <div class="mrp-box mrp-pt">
-                    <span class="mrp-tag">3. RECÁLCULO OFICIAL DE AVCO</span>
-                    <p>Costo anterior: $1,805.00 MXN → <strong>Nuevo AVCO: $1,855.00 MXN / pza</strong></p>
-                  </div>
-                </div>
-
-                <div class="mrp-insights">
-                  <div class="alert-box">
-                    <h4>⚖️ El Error Fatal en Pedimentos</h4>
-                    <p>Muchos contadores mandan la factura aduanal a una cuenta de gastos generales (601) para no complicarse:</p>
-                    <ul class="styled-list">
-                      <li>Subvalúan el inventario en el balance general.</li>
-                      <li>Distorsionan el costo de ventas al vender el producto.</li>
-                      <li><strong>Violan el Art. 39 de la Ley del ISR</strong>, que obliga a capitalizar los gastos aduanales indispensables para adquirir los inventarios.</li>
+                    Al cambiar la categoría de producto con stock existente:
+                    <ul class="styled-list" style="margin-top:8px;">
+                      <li><strong>Cero pólizas de ajuste:</strong> Odoo no genera asientos contables sobre las existencias anteriores.</li>
+                      <li><strong>Brecha silenciosa:</strong> Las unidades físicas quedan flotando sin contrapartida en la cuenta 1150.</li>
+                      <li><strong>Regla Vauxoo:</strong> La categoría de producto no es un área de juegos. Modificarla en producción exige corte formal de saldos y reclasificación planificada.</li>
                     </ul>
                   </div>
                 </div>
@@ -521,107 +323,224 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             </div>
             '''
         },
-        # Slide 11: Bloque 3 - Paso 4: CFDI de Pago y Complemento
+        # Slide 7: Bloque 3 - Caso 1: Flujo Limpio en MXN (WIDGET-MX)
         {
-            "id": 11,
-            "title": "Paso 4: CFDI de Pago y Complemento",
+            "id": 7,
+            "title": "Caso 1: Flujo Limpio en MXN",
             "bg": "white",
-            "time": "00:40 - 00:45",
+            "time": "00:17 - 00:25",
             "block": "Bloque 3",
-            "notes": "Liquidación final de la factura semanas después. Diferencia cambiaria realizada contra el banco, timbrado o registro del Complemento de Pago en Odoo y el traslado automático del IVA acreditable pagado efectivamente.",
+            "notes": "Mostrar el flujo limpio en MXN con el producto [WIDGET-MX] Widget Nacional MX (AVCO). 50u @ $150 + 50u @ $170 = 100u @ $160 MXN. Venta y entrega de 30 unidades a $160 MXN -> Asiento directo: Cargo 501.01.01 / Abono 115.01.01 por $4,800.00 MXN. Cero cuentas intermedias.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 3 · PASO 4</span>
-                  <h2 class="slide-title">Liquidación, Complemento de Pago e IVA Acreditable</h2>
+                  <span class="pill-badge">BLOQUE 3 · CASO 1 (8 MIN)</span>
+                  <h2 class="slide-title">Flujo Limpio en MXN: Ponderación AVCO Directa</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead">Día 30: Liquidación final del saldo remanente al proveedor extranjero mediante transferencia bancaria:</p>
+              <p class="slide-lead">Producto demo: <code>[WIDGET-MX] Widget Nacional MX (AVCO)</code>. Ponderación matemática en moneda base:</p>
               
               <div class="flow-steps-grid">
                 <div class="flow-step-card">
-                  <div class="step-badge">1. PAGO EFECTIVO</div>
-                  <h4>Salida Bancaria USD</h4>
-                  <p>TC Bancario real de liquidación: <strong>$18.60 MXN/USD</strong>.</p>
+                  <div class="step-badge">1. COMPRA Y PONDERACIÓN</div>
+                  <h4>Entrada Física Progresiva</h4>
+                  <p>Lote 1: 50 piezas @ $150.00 MXN<br>Lote 2: 50 piezas @ $170.00 MXN</p>
                   <div class="asiento-box">
-                    <div class="asiento-row"><span class="cargo">CARGO</span> 201.01.02 Proveedores Ext. $185,000</div>
-                    <div class="asiento-row"><span class="cargo">CARGO</span> 701.01.01 Pérdida Camb. $1,000</div>
-                    <div class="asiento-row"><span class="abono">ABONO</span> 102.01.01 Banco USD $186,000</div>
+                    Nuevo AVCO = (50×150 + 50×170) / 100<br>
+                    <strong>Nuevo AVCO = $160.00 MXN / pieza</strong>
                   </div>
+                  <div class="step-avco">Total en almacén: 100 piezas = <strong>$16,000.00 MXN</strong></div>
                 </div>
 
                 <div class="flow-step-card">
-                  <div class="step-badge">2. CFDI / COMPLEMENTO</div>
-                  <h4>Efecto Fiscal en México</h4>
-                  <p>Conciliación y soporte de pago ante el SAT.</p>
-                  <p style="font-size:0.85rem; color:#475569; margin-top:8px;">
-                    En compras internacionales sin CFDI directo, el pago concilia contra la póliza de importación y el pedimento correspondiente.
-                  </p>
+                  <div class="step-badge">2. VENTA Y ENTREGA AL CLIENTE</div>
+                  <h4>Salida de 30 Unidades</h4>
+                  <p>Salida inmediata al AVCO vigente ponderado ($160 MXN).</p>
+                  <div class="asiento-box">
+                    <div class="asiento-row"><span class="cargo">CARGO</span> 501.01.01 Costo de Ventas <strong>$4,800.00 MXN</strong></div>
+                    <div class="asiento-row"><span class="abono">ABONO</span> 115.01.01 Inventarios <strong>$4,800.00 MXN</strong></div>
+                  </div>
+                  <div class="step-avco">Cálculo exacto: 30 unidades &times; $160.00 MXN</div>
                 </div>
 
                 <div class="flow-step-card">
-                  <div class="step-badge">3. IVA ACREDITABLE</div>
-                  <h4>Flujo de Impuestos Pagados</h4>
-                  <p>Acreditamiento conforme a flujo de efectivo.</p>
-                  <p style="font-size:0.85rem; color:#475569; margin-top:8px;">
-                    El IVA de importación pagado en el pedimento aduanal (Paso 3) se vuelve plenamente acreditable al momento del pago del pedimento.
-                  </p>
+                  <div class="step-badge">3. SALDO REMANENTE</div>
+                  <h4>Transparencia en Odoo 19</h4>
+                  <p>Almacén físico: 70 piezas remanentes.</p>
+                  <div class="asiento-box">
+                    Saldo Contable Cuenta 115.01.01: <strong>$11,200.00 MXN</strong><br>
+                    Valoración Logística: 70 &times; $160 = <strong>$11,200.00 MXN</strong>
+                  </div>
+                  <div class="step-avco">✅ En v19 vemos la mitad de apuntes que en v18. Flujo limpio y sin intermediarios.</div>
                 </div>
               </div>
             </div>
             '''
         },
-        # Slide 12: Bloque 4 - Desastre #1: Stock Negativo con AVCO
+        # Slide 8: Bloque 3 - Caso 2: Compras en USD y Costos en Destino
         {
-            "id": 12,
-            "title": "Desastre #1: Stock Negativo con AVCO",
-            "bg": "white",
-            "time": "00:45 - 00:52",
-            "block": "Bloque 4",
-            "notes": "Mostrar la demostración con el producto VALVULA-NEG pre-configurado en setup_masterclass.py. Demostrar cómo vender sin existencias corrompe matemáticamente el promedio ponderado y causa sanciones del SAT por kardex negativo.",
+            "id": 8,
+            "title": "Caso 2: Compras USD y Landed Costs",
+            "bg": "gradient",
+            "time": "00:25 - 00:37",
+            "block": "Bloque 3",
+            "notes": "Mostrar el caso de compras en USD y Costos en Destino: PO en USD a $100 USD. Al recibir en almacén, Odoo toma el TC DOF de recepción ($18.50) -> $1,850.00 MXN/u. Llega la factura de fletes y maniobras por $5,000 MXN vía Costos en Destino (Landed Costs). El sistema reparte +$250 MXN a cada sensor, subiendo el AVCO de $1,850 a $2,100.00 MXN.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge" style="background:#B91C1C;">CLÍNICA DE DESASTRES #1</span>
-                  <h2 class="slide-title">El Veneno Matemático: Stock Negativo en AVCO</h2>
+                  <span class="pill-badge">BLOQUE 3 · CASO 2 (12 MIN)</span>
+                  <h2 class="slide-title" style="color: #fff;">Compras en USD y Landed Costs (Gastos Aduanales)</h2>
+                </div>
+                <div class="slide-header-logo">{logo_white}</div>
+              </div>
+              <p class="slide-lead" style="color: rgba(255,255,255,0.9);">
+                PO internacional en USD y asignación obligatoria de gastos de importación según el Art. 39 de la Ley del ISR:
+              </p>
+              
+              <div class="usd-timeline" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="timeline-step">
+                  <div class="timeline-dot">1</div>
+                  <div class="timeline-header">RECEPCIÓN FÍSICA EN USD</div>
+                  <div class="timeline-body">
+                    <p>PO en dólares a $100 USD (20 unidades).</p>
+                    <div class="tc-badge" style="background:#AC0340;">TC DOF Recepción: $18.50 MXN</div>
+                    <div class="timeline-val">Costo Inicial: $1,850.00 MXN / u</div>
+                    <small>El costo lo fija la fecha de recepción física, NO la orden de compra.</small>
+                  </div>
+                </div>
+
+                <div class="timeline-step">
+                  <div class="timeline-dot">2</div>
+                  <div class="timeline-header">GASTOS DE IMPORTACIÓN</div>
+                  <div class="timeline-body">
+                    <p>Factura de fletes aduanales por <strong>$5,000.00 MXN</strong>.</p>
+                    <div class="tc-badge">Landed Cost Reparto</div>
+                    <div class="timeline-val">Prorrateo: +$250.00 MXN / unidad</div>
+                    <small>Asignación vinculada formalmente al albarán de entrada.</small>
+                  </div>
+                </div>
+
+                <div class="timeline-step">
+                  <div class="timeline-dot">3</div>
+                  <div class="timeline-header">RECÁLCULO AVCO EN ODOO 19</div>
+                  <div class="timeline-body">
+                    <p>El sistema incrementa el valor en almacén.</p>
+                    <div class="tc-badge" style="background:#16A34A;">Nuevo AVCO Oficial</div>
+                    <div class="timeline-val doodle-wrap">$2,100.00 MXN / unidad {doodle_underline}</div>
+                    <small>Cumplimiento estricto del Art. 39 LISR (costo capitalizado).</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="usd-verdict-box">
+                <div class="verdict-col">
+                  <h4>💡 El Error Desmentido</h4>
+                  <p>Muchos contadores mandan los fletes a gastos de administración (601) para evitar configurar Landed Costs: <strong>esto subvalúa el inventario y distorsiona el margen fiscal</strong>.</p>
+                </div>
+                <div class="verdict-col">
+                  <h4>🛡️ Blindaje Fiscal SAT</h4>
+                  <p>En Odoo 19, Costos en Destino inyecta el valor monetario directamente al movimiento de almacén, preservando la trazabilidad deducible para la Declaración Anual.</p>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+        # Slide 9: Bloque 4 - La Clínica de Desastres: Resumen (16 min)
+        {
+            "id": 9,
+            "title": "La Clínica de Desastres (16 min)",
+            "bg": "white",
+            "time": "00:37 - 00:53",
+            "block": "Bloque 4",
+            "notes": "Introducción al Bloque 4: La Clínica de los Desastres (16 min totales, exactamente 4 min por desastre). Los 4 errores que destruyen la deducción fiscal del costo de ventas ante el SAT.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:#B91C1C;">BLOQUE 4 · 00:37 - 00:53 (16 MIN)</span>
+                  <h2 class="slide-title">La Clínica de los Desastres: 4 Errores que Cuestan Millones</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead">Producto demo: <code>VALVULA-NEG</code> (Válvula Reguladora). ¿Qué pasa cuando vendes lo que no tienes?</p>
+              <p class="slide-lead">4 minutos exactos por cada desastre recurrente en las empresas mexicanas:</p>
+              
+              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
+                  <div class="agenda-time">DESASTRE 1 (00:37 - 00:41 | 4 MIN)</div>
+                  <div class="agenda-title">Stock Negativo con AVCO</div>
+                  <p class="agenda-desc">Producto <code>[VALVULA-NEG]</code>: Vender sin existencia fractura el divisor matemático del promedio ponderado y genera observaciones del SAT por kardex negativo.</p>
+                </div>
+                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
+                  <div class="agenda-time">DESASTRE 2 (00:41 - 00:45 | 4 MIN)</div>
+                  <div class="agenda-title">Tipo de Cambio Erróneo en Recepciones</div>
+                  <p class="agenda-desc">Capturar tasas comerciales o dejar valores por omisión en lugar del DOF. Errores de centavos distorsionan decenas de miles de pesos en el costo promedio.</p>
+                </div>
+                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
+                  <div class="agenda-time">DESASTRE 3 (00:45 - 00:49 | 4 MIN)</div>
+                  <div class="agenda-title">Mermas y Ajustes de Conteo Físico</div>
+                  <p class="agenda-desc">Producto <code>[CABLE-MERMA]</code>: Reducir cantidad manteniendo el costo unitario ($85 MXN). El faltante debe ir a gasto por merma sin destruir el costo del stock restante.</p>
+                </div>
+                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
+                  <div class="agenda-time">DESASTRE 4 (00:49 - 00:53 | 4 MIN)</div>
+                  <div class="agenda-title">Inventario Obsoleto y NIF C-4</div>
+                  <p class="agenda-desc">Producto <code>[TARJETA-OBS]</code>: Jamás reducir el costo unitario en Odoo. La pérdida se reconoce en cuenta complementaria de activo (<code>108.02.01</code>).</p>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+        # Slide 10: Bloque 4 - Desastre 1: Stock Negativo (VALVULA-NEG)
+        {
+            "id": 10,
+            "title": "Desastre 1: Stock Negativo (VALVULA-NEG)",
+            "bg": "white",
+            "time": "00:37 - 00:41",
+            "block": "Bloque 4",
+            "notes": "Demostración de VALVULA-NEG: Existencia en 0, venta y entrega de -10 unidades. Al recibir una compra a precio distinto, la fórmula ponderada se fractura. Recordar: Kardex negativo es observación segura y rechazo de deducciones por el SAT.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:#B91C1C;">DESASTRE 1 · 00:37 - 00:41 (4 MIN)</span>
+                  <h2 class="slide-title">El Veneno Matemático: Stock Negativo con AVCO</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">Producto demo: <code>[VALVULA-NEG] Válvula Reguladora</code>. ¿Qué pasa cuando vendes lo que no tienes?</p>
               
               <div class="disaster-grid">
                 <div class="disaster-main">
-                  <h3>Secuencia de la Catástrofe en Odoo:</h3>
+                  <h3>Secuencia de la Fractura Matemática:</h3>
                   <div class="disaster-sequence">
                     <div class="seq-step">
                       <span class="seq-num">1</span>
-                      <div>Stock inicial: 0 piezas. Se confirma venta y entrega física por <strong>-10 piezas</strong>.</div>
+                      <div>Stock inicial en 0. Se confirma venta y entrega física por <strong>-10 unidades</strong>.</div>
                     </div>
                     <div class="seq-step">
                       <span class="seq-num">2</span>
-                      <div>Odoo saca el producto con costo provisional ($0.00 o último conocido de $200 MXN).</div>
+                      <div>Odoo saca el producto con costo provisional ($200.00 MXN o $0.00).</div>
                     </div>
                     <div class="seq-step">
                       <span class="seq-num">3</span>
-                      <div>Días después entra la compra real de 15 piezas a $350 MXN c/u.</div>
+                      <div>Días después entra la compra real de 15 piezas a $350.00 MXN.</div>
                     </div>
                     <div class="seq-step" style="background: #FEE2E2; border: 1px solid #FCA5A5;">
                       <span class="seq-num" style="background:#B91C1C;">💥</span>
-                      <div><strong>Colapso del divisor matemático:</strong> El sistema promedia cantidades negativas con positivas, generando costos unitarios distorsionados de <strong>$1,850 MXN o números negativos</strong>.</div>
+                      <div><strong>Colapso del divisor matemático:</strong> El sistema promedia cantidades negativas con positivas, generando costos distorsionados de <strong>$1,850 MXN o números negativos</strong>.</div>
                     </div>
                   </div>
                 </div>
 
                 <div class="disaster-sat">
                   <div class="sat-warn-card">
-                    <h4>⚖️ Contingencias Fiscales SAT</h4>
+                    <h4>⚖️ Contingencia Fiscal SAT</h4>
                     <ul class="styled-list">
                       <li><strong>Kardex Ilegal:</strong> El SAT prohíbe inventarios negativos en la contabilidad electrónica.</li>
-                      <li><strong>Rechazo del Costo de lo Vendido:</strong> La deducción en la Declaración Anual queda invalidada (Art. 39 LISR).</li>
-                      <li><strong>Multas por Inconsistencia:</strong> Hasta $45,000 MXN por mes dictaminado.</li>
+                      <li><strong>Rechazo de Costo de Ventas:</strong> Pérdida de deducción fiscal en la Declaración Anual.</li>
+                      <li><strong>Multas por Inconsistencia:</strong> Sanciones aplicables por auditoría de comercio o inventario.</li>
                     </ul>
                     <div class="sat-rule-badge">REGLA VAUXOO: Prohibir entregas sin stock en categorías AVCO</div>
                   </div>
@@ -630,187 +549,209 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             </div>
             '''
         },
-        # Slide 13: Bloque 4 - Desastre #2: Ajustes Físicos y Mermas
+        # Slide 11: Bloque 4 - Desastre 2: Tipo de Cambio Erróneo en Recepciones
+        {
+            "id": 11,
+            "title": "Desastre 2: Tipo de Cambio Erróneo",
+            "bg": "white",
+            "time": "00:41 - 00:45",
+            "block": "Bloque 4",
+            "notes": "Desastre 2: Capturar tasas comerciales o dejar valores por omisión en lugar del DOF. En importaciones de alto volumen, un error de 50 centavos genera distorsiones de decenas de miles de pesos en el costo promedio.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:#B91C1C;">DESASTRE 2 · 00:41 - 00:45 (4 MIN)</span>
+                  <h2 class="slide-title">Tipo de Cambio Erróneo en Recepciones de Importación</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">La tasa cambiaria oficial en la fecha de cruce físico es innegociable bajo el Art. 20 del CFF:</p>
+              
+              <div class="two-col-grid">
+                <div class="disaster-col-card">
+                  <div class="card-pill">EL ERROR HABITUAL</div>
+                  <h3>Dejar la Tasa por Defecto en Odoo</h3>
+                  <div class="detail-box">
+                    Odoo tiene una tasa de cambio cargada de hace dos semanas ($18.00 MXN/USD). Al validar la recepción física de mercancía importada por $50,000 USD, se utiliza esa tasa.
+                    <br><br>
+                    <strong>La realidad aduanal:</strong> El pedimento aduanal y el DOF marcaron una tasa oficial de <strong>$18.65 MXN/USD</strong>.
+                    <br><br>
+                    <strong>La distorsión:</strong> Una diferencia de 65 centavos por dólar subvalúa el inventario en <strong>$32,500.00 MXN</strong> de entrada, corrompiendo el AVCO.
+                  </div>
+                </div>
+
+                <div class="disaster-col-card">
+                  <div class="card-pill" style="color:var(--rojo-vauxoo);">EL BLINDAJE VAUXOO</div>
+                  <h3>Actualización Diaria DOF & Pedimento</h3>
+                  <div class="detail-box">
+                    En compras internacionales en México:
+                    <ul class="styled-list" style="margin-top:8px;">
+                      <li>Sincronización automatizada o captura de la tasa DOF del día oficial de entrada.</li>
+                      <li>Validar que el albarán físico tome la tasa del pedimento aduanal.</li>
+                      <li>Evita auditorías de comercio exterior y discrepancias con la balanza fiscal del SAT.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+        # Slide 12: Bloque 4 - Desastre 3 y 4: Mermas y Obsolescencia NIF C-4
+        {
+            "id": 12,
+            "title": "Desastre 3 y 4: Mermas y Obsolescencia",
+            "bg": "white",
+            "time": "00:45 - 00:53",
+            "block": "Bloque 4",
+            "notes": "Desastre 3 (CABLE-MERMA): Faltan 15m @ $85 MXN. El ajuste reduce CANTIDAD, manteniendo el costo unitario ($85). El faltante va a gasto por merma. Desastre 4 (TARJETA-OBS): Jamás reducir el costo unitario del producto en Odoo. La pérdida se reconoce en cuenta complementaria 108.02.01 Estimación de obsolescencia.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:#B91C1C;">DESASTRES 3 Y 4 · 00:45 - 00:53 (8 MIN)</span>
+                  <h2 class="slide-title">Mermas de Conteo Físico & Obsolescencia NIF C-4</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              
+              <div class="two-col-grid">
+                <div class="disaster-col-card">
+                  <div class="card-pill">DESASTRE 3: MERMAS (CABLE-MERMA)</div>
+                  <h3>Conteo Físico: Faltan 15 Metros</h3>
+                  <div class="detail-box">
+                    <strong>La regla contable:</strong> El ajuste de inventario en Odoo 19 debe reducir <strong>CANTIDAD</strong>, manteniendo intacto el costo unitario ($85.00 MXN).
+                    <br><br>
+                    <strong>Destino contable:</strong> El faltante (15m &times; $85 = $1,275 MXN) se envía a una cuenta de <strong>Gasto por Merma</strong> (cuidando actas de pérdida para deducibilidad SAT), evitando que el SAT lo catalogue como venta omitida.
+                  </div>
+                </div>
+
+                <div class="disaster-col-card">
+                  <div class="card-pill">DESASTRE 4: OBSOLESCENCIA (TARJETA-OBS)</div>
+                  <h3>Inventario de Lento Movimiento</h3>
+                  <div class="detail-box">
+                    <strong>El error garrafal:</strong> Reducir el costo unitario del producto en Odoo a $0.00 MXN.
+                    <br><br>
+                    <strong>La solución NIF C-4:</strong> Mantener el costo AVCO en Odoo y reconocer la pérdida en balance mediante una póliza manual en la cuenta complementaria de activo:
+                    <div class="asiento-box" style="margin-top:6px;">
+                      <span class="cargo">CARGO</span> Gasto Estimación Obsolescencia<br>
+                      <span class="abono">ABONO</span> 108.02.01 Estimación de Obsolescencia
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+        # Slide 13: Bloque 5 - Causa Raíz #3: La Matriz de Cadencia
         {
             "id": 13,
-            "title": "Desastre #2: Ajustes Físicos y Mermas",
-            "bg": "white",
-            "time": "00:52 - 00:58",
-            "block": "Bloque 4",
-            "notes": "Producto CABLE-MERMA pre-configurado en setup_masterclass.py. El gran dilema del conteo físico de fin de año. Si haces un Inventory Adjustment directo a resultados ordinarios, el SAT lo objeta. Cómo canalizar faltantes a Gasto No Deducible sin romper el AVCO de las existencias restantes.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge" style="background:#B91C1C;">CLÍNICA DE DESASTRES #2</span>
-                  <h2 class="slide-title">Ajustes Físicos y Mermas (El Conteo de Fin de Año)</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">Producto demo: <code>CABLE-MERMA</code>. Conteo físico revela 80 metros en almacén vs 100 metros en Odoo (Faltan 20m @ $85 MXN):</p>
-              
-              <div class="two-col-grid">
-                <div class="disaster-col-card">
-                  <div class="card-pill">EL ERROR COMÚN</div>
-                  <h3>Ajuste Automático a Costo de Ventas</h3>
-                  <div class="detail-box">
-                    Hacer clic en "Aplicar Inventario Físico" enviando la diferencia directamente a la cuenta 501.01.01 (Costo de Ventas ordinario).
-                    <br><br>
-                    <strong>El peligro SAT:</strong> El SAT audita el consumo de materias primas y ventas. Si el faltante no tiene CFDI de venta ni acta de destrucción de mermas autorizada, <strong>se presume como venta omitida con cobro de IVA e ISR omitido</strong>.
-                  </div>
-                </div>
-
-                <div class="disaster-col-card">
-                  <div class="card-pill">LA PRÁCTICA PROFESIONAL EN ODOO 19</div>
-                  <h3>Canalización a Gasto No Deducible</h3>
-                  <div class="detail-box">
-                    Configurar la ubicación de pérdida de inventario (Scrap / Inventory Loss) vinculada a una cuenta específica: <strong>Gastos No Deducibles por Merma</strong>.
-                    <br><br>
-                    <strong>Beneficio:</strong> Las 80 unidades restantes conservan su AVCO exacto de $85.00 MXN sin alteraciones, y la contabilidad fiscal queda perfectamente blindada.
-                  </div>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-        # Slide 14: Bloque 4 - Desastre #3: Provisión de Inventario Obsoleto
-        {
-            "id": 14,
-            "title": "Desastre #3: Inventario Obsoleto (NIF C-4)",
-            "bg": "white",
-            "time": "00:58 - 01:05",
-            "block": "Bloque 4",
-            "notes": "Producto TARJETA-OBS pre-configurado en setup_masterclass.py. Demostrar cómo manejar inventarios de lento movimiento u obsoletos. El error garrafal es cambiarle el costo a cero o hacer un ajuste negativo; la regla es crear una cuenta complementaria de activo (provisión de obsolescencia).",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge" style="background:#B91C1C;">CLÍNICA DE DESASTRES #3</span>
-                  <h2 class="slide-title">Inventario Obsoleto y Provisiones (NIF C-4)</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">Producto demo: <code>TARJETA-OBS</code>. Lote valorado en $120,000 MXN que perdió su valor de mercado por obsolescencia tecnológica:</p>
-              
-              <div class="two-col-grid">
-                <div class="disaster-col-card">
-                  <div class="card-pill">ERROR CATASTRÓFICO</div>
-                  <h3>Cambiar el Costo o Ajustar a Cero</h3>
-                  <div class="detail-box">
-                    Modificar el <code>standard_price</code> del producto a $0.00 o dar de baja el inventario en el módulo de stock.
-                    <br><br>
-                    <strong>La catástrofe:</strong> Si el producto físicamente sigue en la bodega y se llega a vender como refacción o chatarra, el sistema generará márgenes absurdos del 100% o costos negativos que destruyen el histórico.
-                  </div>
-                </div>
-
-                <div class="disaster-col-card">
-                  <div class="card-pill">SOLUCIÓN CONTABLE CORRECTA</div>
-                  <h3>Cuenta Complementaria de Activo</h3>
-                  <div class="detail-box">
-                    Mantener el AVCO en Odoo intacto ($1,200 MXN) y crear una póliza contable en una cuenta complementaria:
-                    <div class="asiento-box">
-                      <div class="asiento-row"><span class="cargo">CARGO</span> Gastos por Estimación de Obsolescencia</div>
-                      <div class="asiento-row"><span class="abono">ABONO</span> 115.09 Provisión por Inventario Obsoleto (Acreedora)</div>
-                    </div>
-                    <strong>Resultado:</strong> El valor neto en balance baja a valor razonable (NIF C-4) sin desconfigurar la logística de Odoo.
-                  </div>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-        # Slide 15: Bloque 5 - El Momento de la Verdad: Auditoría en Vivo
-        {
-            "id": 15,
-            "title": "El Momento de la Verdad: Auditoría en Vivo",
+            "title": "Causa Raíz #3: Matriz de Cadencia",
             "bg": "gradient",
-            "time": "01:05 - 01:10",
+            "time": "00:53 - 00:58",
             "block": "Bloque 5",
-            "notes": "EL CLÍMAX DE LA AUDITORÍA. Entrar en vivo al menú Contabilidad > Revisión y Cierre > Valoración de inventario en la base de datos de Masterclass México SA de CV. Rastrear los $487,000 MXN del Bloque 1.",
+            "notes": "Parte A del Bloque 5: La Causa Raíz #3 - La Cadencia de Auditoría (5 min). Encuesta relámpago al chat: ¿Cada cuánto auditan el inventario contable contra el almacén? Presentar la Matriz de Cadencia Vauxoo (Diaria, Semanal, Mensual, Anual).",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 5 · 01:05 - 01:15</span>
-                  <h2 class="slide-title" style="color: #fff;">El Momento de la Verdad: Auditoría en Vivo</h2>
+                  <span class="pill-badge">BLOQUE 5 · PARTE A (00:53 - 00:58)</span>
+                  <h2 class="slide-title" style="color: #fff;">Causa Raíz #3: La Cadencia de Auditoría</h2>
                 </div>
                 <div class="slide-header-logo">{logo_white}</div>
               </div>
               <p class="slide-lead" style="color: rgba(255,255,255,0.9);">
-                Rastreando en tiempo real el descuadre de <strong>$487,000.00 MXN</strong> del Bloque 1:
+                Encuesta al chat: <em>"¿Cada cuánto cruzan la cuenta 1150 contra el reporte de existencias?"</em>
               </p>
               
-              <div class="audit-steps-grid">
-                <div class="audit-step-card">
-                  <div class="audit-step-num">PASO 1</div>
-                  <h4>Abrir Valoración de Inventario</h4>
-                  <p>Menú <code>Contabilidad > Revisión y Cierre > Valoración de inventario</code>. Odoo 19 unifica los datos de stock.move directamente.</p>
-                </div>
-                <div class="audit-step-card">
-                  <div class="audit-step-num">PASO 2</div>
-                  <h4>Fijar Fecha de Corte</h4>
-                  <p>Establecer fecha exacta de corte (30/09/2026). Bloquear transacciones posteriores para congelar la fotografía de auditoría.</p>
-                </div>
-                <div class="audit-step-card">
-                  <div class="audit-step-num">PASO 3</div>
-                  <h4>Filtrar Cuenta 115.01.01</h4>
-                  <p>Abrir la Balanza de Comprobación y desplegar los apuntes contables (account.move.line) de la cuenta de inventario.</p>
-                </div>
-                <div class="audit-step-card">
-                  <div class="audit-step-num">PASO 4</div>
-                  <h4>Rastrear Origen Huérfano</h4>
-                  <p>Filtrar los apuntes cuyo origen de diario sea <strong>Operaciones Varias (MISC)</strong> en lugar del Diario de Stock (STJ).</p>
-                </div>
+              <div class="sat-fiscal-table-container">
+                <table class="sat-fiscal-table" style="background:rgba(255,255,255,0.06); color:#fff;">
+                  <thead>
+                    <tr style="background:#1E293B;">
+                      <th>Frecuencia</th>
+                      <th>Calificación</th>
+                      <th>Esfuerzo de Revisión</th>
+                      <th>Impacto en el Negocio</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Diaria</strong></td>
+                      <td>⭐⭐⭐⭐⭐ <span class="pill-badge" style="background:#16A34A;">EXCELENTE</span></td>
+                      <td>2 a 5 minutos</td>
+                      <td>Detección inmediata al vuelo; 1-2 movimientos; cero sorpresas a fin de mes.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Semanal</strong></td>
+                      <td>⭐⭐⭐⭐ <span class="pill-badge" style="background:#0D9488;">RECOMENDADO</span></td>
+                      <td>15 minutos</td>
+                      <td>Fricción mínima; máximo 10 movimientos sospechosos por revisar.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Mensual</strong></td>
+                      <td>⭐⭐⭐ <span class="pill-badge" style="background:#3B82F6;">BUENO</span></td>
+                      <td>1 a 2 horas</td>
+                      <td>Estándar indispensable para el cierre formal y checklist contable.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Anual</strong></td>
+                      <td>❌ <span class="pill-badge" style="background:#B91C1C;">EVITARLO A TODA COSTA</span></td>
+                      <td>Semanas de reconstrucción</td>
+                      <td>3,000+ movimientos acumulados; laberinto indescifrable y costo destructivo.</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
             '''
         },
-        # Slide 16: Bloque 5 - Resolución del Descuadre Inicial
+        # Slide 14: Bloque 5 - Causa Raíz #2: Caza de la Póliza Manual (MISC/2026/09/0001)
         {
-            "id": 16,
-            "title": "Resolución del Descuadre en Vivo",
+            "id": 14,
+            "title": "Caza de la Póliza Manual Intrusa",
             "bg": "white",
-            "time": "01:10 - 01:13",
+            "time": "00:58 - 01:03",
             "block": "Bloque 5",
-            "notes": "DESCUBRIMIENTO EN PANTALLA: Póliza manual con ref 'Ajuste manual auditoría interna (Error contable)' por $487,000 MXN en el diario MISC. Al revertirla en vivo, la cuenta 115.01.01 queda en $200.00 MXN, exactamente igual que el Reporte de Valoración. Cuadre al 100%.",
+            "notes": "Parte B del Bloque 5: Causa Raíz #2 - Caza de la Póliza Manual y Resolución del Hook (5 min). Regreso a las pantallas del Hook: diferencia de $411,275 MXN. Demostración de auditoría en vivo en 115.01.01 > Apuntes contables, filtrar Documento Origen = False. Descubrimiento de la póliza MISC/2026/09/0001 por $487,000.00 MXN.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">RESOLUCIÓN EN VIVO</span>
-                  <h2 class="slide-title">¡Misterio Resuelto! El Asiento Manual Intruso</h2>
+                  <span class="pill-badge">BLOQUE 5 · PARTE B (00:58 - 01:03)</span>
+                  <h2 class="slide-title">Causa Raíz #2: Caza de la Póliza Manual en Vivo</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
+              <p class="slide-lead">Resolviendo el misterio de los <strong>$411,275.00 MXN</strong> del Bloque 1 en menos de 5 minutos:</p>
               
               <div class="resolution-container">
                 <div class="culprit-box">
-                  <div class="culprit-badge">🔍 ORIGEN EXACTO ENCONTRADO EN LA BD</div>
-                  <h3>Póliza Manual: Ref "Ajuste manual auditoría interna (Error contable)"</h3>
+                  <div class="culprit-badge">🔍 PÓLIZA MANUAL DETECTADA EN LA BD</div>
+                  <h3>Póliza <code>MISC/2026/09/0001</code> por $487,000.00 MXN</h3>
                   <div class="culprit-desc">
-                    El equipo contable anterior registró un asiento manual directo en la cuenta <strong>115.01.01</strong> por <strong>$487,000.00 MXN</strong> contra la cuenta 501.01.02 en el diario MISC.
+                    El contador anterior, bajo la presión de un cierre y sin visibilidad del almacén, metió una póliza manual directa a la cuenta <strong>115.01.01</strong> contra la 501.01.02 para forzar un cuadre provisional.
                   </div>
                   <div class="culprit-flaw">
-                    ❌ Una póliza de diario manual <strong>NUNCA genera un stock.move</strong>. Infló la contabilidad en $487,000 MXN mientras que el almacén físico solo tenía $200.00 MXN.
+                    ❌ La "aspirina manual": Una póliza manual NUNCA crea un Stock Move físico. Infló la contabilidad artificialmente, rompiendo la paridad con el almacén.
                   </div>
                 </div>
 
                 <div class="action-result-box">
                   <div class="result-step">
-                    <strong>Acción Correctiva Ejecutada en Vivo:</strong> Revertir el asiento manual indebido. Si se requiere un ajuste de stock, se debe ejecutar exclusivamente desde el módulo de Inventario con su respectivo albarán.
+                    <strong>Paso Quirúrgico en Odoo 19:</strong> Cancelación / Reclasificación de la póliza <code>MISC/2026/09/0001</code>.
                   </div>
                   <div class="balanced-state">
                     <div class="bal-item">
-                      <span>Cuenta 115.01.01 (Balanza)</span>
-                      <strong>$200.00 MXN</strong>
+                      <span>Balanza de Comprobación (Cuenta 115.01.01)</span>
+                      <strong>$75,925.00 MXN</strong>
                     </div>
                     <div class="bal-equal">=</div>
                     <div class="bal-item">
-                      <span>Reporte de Valoración</span>
-                      <strong>$200.00 MXN</strong>
+                      <span>Reporte de Existencias / Valoración</span>
+                      <strong>$75,925.00 MXN</strong>
                     </div>
                     <div class="bal-status">
-                      ✅ CUADRE PERFECTO AL 100% (Diferencia: $0.00 MXN)
+                      ✅ CUADRE PERFECTO AL CENTAVO (Diferencia: $0.00 MXN)
                     </div>
                   </div>
                 </div>
@@ -818,57 +759,145 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             </div>
             '''
         },
-        # Slide 17: Bloque 5 - Las 3 Reglas de Oro en México
+        # Slide 15: Bloque 5 - Las 3 Reglas de Oro Blindadas de Vauxoo
         {
-            "id": 17,
-            "title": "Las 3 Reglas de Oro de Vauxoo",
+            "id": 15,
+            "title": "Las 3 Reglas de Oro Blindadas",
             "bg": "white",
-            "time": "01:13 - 01:15",
+            "time": "01:03 - 01:07",
             "block": "Bloque 5",
-            "notes": "Las 3 reglas de oro del Plan Final Fusionado v2: 1. Jamás permitir stock negativo; 2. Pedimentos obligatorios vía Landed Costs para subir el AVCO; 3. Cut-off logístico estricto antes del cierre contable de mes.",
+            "notes": "Parte C del Bloque 5: Las 3 Reglas de Oro Blindadas de Vauxoo (4 min). 1. Cero Asientos Manuales en la 1150 (bloquear por permisos); 2. Cero Stock Negativo; 3. Configuración y Cadencia Disciplinada.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
                   <span class="pill-badge">MEJORES PRÁCTICAS VAUXOO</span>
-                  <h2 class="slide-title">Las 3 Reglas de Oro para Inventarios en México</h2>
+                  <h2 class="slide-title">Las 3 Reglas de Oro Blindadas de Vauxoo</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
+              <p class="slide-lead">Los 3 mandamientos para no volver a tener un divorcio entre contabilidad y almacén:</p>
               
               <div class="golden-rules-grid">
                 <div class="golden-rule-card">
                   <div class="rule-medal">🥇</div>
-                  <div class="rule-num">REGLA DE ORO #1</div>
-                  <h3>Jamás Permitir Stock Negativo</h3>
-                  <p>Desactiva las entregas sin existencia física en categorías AVCO. Si la mercancía ya está en bodega pero no se ha capturado, ingresa la recepción antes de despachar. El costo negativo corrompe el kardex fiscal.</p>
+                  <div class="rule-num">REGLA BLINDADA #1</div>
+                  <h3>Cero Asientos Manuales en la 1150</h3>
+                  <p>Restringir por permisos de seguridad que los usuarios creen pólizas manuales de diario en cuentas de inventario. Todo ajuste debe nacer exclusivamente de un movimiento logístico documentado.</p>
                 </div>
 
                 <div class="golden-rule-card">
                   <div class="rule-medal">🥇</div>
-                  <div class="rule-num">REGLA DE ORO #2</div>
-                  <h3>Pedimentos Vía Landed Costs</h3>
-                  <p>Los gastos aduanales (DTA, IGI, fletes internacionales) deben inyectarse al AVCO del producto mediante el módulo de Costos en Destino antes de que la mercancía se venda. Cumple con el Art. 39 LISR.</p>
+                  <div class="rule-num">REGLA BLINDADA #2</div>
+                  <h3>Cero Stock Negativo en AVCO</h3>
+                  <p>Bloquear salidas y despachos sin existencia física en todas las categorías con Costo Promedio. El stock negativo destruye la integridad matemática del kardex ante el SAT.</p>
                 </div>
 
                 <div class="golden-rule-card">
                   <div class="rule-medal">🥇</div>
-                  <div class="rule-num">REGLA DE ORO #3</div>
-                  <h3>Cut-Off Logístico Estricto</h3>
-                  <p>Innegociable antes del cierre contable mensual. Todo albarán físico ocurrido en el mes debe validarse antes de las 23:59:59 del último día para que el cruce de la cuenta 115.01.01 cuadre con exactitud de centavos.</p>
+                  <div class="rule-num">REGLA BLINDADA #3</div>
+                  <h3>Configuración y Cadencia Disciplinada</h3>
+                  <p>Categorías de producto inmutables una vez en producción. Y adopción de una disciplina de auditoría semanal cruzando <em>Balanza vs Existencias</em> con el checklist oficial.</p>
                 </div>
               </div>
             </div>
             '''
         },
-        # Slide 18: Bloque 6 - Cierre y Entregables
+        # Slide 16: Bloque 6 - Q&A Hot Seat (23 min)
+        {
+            "id": 16,
+            "title": "Bloque 6: Q&A Hot Seat (23 min)",
+            "bg": "gradient",
+            "time": "01:07 - 01:28",
+            "block": "Bloque 6",
+            "notes": "Bloque 6: Q&A Hot Seat - Consultoría en Vivo (23 minutos). Los asistentes exponen sus dudas, casuísticas de comercio exterior o descuadres reales en vivo. Julio responde en pantalla compartida sobre la base de datos de Odoo 19.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge">BLOQUE 6 · 01:07 - 01:30 (23 MIN)</span>
+                  <h2 class="slide-title" style="color: #fff;">Q&A Hot Seat: Consultoría en Vivo</h2>
+                </div>
+                <div class="slide-header-logo">{logo_white}</div>
+              </div>
+              
+              <div class="hotseat-container">
+                <div class="hotseat-badge-col">
+                  <div class="hotseat-icon">🔥</div>
+                  <h3>Micrófono Abierto</h3>
+                  <p>23 minutos dedicados a resolver tus peores dolores de valoración e importaciones en Odoo 19.</p>
+                </div>
+                <div class="hotseat-topics">
+                  <h4>Casuísticas Prioritarias para la Sesión:</h4>
+                  <ul class="styled-list" style="color: rgba(255,255,255,0.9);">
+                    <li>¿Tienes descuadres históricos acumulados arrastrados desde v16 o v18?</li>
+                    <li>¿Dudas con el reparto de Landed Costs en recepciones parciales?</li>
+                    <li>¿Cómo corregir categorías mal configuradas sin corromper la balanza del SAT?</li>
+                    <li>¿Tratamiento de mermas y destrucciones autorizadas ante auditorías fiscales?</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+        # Slide 17: Paquete de Entregables Oficiales
+        {
+            "id": 17,
+            "title": "Paquete de Entregables Oficiales",
+            "bg": "white",
+            "time": "01:28 - 01:30",
+            "block": "Bloque 6",
+            "notes": "Presentación de los entregables: 1. Checklist de Auditoría Logística-Contable MX con Matriz de Cadencia; 2. Tabla de Mapeo Conceptual v18 -> v19; 3. Grabación HD con capítulos; 4. Certificado de Vauxoo Academy.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge">MATERIALES DE LA MASTERCLASS</span>
+                  <h2 class="slide-title">Suite Oficial de Entregables</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              
+              <div class="deliverables-grid">
+                <div class="deliv-card">
+                  <div class="deliv-icon">📋</div>
+                  <h4>Entregable #1: Checklist con Matriz de Cadencia</h4>
+                  <p>Guía de validación de 4 fases para auditorías diarias, semanales y mensuales en Odoo 19 MX.</p>
+                  <a href="#tab-checklist" onclick="switchTab('checklist')" class="btn btn-sm">Ver Checklist</a>
+                </div>
+
+                <div class="deliv-card">
+                  <div class="deliv-icon">📊</div>
+                  <h4>Entregable #2: Tabla de Mapeo 18 → 19</h4>
+                  <p>Comparativa conceptual de arquitectura: Stock Moves, cuentas puente y reglas de oro SAT.</p>
+                  <a href="#tab-mapeo" onclick="switchTab('mapeo')" class="btn btn-sm">Ver Mapeo & SAT</a>
+                </div>
+
+                <div class="deliv-card">
+                  <div class="deliv-icon">🎥</div>
+                  <h4>Grabación en Alta Definición</h4>
+                  <p>Acceso permanente a la grabación completa indexada por bloques y capítulos para tu equipo.</p>
+                  <span class="pill-badge-outline" style="color:#64748B; border-color:#CBD5E1;">Acceso permanente</span>
+                </div>
+
+                <div class="deliv-card">
+                  <div class="deliv-icon">🎓</div>
+                  <h4>Certificado Vauxoo Academy</h4>
+                  <p>Acreditación digital oficial de aprovechamiento en Valoración de Inventarios en Odoo 19.</p>
+                  <span class="pill-badge-outline" style="color:#64748B; border-color:#CBD5E1;">Emisión oficial</span>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+        # Slide 18: Cierre y Contacto
         {
             "id": 18,
-            "title": "Cierre y Entregables Oficiales",
+            "title": "Cierre y Agradecimientos",
             "bg": "gradient",
-            "time": "01:15 - 01:30",
-            "block": "Bloque 6",
-            "notes": "Hot Seat de consultoría en vivo: responder preguntas reales de los participantes durante 15 minutos. Entregar los accesos al Checklist de Auditoría interactivo, Tabla de Mapeo 18->19, grabación 4K y certificado oficial de Vauxoo Academy.",
+            "time": "01:30",
+            "block": "Cierre",
+            "notes": "Agradecimiento final. Invitación para proyectos de diagnóstico e implementación con Vauxoo. Cierre de la sesión.",
             "html": f'''
             <div class="slide-content cover-slide">
               <div class="cover-logo-wrap">
@@ -877,39 +906,16 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
               <h2 style="font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; color: #fff;">
                 Aprende. Evoluciona. Transforma.
               </h2>
-              <p style="font-size: 1.15rem; color: rgba(255,255,255,0.85); max-width: 700px; margin: 0 auto 28px;">
-                Tus entregables oficiales de la Masterclass 2026 ya están disponibles para descarga y uso en tu empresa:
+              <p style="font-size: 1.15rem; color: rgba(255,255,255,0.85); max-width: 650px; margin: 0 auto 32px;">
+                Gracias por acompañarnos. Tu almacén y tu contabilidad ahora operan con la misma verdad.
               </p>
               
-              <div class="deliverables-grid" style="margin-bottom: 28px;">
-                <div class="deliv-card" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25);">
-                  <div class="deliv-icon">📋</div>
-                  <h4 style="color:#fff;">Checklist de Cierre</h4>
-                  <p style="color:rgba(255,255,255,0.8);">Validación de 12 puntos para cierres de mes en Odoo 19 MX.</p>
-                </div>
-                <div class="deliv-card" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25);">
-                  <div class="deliv-icon">📊</div>
-                  <h4 style="color:#fff;">Tabla Mapeo 18→19</h4>
-                  <p style="color:rgba(255,255,255,0.8);">Arquitectura, importaciones USD y contingencias SAT.</p>
-                </div>
-                <div class="deliv-card" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25);">
-                  <div class="deliv-icon">🎥</div>
-                  <h4 style="color:#fff;">Grabación en 4K</h4>
-                  <p style="color:rgba(255,255,255,0.8);">Acceso permanente con índice por capítulos.</p>
-                </div>
-                <div class="deliv-card" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25);">
-                  <div class="deliv-icon">🎓</div>
-                  <h4 style="color:#fff;">Certificado Digital</h4>
-                  <p style="color:rgba(255,255,255,0.8);">Acreditación oficial emitida por Vauxoo Academy.</p>
-                </div>
-              </div>
-
               <div class="closing-contact-card">
                 <div>
                   <strong>Julio Serna</strong> · Project Manager & Functional Specialist<br>
                   <span style="color: rgba(255,255,255,0.8);">Vauxoo — Odoo Gold Partner</span>
                 </div>
-                <div style="display:flex; gap:12px; justify-content:center; margin-top:14px;">
+                <div style="display:flex; gap:12px; justify-content:center; margin-top:16px;">
                   <span class="pill-badge">vauxoo.com/vauxoo-academy</span>
                   <span class="pill-badge-outline">#VauxooAcademy2026</span>
                 </div>
@@ -919,4 +925,4 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
         }
     ]
 
-print("Updated slides content module ready.")
+print("Plan final v4 slides module compiled successfully.")

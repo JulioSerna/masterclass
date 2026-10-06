@@ -1874,15 +1874,15 @@ h1, h2, h3, h4, h5, h6 {
         </div>
         <div class="doc-header-title">
           <span class="pill-badge">ENTREGABLE OFICIAL #2</span>
-          <h2>Tabla de Mapeo v18 → v19 & Guía de Supervivencia SAT</h2>
-          <p class="doc-subtitle">Análisis Arquitectónico, Mega-Caso de Importaciones USD y Mitigación de Riesgos Fiscales</p>
+          <h2>Tabla de Mapeo Conceptual v18 → v19 & Guía de Supervivencia SAT</h2>
+          <p class="doc-subtitle">Análisis Arquitectónico, Compras USD con Landed Costs y Mitigación de Riesgos Fiscales (NIF C-4)</p>
         </div>
       </div>
 
       <!-- Action Toolbar (hidden on print) -->
       <div class="doc-toolbar no-print">
         <div class="toolbar-stats">
-          <span class="stats-text">Guía de Referencia Rápida para Consultores, Contadores y Líderes de Proyecto</span>
+          <span class="stats-text">Guía de Referencia Rápida para Consultores, Contadores y Auditores de Odoo en México</span>
         </div>
         <div class="toolbar-actions">
           <button class="btn btn-sm" onclick="window.print()">
@@ -1891,81 +1891,95 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </div>
 
-      <!-- Part 1: Arquitectura v18 vs v19 -->
+      <!-- Part 1: Arquitectura v18 vs v19 (Exact from masterclass-plan-final.md lines 221-230) -->
       <div class="doc-section">
         <div class="section-title-wrap">
           <span class="pill-badge">PARTE 1</span>
-          <h3>Mapeo Arquitectónico: Odoo 18 vs Odoo 19.0</h3>
+          <h3>Tabla de Mapeo Conceptual v18 → v19 (México)</h3>
         </div>
         <p class="section-intro">
-          Odoo 19 simplifica radicalmente la pila de inventario y contabilidad. La siguiente tabla sintetiza la transición técnica y su impacto directo en la contabilidad mexicana:
+          Odoo 19 simplifica radicalmente la pila de inventario y contabilidad. La siguiente tabla sintetiza la transición técnica y su impacto directo en la contabilidad y fiscalidad mexicana:
         </p>
 
         <div class="table-responsive">
           <table class="comparison-table">
             <thead>
               <tr>
-                <th style="width: 20%;">Concepto Operativo</th>
-                <th style="width: 25%;">Odoo ≤ 18 (Arquitectura Clásica)</th>
-                <th style="width: 25%;">Odoo 19.0 (Arquitectura Moderna)</th>
-                <th style="width: 30%;">Impacto Práctico & Fiscal en México</th>
+                <th style="width: 22%;">Concepto</th>
+                <th style="width: 25%;">Odoo ≤ 18</th>
+                <th style="width: 25%;">Odoo 19.0</th>
+                <th style="width: 28%;">Impacto para México</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Motor de Valoración</strong></td>
+                <td><strong>Almacenamiento de valoración</strong></td>
                 <td>
-                  <span class="badge-old">stock.valuation.layer (SVL)</span><br>
+                  <span class="badge-old">Stock Valuation Layers (SVL)</span><br>
                   Tabla intermedia separada que registraba el valor monetario de cada movimiento.
                 </td>
                 <td>
-                  <span class="badge-new">stock.move unificado</span><br>
+                  <span class="badge-new">Directo en stock.move</span><br>
                   Los campos de valor monetario residen directamente en el movimiento de almacén.
                 </td>
                 <td>
-                  <strong>Cero desincronización:</strong> Se elimina el error clásico donde existía un Stock Move sin capa SVL. Trazabilidad 1 a 1 por UUID y pedimento.
+                  <strong>Menor peso en base de datos;</strong> rastreo contable directo por póliza sin capas huérfanas.
                 </td>
               </tr>
               <tr>
-                <td><strong>Cuentas Contables Temporales</strong></td>
+                <td><strong>Cuentas puente interim</strong></td>
                 <td>
-                  <span class="badge-old">Interim Accounts</span><br>
-                  Stock Input (Entradas) y Stock Output (Salidas) requerían conciliación posterior.
+                  <span class="badge-old">Interim Input / Output</span><br>
+                  Cuentas puente obligatorias que requerían conciliación posterior.
                 </td>
                 <td>
-                  <span class="badge-new">Asiento Directo</span><br>
-                  El movimiento logístico afecta directamente contra Proveedores o Costo de Ventas.
+                  <span class="badge-new">Flujo Directo a 1150</span><br>
+                  Desaparecen en flujo directo; el movimiento va directo a la cuenta de inventarios 115.01.01.
                 </td>
                 <td>
-                  <strong>Balanza SAT más limpia:</strong> Elimina saldos muertos en cuentas de orden o puente al final del ejercicio fiscal.
-                </td>
-              </tr>
-              <tr>
-                <td><strong>Modelo de Valoración</strong></td>
-                <td>
-                  <span class="badge-old">Continental vs Anglo-Saxon</span><br>
-                  Configuración ambigua en los ajustes contables que confundía a implementadores.
-                </td>
-                <td>
-                  <span class="badge-new">Periódico vs Perpetuo</span><br>
-                  Nomenclatura alineada con las Normas Internacionales de Información Financiera.
-                </td>
-                <td>
-                  En México siempre se selecciona <strong>Perpetuo</strong> junto con <strong>AVCO</strong> para dar pleno cumplimiento al Art. 41 de la Ley del ISR.
+                  <strong>Balanza limpia;</strong> se eliminan conciliaciones interminables de cuentas puente al cierre de mes.
                 </td>
               </tr>
               <tr>
-                <td><strong>Panel de Cierre de Periodo</strong></td>
+                <td><strong>Terminología contable</strong></td>
                 <td>
-                  <span class="badge-old">Disperso</span><br>
-                  Revisión manual en informes de inventario y cruce externo en hojas de cálculo.
+                  <span class="badge-old">Continental / Anglo-Sajona</span><br>
+                  Nomenclatura ambigua que causaba errores de configuración.
                 </td>
                 <td>
-                  <span class="badge-new">Contabilidad > Revisión y Cierre</span><br>
-                  Menú: <em>Valoración de inventario</em> con panel nativo guiado de corte.
+                  <span class="badge-new">Periódico / Perpetuo</span><br>
+                  Nomenclatura formal alineada a estándares internacionales.
                 </td>
                 <td>
-                  Reducción de hasta un <strong>75% del tiempo invertido</strong> en la conciliación del cierre de mes antes de timbrar la contabilidad electrónica.
+                  Alineado formalmente con <strong>NIF C-4</strong> y deducción de costo de ventas ante el SAT.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Movimientos retroactivos</strong></td>
+                <td>
+                  <span class="badge-old">Prohibidos / Rígidos</span><br>
+                  Bloqueo absoluto o inconsistencias severas en el kardex histórico.
+                </td>
+                <td>
+                  <span class="badge-new">Back-dating controlado</span><br>
+                  Permite corregir fechas con debida autorización de auditoría.
+                </td>
+                <td>
+                  Permite corregir recepciones con fechas de pedimento bajo estricta autorización de auditoría.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Cierre de inventario</strong></td>
+                <td>
+                  <span class="badge-old">Scripts y Excel</span><br>
+                  Hojas de cálculo dispersas y scripts SQL de soporte para cuadrar.
+                </td>
+                <td>
+                  <span class="badge-new">Menú guiado centralizado</span><br>
+                  <em>Contabilidad > Informes > Inventario / Existencias</em>.
+                </td>
+                <td>
+                  Validación de consistencia previa a la emisión de estados financieros y balanza SAT.
                 </td>
               </tr>
             </tbody>
@@ -1973,63 +1987,58 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </div>
 
-      <!-- Part 2: Diagrama de Importaciones USD -->
+      <!-- Part 2: Flujo de Compras en USD y Landed Costs (Plan Final v4) -->
       <div class="doc-section" style="page-break-before: always;">
         <div class="section-title-wrap">
           <span class="pill-badge">PARTE 2</span>
-          <h3>El Ciclo Maestro de Importaciones (USD en Moneda Base MXN)</h3>
+          <h3>El Flujo Maestro de Compras en USD y Costos en Destino (Landed Costs)</h3>
         </div>
         <p class="section-intro">
-          El núcleo de la Masterclass: Compras en USD a Global Supply Tech LLC con pedimento de Agencia Aduanal del Norte, S.C. y moneda base MXN:
+          Flujo operativo estricto de acuerdo al Bloque 3 del Plan Definitivo v4: Moneda base MXN, Orden de Compra en USD a Global Supply Tech LLC y Landed Costs de Agencia Aduanal del Norte:
         </p>
 
         <div class="import-lifecycle-box">
           <div class="lifecycle-stage">
             <div class="stage-num">1</div>
             <div class="stage-info">
-              <h4>Anticipo en USD (Art. 20 CFF & NIF B-15)</h4>
-              <p>Se emite anticipo de $3,000 USD a TC DOF de $18.22 MXN/USD ($54,660.00 MXN).</p>
-              <div class="stage-memo">📌 <em>Efecto Fiscal: El anticipo es una partida no monetaria que congela la tasa histórica para el 30% del valor de las mercancías.</em></div>
+              <h4>Orden de Compra en USD (Purchase Order)</h4>
+              <p>PO en dólares por 20 Sensores Industriales a <strong>$100.00 USD/u</strong> ($2,000 USD totales).</p>
+              <div class="stage-memo">📌 <em>Regla Técnica: La Orden de Compra NO fija el costo de inventario. La fecha del PO es irrelevante para el costo contable.</em></div>
             </div>
           </div>
 
           <div class="lifecycle-stage">
             <div class="stage-num">2</div>
             <div class="stage-info">
-              <h4>Recepción Aduanal Física (Stock Move IN)</h4>
-              <p>Ingreso de 100 Sensores USD a aduana mexicana. Tipo de cambio oficial DOF: <strong>$18.05 MXN/USD</strong>.</p>
+              <h4>Recepción Física en Almacén (Stock Move IN) — Fijación del AVCO Inicial</h4>
+              <p>Recepción física validada. Odoo 19 toma automáticamente el Tipo de Cambio oficial del DOF a la <strong>fecha de recepción</strong> ($18.50 MXN/USD).</p>
               <div class="asiento-mini">
-                <div>CARGO: 115.01.01 Mercancías en Almacén → <strong>$180,500.00 MXN</strong> (100u × $100 × 18.05)</div>
-                <div>ABONO: 2110 Proveedores Extranjeros en Tránsito → <strong>$180,500.00 MXN</strong></div>
+                <div>CARGO: 115.01.01 Mercancías en Almacén → <strong>$37,000.00 MXN</strong> (20u × $100 USD × $18.50)</div>
+                <div>ABONO: 201.01.02 Proveedores Extranjeros en Tránsito → <strong>$37,000.00 MXN</strong></div>
               </div>
-              <div class="stage-memo">📌 <em>Efecto en AVCO: El costo unitario promedio del producto absorbe inicialmente $1,805.00 MXN / pieza.</em></div>
+              <div class="stage-memo">📌 <em>AVCO Inicial en Odoo 19: $100 USD &times; $18.50 = <strong>$1,850.00 MXN / pieza</strong>.</em></div>
             </div>
           </div>
 
           <div class="lifecycle-stage">
             <div class="stage-num">3</div>
             <div class="stage-info">
-              <h4>Factura del Proveedor Extranjero (Vendor Bill)</h4>
-              <p>Llega el Invoice comercial con fecha posterior. Tipo de cambio del día de la factura: <strong>$18.50 MXN/USD</strong>.</p>
+              <h4>Factura de Gastos de Importación y Fletes (Landed Costs)</h4>
+              <p>Factura de Agencia Aduanal del Norte, S.C. por <strong>$5,000.00 MXN</strong> (fletes, maniobras y gastos aduanales asignables).</p>
               <div class="asiento-mini">
-                <div>CARGO: 2110 Proveedores Extranjeros en Tránsito → <strong>$180,500.00 MXN</strong></div>
-                <div>CARGO: 701.01.01 Fluctuación Cambiaria (Gasto) → <strong>$4,500.00 MXN</strong></div>
-                <div>ABONO: 201.01.02 Proveedores Extranjeros → <strong>$185,000.00 MXN</strong></div>
+                <div>CARGO: 115.01.01 Mercancías en Almacén (Landed Cost) → <strong>$5,000.00 MXN</strong></div>
+                <div>ABONO: 201.01.01 Proveedores Nacionales (Agencia Aduanal) → <strong>$5,000.00 MXN</strong></div>
               </div>
-              <div class="stage-memo">📌 <em>Regla de Oro: La variación de $4,500 MXN NO contamina el inventario físico, protegiendo el kardex aduanal.</em></div>
+              <div class="stage-memo">📌 <em>Distribución automática de Odoo 19: $5,000 MXN &divide; 20 unidades = <strong>+$250.00 MXN / unidad</strong>.</em></div>
             </div>
           </div>
 
           <div class="lifecycle-stage">
             <div class="stage-num">4</div>
             <div class="stage-info">
-              <h4>Pedimento Aduanal & Costos en Destino (Landed Costs)</h4>
-              <p>Factura de Agencia Aduanal del Norte, S.C. por <strong>$5,000.00 MXN</strong> (LANDED-COST) con DTA e impuestos aduanales.</p>
-              <div class="asiento-mini">
-                <div>CARGO: 115.01.01 Mercancías en Almacén → <strong>$5,000.00 MXN</strong></div>
-                <div>ABONO: 201.01.01 Proveedores Nacionales (Agencia Aduanal) → <strong>$5,000.00 MXN</strong></div>
-              </div>
-              <div class="stage-memo">📌 <em>Nuevo AVCO Final: $1,805.00 + ($5,000 / 100u) = <strong>$1,855.00 MXN / pieza</strong> (Cumple Art. 39 LISR).</em></div>
+              <h4>Cálculo del AVCO Final y Cumplimiento Fiscal</h4>
+              <p>El Costo Promedio ponderado unitario en Odoo 19 sube matemáticamente de $1,850.00 a <strong>$2,100.00 MXN</strong>.</p>
+              <div class="stage-memo">📌 <em>Impacto Fiscal: Sin Landed Costs, el inventario y el costo de ventas quedan artificialmente subvaluados en $250/u, violando el Art. 39 de la Ley del ISR.</em></div>
             </div>
           </div>
         </div>
@@ -2039,16 +2048,19 @@ h1, h2, h3, h4, h5, h6 {
       <div class="doc-section">
         <div class="section-title-wrap">
           <span class="pill-badge">PARTE 3</span>
-          <h3>Fórmula Matemática y Algoritmo de Recálculo AVCO</h3>
+          <h3>Fórmula Matemática y Alerta Técnica de Configuración en Caliente</h3>
         </div>
         <div class="math-card">
-          <h4>Fórmula Oficial en Cada Recepción Validada:</h4>
+          <h4>Fórmula Oficial de Recálculo AVCO en Odoo 19.0:</h4>
           <div class="math-formula">
             Costo Promedio Final = [ (Stock Existente &times; Costo Unitario Actual) + (Qty Recibida &times; Costo Recepción) ] &divide; [ Stock Existente + Qty Recibida ]
           </div>
-          <p style="margin-top: 12px; font-size: 0.9rem; color: #475569;">
-            <strong>Nota técnica de Odoo 19:</strong> Si el Stock Existente es menor o igual a 0.00 (condición anómala de stock negativo con producto VALVULA-NEG), el denominador colapsa o distorsiona el costo promedio a cifras astronómicas o negativas. Por ello, la regla de oro #1 de Vauxoo prohíbe terminantemente operar con existencias negativas.
-          </p>
+          <div style="margin-top: 16px; padding: 12px; background: #FFF1F2; border-left: 4px solid #AC0340; border-radius: 4px;">
+            <strong style="color: #AC0340;">⚠️ Alerta Crítica (Causa Raíz #1): "Dos malas no hacen una buena"</strong>
+            <p style="margin: 6px 0 0; font-size: 0.9rem; color: #1E293B;">
+              Cambiar en caliente una categoría de Periódico a Perpetuo o de Standard a AVCO <strong>NO genera asientos retroactivos</strong> en Odoo 19. El inventario físico anterior queda flotando sin póliza contable de soporte, divorciando permanentemente la cuenta 1150 del reporte de existencias.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -2062,42 +2074,36 @@ h1, h2, h3, h4, h5, h6 {
           <table class="sat-matrix-table">
             <thead>
               <tr>
-                <th>Error o Síntoma Operativo</th>
+                <th>Desastre Operativo</th>
                 <th>Mecanismo de Falla en Odoo</th>
-                <th>Sanción o Contingencia SAT</th>
-                <th>Acción de Mitigación en Odoo 19</th>
+                <th>Riesgo / Sanción SAT</th>
+                <th>Solución Blindada en Odoo 19</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Stock Negativo</strong> (VALVULA-NEG)</td>
-                <td>Despachar sin existencia física validada.</td>
-                <td>Rechazo de deducción del costo de lo vendido (Art. 39 LISR) y multa por inconsistencia en Kardex.</td>
-                <td>Desactivar ventas sin stock en categorías y configurar validaciones de seguridad previas a la entrega.</td>
+                <td><strong>Stock Negativo</strong><br><code>[VALVULA-NEG]</code></td>
+                <td>Despachar sin existencia en almacén (saldo en -10 u). Al ingresar nueva compra, la fórmula ponderada colapsa matemáticamente.</td>
+                <td>Rechazo total de deducción de costo de lo vendido (Art. 39 LISR) y observación en auditoría de Kardex.</td>
+                <td>Bloquear salidas sin stock en almacén y prohibir stock negativo en todas las categorías AVCO.</td>
               </tr>
               <tr>
-                <td><strong>Desfase Cambiario en Aduana</strong></td>
-                <td>Validar recepciones con tipo de cambio genérico.</td>
-                <td>Diferencias no deducibles contra el pedimento de importación en auditorías de comercio exterior.</td>
-                <td>Actualizar diariamente las tasas DOF en Odoo y auditar que la recepción coincida con el pedimento.</td>
+                <td><strong>Tipo de Cambio Erróneo</strong><br>Importaciones USD</td>
+                <td>Validar recepciones con TC comercial o fecha de orden de compra en vez del TC DOF de la fecha de recepción.</td>
+                <td>Distorsión de costo fiscal, discrepancias en auditoría de comercio exterior y diferencias cambiarias ficticias.</td>
+                <td>Configurar sincronización automática DOF y verificar que la recepción tome el TC DOF del día exacto de entrada.</td>
               </tr>
               <tr>
-                <td><strong>Landed Costs Tardíos</strong></td>
-                <td>Prorratear fletes cuando el stock ya fue vendido.</td>
-                <td>Inflar artificialmente inventarios que ya no existen, violando el principio de correlación contable.</td>
-                <td>Odoo 19 canaliza automáticamente la porción sin stock hacia Costo de Ventas (501.01.01).</td>
+                <td><strong>Mermas y Faltantes</strong><br><code>[CABLE-MERMA]</code></td>
+                <td>Faltan 15m. Reducir costo unitario o mandar la merma a costo de ventas ordinario sin acta de pérdida.</td>
+                <td>Presunción de venta omitida con determinación presuntiva de IVA e ISR omitido por el SAT.</td>
+                <td>Ajuste de inventario que reduce <strong>CANTIDAD</strong> manteniendo costo unitario ($85 MXN) contra cuenta de Gasto por Merma.</td>
               </tr>
               <tr>
-                <td><strong>Mermas Físicas</strong> (CABLE-MERMA)</td>
-                <td>Ajustar faltantes a costo de ventas ordinario.</td>
-                <td>Presunción de venta omitida con determinación de IVA trasladado e ISR omitido.</td>
-                <td>Direccionar ubicaciones de pérdida a cuentas de <strong>Gastos No Deducibles</strong> con acta circunstanciada.</td>
-              </tr>
-              <tr>
-                <td><strong>Inventario Obsoleto</strong> (TARJETA-OBS)</td>
-                <td>Cambiar el costo unitario a cero en el producto.</td>
-                <td>Márgenes ficticios del 100% y distorsión de utilidades en ejercicios fiscales futuros.</td>
-                <td>Crear cuentas complementarias de activo de <strong>Provisión por Obsolescencia</strong> cumpliendo NIF C-4.</td>
+                <td><strong>Inventario Obsoleto</strong><br><code>[TARJETA-OBS]</code></td>
+                <td>Reducir manualmente el costo unitario del producto a $0.00 MXN en Odoo mediante ajuste de valoración.</td>
+                <td>Distorsión irreversible del Kardex y márgenes brutos futuros inflados artificialmente al 100%.</td>
+                <td>Preservar costo en Kardex y registrar la pérdida en cuenta complementaria de activo (<code>108.02.01 Estimación de obsolescencia</code>).</td>
               </tr>
             </tbody>
           </table>
@@ -2107,7 +2113,7 @@ h1, h2, h3, h4, h5, h6 {
       <!-- Footer Note -->
       <div class="doc-footer">
         <span>Vauxoo Academy · Masterclass 2026: Domina AVCO y Desastres de Importación en Odoo 19.0</span>
-        <span>Guía técnica de arquitectura Odoo 19.0 y fiscalidad mexicana</span>
+        <span>Plan Definitivo v4 · Cumplimiento NIF C-4 y Código Fiscal de la Federación</span>
       </div>
     </div>
     
