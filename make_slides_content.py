@@ -48,57 +48,14 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 2: El Marco Narrativo - Las 3 Causas Raíz
+        # Slide 2: El Hook - Descuadre de $411,275 MXN
         {
             "id": 2,
-            "title": "Las 3 Causas Raíz del Divorcio",
-            "bg": "white",
-            "time": "00:01 - 00:03",
-            "block": "Marco Narrativo",
-            "notes": "Presentar el hilo conductor de toda la masterclass: las 3 causas raíz detectadas en implementaciones reales. 1. Configuración errática; 2. Parches operativos manuales; 3. Ceguera de auditoría por falta de cadencia.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">MARCO NARRATIVO</span>
-                  <h2 class="slide-title">Las 3 Causas Raíz del Divorcio Almacén-Contabilidad</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">La experiencia en implementaciones demuestra que el descuadre nace de 3 vicios principales:</p>
-              
-              <div class="agenda-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="agenda-card" style="border-top: 4px solid #1E293B;">
-                  <div class="agenda-time">FASE 0 · CONFIGURACIÓN</div>
-                  <div class="agenda-num">01</div>
-                  <div class="agenda-title">CONFIGURACIÓN ERRÁTICA</div>
-                  <p class="agenda-desc"><strong>"Dos malas no hacen una buena."</strong> Cambiar métodos en caliente, factores UoM invertidos, ubicaciones de ajuste sin cuenta contable o saldos iniciales duplicados.</p>
-                </div>
-                <div class="agenda-card" style="border-top: 4px solid var(--rojo-vauxoo);">
-                  <div class="agenda-time">OPERACIÓN</div>
-                  <div class="agenda-num">02</div>
-                  <div class="agenda-title">PARCHES OPERATIVOS</div>
-                  <p class="agenda-desc"><strong>"La aspirina manual."</strong> Pólizas manuales para 'cuadrar', recepciones con tipo de cambio erróneo o despachos a clientes sin compra recibida/facturada.</p>
-                </div>
-                <div class="agenda-card" style="border-top: 4px solid #475569;">
-                  <div class="agenda-time">CONTROL</div>
-                  <div class="agenda-num">03</div>
-                  <div class="agenda-title">CEGUERA DE AUDITORÍA</div>
-                  <p class="agenda-desc"><strong>"El costo de la infrecuencia."</strong> Esperar al cierre anual cuando hay miles de movimientos acumulados hace que conciliar sea una pesadilla de semanas.</p>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-
-        # Slide 3: El Hook - Descuadre de $411,275 MXN
-        {
-            "id": 3,
             "title": "El Hook: Descuadre de $411,275 MXN",
             "bg": "white",
-            "time": "00:03 - 00:06",
+            "time": "00:01 - 00:04",
             "block": "Bloque 1",
-            "notes": "Mostrar el split view en vivo: Balanza 115.01.01 ($487,200.00 MXN) vs Reporte de Existencias ($75,925.00 MXN) -> Descuadre real de $411,275.00 MXN.",
+            "notes": "Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($487,200.00 MXN) vs Reporte de Existencias ($75,925.00 MXN) -> Descuadre real de $411,275.00 MXN. Plantear el dolor de todo cierre contable.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -146,6 +103,49 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 <span class="prompt-text" style="color:#1E293B;">
                   <strong>El objetivo de la sesión:</strong> Identificar el origen exacto de esta diferencia de $411,275 MXN y resolverla en vivo durante la clase.
                 </span>
+              </div>
+            </div>
+            '''
+        },
+
+        # Slide 3: Las 3 Causas Recurrentes del Divorcio
+        {
+            "id": 3,
+            "title": "Las 3 Causas Recurrentes del Divorcio",
+            "bg": "white",
+            "time": "00:04 - 00:07",
+            "block": "Bloque 1",
+            "notes": "Explicar por qué ocurre este divorcio contable a partir de los 3 frentes reales: 1. Configuración errática (Fase 0); 2. Parches operativos manuales; 3. Ceguera de auditoría por falta de cadencia.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge">BLOQUE 1 · 00:00 - 00:09</span>
+                  <h2 class="slide-title">Las 3 Causas Recurrentes del Divorcio Almacén-Contabilidad</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">La experiencia en implementaciones demuestra que el descuadre nace de 3 fuentes principales:</p>
+              
+              <div class="agenda-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="agenda-card" style="border-top: 4px solid #1E293B;">
+                  <div class="agenda-time">FASE 0 · CONFIGURACIÓN</div>
+                  <div class="agenda-num">01</div>
+                  <div class="agenda-title">CONFIGURACIÓN ERRÁTICA</div>
+                  <p class="agenda-desc"><strong>"Dos malas no hacen una buena."</strong> Cambiar métodos en caliente, factores UoM invertidos, ubicaciones de ajuste sin cuenta contable o saldos iniciales duplicados.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid var(--rojo-vauxoo);">
+                  <div class="agenda-time">OPERACIÓN</div>
+                  <div class="agenda-num">02</div>
+                  <div class="agenda-title">PARCHES OPERATIVOS</div>
+                  <p class="agenda-desc"><strong>"La aspirina manual."</strong> Pólizas manuales para 'cuadrar', recepciones con tipo de cambio erróneo o despachos a clientes sin compra recibida/facturada.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #475569;">
+                  <div class="agenda-time">CONTROL</div>
+                  <div class="agenda-num">03</div>
+                  <div class="agenda-title">CEGUERA DE AUDITORÍA</div>
+                  <p class="agenda-desc"><strong>"El costo de la infrecuencia."</strong> Esperar al cierre anual cuando hay miles de movimientos acumulados hace que conciliar sea una pesadilla de semanas.</p>
+                </div>
               </div>
             </div>
             '''
@@ -641,55 +641,48 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 14: Bloque 5 - Caza de la Póliza Manual en Vivo
+        # Slide 14: Bloque 5 - Metodología de Auditoría para Encontrar las Diferencias
         {
             "id": 14,
-            "title": "Bloque 5: Auditoría y Caza de la Póliza Manual",
+            "title": "Metodología de Auditoría para Encontrar las Diferencias",
             "bg": "white",
-            "time": "00:55 - 01:01",
+            "time": "00:55 - 01:03",
             "block": "Bloque 5",
-            "notes": "Intro de Julio en Bloque 5. Regreso a las pantallas del Hook: diferencia de $411,275 MXN. Filtro de auditoría: Documento Origen = Vacío en la cuenta 115.01.01 -> Hallazgo de MISC/2026/09/0001 por $487,000.00 MXN.",
+            "notes": "Intro de Julio Serna en Bloque 5: 'Bueno, ya vimos en el Bloque 1 las principales causas que hay que evitar para no tener un divorcio contable y logístico. En los bloques anteriores entendimos cómo es la valoración con el Happy Path y qué pasa con los problemas comunes. Pero muchos de los que están aquí ya tienen Odoo en producción, ya iniciaron operaciones y YA TIENEN el issue encima. Vamos a ver entonces cómo lo auditamos y sobre todo cómo lo corregimos.' Explicar la metodología de auditoría integral y los 4 frentes críticos de validación.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
                   <span class="pill-badge">BLOQUE 5 · 00:55 - 01:07</span>
-                  <h2 class="slide-title">Auditoría en Vivo: Caza de la Póliza Manual</h2>
+                  <h2 class="slide-title">Metodología de Auditoría para Encontrar las Diferencias</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead">Resolviendo el misterio de los <strong>$411,275.00 MXN</strong> del inicio en menos de 5 minutos:</p>
+              <p class="slide-lead">Protocolo integral de diagnóstico para rastrear y sanear cualquier brecha entre contabilidad y almacén:</p>
               
-              <div class="resolution-container">
-                <div class="culprit-box">
-                  <div class="culprit-badge">🔍 PÓLIZA MANUAL DETECTADA EN LA BASE DE DATOS</div>
-                  <h3>Póliza <code>MISC/2026/09/0001</code> por $487,000.00 MXN</h3>
-                  <div class="culprit-desc">
-                    Filtro aplicado en Apuntes Contables de la cuenta <strong>115.01.01</strong>: <code>Documento Origen = Vacío</code>. Aparece un cargo manual directo registrado en fin de mes con la glosa: <em>"Ajuste manual auditoría interna"</em>.
-                  </div>
-                  <div class="culprit-flaw">
-                    ❌ El origen de la brecha: Se inyectaron $487,000 pesos de dinero contable al libro mayor sin un solo movimiento en almacén físico que lo respaldara.
-                  </div>
+              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                <div class="agenda-card" style="border-top: 4px solid #1E293B;">
+                  <div class="agenda-time">PASO 1 · INTEGRIDAD ESTRUCTURAL</div>
+                  <div class="agenda-title">Cuentas en Categorías de Producto</div>
+                  <p class="agenda-desc">Validar que todas las categorías de productos almacenables apunten a la <strong>cuenta correcta de inventario (1150)</strong> y cuenten con cuentas de contrapartida de valoración y merma válidas.</p>
+                </div>
+                
+                <div class="agenda-card" style="border-top: 4px solid var(--rojo-vauxoo);">
+                  <div class="agenda-time">PASO 2 · TRÁNSITO PROVEEDORES</div>
+                  <div class="agenda-title">Pendiente por Facturar (Proveedor)</div>
+                  <p class="agenda-desc">Auditar recepciones físicas de compra que no cuentan con factura de proveedor vinculada o compras facturadas sin recepción (desfase entre costo en inventario y pasivo).</p>
                 </div>
 
-                <div class="action-result-box">
-                  <div class="result-step">
-                    <strong>Paso Quirúrgico de Corrección:</strong> Cancelación / Reclasificación en vivo de la póliza <code>MISC/2026/09/0001</code>.
-                  </div>
-                  <div class="balanced-state">
-                    <div class="bal-item">
-                      <span>Balanza de Comprobación (Cuenta 1150)</span>
-                      <strong>$75,925.00 MXN</strong>
-                    </div>
-                    <div class="bal-equal">=</div>
-                    <div class="bal-item">
-                      <span>Reporte de Existencias / Valoración</span>
-                      <strong>$75,925.00 MXN</strong>
-                    </div>
-                    <div class="bal-status">
-                      ✅ CUADRE EXACTO (Diferencia: $0.00 MXN)
-                    </div>
-                  </div>
+                <div class="agenda-card" style="border-top: 4px solid #0D9488;">
+                  <div class="agenda-time">PASO 3 · TRÁNSITO CLIENTES</div>
+                  <div class="agenda-title">Pendiente por Facturar (Cliente)</div>
+                  <p class="agenda-desc">Auditar entregas de mercancía al cliente con salida física de almacén pendientes de facturación, o facturas emitidas sin registrar la entrega de stock correspondiente.</p>
+                </div>
+
+                <div class="agenda-card" style="border-top: 4px solid #475569;">
+                  <div class="agenda-time">PASO 4 · ANÁLISIS DE LA CUENTA 1150</div>
+                  <div class="agenda-title">Cruce Balanza vs Existencias & Filtros</div>
+                  <p class="agenda-desc">Analizar los apuntes contables de la cuenta 1150 para <strong>aislar pólizas manuales</strong> (<code>Documento Origen = Vacío</code>), movimientos huérfanos y conciliar la cifra al centavo.</p>
                 </div>
               </div>
             </div>
