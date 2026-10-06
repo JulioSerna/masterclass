@@ -30,7 +30,7 @@ ALL_THUMBS_HTML = "\n".join(thumbnails_html)
 INDEX_JS = '''
 <script>
 let currentSlide = 1;
-const totalSlides = 18;
+const totalSlides = __TOTAL_SLIDES__;
 let timerSeconds = 0;
 let timerInterval = null;
 let timerRunning = false;
@@ -298,7 +298,7 @@ INDEX_HTML = f"""<!DOCTYPE html>
         <!-- Deck Top Toolbar -->
         <div class="deck-top-bar">
           <div class="deck-info">
-            <span class="pill-badge" id="currentSlideNumBadge">Slide <span id="currentSlideNum">1</span> / 18</span>
+            <span class="pill-badge" id="currentSlideNumBadge">Slide <span id="currentSlideNum">1</span> / {len(slides)}</span>
             <strong id="currentSlideTitle" style="color:#FFFFFF;">Portada Oficial</strong>
             <span class="pill-badge-outline" style="font-size:0.7rem;">Meta: <span id="slideTargetTime">00:00</span></span>
           </div>
@@ -353,7 +353,7 @@ INDEX_HTML = f"""<!DOCTYPE html>
 
   </main>
 
-  {INDEX_JS}
+  {INDEX_JS.replace("__TOTAL_SLIDES__", str(len(slides)))}
 </body>
 </html>
 """
@@ -391,7 +391,7 @@ SLIDES_HTML = f"""<!DOCTYPE html>
     <!-- Top Bar -->
     <div class="deck-top-bar" style="border-radius:0;">
       <div class="deck-info">
-        <span class="pill-badge">Slide <span id="currentSlideNum">1</span> / 18</span>
+        <span class="pill-badge">Slide <span id="currentSlideNum">1</span> / {len(slides)}</span>
         <strong id="currentSlideTitle" style="color:#FFFFFF;">Portada Oficial</strong>
         <span class="pill-badge-outline">Tiempo: <span id="slideTargetTime">00:00</span></span>
       </div>
@@ -429,7 +429,7 @@ SLIDES_HTML = f"""<!DOCTYPE html>
 
   <script>
   let currentSlide = 1;
-  const totalSlides = 18;
+  const totalSlides = {len(slides)};
   let timerSeconds = 0;
   let timerInterval = null;
   let timerRunning = false;
