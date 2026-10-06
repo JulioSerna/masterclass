@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Content for Cronograma Minuto a Minuto & Guía del Ponente
+# EXACT ALIGNMENT WITH PLAN FINAL FUSIONADO V2 (plan_v2_critico.md + setup_masterclass.py)
 
 def get_cronograma_html(logo_light):
     return f'''
@@ -12,7 +13,7 @@ def get_cronograma_html(logo_light):
         <div class="doc-header-title">
           <span class="pill-badge">GUÍA INTERNA DEL PONENTE & PRODUCCIÓN</span>
           <h2>Cronograma Minuto a Minuto (90 Minutos)</h2>
-          <p class="doc-subtitle">Estructura Detallada de Ejecución, Demos en Vivo, Puntos de Control e Interacción</p>
+          <p class="doc-subtitle">Estructura Oficial del Plan Final Fusionado v2 · Odoo 19.0 México</p>
         </div>
       </div>
 
@@ -34,9 +35,9 @@ def get_cronograma_html(logo_light):
           <small>Virtual en vivo · Grabación · Entregables</small>
         </div>
         <div class="cron-summary-card">
-          <div class="cron-summary-label">STACK TECNOLÓGICO</div>
-          <div class="cron-summary-val">Odoo 19.0 MX</div>
-          <small>Moneda Base MXN · Catálogo SAT · AVCO</small>
+          <div class="cron-summary-label">COMPAÑÍA DEMO BD</div>
+          <div class="cron-summary-val">Masterclass México</div>
+          <small>RFC: EKU9003173C9 · Moneda Base MXN</small>
         </div>
       </div>
 
@@ -51,16 +52,16 @@ def get_cronograma_html(logo_light):
           </div>
           <div class="cron-block-body">
             <div class="cron-element">
-              <strong>🎯 Objetivo del Bloque:</strong> Conectar emocionalmente con el dolor del cierre mensual de contabilidad e inventarios en México.
+              <strong>🎯 Objetivo del Bloque:</strong> Conectar inmediatamente con el contador y director financiero mostrando un descuadre real e impactante en una base de datos de producción mexicana.
             </div>
             <div class="cron-element">
-              <strong>🖥️ Pantalla en Vivo:</strong> Split-screen: A la izquierda, la Balanza de Comprobación en la cuenta 1150 ($1,450,000 MXN). A la derecha, el Reporte de Valoración ($1,210,000 MXN). Diferencia en rojo de $240,000 MXN.
+              <strong>🖥️ Pantalla en Vivo:</strong> Split-screen: A la izquierda, la Balanza de Comprobación en la cuenta <strong>115.01.01 ($487,200.00 MXN)</strong>. A la derecha, el Reporte de Valoración de Inventario de Odoo 19 <strong>($200.00 MXN)</strong>. Diferencia visible en rojo de casi medio millón de pesos: <strong>$487,000.00 MXN</strong>.
             </div>
             <div class="cron-element">
-              <strong>💬 Interacción con el Chat:</strong> "¿A quién le ha tocado explicarle este descuadre al Director Financiero o al Auditor del SAT? Pongan 🔥 en el chat".
+              <strong>💬 Interacción con el Chat:</strong> "¿A quién le ha tocado explicarle este descuadre de casi medio millón de pesos al SAT o a los socios? Pongan 🔥 en el chat".
             </div>
             <div class="cron-element">
-              <strong>🎙️ Guión Clave:</strong> "En los próximos 90 minutos dominarán la valoración AVCO en Odoo 19.0. Y entenderán cómo las variaciones cambiarias no tienen por qué ser un dolor de cabeza ni una multa fiscal."
+              <strong>🎙️ Guión Clave:</strong> "En los próximos 90 minutos dominarán la valoración AVCO en Odoo 19.0 y los peores escenarios de importación, tipos de cambio y pedimentos aduanales para que nunca vuelvan a tener un cierre con descuadres."
             </div>
           </div>
         </div>
@@ -74,36 +75,42 @@ def get_cronograma_html(logo_light):
           </div>
           <div class="cron-block-body">
             <div class="cron-element">
-              <strong>🎯 Objetivo del Bloque:</strong> Explicar el cambio estructural de Odoo 19.0 y fundamentar por qué en México AVCO es el método indiscutible.
+              <strong>🎯 Objetivo del Bloque:</strong> Presentar la nueva arquitectura de Odoo 19.0 y fundamentar por qué en México AVCO es el estándar innegociable bajo NIF C-4 y Art. 41 de la Ley del ISR.
             </div>
             <div class="cron-element">
               <strong>⚙️ Puntos Clave de Explicación:</strong>
               <ul class="styled-list">
-                <li>🚫 <strong>Adiós SVL (Stock Valuation Layers):</strong> La valoración vive dentro del Stock Move, eliminando tablas huérfanas.</li>
-                <li>🚫 <strong>Adiós Cuentas Puente (Stock Input/Output):</strong> Contabilidad directa con menos pólizas transitorias.</li>
-                <li>🔄 <strong>De Continental a Periódico vs Perpetuo:</strong> Adopción de terminología financiera internacional.</li>
-                <li>✨ <strong>Nuevo Menú:</strong> Accounting > Review > Inventory Valuation.</li>
+                <li>🚫 <strong>Muerte de SVL (Stock Valuation Layers):</strong> Todo el valor monetario vive ahora dentro del propio `stock.move`. Se eliminan las tablas huérfanas.</li>
+                <li>🚫 <strong>Adiós Cuentas Puente (Interim Accounts):</strong> Registro directo a la cuenta de inventarios 115.01.01.</li>
+                <li>🔄 <strong>Adopción de "Periódico vs Perpetuo":</strong> Superación definitiva del confuso modelo Continental vs Anglo-Sajón.</li>
+                <li>✨ <strong>Menú Centralizado:</strong> <code>Contabilidad > Revisión y Cierre > Valoración de inventario</code>.</li>
               </ul>
             </div>
           </div>
         </div>
 
         <!-- Bloque 3 -->
-        <div class="cron-block-card">
-          <div class="cron-block-header">
-            <div class="cron-time-pill">00:15 – 00:35 (20 min)</div>
-            <h3>BLOQUE 3: BAJO EL CAPÓ — "Casos Prácticos en Vivo (AVCO + MXN)"</h3>
-            <span class="pill-badge">DEMO EN VIVO</span>
+        <div class="cron-block-card" style="border: 2px solid var(--rojo-vauxoo);">
+          <div class="cron-block-header" style="background:#FFF1F2;">
+            <div class="cron-time-pill" style="background:var(--rojo-vauxoo);">00:15 – 00:45 (30 min)</div>
+            <h3>BLOQUE 3: EL MEGA-CASO — "Importación, USD y Pedimentos" (El Núcleo de la Sesión)</h3>
+            <span class="pill-badge">MEGA-CASO</span>
           </div>
           <div class="cron-block-body">
             <div class="cron-element">
-              <strong>Caso 1: Distribución Comercial Pura (5 min)</strong> — Compra → Recepción → Venta → Factura (todo en MXN). Mostrar la afectación de las cuentas 1150 y 5100 sin cuentas intermedias.
+              <strong>🎯 Objetivo del Bloque:</strong> Resolver el caso más complejo de México en 4 pasos continuos con datos reales: Compra en USD a Global Supply Tech LLC del producto <code>SENSOR-USD</code> con pedimento de Agencia Aduanal del Norte, S.C.
             </div>
             <div class="cron-element">
-              <strong>Caso 2: Manufactura MRP (7 min)</strong> — Flujo de componentes AVCO consumidos en Orden de Producción. La cuenta 1160 (WIP) y el peligro de órdenes inconclusas al cierre.
+              <strong>Paso 1: Anticipo y Tipo de Cambio DOF (7 min)</strong> — Registro del anticipo de $3,000 USD a TC $18.22 MXN/USD. Aplicación del Art. 20 CFF y NIF B-15 (partida no monetaria que congela la tasa histórica).
             </div>
             <div class="cron-element">
-              <strong>Caso 3 (CRÍTICO): Importaciones USD en MXN (8 min)</strong> — PO confirmada a TC $18.50, recepción física aduanal a TC DOF $19.20 y factura del proveedor a TC $19.50. Demostrar el tratamiento de los $3,000 MXN de diferencia cambiaria y el blindaje del kardex fiscal.
+              <strong>Paso 2: Recepción vs Factura (Vendor Bill) (8 min)</strong> — Recepción física en aduana a TC DOF de $18.05 MXN vs Factura del proveedor extranjero a TC $18.50 MXN. Demostración de cómo Odoo 19 blinda el AVCO de recepción y envía la diferencia a Pérdida Cambiaria (cuenta 701.01.01).
+            </div>
+            <div class="cron-element">
+              <strong>Paso 3: El Pedimento Aduanal y Landed Costs (8 min)</strong> — Factura de $5,000 MXN del agente aduanal (DTA, IGI, flete). Inyección directa al AVCO del producto importado sin duplicar cuentas contables (Art. 39 LISR).
+            </div>
+            <div class="cron-element">
+              <strong>Paso 4: El CFDI de Pago / Complemento (7 min)</strong> — Liquidación final a TC $18.60 MXN. Diferencia cambiaria realizada e IVA acreditable pagado efectivamente.
             </div>
           </div>
         </div>
@@ -111,22 +118,19 @@ def get_cronograma_html(logo_light):
         <!-- Bloque 4 -->
         <div class="cron-block-card">
           <div class="cron-block-header">
-            <div class="cron-time-pill">00:35 – 00:55 (20 min)</div>
-            <h3>BLOQUE 4: LA CLÍNICA DE LOS DESASTRES — "Errores de Millones de Pesos"</h3>
-            <span class="pill-badge" style="background:#B91C1C;">CASOS DE TRINCHERA</span>
+            <div class="cron-time-pill">00:45 – 01:05 (20 min)</div>
+            <h3>BLOQUE 4: LA CLÍNICA DE DESASTRES — "Errores que Cuestan Millones"</h3>
+            <span class="pill-badge" style="background:#B91C1C;">CLÍNICA DE TRINCHERA</span>
           </div>
           <div class="cron-block-body">
             <div class="cron-element">
-              <strong>🔥 Desastre #1: Stock Negativo con AVCO (5 min)</strong> — Demo de producto vendido en negativo. La corrupción matemática del costo promedio y multas del SAT.
+              <strong>🔥 Desastre #1: Stock Negativo con AVCO (7 min)</strong> — Demo en vivo con <code>VALVULA-NEG</code>: Colapso del promedio ponderado al vender existencias inexistentes y multas por kardex negativo del SAT.
             </div>
             <div class="cron-element">
-              <strong>🔥 Desastre #2: Desfase Cambiario en Recepción vs Factura (7 min)</strong> — El inventario valorado con tipo de cambio irreal y su distorsión del margen operativo.
+              <strong>🔥 Desastre #2: Ajustes Físicos y Mermas (7 min)</strong> — Demo con <code>CABLE-MERMA</code>: Conteo de fin de año. Cómo canalizar faltantes hacia Gastos No Deducibles con acta de pérdida sin destruir el AVCO del inventario remanente.
             </div>
             <div class="cron-element">
-              <strong>🔥 Desastre #3: Landed Costs Tardíos (4 min)</strong> — Cómo prorratear gastos de importación cuando el producto ya fue despachado.
-            </div>
-            <div class="cron-element">
-              <strong>🔥 Desastre #4: Ajustes Masivos e Implicaciones SAT (4 min)</strong> — La gravedad fiscal de cuadrar a la fuerza: ingresos acumulables o ventas presuntas sin CFDI.
+              <strong>🔥 Desastre #3: Inventario Obsoleto (6 min)</strong> — Demo con <code>TARJETA-OBS</code>: Manejo de productos descontinuados o lentos mediante cuentas complementarias de provisión sin usar Inventory Adjustment que alteraría el costo unitario activo (NIF C-4).
             </div>
           </div>
         </div>
@@ -134,19 +138,19 @@ def get_cronograma_html(logo_light):
         <!-- Bloque 5 -->
         <div class="cron-block-card">
           <div class="cron-block-header">
-            <div class="cron-time-pill">00:55 – 01:10 (15 min)</div>
-            <h3>BLOQUE 5: EL MOMENTO DE LA VERDAD — "Auditoría y Corrección"</h3>
+            <div class="cron-time-pill">01:05 – 01:15 (10 min)</div>
+            <h3>BLOQUE 5: EL MOMENTO DE LA VERDAD — "Auditoría en Vivo y Resolución"</h3>
             <span class="pill-badge">CLÍMAX</span>
           </div>
           <div class="cron-block-body">
             <div class="cron-element">
-              <strong>🔍 Auditoría Paso a Paso (8 min)</strong> — Demostración de Accounting > Review > Inventory Valuation y filtro contra Balanza 1150.
+              <strong>🔍 Auditoría en Vivo (6 min):</strong> Acceso al menú <code>Contabilidad > Revisión y Cierre > Valoración de inventario</code> en la base de datos de Masterclass México SA de CV. Rastreo con bisturí de la póliza manual intrusa de <strong>$487,000.00 MXN</strong> con ref <em>"Ajuste manual auditoría interna (Error contable)"</em> en la cuenta 115.01.01.
             </div>
             <div class="cron-element">
-              <strong>🎯 Resolución del Hook Inicial (4 min)</strong> — Descubrir en vivo la póliza manual intrusa de $240,000 MXN, revertirla, registrar el ajuste logístico y lograr el 100% de cuadre al centavo.
+              <strong>🎯 Reversión y Cuadre al 100% (2 min):</strong> Cancelación y reversa del asiento manual en vivo → Saldo Cuenta 115.01.01 = $200.00 MXN = Saldo Reporte de Valoración ($200.00 MXN). Diferencia: $0.00 MXN.
             </div>
             <div class="cron-element">
-              <strong>🥇 Las 3 Reglas de Oro de Vauxoo (3 min)</strong> — 1. Cero stock negativo en AVCO; 2. Cut-off logístico innegociable; 3. Tipo de cambio DOF exacto en recepciones.
+              <strong>🥇 Las 3 Reglas de Oro de Vauxoo (2 min):</strong> 1. Jamás permitir stock negativo; 2. Pedimentos obligatorios vía Landed Costs para subir el AVCO; 3. Cut-off logístico innegociable a fin de mes.
             </div>
           </div>
         </div>
@@ -154,16 +158,16 @@ def get_cronograma_html(logo_light):
         <!-- Bloque 6 -->
         <div class="cron-block-card">
           <div class="cron-block-header">
-            <div class="cron-time-pill">01:10 – 01:30 (20 min)</div>
+            <div class="cron-time-pill">01:15 – 01:30 (15 min)</div>
             <h3>BLOQUE 6: Q&A "HOT SEAT" & ENTREGABLES</h3>
             <span class="pill-badge">CONSULTORÍA</span>
           </div>
           <div class="cron-block-body">
             <div class="cron-element">
-              <strong>🎙️ Consultoría en Vivo (15 min):</strong> Respuestas directas de Julio Serna a las preguntas y escenarios de los asistentes.
+              <strong>🎙️ Consultoría en Directo (12 min):</strong> Julio Serna responde preguntas de los asistentes sobre pedimentos consolidados, diferencias cambiarias y migraciones a Odoo 19.
             </div>
             <div class="cron-element">
-              <strong>📦 Entrega de Recursos (5 min):</strong> Enlace al Checklist de Auditoría interactivo, Tabla de Mapeo conceptual, Certificado y Grabación de Vauxoo Academy.
+              <strong>📦 Entrega de Recursos (3 min):</strong> Distribución del Checklist de Cierre mensual, Tabla de Mapeo 18→19, certificado oficial y grabación.
             </div>
           </div>
         </div>
@@ -173,19 +177,19 @@ def get_cronograma_html(logo_light):
       <div class="cron-prep-section">
         <h3 style="font-family:'Sora'; margin-bottom:12px;">Checklist Pre-Sesión del Ponente (Julio Serna)</h3>
         <div class="prep-grid">
-          <div class="prep-item">✅ Instancia Odoo 19.0 lista con Localización Mexicana (Plan Contable MX y moneda base MXN).</div>
-          <div class="prep-item">✅ Órdenes de compra pre-cargadas en USD con tipos de cambio desfasados para la demo en vivo.</div>
-          <div class="prep-item">✅ Asiento manual ficticio de $240,000 MXN inyectado en cuenta 1150 para el hook de apertura.</div>
-          <div class="prep-item">✅ Producto con stock negativo pre-configurado para mostrar el colapso del algoritmo AVCO.</div>
+          <div class="prep-item">✅ Instancia Odoo 19.0 operativa: <code>https://julioserna-masterclass-main-38706787.dev.odoo.com/</code></div>
+          <div class="prep-item">✅ Póliza manual intrusa de $487,000.00 MXN inyectada en cuenta 115.01.01 para el hook de apertura.</div>
+          <div class="prep-item">✅ Contactos de demo configurados: Global Supply Tech LLC (USD), Agencia Aduanal del Norte, SC, Distribuidora Nacional de Insumos.</div>
+          <div class="prep-item">✅ Productos de demo listos: SENSOR-USD, LANDED-COST, VALVULA-NEG, CABLE-MERMA, TARJETA-OBS.</div>
           <div class="prep-item">✅ Presentador interactivo abierto en pantalla secundaria con notas de orador y cronómetro activo.</div>
         </div>
       </div>
 
       <div class="doc-footer">
         <span>Vauxoo Academy · Documento de Control de Producción Masterclass 2026</span>
-        <span>Alineado a lineamientos de marca Josefina / Vauxoo Academy</span>
+        <span>Alineado al Plan Final Fusionado v2 y branding oficial Josefina</span>
       </div>
     </div>
     '''
 
-print("Cronograma module ready.")
+print("Updated cronograma module ready.")

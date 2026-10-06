@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Content for Entregable #2: Tabla de Mapeo Conceptual v18 -> v19 y Guía SAT
+# EXACT ALIGNMENT WITH PLAN FINAL FUSIONADO V2 (plan_v2_critico.md + setup_masterclass.py)
 
 def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
     return f'''
@@ -12,7 +13,7 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
         <div class="doc-header-title">
           <span class="pill-badge">ENTREGABLE OFICIAL #2</span>
           <h2>Tabla de Mapeo v18 → v19 & Guía de Supervivencia SAT</h2>
-          <p class="doc-subtitle">Análisis Arquitectónico, Flujo de Importaciones USD y Mitigación de Riesgos Fiscales</p>
+          <p class="doc-subtitle">Análisis Arquitectónico, Mega-Caso de Importaciones USD y Mitigación de Riesgos Fiscales</p>
         </div>
       </div>
 
@@ -60,7 +61,7 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
                   Los campos de valor monetario residen directamente en el movimiento de almacén.
                 </td>
                 <td>
-                  <strong>Cero desincronización:</strong> Se elimina el error clásico donde existía un Stock Move sin capa de valoración SVL. Trazabilidad 1 a 1 por UUID y pedimento.
+                  <strong>Cero desincronización:</strong> Se elimina el error clásico donde existía un Stock Move sin capa SVL. Trazabilidad 1 a 1 por UUID y pedimento.
                 </td>
               </tr>
               <tr>
@@ -95,11 +96,11 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
                 <td><strong>Panel de Cierre de Periodo</strong></td>
                 <td>
                   <span class="badge-old">Disperso</span><br>
-                  Revisión manual en informes de inventario y comparación externa en hojas de cálculo.
+                  Revisión manual en informes de inventario y cruce externo en hojas de cálculo.
                 </td>
                 <td>
-                  <span class="badge-new">Accounting > Review > Valuation</span><br>
-                  Panel nativo guiado de corte con validación de diferencias y bloqueo de fechas.
+                  <span class="badge-new">Contabilidad > Revisión y Cierre</span><br>
+                  Menú: <em>Valoración de inventario</em> con panel nativo guiado de corte.
                 </td>
                 <td>
                   Reducción de hasta un <strong>75% del tiempo invertido</strong> en la conciliación del cierre de mes antes de timbrar la contabilidad electrónica.
@@ -117,29 +118,29 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
           <h3>El Ciclo Maestro de Importaciones (USD en Moneda Base MXN)</h3>
         </div>
         <p class="section-intro">
-          El talón de Aquiles de las empresas mexicanas es la adquisición de mercancías extranjeras. A continuación se detalla la mecánica contable oficial en Odoo 19:
+          El núcleo de la Masterclass: Compras en USD a Global Supply Tech LLC con pedimento de Agencia Aduanal del Norte, S.C. y moneda base MXN:
         </p>
 
         <div class="import-lifecycle-box">
           <div class="lifecycle-stage">
             <div class="stage-num">1</div>
             <div class="stage-info">
-              <h4>Orden de Compra (PO)</h4>
-              <p>Compra pactada por <strong>$10,000 USD</strong>. Tipo de cambio del día de la cotización: <strong>$18.50 MXN</strong>.</p>
-              <div class="stage-memo">📌 <em>Efecto Contable: Ninguno. Se trata de una orden de compromiso comercial sin afectación en pólizas.</em></div>
+              <h4>Anticipo en USD (Art. 20 CFF & NIF B-15)</h4>
+              <p>Se emite anticipo de $3,000 USD a TC DOF de $18.22 MXN/USD ($54,660.00 MXN).</p>
+              <div class="stage-memo">📌 <em>Efecto Fiscal: El anticipo es una partida no monetaria que congela la tasa histórica para el 30% del valor de las mercancías.</em></div>
             </div>
           </div>
 
           <div class="lifecycle-stage">
             <div class="stage-num">2</div>
             <div class="stage-info">
-              <h4>Recepción Aduanal (Stock Move IN)</h4>
-              <p>La mercancía cruza aduana mexicana. Tipo de cambio oficial del DOF (Pedimento): <strong>$19.20 MXN</strong>.</p>
+              <h4>Recepción Aduanal Física (Stock Move IN)</h4>
+              <p>Ingreso de 100 Sensores USD a aduana mexicana. Tipo de cambio oficial DOF: <strong>$18.05 MXN/USD</strong>.</p>
               <div class="asiento-mini">
-                <div>CARGO: 1150 Inventarios / Almacén → <strong>$192,000.00 MXN</strong> ($10,000 × $19.20)</div>
-                <div>ABONO: 2110 Proveedores Extranjeros en Tránsito → <strong>$192,000.00 MXN</strong></div>
+                <div>CARGO: 115.01.01 Mercancías en Almacén → <strong>$180,500.00 MXN</strong> (100u × $100 × 18.05)</div>
+                <div>ABONO: 2110 Proveedores Extranjeros en Tránsito → <strong>$180,500.00 MXN</strong></div>
               </div>
-              <div class="stage-memo">📌 <em>Efecto en AVCO: El costo unitario promedio del producto absorbe exactamente los $19.20 MXN por dólar.</em></div>
+              <div class="stage-memo">📌 <em>Efecto en AVCO: El costo unitario promedio del producto absorbe inicialmente $1,805.00 MXN / pieza.</em></div>
             </div>
           </div>
 
@@ -147,13 +148,26 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
             <div class="stage-num">3</div>
             <div class="stage-info">
               <h4>Factura del Proveedor Extranjero (Vendor Bill)</h4>
-              <p>Se registra la factura final del proveedor con fecha posterior. Tipo de cambio fiscal del día de la factura: <strong>$19.50 MXN</strong>.</p>
+              <p>Llega el Invoice comercial con fecha posterior. Tipo de cambio del día de la factura: <strong>$18.50 MXN/USD</strong>.</p>
               <div class="asiento-mini">
-                <div>CARGO: 2110 Proveedores Extranjeros en Tránsito → <strong>$192,000.00 MXN</strong></div>
-                <div>CARGO: 6100 Pérdida por Fluctuación Cambiaria → <strong>$3,000.00 MXN</strong> ($10,000 × ($19.50 - $19.20))</div>
-                <div>ABONO: 2110 Cuentas por Pagar Proveedores → <strong>$195,000.00 MXN</strong> ($10,000 × $19.50)</div>
+                <div>CARGO: 2110 Proveedores Extranjeros en Tránsito → <strong>$180,500.00 MXN</strong></div>
+                <div>CARGO: 701.01.01 Fluctuación Cambiaria (Gasto) → <strong>$4,500.00 MXN</strong></div>
+                <div>ABONO: 201.01.02 Proveedores Extranjeros → <strong>$185,000.00 MXN</strong></div>
               </div>
-              <div class="stage-memo">📌 <em>Regla de Oro: La variación de $3,000 MXN NO altera el inventario físico, sino que va a Resultados (Pérdida Cambiaria deducible).</em></div>
+              <div class="stage-memo">📌 <em>Regla de Oro: La variación de $4,500 MXN NO contamina el inventario físico, protegiendo el kardex aduanal.</em></div>
+            </div>
+          </div>
+
+          <div class="lifecycle-stage">
+            <div class="stage-num">4</div>
+            <div class="stage-info">
+              <h4>Pedimento Aduanal & Costos en Destino (Landed Costs)</h4>
+              <p>Factura de Agencia Aduanal del Norte, S.C. por <strong>$5,000.00 MXN</strong> (LANDED-COST) con DTA e impuestos aduanales.</p>
+              <div class="asiento-mini">
+                <div>CARGO: 115.01.01 Mercancías en Almacén → <strong>$5,000.00 MXN</strong></div>
+                <div>ABONO: 201.01.01 Proveedores Nacionales (Agencia Aduanal) → <strong>$5,000.00 MXN</strong></div>
+              </div>
+              <div class="stage-memo">📌 <em>Nuevo AVCO Final: $1,805.00 + ($5,000 / 100u) = <strong>$1,855.00 MXN / pieza</strong> (Cumple Art. 39 LISR).</em></div>
             </div>
           </div>
         </div>
@@ -171,7 +185,7 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
             Costo Promedio Final = [ (Stock Existente &times; Costo Unitario Actual) + (Qty Recibida &times; Costo Recepción) ] &divide; [ Stock Existente + Qty Recibida ]
           </div>
           <p style="margin-top: 12px; font-size: 0.9rem; color: #475569;">
-            <strong>Nota técnica de Odoo 19:</strong> Si el Stock Existente es menor o igual a 0.00 (condición anómala de stock negativo), el denominador colapsa o distorsiona el costo promedio. Por ello, la regla de oro #1 de Vauxoo prohíbe terminantemente operar con existencias negativas.
+            <strong>Nota técnica de Odoo 19:</strong> Si el Stock Existente es menor o igual a 0.00 (condición anómala de stock negativo con producto VALVULA-NEG), el denominador colapsa o distorsiona el costo promedio a cifras astronómicas o negativas. Por ello, la regla de oro #1 de Vauxoo prohíbe terminantemente operar con existencias negativas.
           </p>
         </div>
       </div>
@@ -194,7 +208,7 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
             </thead>
             <tbody>
               <tr>
-                <td><strong>Stock Negativo</strong></td>
+                <td><strong>Stock Negativo</strong> (VALVULA-NEG)</td>
                 <td>Despachar sin existencia física validada.</td>
                 <td>Rechazo de deducción del costo de lo vendido (Art. 39 LISR) y multa por inconsistencia en Kardex.</td>
                 <td>Desactivar ventas sin stock en categorías y configurar validaciones de seguridad previas a la entrega.</td>
@@ -209,13 +223,19 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
                 <td><strong>Landed Costs Tardíos</strong></td>
                 <td>Prorratear fletes cuando el stock ya fue vendido.</td>
                 <td>Inflar artificialmente inventarios que ya no existen, violando el principio de correlación contable.</td>
-                <td>Odoo 19 canaliza automáticamente la porción sin stock hacia Costo de Ventas (5100).</td>
+                <td>Odoo 19 canaliza automáticamente la porción sin stock hacia Costo de Ventas (501.01.01).</td>
               </tr>
               <tr>
-                <td><strong>Ajuste Físico no Documentado</strong></td>
-                <td>Ajustes masivos de fin de año sin actas de merma.</td>
-                <td>Sobrantes gravados como ingresos presuntos; faltantes gravados como venta omitida con IVA a pagar.</td>
-                <td>Respaldar cada ajuste de inventario con bitácora circunstanciada y póliza de pérdida justificada.</td>
+                <td><strong>Mermas Físicas</strong> (CABLE-MERMA)</td>
+                <td>Ajustar faltantes a costo de ventas ordinario.</td>
+                <td>Presunción de venta omitida con determinación de IVA trasladado e ISR omitido.</td>
+                <td>Direccionar ubicaciones de pérdida a cuentas de <strong>Gastos No Deducibles</strong> con acta circunstanciada.</td>
+              </tr>
+              <tr>
+                <td><strong>Inventario Obsoleto</strong> (TARJETA-OBS)</td>
+                <td>Cambiar el costo unitario a cero en el producto.</td>
+                <td>Márgenes ficticios del 100% y distorsión de utilidades en ejercicios fiscales futuros.</td>
+                <td>Crear cuentas complementarias de activo de <strong>Provisión por Obsolescencia</strong> cumpliendo NIF C-4.</td>
               </tr>
             </tbody>
           </table>
@@ -224,10 +244,10 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
 
       <!-- Footer Note -->
       <div class="doc-footer">
-        <span>Vauxoo Academy · Masterclass 2026: De la Logística a la Contabilidad</span>
+        <span>Vauxoo Academy · Masterclass 2026: Domina AVCO y Desastres de Importación en Odoo 19.0</span>
         <span>Guía técnica de arquitectura Odoo 19.0 y fiscalidad mexicana</span>
       </div>
     </div>
     '''
 
-print("Mapeo module ready.")
+print("Updated mapeo module ready.")

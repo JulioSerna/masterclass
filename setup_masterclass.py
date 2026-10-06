@@ -131,7 +131,13 @@ class OdooMasterclassManager:
             'currency_id': mxn_curr,
             'vat': 'EKU9003173C9',
             'anglo_saxon_accounting': True,
+            'inventory_period': 'manual',
         })
+
+        # Desactivar cron de cierre periódico de inventario para evitar asientos automáticos
+        cron_closing = self.execute('ir.cron', 'search', [('name', '=', 'Stock Account: Inventory Valuation Closing')])
+        if cron_closing:
+            self.execute('ir.cron', 'write', cron_closing, {'active': False})
 
         # Habilitar USD y crear tasas de cambio históricas
         self.execute('res.currency', 'write', [usd_curr], {'active': True})
@@ -379,7 +385,9 @@ class OdooMasterclassManager:
         """Crea todas las transacciones pre-cargadas de la masterclass"""
         print("🎬 Generando transacciones pre-cargadas para la sesión...")
 
-        # 1. EL HOOK: Asiento manual intruso de $487,000 MXN en cuenta 1150
+        # 1. EL HOOK: Única póliza manual en todo el sistema ($487,000 MXN en cuenta 1150)
+        # NOTA: Se omite intencionalmente cualquier póliza adicional (como MISC/2026/09/0002)
+        # para que la única anomalía contable a auditar sea estrictamente este hook del ponente.
         hook_move = self.execute('account.move', 'search', [('ref', '=', 'Ajuste manual auditoría interna (Error contable)')])
         if not hook_move:
             acc_115 = self.execute('account.account', 'search', [('code', '=', '115.01.01')])[0]
