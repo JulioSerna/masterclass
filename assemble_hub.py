@@ -270,7 +270,7 @@ INDEX_HTML = f"""<!DOCTYPE html>
           📋 Entregable #1: Checklist
         </button>
         <button class="tab-btn" id="btn-tab-mapeo" onclick="switchTab('mapeo')">
-          📊 Entregable #2: Mapeo & SAT
+          📊 Entregable #2: Tabla de Mapeo
         </button>
         <button class="tab-btn" id="btn-tab-cronograma" onclick="switchTab('cronograma')">
           ⏱️ Minuto a Minuto
@@ -341,7 +341,7 @@ INDEX_HTML = f"""<!DOCTYPE html>
       {checklist_html}
     </div>
 
-    <!-- TAB 3: ENTREGABLE #2 MAPEO & GUÍA SAT -->
+    <!-- TAB 3: ENTREGABLE #2 MAPEO & ARQUITECTURA -->
     <div class="tab-pane" id="tab-mapeo">
       {mapeo_html}
     </div>
@@ -645,7 +645,7 @@ STANDALONE_MAPEO_HTML = f"""<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entregable #2 · Tabla de Mapeo v18 → v19 & Guía SAT (Vauxoo Academy)</title>
+  <title>Entregable #2 · Tabla de Mapeo v18 → v19 (Vauxoo Academy)</title>
   <style>
     {CSS_STYLES}
     body {{

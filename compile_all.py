@@ -997,17 +997,17 @@ h1, h2, h3, h4, h5, h6 {{
   font-weight: 700;
   flex-shrink: 0;
 }}
-.sat-warn-card {{
+.op-warn-card {{
   background: #FFF1F2;
   border: 1px solid #FECDD3;
   border-radius: 8px;
   padding: 20px;
 }}
-.sat-warn-card h4 {{
+.op-warn-card h4 {{
   color: #9F1239;
   margin-bottom: 12px;
 }}
-.sat-rule-badge {{
+.vauxoo-rule-badge {{
   margin-top: 16px;
   background: var(--rojo-vauxoo);
   color: #FFFFFF;
@@ -1052,16 +1052,16 @@ h1, h2, h3, h4, h5, h6 {{
   line-height: 1.5;
 }}
 
-/* SAT Fiscal Table (Slide 12) */
-.sat-fiscal-table-container {{
+/* Cadencia de Auditoria Table */
+.cadencia-table-container {{
   overflow-x: auto;
 }}
-.sat-fiscal-table {{
+.cadencia-table {{
   width: 100%;
   border-collapse: collapse;
   font-size: 0.88rem;
 }}
-.sat-fiscal-table th {{
+.cadencia-table th {{
   background: #1E293B;
   color: #FFFFFF;
   font-family: 'Sora', sans-serif;
@@ -1069,7 +1069,7 @@ h1, h2, h3, h4, h5, h6 {{
   padding: 12px 16px;
   text-align: left;
 }}
-.sat-fiscal-table td {{
+.cadencia-table td {{
   padding: 14px 16px;
   border-bottom: 1px solid var(--borde-suave);
   vertical-align: top;
@@ -1621,12 +1621,12 @@ h1, h2, h3, h4, h5, h6 {{
 .table-responsive {{
   overflow-x: auto;
 }}
-.comparison-table, .sat-matrix-table {{
+.comparison-table, .mitigation-matrix-table {{
   width: 100%;
   border-collapse: collapse;
   font-size: 0.88rem;
 }}
-.comparison-table th, .sat-matrix-table th {{
+.comparison-table th, .mitigation-matrix-table th {{
   background: #1E293B;
   color: #FFFFFF;
   font-family: 'Sora', sans-serif;
@@ -1634,7 +1634,7 @@ h1, h2, h3, h4, h5, h6 {{
   padding: 12px 14px;
   text-align: left;
 }}
-.comparison-table td, .sat-matrix-table td {{
+.comparison-table td, .mitigation-matrix-table td {{
   padding: 14px;
   border-bottom: 1px solid var(--borde-suave);
   vertical-align: top;
@@ -1831,7 +1831,7 @@ h1, h2, h3, h4, h5, h6 {{
     box-shadow: none !important;
     padding: 0 !important;
   }}
-  .doc-meta-grid, .chk-section, .signoff-box, .comparison-table, .sat-matrix-table {{
+  .doc-meta-grid, .chk-section, .signoff-box, .comparison-table, .mitigation-matrix-table {{
     border-color: #94A3B8 !important;
   }}
   .page-break {{
