@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import os
 from compile_all import CSS_STYLES, slides, checklist_html, mapeo_html, cronograma_html, logo_white_svg
+from make_prompts_content import get_prompts_html
+
+prompts_html = get_prompts_html()
 
 # Build slides HTML inside stage
 slides_boxes_html = []
@@ -275,10 +278,16 @@ INDEX_HTML = f"""<!DOCTYPE html>
         <button class="tab-btn" id="btn-tab-cronograma" onclick="switchTab('cronograma')">
           ⏱️ Minuto a Minuto
         </button>
+        <button class="tab-btn" id="btn-tab-prompts" onclick="switchTab('prompts')">
+          💡 Prompts de IA
+        </button>
       </nav>
 
       <!-- Action buttons -->
       <div class="nav-actions">
+        <a href="prompts.html" target="_blank" class="btn btn-sm btn-secondary">
+          ↗️ Prompts Standalone
+        </a>
         <a href="slides.html" target="_blank" class="btn btn-sm btn-secondary">
           ↗️ Slides Standalone
         </a>
@@ -349,6 +358,11 @@ INDEX_HTML = f"""<!DOCTYPE html>
     <!-- TAB 4: CRONOGRAMA MINUTO A MINUTO -->
     <div class="tab-pane" id="tab-cronograma">
       {cronograma_html}
+    </div>
+
+    <!-- TAB 5: PROMPTS CLAVE DE IA -->
+    <div class="tab-pane" id="tab-prompts">
+      {prompts_html}
     </div>
 
   </main>
