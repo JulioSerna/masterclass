@@ -87,13 +87,15 @@ flowchart TD
   - 🔄 **Terminología formal:** De 'Anglo-Sajona/Continental' a 'Periódico vs Perpetuo'.
   - ✅ **Nuevo menú:** *Contabilidad > Informes > Inventario / Existencias*.
 
-**Causa Raíz #1: La Trampa de las Configuraciones en Caliente (4 min):**
+**Causa Raíz #1: La Trampa de las Configuraciones en Caliente y Parches en Productos (4 min):**
 - *Historia de guerra / Principio:* **"Dos configuraciones malas no hacen una buena"**.
 - El error típico: Arrancar la empresa con valoración periódica (manual). A los 4 meses darse cuenta y cambiar la categoría a perpetua. Ver números extraños y pasarla a FIFO "para probar", y luego a AVCO.
 - **Lección técnica basada en laboratorio Odoo 19:**
   - Odoo 19 **NO** genera pólizas contables retroactivas de ajuste por el simple cambio de método de costeo o valuación en la categoría.
   - El inventario físico anterior queda flotando sin soporte contable, creando una brecha silenciosa permanente en el balance.
-  - *Mensaje al asistente:* La categoría de producto no es un área de juegos; una vez que hay operaciones, los cambios de método requieren un corte formal de saldos y asientos de reclasificación planificados.
+  - ⚠️ **La trampa de cambiar el Costo "a mano" en la ficha del producto (`standard_price`):** Modificar el coste en el formulario del producto recalcula de inmediato la valoración del almacén, pero **no genera póliza contable**, abriendo una brecha instantánea e irrastreable entre almacén y balance (caso `julio121`).
+  - ⚠️ **Ajustes físicos huérfanos:** Conteo físico en ubicaciones virtuales de ajuste sin cuenta de contrapartida contable configurada o con periodicidad manual (`inventory_period: manual`); las piezas entran a bodega pero la cuenta 1150 queda vacía.
+  - *Mensaje al asistente:* La categoría de producto y la ficha de coste no son áreas de juego; una vez que hay operaciones, los cambios de método requieren un corte formal de saldos y asientos de reclasificación planificados.
 
 ---
 
@@ -119,22 +121,28 @@ flowchart TD
 
 ---
 
-### Bloque 4: LA CLÍNICA DE DESASTRES — "4 Errores que Cuestan Millones"
-**⏰ 00:37 – 00:53 (16 min)** *(4 min exactos por desastre)*
+### Bloque 4: LA CLÍNICA DE DESASTRES — "5 Errores que Cuestan Millones"
+**⏰ 00:37 – 00:53 (16 min)**
 
 > [!CAUTION]
 > Errores de trinchera que destruyen la deducción fiscal del costo de ventas ante el SAT.
 
-1. **🔥 Desastre 1: Stock Negativo con AVCO (4 min — 00:37 a 00:41):**
-   - Venta de producto `[VALVULA-NEG]` con existencia en 0 (saldo -10 u). Al ingresar nueva compra a precio distinto, la fórmula ponderada se fractura matemáticamente.
-   - *Regla de Oro:* Un kardex negativo es observación segura y rechazo de deducciones por el SAT.
-2. **🔥 Desastre 2: Tipo de Cambio Erróneo en Recepciones (4 min — 00:41 a 00:45):**
+1. **🔥 Desastre 1: Stock Negativo con AVCO (Caso `VALVULA-NEG`):**
+   - Venta/salida con existencia en 0 (saldo -10 u valuadas a \$200). Recepción posterior de 20 u a precio real de compra (\$350 = \$7,000 MXN).
+   - **Autopsia de la fractura:** Las 10 u salidas consumieron mercancía que costó \$350 (\$3,500 MXN), pero en libros sólo se dedujo a \$200 (\$2,000 MXN). Quedan **\$1,500.00 MXN flotando en el limbo**: costo de ventas subvaluado ante el SAT y cuenta 1150 sobrevaluada en balance.
+   - **Por qué NO se arregla con una devolución ni con un ajuste:** No fue venta con albarán reversible y un ajuste de cantidad inventaría piezas que no existen. Exige reconocimiento formal de la variación.
+   - *Regla de Oro:* Bloquear salidas en negativo (`stock_no_negative`). La recepción siempre debe anteceder a la salida.
+2. **🔥 Desastre 2: Tipo de Cambio Erróneo en Recepciones:**
    - Capturar tasas comerciales o dejar valores por omisión en lugar del DOF. En importaciones de alto volumen, un error de 50 centavos genera distorsiones de decenas de miles de pesos en el costo promedio.
-3. **🔥 Desastre 3: Mermas y Ajustes de Conteo Físico (4 min — 00:45 a 00:49):**
+3. **🔥 Desastre 3: Mermas y Ajustes de Conteo Físico:**
    - Producto `[CABLE-MERMA]`: Faltan 15 metros.
    - Demostración: El ajuste de inventario reduce **CANTIDAD**, manteniendo el costo unitario (\$85 MXN). El faltante va a gasto por merma (cuidando topes de deducibilidad).
-4. **🔥 Desastre 4: Inventario Obsoleto y Provisiones NIF C-4 (4 min — 00:49 a 00:53):**
+4. **🔥 Desastre 4: Inventario Obsoleto y Provisiones NIF C-4:**
    - Producto `[TARJETA-OBS]`: Jamás reducir el costo unitario del producto en Odoo. La pérdida se reconoce mediante póliza en cuenta complementaria de activo (`108.02.01 Estimación de obsolescencia`).
+5. **🔥 Desastre 5: El Fantasma de Archivar Productos con Movimientos (Caso `ZZ-PRUEBA-01`):**
+   - Archivar productos creyendo que se "limpia" el catálogo mientras tienen órdenes de compra pendientes o movimientos históricos.
+   - Desaparecen del reporte de existencias (\$0.00), pero sus documentos siguen sumando en compras y kardex, generando una diferencia fantasma (ej. \$2,400 MXN) indetectable a simple vista.
+   - *Regla de Oro:* Producto con transacciones jamás se archiva sin dejar saldo en cero y compras liquidadas.
 
 ---
 
@@ -157,12 +165,18 @@ flowchart TD
   - Filtrar movimientos sin documento logístico (`Documento Origen = False`).
   - Identificar la póliza **`MISC/2026/09/0001`** por **\$487,000.00 MXN**.
 - **La historia detrás del error:** *"El contador, bajo presión de cierre y sin visibilidad del origen, calculó una diferencia y decidió meter una póliza manual para forzar el cuadre. La 'aspirina' manual envenenó el sistema para siempre"*.
-- Reclasificación/cancelación de la póliza: La cuenta 1150 regresa a **\$75,925.00 MXN**, cuadrando al centavo con el almacén.
+- Reclasificación/cancelación de la póliza: La cuenta 1150 regresa a su saldo publicado real, revelando la estructura de control interno.
+- 👁️ **Punto Ciego de Auditoría: Facturas en Borrador:** Caso `SENSOR-USD`, donde la OC aparece "Facturada" en Compras pero la factura de proveedor sigue en borrador, ocultando el producto de mayor valor del balance.
+- 🛠️ **La Herramienta Maestra: Matriz de Conciliación por Producto en 4 Fuentes:**
+  $$\mathbf{\text{Valor Almacén}} = \text{Compras por Facturar} + \text{Ajustes Entrantes} - \text{Ajustes Salientes} + \text{Efecto Contable (1150)}$$
+  *Demostración en vivo:* Cruzar producto por producto en lugar de pelear con sumas globales para detectar al vuelo stock negativo, mermas o productos descontinuados.
 
-**Parte C: Las 3 Reglas de Oro Blindadas de Vauxoo (4 min — 01:03 a 01:07):**
+**Parte C: Las 5 Reglas de Oro Blindadas de Vauxoo (4 min — 01:03 a 01:07):**
 1. 🥇 **Cero Asientos Manuales en la 1150:** Prohibir por permisos que usuarios creen pólizas manuales en cuentas de inventario.
 2. 🥇 **Cero Stock Negativo:** Bloquear salidas sin inventario en todas las categorías con AVCO.
 3. 🥇 **Configuración y Cadencia Disciplinada:** Categorías inmutables en caliente y auditoría periódica cruzando *Balanza vs Existencias*.
+4. 🥇 **Cero Cambios Manuales de Coste:** Prohibir la edición de `standard_price` en la ficha de productos con valoración automatizada.
+5. 🥇 **Trazabilidad Contable Obligatoria:** Si la dirección autoriza un ajuste contable en la 1150, es mandatorio capturar el campo **`Producto` (`product_id`)** en la línea contable para no romper la conciliación por producto.
 
 ---
 
@@ -230,6 +244,19 @@ flowchart TD
 
 ---
 
+## 📋 Entregable #3: Guía Rápida de Trinchera — Diagnóstico, Correctiva y Preventiva
+
+Guía de referencia rápida para el ponente y material de apoyo para los asistentes, cubriendo las 4 casuísticas forenses reales de Odoo:
+
+| Caso | 1. Diagnóstico / Síntoma | 2. Solución Correctiva (Ya ocurrió) | 3. Solución Preventiva (Control Interno) |
+| :--- | :--- | :--- | :--- |
+| **1. Stock Negativo con Compra Posterior**<br>*(Caso Válvula)* | • Salida a \$200 y compra a \$350.<br>• \$7,000 en factura vs \$3,500 en existencias.<br>• **Descuadre:** +\$1,500 MXN en balance y costo de ventas no deducible. | • Póliza de reclasificación en `MISC`/`STJ`: Debe a `501.01.01 Costo de Ventas` (\$1,500) y Haber a `115.01.01 Inventario` (\$1,500).<br>• **Mandatorio:** Asignar campo `Producto` (`product_id = VALVULA-NEG`) en la línea contable. | • Instalar candado `stock_no_negative` de la OCA/Vauxoo.<br>• Exigir validación de recepción (`WH/IN`) antes de cualquier despacho al cliente. |
+| **2. Cambio Manual de Coste en Ficha**<br>*(Caso julio121)* | • Campo Coste alterado a mano (ej. \$100 &rarr; \$121).<br>• Almacén sube a \$1,210 pero la 1150 se queda en \$1,000.<br>• **Descuadre:** -\$210 MXN sin soporte contable. | • **Opción A (Error):** Revertir Coste a \$100.00 en la ficha.<br>• **Opción B (Revalorización real):** Póliza con `product_id = julio121`: Cargo a 1150 (\$210) y Abono a `501.01.02 Variación de Inventario` (\$210). | • Restringir permisos de edición del campo `standard_price` en `product.template`.<br>• En AVCO el costo es sólo lectura operativa. |
+| **3. Productos Archivados con Saldo**<br>*(Caso ZZ-PRUEBA)* | • Producto archivado con compras pendientes o ajustes.<br>• Almacén dice \$0.00, pero compras y kardex siguen sumando.<br>• **Descuadre:** +\$2,400 MXN fantasma en conciliación. | • Aplicar filtro `Archivado` (`active=False`) y Desarchivar.<br>• Liquidar o cancelar órdenes de compra pendientes y dejar stock en 0.00.<br>• Re-archivar únicamente en ceros absolutos. | • Regla de negocio: Prohibir archivar productos con movimientos abiertos o compras por facturar. |
+| **4. Puntos Ciegos: Facturas en Borrador**<br>*(Caso Sensor USD)* | • La OC dice "Facturada" en Compras, pero su factura de proveedor sigue en **Borrador** (`draft`).<br>• Físico en bodega (\$41,100) pero ausente en Balanza (\$36,100). | • Ir a `Contabilidad > Proveedores > Facturas` con filtro `Estado = Borrador`.<br>• Validar factura contra pedimento y hacer clic en **Publicar** (`Post`). | • Protocolo obligatorio en checklist: Cero facturas de proveedor en borrador antes de correr el corte de existencias. |
+
+---
+
 ## 📊 Historial de Ajustes al Plan
 
 | Versión | Cambios Clave Realizados | Justificación Técnica |
@@ -237,4 +264,5 @@ flowchart TD
 | **v1** | Plan preliminar general con FIFO, AVCO, CFDI y anticipos. | Base inicial sin acotar. |
 | **v2** | Eliminación de CFDI y anticipos; enfoque en AVCO. | Los CFDI de pago no impactan el costo de inventario. |
 | **v3** | Caso básico MXN explícito; pedimento acotado a Landed Costs; +5 min Q&A. | Enfoque riguroso en el impacto al AVCO en Odoo 19. |
-| **v4** | **Integración de las 3 Causas Raíz:**<br>1. Alerta de cambios de configuración en caliente (Bloque 2, +2 min).<br>2. Reducción de clínica de desastres a 16 min (4 min c/u).<br>3. Encuesta y Matriz de Cadencia de Auditoría (Bloque 5, +4 min).<br>4. Profundización en la historia de la póliza manual para cuadrar.<br>5. Inclusión de la Matriz de Cadencia en el Checklist de Auditoría. | Basado en experiencia real de implementaciones y resultados de laboratorio en Odoo 19 donde cambiar configuración en caliente no genera pólizas retroactivas. |
+| **v4** | **Integración de las 3 Causas Raíz:**<br>1. Alerta de cambios de configuración en caliente (Bloque 2).<br>2. Clínica de desastres a 16 min.<br>3. Matriz de Cadencia de Auditoría (Bloque 5).<br>4. Profundización en póliza manual de cuadre.<br>5. Inclusión de Cadencia en Checklist. | Basado en experiencia real de implementaciones y resultados de laboratorio en Odoo 19. |
+| **v5** | **Integración Forense de Auditoría en Vivo:**<br>1. Autopsia matemática del Stock Negativo (\$1,500 de costo no deducible y balance inflado).<br>2. Regla contra cambios manuales de coste en ficha (`julio121`).<br>3. Protocolo contra productos archivados con saldo (`ZZ-PRUEBA-01`).<br>4. Auditoría de facturas de proveedor en borrador (`SENSOR-USD`).<br>5. Incorporación de la **Matriz de Conciliación por Producto en 4 Fuentes**.<br>6. Adición de las Reglas 4 y 5 de Oro (Cero coste manual y Trazabilidad con `product_id`).<br>7. Creación del **Entregable #3: Guía Rápida de Trinchera (Diagnóstico, Correctiva y Preventiva)**. | Validación empírica en tiempo real sobre la base de datos de producción `masterclass`. |

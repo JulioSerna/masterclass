@@ -1962,7 +1962,7 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </div>
 
-      <!-- Checklist Sections (14 items) -->
+      <!-- Checklist Sections (18 items) -->
       <div class="checklist-sections">
         <!-- SECCIÓN 1 -->
         <div class="chk-section">
@@ -2005,6 +2005,15 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="chk-desc">Se verificó que las ubicaciones virtuales de pérdida, merma y ajuste físico cuenten con su cuenta contable contrapartida debidamente asignada.</div>
               </div>
               <span class="chk-tag tag-critico">CONFIGURACIÓN</span>
+            </label>
+
+            <label class="chk-item" data-id="chk_15">
+              <input type="checkbox" onchange="updateProgress(this)">
+              <div class="chk-content">
+                <div class="chk-title">1.5 Cero Edición Manual de Coste en Ficha de Producto</div>
+                <div class="chk-desc">El campo Coste (standard_price) en productos con AVCO tiene permisos bloqueados para evitar desfases manuales sin póliza contable.</div>
+              </div>
+              <span class="chk-tag tag-critico">CONTROL COSTE</span>
             </label>
           </div>
         </div>
@@ -2051,6 +2060,15 @@ h1, h2, h3, h4, h5, h6 {
               </div>
               <span class="chk-tag tag-alto">SECUENCIA</span>
             </label>
+
+            <label class="chk-item" data-id="chk_16">
+              <input type="checkbox" onchange="updateProgress(this)">
+              <div class="chk-content">
+                <div class="chk-title">2.5 Cero Productos Archivados con Saldo o Compras Abiertas</div>
+                <div class="chk-desc">Filtro aplicado sobre productos archivados (active = False) para confirmar que ninguno tenga existencias físicas ni órdenes de compra pendientes.</div>
+              </div>
+              <span class="chk-tag tag-critico">CATÁLOGO</span>
+            </label>
           </div>
         </div>
 
@@ -2077,6 +2095,15 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="chk-desc">Órdenes de compra y facturas de proveedor procesadas ordenadamente para garantizar costo base correcto en cada salida.</div>
               </div>
               <span class="chk-tag tag-control">TRAZABILIDAD</span>
+            </label>
+
+            <label class="chk-item" data-id="chk_17">
+              <input type="checkbox" onchange="updateProgress(this)">
+              <div class="chk-content">
+                <div class="chk-title">3.3 Cero Facturas de Proveedor en Borrador</div>
+                <div class="chk-desc">Auditoría en Facturas de Proveedor confirmando 0 registros en borrador para evitar puntos ciegos donde las compras no impactan la balanza.</div>
+              </div>
+              <span class="chk-tag tag-critico">PUNTO CIEGO</span>
             </label>
           </div>
         </div>
@@ -2122,6 +2149,15 @@ h1, h2, h3, h4, h5, h6 {
                 <div class="chk-desc">Todo ajuste de inventario o merma cuenta con su documento de almacén correspondiente respaldando el apunte contable generado.</div>
               </div>
               <span class="chk-tag tag-control">CONTROL</span>
+            </label>
+
+            <label class="chk-item" data-id="chk_18">
+              <input type="checkbox" onchange="updateProgress(this)">
+              <div class="chk-content">
+                <div class="chk-title">4.5 Conciliación por Producto en 4 Fuentes con product_id</div>
+                <div class="chk-desc">Ejecución de la Matriz de 4 Fuentes verificando diferencia $0.00 por producto y validando que todo ajuste contable en la 1150 lleve producto asignado.</div>
+              </div>
+              <span class="chk-tag tag-critico">MATRIZ 4 FUENTES</span>
             </label>
           </div>
         </div>

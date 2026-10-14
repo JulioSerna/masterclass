@@ -2692,7 +2692,8 @@ h1, h2, h3, h4, h5, h6 {
                     <ul class="styled-list">
                       <li>La ubicación <code>Virtual Locations/Inventory adjustment</code> no tiene cuenta contable configurada.</li>
                       <li>Al validar el ajuste físico, el reporte de almacén descuenta o suma piezas inmediatamente.</li>
-                      <li><strong>En Contabilidad:</strong> Odoo no puede generar la póliza o arroja un error silencioso de validación.</li>
+                      <li><strong>En Contabilidad:</strong> Odoo no genera la póliza o la descarta por falta de cuentas.</li>
+                      <li><strong>Peligro adicional (Caso julio121):</strong> Cambiar el coste "a mano" en la ficha del producto recalcula el almacén pero nunca genera póliza en la 1150.</li>
                     </ul>
                   </div>
                 </div>
@@ -2701,8 +2702,8 @@ h1, h2, h3, h4, h5, h6 {
                   <div class="card-pill" style="color:var(--rojo-vauxoo);">IMPACTO Y SOLUCIÓN</div>
                   <h3>Descuadre Inmediato Almacén vs Balanza</h3>
                   <div class="detail-box">
-                    <p>Las existencias físicas bajaron de valor, pero la cuenta <code>115.01.01</code> sigue con el saldo anterior.</p>
-                    <div class="vauxoo-rule-badge" style="margin-top:12px;">REGLA VAUXOO: Auditar que cada ubicación de ajuste y categoría tenga cuenta contrapartida asignada antes de operar.</div>
+                    <p>Las existencias físicas cambian de valor, pero la cuenta <code>115.01.01</code> queda divorciada de la realidad.</p>
+                    <div class="vauxoo-rule-badge" style="margin-top:12px;">REGLA VAUXOO: Auditar cuentas de ajuste y congelar la edición manual del coste en fichas AVCO.</div>
                   </div>
                 </div>
               </div>
@@ -2866,11 +2867,12 @@ h1, h2, h3, h4, h5, h6 {
                 </div>
 
                 <div class="disaster-col-card" style="border-left: 4px solid var(--rojo-vauxoo);">
-                  <div class="card-pill" style="color:var(--rojo-vauxoo);">CONSECUENCIA EN ODOO 19</div>
-                  <h3>Revaloraciones Forzadas</h3>
+                  <div class="card-pill" style="color:var(--rojo-vauxoo);">IMPACTO FISCAL Y FANTASMAS</div>
+                  <h3>Autopsia del Costo & Catálogo</h3>
                   <div class="detail-box">
-                    <p>Cuando la compra o factura del proveedor entra días después, el sistema debe reajustar movimientos pasados, provocando saltos anómalos en el costo de ventas.</p>
-                    <div class="vauxoo-rule-badge" style="margin-top:12px;">REGLA VAUXOO: Respetar la secuencia estricta: Orden de Compra &rarr; Recepción en Sistema &rarr; Entrega al Cliente.</div>
+                    <p><strong>Caso Válvula:</strong> Salió a $200 y la compra entró a $350. Las 10 piezas consumidas costaron $3,500 pero en libros sólo se dedujeron $2,000 $ightarrow$ <strong>$1,500 MXN de costo de venta perdido y balance inflado</strong>.</p>
+                    <p style="margin-top:6px;"><strong>Caso ZZ-PRUEBA:</strong> Archivar productos con transacciones pendientes los borra del almacén pero deja compras vivas en la conciliación.</p>
+                    <div class="vauxoo-rule-badge" style="margin-top:10px;">REGLA VAUXOO: Respetar la secuencia estricta: Orden de Compra &rarr; Recepción en Sistema &rarr; Entrega al Cliente. Cero productos archivados con saldo.</div>
                   </div>
                 </div>
               </div>
@@ -3018,31 +3020,37 @@ h1, h2, h3, h4, h5, h6 {
   </g>
 </svg></div>
               </div>
-              <p class="slide-lead">Protocolo integral de diagnóstico para rastrear y sanear cualquier brecha entre contabilidad y almacén:</p>
+              <div class="interactive-chat-prompt" style="background:#FFFBEB; border:1px solid #FCD34D; margin-bottom:16px;">
+                <span class="prompt-icon">📐</span>
+                <span class="prompt-text" style="color:#92400E; font-size:0.92rem;">
+                  <strong>La Ecuación Maestra de Auditoría por Producto:</strong><br>
+                  <code>Valor Almacén = Compras Recibidas por Facturar + Ajustes Netos (Entrantes - Salientes) + Contabilidad 1150 (Facturas Borrador + Landed Costs - Costo Ventas)</code>
+                </span>
+              </div>
               
-              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 16px;">
                 <div class="agenda-card" style="border-top: 4px solid #1E293B;">
                   <div class="agenda-time">PASO 1 · INTEGRIDAD ESTRUCTURAL</div>
-                  <div class="agenda-title">Cuentas en Categorías de Producto</div>
-                  <p class="agenda-desc">Validar que todas las categorías de productos almacenables apunten a la <strong>cuenta correcta de inventario (1150)</strong> y cuenten con cuentas de contrapartida de valoración y merma válidas.</p>
+                  <div class="agenda-title">Cuentas en Categorías & Ubicaciones</div>
+                  <p class="agenda-desc">Validar que las categorías y la ubicación <code>Virtual Locations/Inventory adjustment</code> apunten a cuentas contables activas. Prohibir la alteración manual del coste en fichas AVCO.</p>
                 </div>
                 
                 <div class="agenda-card" style="border-top: 4px solid var(--rojo-vauxoo);">
-                  <div class="agenda-time">PASO 2 · TRÁNSITO PROVEEDORES</div>
-                  <div class="agenda-title">Pendiente por Facturar (Proveedor)</div>
-                  <p class="agenda-desc">Auditar recepciones físicas de compra que no cuentan con factura de proveedor vinculada o compras facturadas sin recepción (desfase entre costo en inventario y pasivo).</p>
+                  <div class="agenda-time">PASO 2 · PROVEEDORES & FACTURAS BORRADOR</div>
+                  <div class="agenda-title">Compras por Facturar y Puntos Ciegos</div>
+                  <p class="agenda-desc">Auditar recepciones sin factura y <strong>facturas de compra guardadas en borrador</strong> (Caso Sensor USD: la OC dice facturada pero no impacta la balanza oficial).</p>
                 </div>
 
                 <div class="agenda-card" style="border-top: 4px solid #0D9488;">
-                  <div class="agenda-time">PASO 3 · TRÁNSITO CLIENTES</div>
-                  <div class="agenda-title">Pendiente por Facturar (Cliente)</div>
-                  <p class="agenda-desc">Auditar entregas de mercancía al cliente con salida física de almacén pendientes de facturación, o facturas emitidas sin registrar la entrega de stock correspondiente.</p>
+                  <div class="agenda-time">PASO 3 · CLIENTES & ENTREGAS</div>
+                  <div class="agenda-title">Tránsito de Ventas y Despacho</div>
+                  <p class="agenda-desc">Verificar que toda entrega de almacén cuente con su costo de ventas reconocido y que no existan albaranes de salida previos a la recepción del proveedor.</p>
                 </div>
 
                 <div class="agenda-card" style="border-top: 4px solid #475569;">
-                  <div class="agenda-time">PASO 4 · ANÁLISIS DE LA CUENTA 1150</div>
-                  <div class="agenda-title">Cruce Balanza vs Existencias & Filtros</div>
-                  <p class="agenda-desc">Analizar los apuntes contables de la cuenta 1150 para <strong>aislar pólizas manuales</strong> (<code>Documento Origen = Vacío</code>), movimientos huérfanos y conciliar la cifra al centavo.</p>
+                  <div class="agenda-time">PASO 4 · CRUCE POR PRODUCTO</div>
+                  <div class="agenda-title">Matriz de 4 Fuentes & Rastro 1150</div>
+                  <p class="agenda-desc">Auditar producto por producto en Excel o reporte de Odoo 19. Aislar pólizas manuales y verificar que cualquier asiento contable lleve su <code>product_id</code> asignado.</p>
                 </div>
               </div>
             </div>
@@ -3127,14 +3135,14 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-16" data-id="16" data-title="Las 3 Reglas de Oro Blindadas de Vauxoo" data-notes="Parte C del Bloque 5: Las 3 Reglas de Oro Blindadas de Vauxoo. 1. Cero Asientos Manuales en la 1150; 2. Cero Salidas sin Recepción Registrada; 3. Configuración Congelada y Auditoría Disciplinada." data-time="01:04 - 01:07">
+    <div class="slide-box bg-white" id="slide-16" data-id="16" data-title="Las 5 Reglas de Oro Blindadas de Vauxoo" data-notes="Parte C del Bloque 5: Las 5 Reglas de Oro Blindadas de Vauxoo. 1. Cero Asientos Manuales en la 1150; 2. Cero Salidas sin Recepción Registrada; 3. Configuración Congelada y Auditoría Disciplinada; 4. Cero Cambios Manuales de Coste; 5. Trazabilidad Contable con product_id." data-time="01:04 - 01:07">
       
       
             <div class="slide-content">
               <div class="slide-header">
                 <div>
                   <span class="pill-badge">MEJORES PRÁCTICAS VAUXOO</span>
-                  <h2 class="slide-title">Las 3 Reglas de Oro Blindadas de Vauxoo</h2>
+                  <h2 class="slide-title">Las 5 Reglas de Oro Blindadas de Vauxoo</h2>
                 </div>
                 <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
 <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510.52 158.8">
@@ -3182,28 +3190,42 @@ h1, h2, h3, h4, h5, h6 {
   </g>
 </svg></div>
               </div>
-              <p class="slide-lead">Tres lineamientos operativos para garantizar que el divorcio contable nunca vuelva a ocurrir:</p>
+              <p class="slide-lead">Cinco lineamientos operativos para garantizar que el divorcio contable nunca vuelva a ocurrir:</p>
               
-              <div class="golden-rules-grid">
+              <div class="golden-rules-grid" style="grid-template-columns: repeat(3, 1fr); gap: 14px;">
                 <div class="golden-rule-card">
                   <div class="rule-medal">🥇</div>
                   <div class="rule-num">REGLA BLINDADA #1</div>
-                  <h3>Cero Asientos Manuales en la 1150</h3>
-                  <p>Restringir por permisos de seguridad que usuarios o contadores creen pólizas manuales de diario en cuentas de inventario. Todo apunte debe nacer de un movimiento de almacén.</p>
+                  <h3>Cero Asientos Manuales en 1150</h3>
+                  <p>Prohibir por permisos que usuarios creen pólizas manuales de diario en cuentas de inventario. Todo apunte debe nacer de un movimiento de almacén.</p>
                 </div>
 
                 <div class="golden-rule-card">
                   <div class="rule-medal">🥇</div>
                   <div class="rule-num">REGLA BLINDADA #2</div>
-                  <h3>Cero Salidas sin Recepción Registrada</h3>
-                  <p>Asegurar que toda entrega a cliente cuente con su recepción y compra procesadas en el sistema para mantener la coherencia matemática del costo de ventas.</p>
+                  <h3>Cero Salidas sin Recepción</h3>
+                  <p>Asegurar que toda entrega al cliente cuente con su recepción validada previamente en Odoo para no fracturar la fórmula matemática del costo promedio.</p>
                 </div>
 
                 <div class="golden-rule-card">
                   <div class="rule-medal">🥇</div>
                   <div class="rule-num">REGLA BLINDADA #3</div>
-                  <h3>Configuración y Cadencia Disciplinada</h3>
-                  <p>Categorías inmutables en caliente sin protocolo de corte, y adoptar la disciplina semanal o mensual de conciliar Balanza vs Existencias con el checklist oficial.</p>
+                  <h3>Configuración & Cadencia</h3>
+                  <p>Categorías inmutables en caliente sin protocolo de corte, y adoptar la disciplina semanal o mensual de conciliar Balanza vs Existencias con el checklist.</p>
+                </div>
+
+                <div class="golden-rule-card">
+                  <div class="rule-medal">🥇</div>
+                  <div class="rule-num">REGLA BLINDADA #4</div>
+                  <h3>Cero Cambios Manuales de Coste</h3>
+                  <p>En AVCO el costo promedio unitario nunca se tipea a mano en la ficha del producto; se recalcula exclusivamente por recepciones y Landed Costs.</p>
+                </div>
+
+                <div class="golden-rule-card">
+                  <div class="rule-medal">🥇</div>
+                  <div class="rule-num">REGLA BLINDADA #5</div>
+                  <h3>Trazabilidad con <code>product_id</code></h3>
+                  <p>Si la dirección autoriza un asiento de ajuste contable en la 1150, es mandatorio asignar el campo <strong>Producto</strong> en cada línea para conservar la conciliación.</p>
                 </div>
               </div>
             </div>
@@ -3512,7 +3534,7 @@ h1, h2, h3, h4, h5, h6 {
     
 
     <button class="thumb-btn" onclick="goToSlide(16)" id="thumb-16">
-      16. Las 3 Reglas de Oro Blindadas de Vauxoo
+      16. Las 5 Reglas de Oro Blindadas de Vauxoo
     </button>
     
 
