@@ -2,8 +2,10 @@
 import os
 from compile_all import CSS_STYLES, slides, checklist_html, mapeo_html, cronograma_html, logo_white_svg
 from make_prompts_content import get_prompts_html
+from make_kit_content import get_kit_html
 
 prompts_html = get_prompts_html()
+kit_html = get_kit_html()
 
 # Build slides HTML inside stage
 slides_boxes_html = []
@@ -275,6 +277,9 @@ INDEX_HTML = f"""<!DOCTYPE html>
         <button class="tab-btn" id="btn-tab-mapeo" onclick="switchTab('mapeo')">
           📊 Entregable #2: Tabla de Mapeo
         </button>
+        <button class="tab-btn" id="btn-tab-kit" onclick="switchTab('kit')">
+          🛠️ Entregable #4: Kit Técnico
+        </button>
         <button class="tab-btn" id="btn-tab-cronograma" onclick="switchTab('cronograma')">
           ⏱️ Minuto a Minuto
         </button>
@@ -353,6 +358,11 @@ INDEX_HTML = f"""<!DOCTYPE html>
     <!-- TAB 3: ENTREGABLE #2 MAPEO & ARQUITECTURA -->
     <div class="tab-pane" id="tab-mapeo">
       {mapeo_html}
+    </div>
+
+    <!-- TAB: ENTREGABLE #4 KIT TÉCNICO DE REGULARIZACIÓN & ACCIÓN DE SERVIDOR -->
+    <div class="tab-pane" id="tab-kit">
+      {kit_html}
     </div>
 
     <!-- TAB 4: CRONOGRAMA MINUTO A MINUTO -->

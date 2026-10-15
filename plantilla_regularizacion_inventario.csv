@@ -1,0 +1,5 @@
+ref,date,journal_id,line_ids/account_id,line_ids/name,line_ids/product_id,line_ids/debit,line_ids/credit
+REG-INV-2026-001,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - ZZ-PRUEBA-01,ZZ-PRUEBA-01,2500.00,0.00
+,,,501.01.02,Contrapartida variacion inventario - ZZ-PRUEBA-01,,0.00,2500.00
+REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Valvula,VALVULA-NEG,3500.00,0.00
+,,,501.01.02,Contrapartida variacion inventario - Valvula,,0.00,3500.00

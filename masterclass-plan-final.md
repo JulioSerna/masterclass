@@ -1,4 +1,4 @@
-# 🎯 Plan Definitivo v4: Masterclass 2026
+# 🎯 Plan Definitivo v6: Masterclass 2026
 
 ## "De la logística a la contabilidad: Domina la valoración de inventarios en Odoo 19.0"
 
@@ -16,7 +16,7 @@
 | **Localización** | México — Moneda Base MXN, Plan Contable Mexicano (SAT) |
 | **Método de Costeo** | Costo Promedio (AVCO) — enfoque exclusivo y perpetuo |
 | **Audiencia** | Contadores, Controllers, Consultores Odoo y Directores Financieros en México |
-| **Entregables** | Certificado · Grabación HD · Checklist de Auditoría MX (con Matriz de Cadencia) · Tabla de Mapeo 18→19 |
+| **Entregables** | Certificado · Grabación HD · Checklist de Auditoría MX (con Matriz de Cadencia) · Tabla de Mapeo 18→19 · Guía Rápida de Trinchera · **Kit Técnico de Regularización & Acción de Servidor en Odoo 19** |
 
 ---
 
@@ -261,6 +261,42 @@ Guía de referencia rápida para el ponente y material de apoyo para los asisten
 
 ---
 
+---
+
+## 📋 Entregable #4: Kit Técnico de Regularización y Auditoría en Odoo 19.0
+
+Los dos activos técnicos indispensables para auditar y corregir descuadres entre el módulo de inventarios y la contabilidad:
+
+### Componente A: Plantilla CSV de Regularización con Trazabilidad por Producto
+Plantilla de importación balanceada para Odoo 19 con asignación obligatoria del campo `line_ids/product_id` en las líneas de la cuenta `115.01.01`:
+```csv
+ref,date,journal_id,line_ids/account_id,line_ids/name,line_ids/product_id,line_ids/debit,line_ids/credit
+REG-INV-2026-001,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - ZZ-PRUEBA-01,ZZ-PRUEBA-01,2500.00,0.00
+,,,501.01.02,Contrapartida variacion inventario - ZZ-PRUEBA-01,,0.00,2500.00
+REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Valvula,VALVULA-NEG,3500.00,0.00
+,,,501.01.02,Contrapartida variacion inventario - Valvula,,0.00,3500.00
+```
+- **Regla técnica:** La contrapartida en la cuenta de resultados (`501.01.02 Variación de Inventario`) no requiere SKU, pero la línea en la cuenta de inventario (`115.01.01`) lo requiere invariablemente para que la conciliación por SKU sea exacta.
+
+---
+
+### Componente B: Acción de Servidor para Exportar Reporte de Conciliación en CSV
+Acción de servidor en Python (modelo `stock.quant` o `product.product`) compatible con el sandbox `safe_eval` de Odoo 19:
+- **Criterio de Cobertura:** Exporta **todos** los productos activos con existencias en ubicaciones internas sin requerir selección manual en la vista de lista.
+- **Fórmula de Cuadre:**
+  $$\text{Diferencia} = \text{Valor en Existencias} - (\text{Valor por Facturar} + \text{Valor en Contabilidad} + \text{Valor No Reconocido})$$
+- **Columnas Generadas:**
+  1. `Producto`: Nombre del producto.
+  2. `Costo`: Costo unitario actual (`standard_price`).
+  3. `Cantidad`: Suma de cantidades en ubicaciones internas.
+  4. `Valor en existencias`: Valor total del stock en almacén.
+  5. `Valor por facturar`: Monto de líneas de compra con facturas pendientes (`bill_to_receive = True`).
+  6. `Valor en contabilidad`: Saldo neto (`debit - credit`) de apuntes contables publicados con la cuenta de inventario de su categoría.
+  7. `Valor no reconocido`: Ajustes de inventario hechos (`state = 'done'`, `is_inventory = True`) que **no generaron póliza contable** (`move_id.account_move_id == False`).
+  8. `Diferencia (Cuadre)`: Brecha exacta por producto.
+
+---
+
 ## 📊 Historial de Ajustes al Plan
 
 | Versión | Cambios Clave Realizados | Justificación Técnica |
@@ -270,3 +306,4 @@ Guía de referencia rápida para el ponente y material de apoyo para los asisten
 | **v3** | Caso básico MXN explícito; pedimento acotado a Landed Costs; +5 min Q&A. | Enfoque riguroso en el impacto al AVCO en Odoo 19. |
 | **v4** | **Integración de las 3 Causas Raíz:**<br>1. Alerta de cambios de configuración en caliente (Bloque 2).<br>2. Clínica de desastres a 16 min.<br>3. Matriz de Cadencia de Auditoría (Bloque 5).<br>4. Profundización en póliza manual de cuadre.<br>5. Inclusión de Cadencia en Checklist. | Basado en experiencia real de implementaciones y resultados de laboratorio en Odoo 19. |
 | **v5** | **Integración Forense de Auditoría en Vivo:**<br>1. Autopsia matemática del Stock Negativo (\$1,500 de costo no deducible y balance inflado).<br>2. Regla contra cambios manuales de coste en ficha (`julio121`).<br>3. Protocolo contra productos archivados con saldo (`ZZ-PRUEBA-01`).<br>4. Auditoría de facturas de proveedor en borrador (`SENSOR-USD`).<br>5. Incorporación de la **Matriz de Conciliación por Producto en 4 Fuentes**.<br>6. Adición de las Reglas 4 y 5 de Oro (Cero coste manual y Trazabilidad con `product_id`).<br>7. Creación del **Entregable #3: Guía Rápida de Trinchera (Diagnóstico, Correctiva y Preventiva)**. | Validación empírica en tiempo real sobre la base de datos de producción `masterclass`. |
+| **v6** | **Inclusión del Entregable #4: Kit Técnico de Regularización & Acción de Servidor:**<br>1. Plantilla CSV oficial de importación balanceada con `line_ids/product_id`.<br>2. Código fuente de la Acción de Servidor en Odoo 19 (`stock.quant` / `product.product`) con descarga directa en CSV UTF-8 BOM.<br>3. Reporte global para todos los productos activos en ubicaciones internas sin depender de selecciones manuales en lista.<br>4. Integración completa en el Hub interactivo (`index.html`). | Automatización completa de la conciliación y regularización para los asistentes. |
