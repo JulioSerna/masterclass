@@ -650,7 +650,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "bg": "white",
             "time": "00:55 - 01:03",
             "block": "Bloque 5",
-            "notes": "Intro de Julio Serna en Bloque 5: 'Bueno, ya vimos en el Bloque 1 las principales causas que hay que evitar para no tener un divorcio contable y logístico. En los bloques anteriores entendimos cómo es la valoración con el Happy Path y qué pasa con los problemas comunes. Pero muchos de los que están aquí ya tienen Odoo en producción, ya iniciaron operaciones y YA TIENEN el issue encima. Vamos a ver entonces cómo lo auditamos y sobre todo cómo lo corregimos.' Explicar la metodología de auditoría integral y los 4 frentes críticos de validación.",
+            "notes": "Intro de Julio Serna en Bloque 5: 'Bueno, ya vimos en el Bloque 1 las principales causas que hay que evitar para no tener un divorcio contable y logístico. En los bloques anteriores entendimos cómo es la valoración con el Happy Path y qué pasa con los problemas comunes. Pero muchos de los que están aquí ya tienen Odoo en producción, ya iniciaron operaciones y YA TIENEN el issue encima. Vamos a ver entonces cómo lo auditamos y sobre todo cómo lo corregimos.' Regla de oro que deben tatuarse: NUNCA auditen solo los totales consolidados. Si comparas la suma total del almacén contra el total de la cuenta 1150, caes en la Trampa de la Compensación Global: un producto con stock negativo de +$1,500 se anula con otro producto con faltante de -$1,500. La suma te da $0.00 de diferencia, crees que todo cuadra, y en realidad tienes dos contingencias graves. La conciliación SOLO es real si la auditas SKU por SKU y cada producto tiene diferencia cero. Aquí está la metodología de 4 frentes.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -660,12 +660,22 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <div class="interactive-chat-prompt" style="background:#FFFBEB; border:1px solid #FCD34D; margin-bottom:16px;">
-                <span class="prompt-icon">📐</span>
-                <span class="prompt-text" style="color:#92400E; font-size:0.92rem;">
-                  <strong>La Ecuación Maestra de Auditoría por Producto:</strong><br>
-                  <code>Valor Almacén = Compras Recibidas por Facturar + Ajustes Netos (Entrantes - Salientes) + Contabilidad 1150 (Facturas Borrador + Landed Costs - Costo Ventas)</code>
-                </span>
+              
+              <div style="display:grid; grid-template-columns: 1.15fr 0.95fr; gap: 14px; margin-bottom: 16px;">
+                <div class="interactive-chat-prompt" style="background:#FFFBEB; border:1px solid #FCD34D; margin-bottom:0;">
+                  <span class="prompt-icon">📐</span>
+                  <span class="prompt-text" style="color:#92400E; font-size:0.86rem; line-height:1.4;">
+                    <strong>Ecuación Maestra por Producto (SKU por SKU):</strong><br>
+                    <code>Valor Almacén = Compras por Facturar + Ajustes Netos + Contabilidad 1150 (Borradores + LC - Costo Ventas)</code>
+                  </span>
+                </div>
+                <div class="interactive-chat-prompt" style="background:#FEF2F2; border:1px solid #FCA5A5; margin-bottom:0;">
+                  <span class="prompt-icon">⚠️</span>
+                  <span class="prompt-text" style="color:#991B1B; font-size:0.86rem; line-height:1.4;">
+                    <strong>Trampa de la Compensación Global:</strong><br>
+                    ¡Prohibido auditar solo por grandes totales! Desvíos opuestos (+/-) se anulan en la suma dando un falso $0.00. <strong>La conciliación sólo vale si cada SKU = $0.00.</strong>
+                  </span>
+                </div>
               </div>
               
               <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 16px;">
@@ -688,9 +698,9 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 </div>
 
                 <div class="agenda-card" style="border-top: 4px solid #475569;">
-                  <div class="agenda-time">PASO 4 · CRUCE POR PRODUCTO</div>
+                  <div class="agenda-time">PASO 4 · AUDITORÍA INDIVIDUAL SKU POR SKU</div>
                   <div class="agenda-title">Matriz de 4 Fuentes & Rastro 1150</div>
-                  <p class="agenda-desc">Auditar producto por producto en Excel o reporte de Odoo 19. Aislar pólizas manuales y verificar que cualquier asiento contable lleve su <code>product_id</code> asignado.</p>
+                  <p class="agenda-desc">Auditar <strong>producto por producto</strong> (nunca en global). Aislar pólizas manuales, detectar compensaciones engañosas y verificar que cualquier asiento contable lleve su <code>product_id</code> asignado.</p>
                 </div>
               </div>
             </div>
@@ -756,7 +766,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "bg": "white",
             "time": "01:04 - 01:07",
             "block": "Bloque 5",
-            "notes": "Parte C del Bloque 5: Las 5 Reglas de Oro Blindadas de Vauxoo. 1. Cero Asientos Manuales en la 1150; 2. Cero Salidas sin Recepción Registrada; 3. Configuración Congelada y Auditoría Disciplinada; 4. Cero Cambios Manuales de Coste; 5. Trazabilidad Contable con product_id.",
+            "notes": "Parte C del Bloque 5: Las 5 Reglas de Oro Blindadas de Vauxoo. 1. Cero Asientos Manuales en la 1150; 2. Cero Salidas sin Recepción Registrada; 3. Configuración Congelada y Auditoría Disciplinada; 4. Cero Cambios Manuales de Coste; 5. Auditoría SKU por SKU y trazabilidad contable con product_id.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -800,8 +810,8 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 <div class="golden-rule-card">
                   <div class="rule-medal">🥇</div>
                   <div class="rule-num">REGLA BLINDADA #5</div>
-                  <h3>Trazabilidad con <code>product_id</code></h3>
-                  <p>Si la dirección autoriza un asiento de ajuste contable en la 1150, es mandatorio asignar el campo <strong>Producto</strong> en cada línea para conservar la conciliación.</p>
+                  <h3>Auditoría SKU & <code>product_id</code></h3>
+                  <p>Auditar siempre producto por producto para evitar compensaciones engañosas (+/-). Si se autoriza un ajuste contable en la 1150, es mandatorio asignar el campo <strong>Producto</strong>.</p>
                 </div>
               </div>
             </div>

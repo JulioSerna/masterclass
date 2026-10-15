@@ -249,6 +249,14 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
             </tbody>
           </table>
         </div>
+
+        <!-- Alerta Principio de Auditoría SKU por SKU -->
+        <div style="margin-top: 20px; padding: 14px 18px; background: #FEF2F2; border-left: 4px solid #B91C1C; border-radius: 6px;">
+          <strong style="color: #991B1B; font-size: 0.95rem;">⚠️ Principio de Auditoría Vauxoo: Cero Compensación Global (Auditoría SKU por SKU)</strong>
+          <p style="margin: 6px 0 0; font-size: 0.88rem; color: #7F1D1D; line-height: 1.45;">
+            Al auditar la cuenta 1150 contra el almacén, <strong>está estrictamente prohibido validar solo el gran total consolidado</strong>. Si un producto tiene un sobrante de +$1,500 y otro tiene un faltante de -$1,500, la suma arroja una diferencia engañosa de $0.00 que oculta dos contingencias operativas y fiscales graves. La conciliación solo es válida cuando se desglosa <strong>producto por producto</strong> y cada línea da una diferencia neta de $0.00.
+          </p>
+        </div>
       </div>
 
       <!-- Footer Note -->

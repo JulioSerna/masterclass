@@ -1962,6 +1962,14 @@ h1, h2, h3, h4, h5, h6 {
         </div>
       </div>
 
+      <!-- Alerta Principio de Auditoría SKU por SKU -->
+      <div style="background:#FEF2F2; border-left:4px solid #B91C1C; padding:14px 18px; border-radius:6px; margin-bottom:24px;">
+        <strong style="color:#991B1B; font-family:'Sora'; font-size:0.95rem;">⚠️ Principio Fundamental Vauxoo: Auditoría Individual por Producto (SKU por SKU)</strong>
+        <p style="color:#7F1D1D; font-size:0.86rem; margin:6px 0 0 0; line-height:1.45;">
+          <strong>NUNCA valide la conciliación únicamente comparando los totales globales</strong> del Almacén vs la Balanza. En los totales consolidados, los errores se enmascaran algebraicamente: un sobrante de +$1,500 en un producto compensa un faltante de -$1,500 en otro, arrojando un ficticio $0.00 de diferencia global mientras oculta contingencias operativas y fiscales graves. La auditoría sólo se considera aprobada si <strong>cada producto individualmente presenta $0.00 de diferencia</strong>.
+        </p>
+      </div>
+
       <!-- Checklist Sections (18 items) -->
       <div class="checklist-sections">
         <!-- SECCIÓN 1 -->
@@ -2154,8 +2162,8 @@ h1, h2, h3, h4, h5, h6 {
             <label class="chk-item" data-id="chk_18">
               <input type="checkbox" onchange="updateProgress(this)">
               <div class="chk-content">
-                <div class="chk-title">4.5 Conciliación por Producto en 4 Fuentes con product_id</div>
-                <div class="chk-desc">Ejecución de la Matriz de 4 Fuentes verificando diferencia $0.00 por producto y validando que todo ajuste contable en la 1150 lleve producto asignado.</div>
+                <div class="chk-title">4.5 Conciliación por Producto en 4 Fuentes (Prohibido Auditar por Totales Globales)</div>
+                <div class="chk-desc">Ejecución obligatoria SKU por SKU. Prohibido validar únicamente el gran total consolidado para evitar que desvíos opuestos (+/-) se compensen y oculten contingencias. Cada producto individual debe tener diferencia $0.00, y todo asiento en la 1150 debe llevar asignado su product_id.</div>
               </div>
               <span class="chk-tag tag-critico">MATRIZ 4 FUENTES</span>
             </label>

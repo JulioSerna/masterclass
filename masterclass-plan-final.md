@@ -167,6 +167,10 @@ flowchart TD
 - **La historia detrás del error:** *"El contador, bajo presión de cierre y sin visibilidad del origen, calculó una diferencia y decidió meter una póliza manual para forzar el cuadre. La 'aspirina' manual envenenó el sistema para siempre"*.
 - Reclasificación/cancelación de la póliza: La cuenta 1150 regresa a su saldo publicado real, revelando la estructura de control interno.
 - 👁️ **Punto Ciego de Auditoría: Facturas en Borrador:** Caso `SENSOR-USD`, donde la OC aparece "Facturada" en Compras pero la factura de proveedor sigue en borrador, ocultando el producto de mayor valor del balance.
+- ⚠️ **La Trampa de la Compensación Global (¿Por qué auditar por producto y NUNCA por totales consolidados?):**
+  - Si auditas solo la suma global del almacén vs el total de la balanza, **los errores se enmascaran mutuamente**: un sobrante de +\$1,500 en un producto neutraliza un faltante de -\$1,500 en otro.
+  - La suma total arroja "\$0.00 de diferencia", el contador se confía creyendo que "todo cuadra", pero en la realidad existen **dos bombas de tiempo operativas y fiscales**.
+  - **La Regla de Oro:** La conciliación es válida *únicamente* si cada producto individualmente da \$0.00 de diferencia.
 - 🛠️ **La Herramienta Maestra: Matriz de Conciliación por Producto en 4 Fuentes:**
   $$\mathbf{\text{Valor Almacén}} = \text{Compras por Facturar} + \text{Ajustes Entrantes} - \text{Ajustes Salientes} + \text{Efecto Contable (1150)}$$
   *Demostración en vivo:* Cruzar producto por producto en lugar de pelear con sumas globales para detectar al vuelo stock negativo, mermas o productos descontinuados.
