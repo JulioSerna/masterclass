@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Content for Entregable #2: Tabla de Mapeo Conceptual v18 -> v19 & Guía de Arquitectura
-# STRICT ALIGNMENT WITH masterclass-plan-final.md v7
+# STRICT ALIGNMENT WITH masterclass-plan-final.md v8
 
 
 def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
@@ -120,6 +120,79 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
                 <td>
                   Validación de consistencia inmediata previa a la emisión de estados financieros.
                 </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Part 1.B: Tabla Maestra de Movimientos Logísticos -->
+      <div class="doc-section">
+        <div class="section-title-wrap">
+          <span class="pill-badge">PARTE 1.B</span>
+          <h3>Tabla Maestra de Movimientos Logísticos en Odoo 19.0</h3>
+        </div>
+        <p class="section-intro">
+          ¿Cuáles eventos operativos generan pólizas automáticas a la cuenta de inventarios <code>115.01.01</code> y cuáles son neutros en Odoo 19?
+        </p>
+        <div class="table-responsive">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">Movimiento / Documento</th>
+                <th style="width: 20%;">Modelo Odoo</th>
+                <th style="width: 20%;">¿Genera Póliza a 1150?</th>
+                <th style="width: 35%;">Justificación Técnica en Odoo 19</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Costes en Destino (Landed Costs)</strong></td>
+                <td><code>stock.landed.cost</code></td>
+                <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
+                <td>Incrementa el valor del inventario capitalizando fletes, seguros y aranceles sobre las recepciones.</td>
+              </tr>
+              <tr>
+                <td><strong>Facturas de Proveedor / Cliente</strong></td>
+                <td><code>account.move</code></td>
+                <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
+                <td>Reconoce costo de adquisición en compras o deduce existencias enviando a Costo de Ventas (501).</td>
+              </tr>
+              <tr>
+                <td><strong>Ajustes de Inventario (Mermas/Conteos)</strong></td>
+                <td><code>stock.move</code></td>
+                <td><span class="pill-badge" style="background:#16A34A;">SÍ (SI TIENE CUENTA)</span></td>
+                <td>Genera póliza si la ubicación virtual (Virtual Locations/Inventory adjustment) tiene cuenta contable.</td>
+              </tr>
+              <tr>
+                <td><strong>Órdenes de Producción (MO)</strong></td>
+                <td><code>mrp.production</code></td>
+                <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
+                <td>Acredita materias primas consumidas y debita el producto terminado ingresado al almacén.</td>
+              </tr>
+              <tr>
+                <td><strong>Revalorización de Coste</strong></td>
+                <td><code>stock.valuation.adjustment</code></td>
+                <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
+                <td>Cuando se ejecuta por asistente contable formal, no por simple edición en la ficha.</td>
+              </tr>
+              <tr>
+                <td><strong>Pedidos de Venta (SO)</strong></td>
+                <td><code>sale.order</code></td>
+                <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
+                <td>Compromiso comercial; no altera existencias físicas ni saldos contables.</td>
+              </tr>
+              <tr>
+                <td><strong>Pedidos de Compra (PO)</strong></td>
+                <td><code>purchase.order</code></td>
+                <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
+                <td>Orden contractual; no representa devengo ni entrega física de mercancía.</td>
+              </tr>
+              <tr>
+                <td><strong>Traslados Internos entre Ubicaciones</strong></td>
+                <td><code>stock.picking</code> (internal)</td>
+                <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
+                <td>Mover de un estante a otro dentro del mismo almacén/compañía no altera el valor del activo.</td>
               </tr>
             </tbody>
           </table>
@@ -274,11 +347,84 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
             </tbody>
           </table>
         </div>
+      </div>
+
+      <!-- Part 5: Los 4 Modelos Esenciales de Auditoría -->
+      <div class="doc-section" style="page-break-before: always;">
+        <div class="section-title-wrap">
+          <span class="pill-badge">PARTE 5</span>
+          <h3>Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")</h3>
+        </div>
+        <p class="section-intro">
+          Para realizar una conciliación integral e identificar cualquier desvío contable-logístico, es obligatorio cruzar estas 4 fuentes de verdad:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px;">
+          <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-top:4px solid #345D90; border-radius:8px; padding:16px;">
+            <strong style="color:#172A45; font-size:1rem;">1. Reporte de Existencias</strong>
+            <p style="font-size:0.85rem; color:#475569; margin:8px 0;">Menú: <em>Inventario > Informes > Existencias</em> (o <em>Contabilidad > Informes > Inventario</em>). Muestra unidades físicas $\times$ coste unitario de la ficha.</p>
+            <small style="color:#345D90; font-weight:600;">Objetivo: Conocer el valor físico en bodega.</small>
+          </div>
+
+          <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-top:4px solid #AC0340; border-radius:8px; padding:16px;">
+            <strong style="color:#172A45; font-size:1rem;">2. Facturas por Recibir</strong>
+            <p style="font-size:0.85rem; color:#475569; margin:8px 0;">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de factura del proveedor.</p>
+            <small style="color:#AC0340; font-weight:600;">Objetivo: Auditar provisiones en tránsito.</small>
+          </div>
+
+          <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-top:4px solid #E4A900; border-radius:8px; padding:16px;">
+            <strong style="color:#172A45; font-size:1rem;">3. Reporte Contable (Mayor 1150)</strong>
+            <p style="font-size:0.85rem; color:#475569; margin:8px 0;">Balanza de Comprobación y Apuntes Contables en la cuenta <code>115.01.01</code>. Revela asientos sin producto y pólizas manuales intrusas.</p>
+            <small style="color:#B45309; font-weight:600;">Objetivo: Auditar el saldo financiero en libros.</small>
+          </div>
+
+          <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-top:4px solid #16A34A; border-radius:8px; padding:16px;">
+            <strong style="color:#172A45; font-size:1rem;">4. Movimientos (stock.move)</strong>
+            <p style="font-size:0.85rem; color:#475569; margin:8px 0;">Histórico granular de cada entrada, salida y ajuste con fecha efectiva, origen, destino y valor monetario unitario registrado.</p>
+            <small style="color:#166534; font-weight:600;">Objetivo: Rastrear la causa raíz forense.</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- Part 6: Recomendaciones de Saneamiento en la Vida Real -->
+      <div class="doc-section">
+        <div class="section-title-wrap">
+          <span class="pill-badge">PARTE 6</span>
+          <h3>Estrategias de Saneamiento en Producción: Parche Manual vs Borrón y Cuenta Nueva</h3>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; margin-bottom: 24px;">
+          <!-- Opción A -->
+          <div style="background:#FEF2F2; border:1px solid #FECACA; border-left:5px solid #B91C1C; border-radius:8px; padding:20px;">
+            <h4 style="color:#991B1B; margin-top:0;">❌ Vía A: El Parche Manual ("La Aspirina Destructiva")</h4>
+            <p style="font-size:0.88rem; color:#7F1D1D; line-height:1.45;">
+              <strong>Práctica común:</strong> El contador inyecta un asiento de diario directo cargando o abonando a la cuenta <code>115.01.01</code> para forzar el cuadre contra el reporte de almacén.
+            </p>
+            <div style="background:#FFFFFF; border:1px solid #FECACA; padding:12px; border-radius:6px; font-size:0.85rem; color:#991B1B; margin-top:10px;">
+              <strong>Por qué fracasa:</strong> No modifica en nada las existencias del almacén ni el costo promedio de las fichas. En la siguiente venta o recepción, Odoo volverá a calcular salidas con costos erróneos, reabriendo la brecha contable de inmediato.
+            </div>
+          </div>
+
+          <!-- Opción B -->
+          <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-left:5px solid #16A34A; border-radius:8px; padding:20px;">
+            <h4 style="color:#166534; margin-top:0;">✅ Vía B: Protocolo "Borrón y Cuenta Nueva" (Vauxoo)</h4>
+            <p style="font-size:0.88rem; color:#14532D; line-height:1.45;">
+              <strong>La solución definitiva:</strong> Recomendada para bases de datos con meses de descuadre acumulado donde la reconstrucción histórica es inviable:
+            </p>
+            <ol style="font-size:0.85rem; color:#14532D; margin:10px 0 0 16px; padding:0; line-height:1.5;">
+              <li><strong>Corte Operativo:</strong> Detener movimientos de bodega durante la ventana de auditoría.</li>
+              <li><strong>Descarga a Cero:</strong> Ajuste de inventario llevando todas las cantidades físicas a <code>0.00</code>.</li>
+              <li><strong>Ajuste Contable a Cero:</strong> Regularizar la cuenta <code>115.01.01</code> a <code>$0.00</code> contra Pérdidas por Inventario.</li>
+              <li><strong>Congelación de Categorías:</strong> Validar Fase 0 (AVCO, Perpetuo, Cuentas y permisos bloqueados).</li>
+              <li><strong>Carga de Conteo Físico Real:</strong> Importar inventario físico real con coste promedio auditado.</li>
+            </ol>
+          </div>
+        </div>
 
         <!-- Alerta Principio de Auditoría SKU por SKU -->
-        <div style="margin-top: 20px; padding: 14px 18px; background: #FEF2F2; border-left: 4px solid #B91C1C; border-radius: 6px;">
-          <strong style="color: #991B1B; font-size: 0.95rem;">⚠️ Principio de Auditoría Vauxoo: Cero Compensación Global (Auditoría SKU por SKU)</strong>
-          <p style="margin: 6px 0 0; font-size: 0.88rem; color: #7F1D1D; line-height: 1.45;">
+        <div style="padding: 14px 18px; background: #FFF1F2; border-left: 4px solid #AC0340; border-radius: 6px;">
+          <strong style="color: #AC0340; font-size: 0.95rem;">⚠️ Principio de Auditoría Vauxoo: Cero Compensación Global (Auditoría SKU por SKU)</strong>
+          <p style="margin: 6px 0 0; font-size: 0.88rem; color: #1E293B; line-height: 1.45;">
             Al auditar la cuenta 1150 contra el almacén, <strong>está estrictamente prohibido validar solo el gran total consolidado</strong>. Si un producto tiene un sobrante de +$1,500 y otro tiene un faltante de -$1,500, la suma arroja una diferencia engañosa de $0.00 que oculta dos contingencias operativas y fiscales graves. La conciliación solo es válida cuando se desglosa <strong>producto por producto</strong> y cada línea da una diferencia neta de $0.00.
           </p>
         </div>
@@ -287,9 +433,9 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
       <!-- Footer Note -->
       <div class="doc-footer">
         <span>Vauxoo Academy · Masterclass 2026: Domina la valoración de inventarios en Odoo 19.0</span>
-        <span>Plan Definitivo v7 · Control Contable-Logístico</span>
+        <span>Plan Definitivo v8 · Control Contable-Logístico</span>
       </div>
     </div>
     '''
 
-print("Updated mapeo module v7 ready.")
+print("Updated mapeo module v8 ready.")

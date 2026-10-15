@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Content for all slides of the Masterclass 2026
-# Aligned strictly with masterclass-plan-final.md v7
+# Aligned strictly with masterclass-plan-final.md v8
+# Duración: 150 minutos (120 min exposición + 30 min Q&A)
 # Catálogo: Hardware & Cómputo (100% Unidades Enteras · Cero NIF · Cero Landed Costs)
 
 
@@ -13,7 +14,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "bg": "gradient",
             "time": "00:00",
             "block": "Apertura",
-            "notes": "Bienvenida de Julio Serna (PM y Experto Funcional en Vauxoo). Masterclass 2026 de Vauxoo Academy. Reglas de la sesión: 90 minutos enfocados en la sincronía contable y logística en Odoo 19.0 Enterprise.",
+            "notes": "Bienvenida de Julio Serna (PM y Experto Funcional en Vauxoo). Masterclass 2026 de Vauxoo Academy. 150 minutos (2 horas de exposición + 30 min de Q&A en vivo) enfocados en la sincronía contable y logística en Odoo 19.0 Enterprise.",
             "html": f'''
             <div class="slide-content cover-slide">
               <div class="cover-logo-wrap">
@@ -22,7 +23,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
               <div class="cover-badge-row">
                 <span class="pill-badge">MASTERCLASS 2026</span>
                 <span class="pill-badge-outline">ODOO 19.0 ENTERPRISE · MÉXICO</span>
-                <span class="pill-badge-outline">90 MINUTOS ESTRICTOS</span>
+                <span class="pill-badge-outline">150 MINUTOS (120 MIN + 30 MIN Q&A)</span>
               </div>
               <h1 class="cover-title">
                 De la Logística a la Contabilidad:
@@ -54,14 +55,14 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "id": 2,
             "title": "El Hook: Descuadre de $482,190 MXN",
             "bg": "white",
-            "time": "00:01 - 00:04",
+            "time": "00:01 - 00:06",
             "block": "Bloque 1",
             "notes": "Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($821,100.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $482,190.00 MXN ($487k de póliza manual + $4,810 de descuadres operativos). Plantear el dolor de todo cierre contable.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 1 · 00:00 - 00:09</span>
+                  <span class="pill-badge">BLOQUE 1 · 00:00 - 00:12</span>
                   <h2 class="slide-title">El Dolor que Todos Conocen (Caso Real en Vivo)</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
@@ -99,88 +100,88 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 </div>
               </div>
 
-              <div class="interactive-chat-prompt" style="background:#F1F5F9; border:1px solid #CBD5E1;">
-                <span class="prompt-icon">💡</span>
-                <span class="prompt-text" style="color:#1E293B;">
-                  <strong>El objetivo de la sesión:</strong> Identificar el origen exacto de esta diferencia de $482,190 MXN ($487,000 de parche manual + $4,810 de fallas de operación) y resolverla en vivo durante la clase.
+              <div class="interactive-chat-prompt">
+                <span class="prompt-icon">💬</span>
+                <span class="prompt-text">
+                  <strong>Pregunta al chat:</strong> ¿A quién le ha tocado explicarle este descuadre al Director General o al Auditor? Pongan <strong>🔥</strong> en el chat.
                 </span>
               </div>
             </div>
             '''
         },
 
-        # Slide 3: Las 3 Causas Recurrentes del Divorcio
+        # Slide 3: Las 3 Causas Raíz del Divorcio
         {
             "id": 3,
             "title": "Las 3 Causas Recurrentes del Divorcio",
             "bg": "white",
-            "time": "00:04 - 00:07",
+            "time": "00:06 - 00:10",
             "block": "Bloque 1",
-            "notes": "Explicar por qué ocurre este divorcio contable a partir de los 3 frentes reales: 1. Configuración errática (Fase 0); 2. Parches operativos manuales; 3. Ceguera de auditoría por falta de cadencia.",
+            "notes": "Introducir las 3 causas raíz identificadas por Vauxoo: 1. Configuración errática (cambios en caliente); 2. Parches operativos (pólizas manuales del contador); 3. Ceguera de auditoría (esperar al cierre anual).",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 1 · 00:00 - 00:09</span>
-                  <h2 class="slide-title">Las 3 Causas Recurrentes del Divorcio Almacén-Contabilidad</h2>
+                  <span class="pill-badge">MARCO CONCEPTUAL</span>
+                  <h2 class="slide-title">Las 3 Causas Raíz del Divorcio Contable-Logístico</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead">La experiencia en implementaciones demuestra que el descuadre nace de 3 fuentes principales:</p>
+              <p class="slide-lead">Lo que detectamos en más de una década auditando bases de datos de Odoo en México:</p>
               
-              <div class="agenda-grid" style="grid-template-columns: repeat(3, 1fr);">
-                <div class="agenda-card" style="border-top: 4px solid #1E293B;">
-                  <div class="agenda-time">FASE 0 · CONFIGURACIÓN</div>
-                  <div class="agenda-num">01</div>
-                  <div class="agenda-title">CONFIGURACIÓN ERRÁTICA</div>
-                  <p class="agenda-desc"><strong>"Dos malas no hacen una buena."</strong> Cambiar métodos en caliente, compras en divisa sin tasa oficial o saldos iniciales huérfanos.</p>
+              <div class="root-causes-grid">
+                <div class="root-cause-card">
+                  <div class="cause-badge">CAUSA 1 · CONFIGURACIÓN</div>
+                  <div class="cause-num">01</div>
+                  <h3>"Dos malas no hacen una buena"</h3>
+                  <p>Cambiar en caliente una categoría de Periódico a Perpetuo o de Estándar a AVCO. Odoo 19 <strong>NO genera pólizas retroactivas</strong> y deja el stock inicial flotando sin cuenta contable.</p>
                 </div>
-                <div class="agenda-card" style="border-top: 4px solid var(--rojo-vauxoo);">
-                  <div class="agenda-time">OPERACIÓN</div>
-                  <div class="agenda-num">02</div>
-                  <div class="agenda-title">PARCHES OPERATIVOS</div>
-                  <p class="agenda-desc"><strong>"La aspirina manual."</strong> Pólizas manuales para 'cuadrar', alterar costos a mano en la ficha o forzar despachos en stock negativo.</p>
+
+                <div class="root-cause-card">
+                  <div class="cause-badge">CAUSA 2 · OPERACIÓN</div>
+                  <div class="cause-num">02</div>
+                  <h3>El Parche Manual (La Aspirina)</h3>
+                  <p>Ante la presión del cierre, el contador mete un asiento manual directo en la cuenta 1150. Resuelve el papel hoy, pero fractura el sistema para siempre porque no hay movimiento en el almacén.</p>
                 </div>
-                <div class="agenda-card" style="border-top: 4px solid #475569;">
-                  <div class="agenda-time">CONTROL</div>
-                  <div class="agenda-num">03</div>
-                  <div class="agenda-title">CEGUERA DE AUDITORÍA</div>
-                  <p class="agenda-desc"><strong>"El costo de la infrecuencia."</strong> Esperar al cierre anual cuando hay miles de movimientos acumulados hace que conciliar sea una pesadilla de semanas.</p>
+
+                <div class="root-cause-card">
+                  <div class="cause-badge">CAUSA 3 · AUDITORÍA</div>
+                  <div class="cause-num">03</div>
+                  <h3>Ceguera por Falta de Cadencia</h3>
+                  <p>Empresas que auditan existencias vs contabilidad una sola vez al año. Cuando intentan cuadrar en diciembre hay 10,000 movimientos intermedios y rastrear el origen es casi imposible.</p>
                 </div>
               </div>
             </div>
             '''
         },
 
-        # Slide 4: Matriz de Cadencia de Auditoría & Encuesta al Chat
+        # Slide 4: Cadencia de Auditoría
         {
             "id": 4,
             "title": "Matriz de Cadencia de Auditoría",
-            "bg": "gradient",
-            "time": "00:06 - 00:09",
+            "bg": "white",
+            "time": "00:10 - 00:12",
             "block": "Bloque 1",
-            "notes": "Lanzar la encuesta al chat: ¿Cada cuánto auditan el inventario contable contra el almacén? Mostrar la Matriz de Cadencia Vauxoo (Diario, Semanal, Mensual, Anual).",
+            "notes": "La importancia de la frecuencia de auditoría. Diario = 2 min (fácil). Semanal = 15 min (recomendado). Mensual = 1-2 hrs (cierre). Anual = semanas de sufrimiento (evitar).",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">ENCUESTA AL CHAT · CADENCIA DE CONTROL</span>
-                  <h2 class="slide-title" style="color: #fff;">¿Cada Cuánto Auditan Contabilidad vs Almacén?</h2>
+                  <span class="pill-badge">DISCIPLINA OPERATIVA</span>
+                  <h2 class="slide-title">La Regla de Oro de la Cadencia (Vauxoo Standard)</h2>
                 </div>
-                <div class="slide-header-logo">{logo_white}</div>
+                <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead" style="color: rgba(255,255,255,0.9);">
-                La frecuencia con la que se concilia el inventario determina el tiempo, esfuerzo y costo de resolver las diferencias:
-              </p>
+              <p class="slide-lead">¿Con qué frecuencia deberías comparar la Balanza de Comprobación con el Reporte de Existencias?</p>
               
-              <div class="cadencia-table-container">
-                <table class="cadencia-table" style="background:rgba(255,255,255,0.06); color:#fff;">
+              <div class="table-wrap">
+                <table class="cadencia-table">
                   <thead>
-                    <tr style="background:#1E293B;">
+                    <tr>
                       <th>Frecuencia</th>
                       <th>Calificación</th>
                       <th>Esfuerzo de Revisión</th>
-                      <th>Impacto Operativo en el Negocio</th>
+                      <th>Impacto en el Negocio</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -188,13 +189,13 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                       <td><strong>Diaria</strong></td>
                       <td>⭐⭐⭐⭐⭐ <span class="pill-badge" style="background:#16A34A;">EXCELENTE</span></td>
                       <td>2 a 5 minutos</td>
-                      <td>Detección inmediata al vuelo; 1-2 movimientos; cero sorpresas a fin de mes.</td>
+                      <td>Detección inmediata de cualquier desvío (1-2 movimientos); cero sorpresas a fin de mes.</td>
                     </tr>
                     <tr>
                       <td><strong>Semanal</strong></td>
                       <td>⭐⭐⭐⭐ <span class="pill-badge" style="background:#0D9488;">RECOMENDADO</span></td>
                       <td>15 minutos</td>
-                      <td>Fricción mínima; máximo 10 movimientos sospechosos por revisar.</td>
+                      <td>Corrección oportuna de recepciones o tipos de cambio erróneos sin fricción.</td>
                     </tr>
                     <tr>
                       <td><strong>Mensual</strong></td>
@@ -220,14 +221,14 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "id": 5,
             "title": "¿Por qué Odoo 19.0 para esta Masterclass?",
             "bg": "white",
-            "time": "00:09 - 00:13",
+            "time": "00:12 - 00:16",
             "block": "Bloque 2",
             "notes": "Explicar las 4 grandes razones arquitectónicas de Odoo 19: sin SVL (en stock.move), sin cuentas interim en flujos directos, terminología Formal Periódico/Perpetuo, auditoría visual inmediata en Informes > Inventario.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 2 · 00:09 - 00:17</span>
+                  <span class="pill-badge">BLOQUE 2 · 00:12 - 00:30</span>
                   <h2 class="slide-title">Odoo 19.0: La Gran Simplificación de la Auditoría</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
@@ -265,7 +266,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "id": 6,
             "title": "¿Y si mi empresa está en Odoo 16, 17 o 18?",
             "bg": "white",
-            "time": "00:13 - 00:17",
+            "time": "00:16 - 00:20",
             "block": "Bloque 2",
             "notes": "Mensaje de tranquilidad: la lógica de Costo Promedio (AVCO), la valoración perpetua y el cuadre balanza vs existencias son idénticos. La diferencia es que en v19 es más visual y directo.",
             "html": f'''
@@ -308,12 +309,63 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 7: Bloque 3 - Operación Normal Paso 1 (Compra Limpia MXN)
+        # Slide 7: NUEVA SLIDE - Tabla Maestra de Movimientos Logísticos en Odoo 19
         {
             "id": 7,
+            "title": "Tabla Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?",
+            "bg": "white",
+            "time": "00:20 - 00:30",
+            "block": "Bloque 2",
+            "notes": "Desmitificar en vivo cuáles movimientos disparan pólizas a la cuenta 1150 y cuáles no. Explicar landed costs, facturas, ajustes con cuenta, MOs vs SO, PO y traslados internos.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:#16A34A;">BLOQUE 2 · REGLAS DEL JUEGO</span>
+                  <h2 class="slide-title">Movimientos Logísticos: ¿Cuáles SÍ y Cuáles NO Generan Contabilidad?</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">La regla de oro para no buscar pólizas donde no existen en Odoo 19.0:</p>
+              
+              <div class="two-col-grid" style="gap:16px;">
+                <div class="disaster-col-card" style="border-left: 4px solid #16A34A;">
+                  <div class="card-pill" style="color:#16A34A; background:#DCFCE7;">SÍ GENERAN APUNTE CONTABLE A LA 1150</div>
+                  <h3>Eventos con Impacto Financiero</h3>
+                  <div class="detail-box" style="font-size:0.86rem;">
+                    <ul class="styled-list">
+                      <li><strong>Costes en Destino (Landed Costs):</strong> Capitalizan fletes y aranceles aumentando el valor del activo.</li>
+                      <li><strong>Facturas de Proveedor / Cliente:</strong> Validan coste de adquisición o reconocen Costo de Ventas (501).</li>
+                      <li><strong>Ajustes de Inventario:</strong> Solo si la ubicación virtual (pérdida/merma) tiene cuenta contrapartida.</li>
+                      <li><strong>Órdenes de Producción (MO):</strong> Acreditan materias primas consumidas y debitan producto terminado.</li>
+                      <li><strong>Revalorizaciones de Inventario:</strong> Si se corren vía asistente formal contable.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="disaster-col-card" style="border-left: 4px solid #64748B;">
+                  <div class="card-pill" style="color:#475569; background:#F1F5F9;">NO GENERAN APUNTE CONTABLE (NEUTROS)</div>
+                  <h3>Eventos Puramente Operativos</h3>
+                  <div class="detail-box" style="font-size:0.86rem;">
+                    <ul class="styled-list">
+                      <li><strong>Pedidos de Venta (SO):</strong> Compromiso comercial; no altera existencias ni saldos contables.</li>
+                      <li><strong>Pedidos de Compra (PO):</strong> Contrato con proveedor; no representa devengo ni entrega física.</li>
+                      <li><strong>Traslados Internos entre Ubicaciones:</strong> Mover de un estante a otro en el mismo almacén no cambia el activo.</li>
+                      <li><strong>Recepciones Directas sin Interim:</strong> En v19 sin cuentas puente, la valoración se consolida con el albarán valorado o factura.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+
+        # Slide 8: Bloque 3 - Operación Normal Paso 1 (Compra Limpia MXN)
+        {
+            "id": 8,
             "title": "Operación Normal: Compra Progresiva en MXN",
             "bg": "white",
-            "time": "00:17 - 00:25",
+            "time": "00:30 - 00:38",
             "block": "Bloque 3",
             "notes": "Mostrar la compra progresiva y el cálculo ponderado en Odoo 19 con [TECL-INAL-USB]. 50 u @ $150 + 50 u @ $170 = 100 u @ $160 MXN. Cuenta 1150 suma $16,000 MXN.",
             "html": f'''
@@ -348,67 +400,66 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                   </div>
                 </div>
 
-                <div class="flow-step-card" style="border: 2px solid var(--rojo-vauxoo);">
-                  <div class="step-badge" style="background:var(--rojo-vauxoo); color:#fff;">PONDERACIÓN ODOO 19</div>
-                  <h4>Nuevo Costo Promedio</h4>
-                  <div class="asiento-box">
-                    (50&times;150 + 50&times;170) / 100 =<br>
-                    <strong style="color:var(--rojo-vauxoo); font-size:1.15rem;">$160.00 MXN / pieza</strong>
+                <div class="flow-step-card" style="border: 2px solid var(--azul-marino);">
+                  <div class="step-badge" style="background:var(--azul-marino);">RESULTADO EN ODOO 19</div>
+                  <h4>Ponderación Automática</h4>
+                  <p>Total en Almacén: 100 piezas</p>
+                  <div class="asiento-box" style="background:#EEF2F6; color:var(--azul-marino);">
+                    (50&times;$150 + 50&times;$170) &divide; 100 =<br>
+                    <strong>Costo Promedio: $160.00 MXN</strong><br>
+                    Saldo en Cuenta 1150: <strong>$16,000.00 MXN</strong>
                   </div>
-                  <div class="step-avco">Total Activo en Almacén: 100 u = <strong>$16,000.00 MXN</strong></div>
                 </div>
               </div>
 
-              <div class="interactive-chat-prompt" style="background:#F8FAFC; border:1px solid #E2E8F0; margin-top:24px;">
-                <span class="prompt-icon">📊</span>
-                <span class="prompt-text">
-                  <strong>Asiento contable limpio:</strong> Cargo directo a la cuenta <code>115.01.01 Inventario</code> por <strong>$16,000.00 MXN</strong> sin cuentas puente intermedias.
-                </span>
+              <div class="formula-banner">
+                FÓRMULA MATEMÁTICA OFICIAL: <code>Costo Promedio = [ (Stock Actual &times; Costo Actual) + (Qty Recibida &times; Costo Entrada) ] &divide; [ Stock Total ]</code>
               </div>
             </div>
             '''
         },
 
-        # Slide 8: Bloque 3 - Operación Normal Paso 2 (Venta y Costo de Ventas)
+        # Slide 9: Bloque 3 - Operación Normal Paso 2 (Venta y Factura MXN)
         {
-            "id": 8,
+            "id": 9,
             "title": "Operación Normal: Venta y Costo de Ventas",
             "bg": "white",
-            "time": "00:25 - 00:30",
+            "time": "00:38 - 00:45",
             "block": "Bloque 3",
-            "notes": "Mostrar el pedido de venta S00001, entrega física de 30 piezas y factura con Costo de Ventas ($4,800 MXN). Cuadre perfecto: 70 u en existencias = $11,200 MXN en la 1150.",
+            "notes": "Mostrar la venta de 30 unidades de [TECL-INAL-USB] @ $160 MXN. Costo de ventas = $4,800. Saldo remanente en almacén = 70 u @ $160 = $11,200 MXN = Balanza contable.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 3 · CASO 1 (PARTE 2)</span>
-                  <h2 class="slide-title">Venta, Entrega Física y Registro del Costo de Ventas</h2>
+                  <span class="pill-badge">BLOQUE 3 · CASO 1 (CONT.)</span>
+                  <h2 class="slide-title">Venta, Entrega y Reconocimiento del Costo de Ventas</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead">Completando el ciclo comercial en moneda nacional: despacho físico y asiento automático de costo:</p>
+              <p class="slide-lead">Entrega de 30 unidades al cliente y emisión de la factura de venta en Odoo 19:</p>
               
               <div class="two-col-grid">
-                <div class="disaster-col-card">
-                  <div class="card-pill">OPERACIÓN COMERCIAL (S00001)</div>
-                  <h3>Venta y Entrega de 30 Unidades</h3>
+                <div class="disaster-col-card" style="border-left: 4px solid var(--azul-marino);">
+                  <div class="card-pill" style="color:var(--azul-marino);">EL ASIENTO CONTABLE AUTOMÁTICO</div>
+                  <h3>Póliza de Costo de Ventas</h3>
                   <div class="detail-box">
-                    <p>Almacén valida la salida. Odoo descarga 30 piezas al costo promedio vigente ($160.00 MXN).</p>
-                    <div class="asiento-box" style="margin-top:12px;">
-                      <div class="asiento-row"><span class="cargo">CARGO</span> 501.01.01 Costo de Ventas: <strong>$4,800.00 MXN</strong></div>
-                      <div class="asiento-row"><span class="abono">ABONO</span> 115.01.01 Inventario: <strong>$4,800.00 MXN</strong></div>
+                    <p>Odoo 19 descarga automáticamente el valor al costo promedio ponderado ($160.00 MXN):</p>
+                    <div class="asiento-box" style="margin-top:10px;">
+                      <div>CARGO: <strong>501.01.01 Costo de Ventas</strong> → <strong>$4,800.00 MXN</strong> (30 u &times; $160)</div>
+                      <div style="margin-top:4px;">ABONO: <strong>115.01.01 Inventario Almacén</strong> → <strong>$4,800.00 MXN</strong></div>
                     </div>
                   </div>
                 </div>
 
-                <div class="disaster-col-card" style="border: 2px solid #16A34A;">
-                  <div class="card-pill" style="color:#16A34A;">SINCRONIZACIÓN PERFECTA</div>
-                  <h3>Cuadre de Cierre Inmediato</h3>
+                <div class="disaster-col-card" style="border-left: 4px solid #16A34A;">
+                  <div class="card-pill" style="color:#16A34A;">ESTADO POST-VENTA (CUADRE PERFECTO)</div>
+                  <h3>Sincronía Total al Centavo</h3>
                   <div class="detail-box">
                     <ul class="styled-list">
-                      <li><strong>En Almacén Físico:</strong> Quedan 70 piezas @ $160 = <strong>$11,200.00 MXN</strong>.</li>
-                      <li><strong>En el Libro Mayor (115.01.01):</strong> Saldo deudor de <strong>$11,200.00 MXN</strong>.</li>
-                      <li><strong>Diferencia:</strong> $0.00 MXN. Sincronía contable y logística total.</li>
+                      <li><strong>Existencias Físicas:</strong> 70 unidades en almacén.</li>
+                      <li><strong>Valor en Almacén:</strong> 70 u &times; $160.00 = <strong>$11,200.00 MXN</strong>.</li>
+                      <li><strong>Saldo en Balanza (1150):</strong> $16,000 - $4,800 = <strong>$11,200.00 MXN</strong>.</li>
+                      <li><strong>Diferencia Contable vs Logística:</strong> <span style="color:#16A34A; font-weight:700;">$0.00 MXN</span>.</li>
                     </ul>
                   </div>
                 </div>
@@ -417,117 +468,103 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 9: Bloque 3 - Operación Normal en USD (Monitor 4K)
-        {
-            "id": 9,
-            "title": "Operación Normal: Compra de Importación en USD",
-            "bg": "white",
-            "time": "00:30 - 00:37",
-            "block": "Bloque 3",
-            "notes": "Mostrar la compra en USD con [MON-27-4K]. 20 u @ 100 USD. Odoo fija el costo contable con el TC del día de recepción física ($18.50 = $1,850 MXN). Total $37,000 MXN.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">BLOQUE 3 · CASO 2</span>
-                  <h2 class="slide-title">Compra de Importación en USD: La Fecha de Recepción Manda</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">Producto demo: <code>[MON-27-4K] Monitor Profesional 27" 4K</code>. Impacto del Tipo de Cambio:</p>
-              
-              <div class="two-col-grid">
-                <div class="disaster-col-card">
-                  <div class="card-pill">ORDEN DE COMPRA & FACTURA</div>
-                  <h3>Orden en $100.00 USD</h3>
-                  <div class="detail-box">
-                    <p>La orden se pacta con el proveedor internacional en $100 USD por monitor. El mito común cree que la fecha de la OC o de la factura fija el costo.</p>
-                    <div class="asiento-box" style="margin-top:10px;">
-                      20 monitores &times; $100 USD = <strong>$2,000.00 USD</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="disaster-col-card" style="border: 2px solid #345D90;">
-                  <div class="card-pill" style="color:#345D90;">RECEPCIÓN FÍSICA EN ALMACÉN</div>
-                  <h3>El Tipo de Cambio del Día Fija el Costo</h3>
-                  <div class="detail-box">
-                    <p>Al recibir en bodega, Odoo toma automáticamente el Tipo de Cambio oficial del DOF ($18.50 MXN/USD):</p>
-                    <div class="asiento-box" style="margin-top:10px;">
-                      $100.00 USD &times; $18.50 = <strong>$1,850.00 MXN / pieza</strong><br>
-                      Total Activo en Almacén: <strong>$37,000.00 MXN</strong>
-                    </div>
-                    <div class="vauxoo-rule-badge" style="margin-top:10px;">REGLA VAUXOO: El costo contable lo define la recepción física, no la OC ni la factura.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-
-        # Slide 10: Bloque 4 - La Clínica de Desastres (5 Casos)
+        # Slide 10: Bloque 3 - Operación Normal Paso 3 (Compras en USD)
         {
             "id": 10,
-            "title": "La Clínica de Desastres: 5 Errores Reales",
+            "title": "Operación Normal: Compra de Importación en USD",
             "bg": "white",
-            "time": "00:37 - 00:40",
-            "block": "Bloque 4",
-            "notes": "Introducir la clínica de 5 desastres reales probados en laboratorio: 1. Ajuste sin cuenta; 2. Producto archivado; 3. Error de divisa (MXN en USD); 4. Costo manual en ficha; 5. Stock negativo.",
+            "time": "00:45 - 00:55",
+            "block": "Bloque 3",
+            "notes": "Mostrar la compra en USD con [MON-27-4K]. 20 u @ $100 USD (TC oficial $18.50) = $37,000 MXN. Explicar por qué el TC de la recepción física manda sobre el costo contable del inventario.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge" style="background:#B91C1C;">BLOQUE 4 · 00:37 - 00:53</span>
-                  <h2 class="slide-title">La Clínica de Desastres: 5 Errores que Cuestan Millones</h2>
+                  <span class="pill-badge" style="background:#0D9488;">BLOQUE 3 · CASO 2 (USD)</span>
+                  <h2 class="slide-title">Compras en Moneda Extranjera (USD) y Tipo de Cambio</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
-              <p class="slide-lead">Los 5 desvíos operativos y de configuración más comunes en empresas mexicanas:</p>
+              <p class="slide-lead">Producto demo: <code>[MON-27-4K] Monitor Profesional 27" 4K</code> (20 piezas @ $100.00 USD):</p>
               
-              <div class="agenda-grid" style="grid-template-columns: repeat(3, 1fr); gap: 16px;">
-                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="agenda-time">ERROR #1 · CONFIGURACIÓN</div>
-                  <div class="agenda-title">Ajuste sin Póliza Contable</div>
-                  <p class="agenda-desc"><strong>Mouse Óptico:</strong> Conteo inicial en categoría periódica; las piezas entran a bodega pero la cuenta 1150 queda vacía ($8,500).</p>
+              <div class="flow-steps-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="flow-step-card">
+                  <div class="step-badge">1. ORDEN DE COMPRA (PO)</div>
+                  <h4>Pacto Comercial</h4>
+                  <p>20 unidades @ $100.00 USD</p>
+                  <div class="asiento-box">
+                    Total: <strong>$2,000.00 USD</strong><br>
+                    <em>No fija el costo contable de bodega</em>
+                  </div>
                 </div>
-                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="agenda-time">ERROR #2 · CATÁLOGO</div>
-                  <div class="agenda-title">Archivado con Existencias</div>
-                  <p class="agenda-desc"><strong>Router Legacy:</strong> Archivar para "limpiar catálogo" mientras tiene saldo; borrado en almacén pero vivo en Balanza ($2,400).</p>
+
+                <div class="flow-step-card" style="border: 2px solid var(--rojo-vauxoo);">
+                  <div class="step-badge" style="background:var(--rojo-vauxoo);">2. RECEPCIÓN FÍSICA (WH/IN)</div>
+                  <h4>El Momento Clave del Costo</h4>
+                  <p>Tipo de Cambio Oficial: <strong>$18.50 MXN</strong></p>
+                  <div class="asiento-box" style="background:#FFF1F2; color:#991B1B;">
+                    $100 USD &times; $18.50 =<br>
+                    <strong>Costo Almacén: $1,850.00 MXN/u</strong><br>
+                    Entrada a 1150: <strong>$37,000.00 MXN</strong>
+                  </div>
                 </div>
-                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="agenda-time">ERROR #3 · OPERACIÓN</div>
-                  <div class="agenda-title">Error de Moneda en Compra</div>
-                  <p class="agenda-desc"><strong>Cámara Web:</strong> Costo de $1,500 MXN capturado como $1,500 USD en la OC; al recibir a TC 18.50 se infla a $27,750 MXN ($277.5k).</p>
+
+                <div class="flow-step-card">
+                  <div class="step-badge">3. FACTURA DEL PROVEEDOR</div>
+                  <h4>Cierre del Ciclo</h4>
+                  <p>Factura recibida con TC de $18.50 MXN</p>
+                  <div class="asiento-box">
+                    Pasivo Proveedor: <strong>$37,000.00 MXN</strong><br>
+                    <strong>Cero diferencial cambiario distorsivo</strong>
+                  </div>
                 </div>
-                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="agenda-time">ERROR #4 · PARCHE</div>
-                  <div class="agenda-title">Costo Manual en Ficha</div>
-                  <p class="agenda-desc"><strong>Memoria RAM:</strong> Editar a mano el costo en el formulario ($100 a $121); el almacén sube a $1,210 pero contabilidad queda en $1,000 ($210).</p>
-                </div>
-                <div class="agenda-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="agenda-time">ERROR #5 · DESPACHO</div>
-                  <div class="agenda-title">Stock Negativo Forzado</div>
-                  <p class="agenda-desc"><strong>Disco SSD:</strong> Salida urgente en 0 a costo viejo ($200) y compra posterior a $350; costo deducible perdido y balance inflado ($1,500).</p>
-                </div>
-                <div class="agenda-card" style="border-left: 4px solid #1E293B; background:#F8FAFC;">
-                  <div class="agenda-time">EL PARCHE DE CIERRE</div>
-                  <div class="agenda-title">La Póliza Manual del Hook</div>
-                  <p class="agenda-desc"><strong>El Parche:</strong> El contador inyecta una póliza de $487,000 MXN directa a la 1150 sin SKU para forzar el balance general.</p>
-                </div>
+              </div>
+
+              <div class="interactive-chat-prompt" style="background:#F0FDF4; border:1px solid #BBF7D0;">
+                <span class="prompt-icon">💡</span>
+                <span class="prompt-text" style="color:#166534;">
+                  <strong>Regla de Oro Vauxoo:</strong> El costo unitario contable del inventario lo define estrictamente el <strong>Tipo de Cambio a la fecha de la recepción física en almacén</strong>.
+                </span>
               </div>
             </div>
             '''
         },
 
-        # Slide 11: Desastres 1 y 2 (Mouse y Router)
+        # Slide 11: Bloque 4 - Portada Clínica de Desastres
         {
             "id": 11,
+            "title": "La Clínica de Desastres: 5 Errores Reales",
+            "bg": "gradient",
+            "time": "00:55 - 00:58",
+            "block": "Bloque 4",
+            "notes": "Entrada al Bloque 4: La Clínica de Desastres. 5 errores operativos y de configuración comunes que cuestan millones.",
+            "html": f'''
+            <div class="slide-content cover-slide">
+              <div class="cover-badge-row">
+                <span class="pill-badge" style="background:#B91C1C;">BLOQUE 4 · 00:55 - 01:25</span>
+                <span class="pill-badge-outline">PARTE 2: CASOS FORENSES</span>
+              </div>
+              <h1 class="cover-title" style="color: #fff; margin-top:20px;">
+                La Clínica de Desastres:
+                <span class="doodle-wrap" style="color: #F87171;">
+                  5 Errores que Cuestan Dinero
+                </span>
+              </h1>
+              <p style="font-size: 1.15rem; color: rgba(255,255,255,0.85); max-width: 700px; margin: 20px auto 0;">
+                Casos reales documentados en producción: ajustes huérfanos, productos archivados con saldo, compras en moneda errónea, edición directa de costos y stock negativo.
+              </p>
+            </div>
+            '''
+        },
+
+        # Slide 12: Desastres 1 y 2 (Mouse y Router)
+        {
+            "id": 12,
             "title": "Desastres 1 y 2: Ajuste Huérfano y Producto Archivado",
             "bg": "white",
-            "time": "00:40 - 00:44",
+            "time": "00:58 - 01:07",
             "block": "Bloque 4",
-            "notes": "Detalle del Desastre 1 (Mouse Óptico) y Desastre 2 (Router Wi-Fi 4 Legacy). Explicar por qué ocurren y cómo se evidencian en el sistema.",
+            "notes": "Detalle del Desastre 1 (Mouse Óptico sin cuenta contable en ajuste) y Desastre 2 (Router Legacy archivado con existencias vivas).",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -539,15 +576,15 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
               </div>
               
               <div class="two-col-grid">
-                <div class="disaster-col-card">
-                  <div class="card-pill">CASO 1 · MOUSE ÓPTICO (MOUS-OPT-USB)</div>
-                  <h3>Ajuste Físico sin Respaldo Contable</h3>
+                <div class="disaster-col-card" style="border-left: 4px solid #B91C1C;">
+                  <div class="card-pill" style="color:#B91C1C;">CASO 1 · MOUSE ÓPTICO (MOUS-OPT-USB)</div>
+                  <h3>Ajuste de Inventario sin Cuenta Contable</h3>
                   <div class="detail-box">
-                    <p>Se realiza un ajuste inicial de 100 piezas físicas cuando la categoría operaba en valoración periódica o sin cuenta de ajuste asignada.</p>
+                    <p>Se realiza un ajuste físico inicial de 100 piezas a $85.00 MXN en una categoría sin cuenta en la ubicación virtual de merma:</p>
                     <ul class="styled-list">
-                      <li><strong>En Almacén:</strong> 100 mouses @ $85 = <strong>$8,500.00 MXN</strong>.</li>
-                      <li><strong>En Contabilidad:</strong> <strong>$0.00 MXN</strong> (cero pólizas generadas).</li>
-                      <li><strong>Diagnóstico:</strong> Valor no reconocido que genera una brecha silenciosa.</li>
+                      <li><strong>En Almacén:</strong> 100 piezas valoradas en <strong>$8,500.00 MXN</strong>.</li>
+                      <li><strong>En Contabilidad:</strong> <strong>$0.00 MXN</strong> (nunca nació la póliza).</li>
+                      <li><strong>Diagnóstico:</strong> Valor no reconocido que genera una brecha silenciosa de -$8,500 MXN.</li>
                     </ul>
                   </div>
                 </div>
@@ -560,7 +597,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                     <ul class="styled-list">
                       <li><strong>En Reporte de Almacén:</strong> <strong>$0.00 MXN</strong> (el filtro oculta inactivos).</li>
                       <li><strong>En Balanza de Comprobación:</strong> <strong>$2,400.00 MXN</strong> vivos.</li>
-                      <li><strong>Diagnóstico:</strong> Saldo contable fantasma imposible de cuadrar a simple vista.</li>
+                      <li><strong>Diagnóstico:</strong> Saldo contable fantasma imposible de cuadrar a simple vista (+2,400 MXN).</li>
                     </ul>
                   </div>
                 </div>
@@ -569,12 +606,12 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 12: Desastres 3 y 4 (Cámara Web y Memoria RAM)
+        # Slide 13: Desastres 3 y 4 (Cámara Web y Memoria RAM)
         {
-            "id": 12,
+            "id": 13,
             "title": "Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha",
             "bg": "white",
-            "time": "00:44 - 00:48",
+            "time": "01:07 - 01:16",
             "block": "Bloque 4",
             "notes": "Detalle del Desastre 3 (Cámara Web con error de moneda USD) y Desastre 4 (Memoria RAM con costo cambiado a mano).",
             "html": f'''
@@ -596,68 +633,20 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                     <div class="asiento-box" style="margin-top:10px;">
                       10 unidades &times; 1,500 USD @ TC $18.50 =<br>
                       <strong>Costo unitario Odoo: $27,750.00 MXN</strong><br>
-                      Total Activo Inflado: <strong>$277,500.00 MXN</strong> ($262.5k de sobrecosto).
+                      Total Activo Inflado: <strong>$277,500.00 MXN</strong> ($262.5k de sobrecosto por un clic).
                     </div>
                   </div>
                 </div>
 
-                <div class="disaster-col-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="card-pill" style="color:#B91C1C;">CASO 4 · MEMORIA RAM (MEM-RAM-16GB)</div>
-                  <h3>Cambio Manual de Coste en Formulario</h3>
-                  <div class="detail-box">
-                    <p>Compra real de 10 u @ $100 MXN ($1,000 MXN en la 1150). El usuario edita el campo <em>Coste</em> en la ficha a mano de $100 a $121 MXN.</p>
-                    <div class="asiento-box" style="margin-top:10px;">
-                      Almacén recalcula: 10 &times; $121 = <strong>$1,210.00 MXN</strong><br>
-                      Contabilidad 1150: Se queda en <strong>$1,000.00 MXN</strong><br>
-                      <strong style="color:#B91C1C;">Descuadre silencioso: -$210.00 MXN sin póliza.</strong>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-
-        # Slide 13: Desastre 5 (Disco SSD - Stock Negativo)
-        {
-            "id": 13,
-            "title": "Desastre 5: Stock Negativo con Compra Posterior",
-            "bg": "white",
-            "time": "00:48 - 00:53",
-            "block": "Bloque 4",
-            "notes": "Detalle del Desastre 5 (Disco SSD 1TB). Explicar por qué vender en negativo fractura el AVCO y cómo deja $1,500 flotando en el balance.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge" style="background:#B91C1C;">CLÍNICA · CASO 5</span>
-                  <h2 class="slide-title">Stock Negativo: La Fractura del Costo de Ventas</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">Producto demo: <code>[DISC-SSD-1TB] Disco Sólido SSD NVMe 1TB</code>. Despachar antes de recibir compra:</p>
-              
-              <div class="two-col-grid">
                 <div class="disaster-col-card">
-                  <div class="card-pill">DESPACHO URGENTE EN EXISTENCIA 0</div>
-                  <h3>Salida a Costo Desfasado</h3>
+                  <div class="card-pill">CASO 4 · MEMORIA RAM (MEM-RAM-16GB)</div>
+                  <h3>La Edición Manual en Ficha</h3>
                   <div class="detail-box">
-                    <p>Se entregan 10 discos cuando había 0 existencias. Odoo descarga a costo provisional ($200 MXN = $2,000 MXN costo ventas).</p>
-                    <div class="asiento-box" style="margin-top:10px;">
-                      Días después: Se valida la compra de 20 discos a <strong>$350.00 MXN</strong> ($7,000 MXN en factura).
-                    </div>
-                  </div>
-                </div>
-
-                <div class="disaster-col-card" style="border-left: 4px solid var(--rojo-vauxoo);">
-                  <div class="card-pill" style="color:var(--rojo-vauxoo);">EL LIMBO CONTABLE</div>
-                  <h3>Autopsia de la Brecha</h3>
-                  <div class="detail-box">
-                    <ul class="styled-list">
-                      <li>Los 10 discos consumidos costaron en realidad $3,500 pero en libros solo se dedujeron $2,000.</li>
-                      <li><strong>En Almacén Físico:</strong> Quedan 10 discos @ $350 = <strong>$3,500.00 MXN</strong>.</li>
-                      <li><strong>En Balanza (1150):</strong> Saldo deudor de <strong>$5,000.00 MXN</strong> ($7,000 compra - $2,000 costo).</li>
-                      <li><strong style="color:var(--rojo-vauxoo);">Brecha: +$1,500.00 MXN en el limbo</strong> (balance inflado y deducción perdida).</li>
+                    <p>Compra de 10 u @ $100.00 MXN ($1,000 MXN). El usuario edita directamente el campo <em>Coste</em> en la ficha a <strong>$121.00 MXN</strong>:</p>
+                    <ul class="styled-list" style="margin-top:10px;">
+                      <li><strong>Almacén:</strong> Sube a <strong>$1,210.00 MXN</strong>.</li>
+                      <li><strong>Contabilidad:</strong> Se queda en <strong>$1,000.00 MXN</strong> (sin póliza).</li>
+                      <li><strong>Descuadre silencioso:</strong> -$210.00 MXN en libros.</li>
                     </ul>
                   </div>
                 </div>
@@ -666,19 +655,112 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 14: Bloque 5 - Metodología de Auditoría SKU por SKU
+        # Slide 14: Desastre 5 (Disco SSD - Stock Negativo)
         {
             "id": 14,
-            "title": "Metodología de Auditoría SKU por SKU",
+            "title": "Desastre 5: Stock Negativo con Compra Posterior",
             "bg": "white",
-            "time": "00:53 - 01:00",
-            "block": "Bloque 5",
-            "notes": "Intro de Julio Serna en Bloque 5. Regla de oro: NUNCA auditar solo totales consolidados. Los errores se compensan (+/-). La conciliación SOLO es real si cada SKU tiene diferencia cero. Presentar la fórmula y la Acción de Servidor.",
+            "time": "01:16 - 01:25",
+            "block": "Bloque 4",
+            "notes": "Detalle del Desastre 5 (Disco SSD NVMe con stock negativo): Salida urgente de 5 unidades sin stock previo. Cuando entra la compra después a $350, se pierde la deducción contable real. Descuadre de +$1,500 MXN.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 5 · 00:53 - 01:07</span>
+                  <span class="pill-badge" style="background:#B91C1C;">CLÍNICA · CASO 5</span>
+                  <h2 class="slide-title">Venta Forzada Dejando Stock Negativo</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">Producto demo: <code>[DISC-SSD-1TB] Disco Sólido SSD NVMe 1TB</code>. La fractura matemática de entregar antes de recibir:</p>
+              
+              <div class="two-col-grid">
+                <div class="disaster-col-card" style="border-left: 4px solid #B91C1C;">
+                  <div class="card-pill" style="color:#B91C1C;">PASO 1 · SALIDA FORZADA (-5 UNIDADES)</div>
+                  <h3>La Entrega a Ciegas</h3>
+                  <div class="detail-box">
+                    <p>Urgencia de entrega: se valida la salida de 5 piezas teniendo existencia en 0. Odoo descarga a costo provisional ($0 o desfasado):</p>
+                    <div class="asiento-box" style="margin-top:10px;">
+                      Stock Físico: <strong>-5 piezas</strong><br>
+                      Deducción en Costo de Ventas: <strong>Subvaluada o nula</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disaster-col-card" style="border-left: 4px solid var(--rojo-vauxoo);">
+                  <div class="card-pill" style="color:var(--rojo-vauxoo);">PASO 2 · COMPRA TARDÍA (15 UNIDADES)</div>
+                  <h3>El Costo que Quedó en el Limbo</h3>
+                  <div class="detail-box">
+                    <p>Días después se recibe la compra de 15 piezas a $350.00 MXN ($5,250 MXN). El costo real debió deducirse en la venta pero ya quedó cerrado:</p>
+                    <div class="asiento-box" style="margin-top:10px; background:#FFF1F2; color:#991B1B;">
+                      Distorsión permanente en Cuenta 1150: <strong>+$1,500.00 MXN</strong><br>
+                      Costo de Ventas subvaluado en el ejercicio fiscal.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+
+        # Slide 15: NUEVA SLIDE - Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")
+        {
+            "id": 15,
+            "title": "Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')",
+            "bg": "white",
+            "time": "01:25 - 01:33",
+            "block": "Bloque 5",
+            "notes": "Presentar los 4 reportes obligatorios para auditar inventarios en Odoo: Existencias, Facturas por recibir, Balanza 1150 y Movimientos stock.move. El mapa de coordenadas del auditor.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge">BLOQUE 5 · 01:25 - 02:00</span>
+                  <h2 class="slide-title">Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">Para auditar al centavo en Odoo 19, es obligatorio cruzar estas 4 fuentes de verdad:</p>
+              
+              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                <div class="agenda-card" style="border-top: 4px solid #345D90;">
+                  <div class="agenda-time">1. ALMACÉN</div>
+                  <div class="agenda-title">Reporte de Existencias</div>
+                  <p class="agenda-desc"><em>Inventario > Informes > Existencias</em> (<code>stock.quant</code> / <code>stock.valuation</code>). Cantidades físicas reales en mano multiplicadas por el coste unitario.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #AC0340;">
+                  <div class="agenda-time">2. COMPRAS EN TRÁNSITO</div>
+                  <div class="agenda-title">Facturas por Recibir</div>
+                  <p class="agenda-desc">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de provisión o factura.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #E4A900;">
+                  <div class="agenda-time">3. CONTABILIDAD</div>
+                  <div class="agenda-title">Mayor de la Cuenta 115.01.01</div>
+                  <p class="agenda-desc">Balanza de Comprobación y Apuntes Contables individuales. Revela asientos huérfanos sin producto y pólizas manuales de diario.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #16A34A;">
+                  <div class="agenda-time">4. TRAZABILIDAD GRANULAR</div>
+                  <div class="agenda-title">Movimientos (stock.move)</div>
+                  <p class="agenda-desc">Histórico de cada entrada, salida y ajuste con fecha efectiva, origen, destino y valor monetario unitario registrado en Odoo 19.</p>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+
+        # Slide 16: Bloque 5 - Caza de la Póliza Manual y Server Action 589
+        {
+            "id": 16,
+            "title": "Metodología de Auditoría Forense: SKU por SKU",
+            "bg": "white",
+            "time": "01:33 - 01:40",
+            "block": "Bloque 5",
+            "notes": "Paso a paso de la resolución forense: 1. Aislar póliza manual de $487,000 MXN en cuenta 1150 sin SKU; 2. Ejecutar Acción de Servidor 589 con 1 clic; 3. Regularización SKU por SKU con plantilla CSV.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge">BLOQUE 5 · AUDITORÍA</span>
                   <h2 class="slide-title">Metodología de Auditoría Forense: SKU por SKU</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
@@ -730,12 +812,12 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 15: Bloque 5 - Cuadre Perfecto al Centavo
+        # Slide 17: Bloque 5 - Cuadre Perfecto al Centavo
         {
-            "id": 15,
+            "id": 17,
             "title": "Cuadre Perfecto al Centavo ($338,910 = $338,910)",
             "bg": "gradient",
-            "time": "01:00 - 01:04",
+            "time": "01:40 - 01:48",
             "block": "Bloque 5",
             "notes": "Celebrar el cuadre perfecto al centavo. Balanza ($338,910.00) = Existencias ($338,910.00). Diferencia $0.00 MXN en todos los productos.",
             "html": f'''
@@ -761,41 +843,89 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 </div>
 
                 <div class="audit-vs">
-                  <div class="audit-diff-card" style="background:#fff; color:#1E293B;">
-                    <span class="diff-label" style="color:#16A34A;">DIFERENCIA CONCILIADA</span>
-                    <span class="diff-amount" style="color:#16A34A; font-size:2.5rem;">
-                      $0.00 MXN
-                    </span>
-                    <span class="diff-warn" style="color:#16A34A; font-weight:600;">¡Sincronización Total!</span>
+                  <div class="audit-diff-card" style="background:#fff; border-color:#16A34A;">
+                    <span class="diff-label" style="color:#16A34A;">CONCILIACIÓN 100% CUADRADA</span>
+                    <span class="diff-amount" style="color:#16A34A; font-size:2.2rem;">$0.00 MXN</span>
+                    <span class="diff-warn" style="color:#16A34A; font-weight:600;">Sincronía Contable y Logística</span>
                   </div>
                 </div>
 
                 <div class="audit-col" style="background: rgba(255,255,255,0.1); border: 2px solid #16A34A; color:#fff;">
-                  <div class="audit-col-badge" style="background:#16A34A; color:#fff;">Almacén Físico</div>
+                  <div class="audit-col-badge" style="background:#16A34A; color:#fff;">Almacén Saneado</div>
                   <h3 class="audit-col-title" style="color:#fff;">Reporte de Existencias</h3>
-                  <div class="audit-code" style="color:rgba(255,255,255,0.8);">Valoración de Stock (Odoo 19)</div>
+                  <div class="audit-code" style="color:rgba(255,255,255,0.8);">Valoración de Stock (Valuation)</div>
                   <div class="audit-amount" style="color:#fff;">$338,910.00 MXN</div>
-                  <div class="audit-status audit-ok" style="background:rgba(22,163,74,0.2); color:#4ADE80;">📦 Stock Moves Físicos</div>
+                  <div class="audit-status audit-ok" style="background:rgba(22,163,74,0.2); color:#4ADE80;">📦 Stock Físico Respaldado</div>
                 </div>
               </div>
             </div>
             '''
         },
 
-        # Slide 16: Bloque 5 - Las 5 Reglas de Oro Blindadas de Vauxoo
+        # Slide 18: NUEVA SLIDE - Estrategias de Saneamiento: El Parche Manual vs Borrón y Cuenta Nueva
         {
-            "id": 16,
-            "title": "Las 5 Reglas de Oro Blindadas de Vauxoo",
+            "id": 18,
+            "title": "Estrategias de Saneamiento: El Parche Manual vs Borrón y Cuenta Nueva",
             "bg": "white",
-            "time": "01:04 - 01:07",
+            "time": "01:48 - 01:56",
             "block": "Bloque 5",
-            "notes": "Parte C del Bloque 5: Las 5 Reglas de Oro Blindadas de Vauxoo. 1. Cero Asientos Manuales en la 1150; 2. Cero Salidas sin Recepción Registrada; 3. Configuración Congelada y Auditoría Disciplinada; 4. Cero Cambios Manuales de Coste; 5. Auditoría SKU por SKU y trazabilidad contable con product_id.",
+            "notes": "Comparar las dos vías para sanear un inventario en producción. Por qué la póliza manual es una aspirina tóxica y cómo ejecutar el protocolo formal de Borrón y Cuenta Nueva.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">MEJORES PRÁCTICAS VAUXOO</span>
-                  <h2 class="slide-title">Las 5 Reglas de Oro Blindadas de Vauxoo</h2>
+                  <span class="pill-badge" style="background:var(--rojo-vauxoo);">BLOQUE 5 · PLAN DE RESCATE</span>
+                  <h2 class="slide-title">¿Cómo Sanear en Producción? Dos Caminos Frente al Descuadre</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">Cuando la base de datos ya tiene meses de descuadre acumulado, ¿cuál es la mejor estrategia?</p>
+              
+              <div class="two-col-grid" style="gap:16px;">
+                <div class="disaster-col-card" style="border-left: 4px solid #B91C1C;">
+                  <div class="card-pill" style="color:#B91C1C; background:#FEF2F2;">❌ VÍA A: EL PARCHE MANUAL ("LA ASPIRINA")</div>
+                  <h3>Póliza Directa a la Cuenta 1150</h3>
+                  <div class="detail-box" style="font-size:0.85rem;">
+                    <p><strong>Lo que hace el contador:</strong> Inyecta un asiento de diario tipo MISC para forzar que el saldo contable coincida con el reporte de existencias.</p>
+                    <div style="background:#FFF1F2; padding:10px; border-radius:6px; color:#991B1B; margin-top:8px;">
+                      <strong>Por qué fracasa rotundamente:</strong> No modifica las existencias físicas ni el costo de las fichas. En la siguiente venta, Odoo vuelve a costear con datos desfasados y reabre el descuadre de inmediato.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="disaster-col-card" style="border-left: 4px solid #16A34A;">
+                  <div class="card-pill" style="color:#16A34A; background:#DCFCE7;">✅ VÍA B: PROTOCOLO BORRÓN Y CUENTA NUEVA</div>
+                  <h3>El Protocolo Blindado Vauxoo</h3>
+                  <div class="detail-box" style="font-size:0.85rem;">
+                    <p><strong>La solución definitiva para desastres acumulados:</strong></p>
+                    <ol style="margin:8px 0 0 16px; padding:0; line-height:1.45;">
+                      <li><strong>Corte Operativo:</strong> Congelar operaciones de almacén en una fecha de corte.</li>
+                      <li><strong>Descarga a Cero:</strong> Ajuste físico llevando todas las existencias a 0.00.</li>
+                      <li><strong>Ajuste Contable a Cero:</strong> Llevar cuenta 1150 a $0 contra variación de inventario.</li>
+                      <li><strong>Congelar Fase 0:</strong> Categorías en AVCO Perpetuo y permisos bloqueados.</li>
+                      <li><strong>Carga de Conteo Físico Real:</strong> Reingreso con costos promedio auditados.</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+
+        # Slide 19: Las 5 Reglas de Oro Blindadas de Vauxoo
+        {
+            "id": 19,
+            "title": "Las 5 Reglas de Oro Blindadas de Vauxoo",
+            "bg": "white",
+            "time": "01:56 - 02:00",
+            "block": "Bloque 5",
+            "notes": "Las 5 Reglas de Oro Blindadas de Vauxoo: 1. Cero Asientos Manuales en la 1150; 2. Cero Salidas sin Recepción; 3. Configuración y Cadencia; 4. Cero Cambios Manuales de Coste; 5. Auditoría SKU y product_id.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:#16A34A;">MEJORES PRÁCTICAS VAUXOO</span>
+                  <h2 class="slide-title">Las 5 Reglas de Oro para Blindar tu Inventario</h2>
                 </div>
                 <div class="slide-header-logo">{logo_light}</div>
               </div>
@@ -841,20 +971,20 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 17: Bloque 6 - Q&A Hot Seat
+        # Slide 20: Bloque 6 - Q&A Hot Seat (30 min)
         {
-            "id": 17,
+            "id": 20,
             "title": "Bloque 6: Q&A Hot Seat (Consultoría en Vivo)",
             "bg": "gradient",
-            "time": "01:07 - 01:28",
+            "time": "02:00 - 02:27",
             "block": "Bloque 6",
-            "notes": "Bloque 6: Q&A Hot Seat - Consultoría en Vivo (23 minutos). Los asistentes exponen sus dudas operativas, configuraciones o descuadres reales en vivo. Julio responde en pantalla sobre Odoo 19.",
+            "notes": "Bloque 6: Q&A Hot Seat - Consultoría en Vivo (30 minutos completos). Los asistentes exponen sus dudas operativas, configuraciones o descuadres reales en vivo. Julio responde en pantalla sobre Odoo 19.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">BLOQUE 6 · 01:07 - 01:30</span>
-                  <h2 class="slide-title" style="color: #fff;">Q&A Hot Seat: Consultoría en Vivo</h2>
+                  <span class="pill-badge">BLOQUE 6 · 02:00 - 02:30</span>
+                  <h2 class="slide-title" style="color: #fff;">Q&A Hot Seat: Consultoría en Vivo (30 Minutos)</h2>
                 </div>
                 <div class="slide-header-logo">{logo_white}</div>
               </div>
@@ -872,6 +1002,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                     <li>¿Cómo corregir categorías de producto sin generar vacíos de saldos?</li>
                     <li>¿Qué hacer con ubicaciones de ajuste físico que no generan póliza?</li>
                     <li>¿Mejores prácticas para compras en USD y cortes de inventario?</li>
+                    <li>¿Cómo planear un protocolo de Borrón y Cuenta Nueva sin parar la empresa?</li>
                   </ul>
                 </div>
               </div>
@@ -879,14 +1010,14 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 18: Suite de Entregables Oficiales
+        # Slide 21: Suite de Entregables Oficiales
         {
-            "id": 18,
+            "id": 21,
             "title": "Paquete de Entregables Oficiales",
             "bg": "white",
-            "time": "01:28 - 01:30",
+            "time": "02:27 - 02:29",
             "block": "Bloque 6",
-            "notes": "Presentación de los entregables: 1. Checklist de Auditoría Logística-Contable con Matriz de Cadencia; 2. Tabla de Mapeo Conceptual v18 -> v19; 3. Kit Técnico de Regularización y Acción de Servidor; 4. Grabación HD y Certificado.",
+            "notes": "Presentación de los entregables: 1. Checklist de Auditoría Logística-Contable con Matriz de Cadencia; 2. Tabla de Mapeo Conceptual v18 -> v19 y Matriz de Movimientos; 3. Kit Técnico de Regularización y Acción de Servidor; 4. Grabación HD y Certificado.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -901,21 +1032,21 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 <div class="deliv-card">
                   <div class="deliv-icon">📋</div>
                   <h4>Entregable #1: Checklist con Matriz de Cadencia</h4>
-                  <p>Guía de validación operativa para auditorías diarias, semanales y mensuales en Odoo 19.</p>
+                  <p>Guía de 18 puntos de validación operativa para auditorías diarias, semanales y mensuales en Odoo 19.</p>
                   <a href="#tab-checklist" onclick="switchTab('checklist')" class="btn btn-sm">Ver Checklist</a>
                 </div>
 
                 <div class="deliv-card">
                   <div class="deliv-icon">📊</div>
-                  <h4>Entregable #2: Tabla de Mapeo 18 → 19</h4>
-                  <p>Comparativa conceptual de arquitectura: Stock Moves, cuentas directas y control de cierre.</p>
+                  <h4>Entregable #2: Mapeo 18 → 19 & Tabla de Movimientos</h4>
+                  <p>Comparativa conceptual de arquitectura y tabla de cuáles eventos generan contabilidad y cuáles no.</p>
                   <a href="#tab-mapeo" onclick="switchTab('mapeo')" class="btn btn-sm">Ver Mapeo</a>
                 </div>
 
                 <div class="deliv-card">
                   <div class="deliv-icon">🛠️</div>
                   <h4>Entregable #4: Kit Técnico de Auditoría</h4>
-                  <p>Plantilla CSV de regularización con product_id y código de la Acción de Servidor Odoo 19.</p>
+                  <p>Plantilla CSV de regularización con product_id y código de la Acción de Servidor Odoo 19 (#589).</p>
                   <a href="#tab-kit" onclick="switchTab('kit')" class="btn btn-sm">Ver Kit Técnico</a>
                 </div>
 
@@ -930,12 +1061,12 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 19: Cierre y Agradecimientos
+        # Slide 22: Cierre y Agradecimientos
         {
-            "id": 19,
+            "id": 22,
             "title": "Cierre y Agradecimientos",
             "bg": "gradient",
-            "time": "01:30",
+            "time": "02:30",
             "block": "Cierre",
             "notes": "Agradecimiento final de Julio Serna. Contacto y cierre de la masterclass.",
             "html": f'''
@@ -965,4 +1096,4 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
         }
     ]
 
-print("make_slides_content.py updated successfully (19 slides).")
+print("make_slides_content.py updated successfully (22 slides).")
