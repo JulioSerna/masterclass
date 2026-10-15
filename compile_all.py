@@ -663,6 +663,213 @@ h1, h2, h3, h4, h5, h6 {{
   font-size: 1.4rem;
 }}
 
+/* Root Causes (Slide 3) */
+.root-causes-grid {{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}}
+.root-cause-card {{
+  background: var(--gris-surface);
+  border: 1px solid var(--borde-suave);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}}
+.root-cause-card:hover {{
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}}
+.cause-card-header {{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}}
+.cause-icon-pill {{
+  font-size: 1.3rem;
+  background: #FFFFFF;
+  border: 1px solid var(--borde-card);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}}
+.cause-number {{
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #CBD5E1;
+}}
+.cause-category-tag {{
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 4px;
+}}
+.cause-headline {{
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--negro-suave);
+  margin-bottom: 2px;
+}}
+.cause-subhead {{
+  font-size: 0.78rem;
+  color: var(--gris-muted);
+  font-style: italic;
+  margin-bottom: 12px;
+}}
+.cause-blocks {{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}}
+.cause-block {{
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 7px 9px;
+  border-radius: 6px;
+}}
+.cause-block.block-error {{
+  background: #FFF1F2;
+  border-left: 3px solid #E11D48;
+  color: #881337;
+}}
+.cause-block.block-impact {{
+  background: #EFF6FF;
+  border-left: 3px solid #2563EB;
+  color: #1E3A8A;
+}}
+.cause-block.block-rule {{
+  background: #F0FDF4;
+  border-left: 3px solid #16A34A;
+  color: #14532D;
+}}
+.cause-block strong {{
+  font-weight: 700;
+}}
+.cause-block .block-label {{
+  font-weight: 700;
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}}
+.cause-takeaway-banner {{
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-left: 4px solid var(--rojo-vauxoo);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--negro-suave);
+}}
+
+/* Movements Matrix (Slide 7) */
+.movements-matrix-container {{
+  overflow-x: auto;
+  border: 1px solid var(--borde-suave);
+  border-radius: 8px;
+  background: #FFFFFF;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}}
+.movements-matrix-table {{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  text-align: left;
+}}
+.movements-matrix-table th {{
+  background: #0F172A;
+  color: #FFFFFF;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--rojo-vauxoo);
+}}
+.movements-matrix-table td {{
+  padding: 7px 12px;
+  border-bottom: 1px solid #E2E8F0;
+  vertical-align: middle;
+}}
+.movements-matrix-table tr:nth-child(even) {{
+  background: #F8FAFC;
+}}
+.movements-matrix-table tr:hover {{
+  background: #F1F5F9;
+}}
+.matrix-doc-code {{
+  font-family: monospace;
+  font-size: 0.72rem;
+  background: #E2E8F0;
+  color: #334155;
+  padding: 2px 6px;
+  border-radius: 4px;
+}}
+.badge-phys {{
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+}}
+.badge-phys.badge-yes {{
+  background: #E0E7FF;
+  color: #3730A3;
+}}
+.badge-phys.badge-no {{
+  background: #F1F5F9;
+  color: #64748B;
+}}
+.badge-acc {{
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  letter-spacing: 0.3px;
+}}
+.badge-acc.badge-yes {{
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #86EFAC;
+}}
+.badge-acc.badge-no {{
+  background: #F1F5F9;
+  color: #64748B;
+  border: 1px solid #CBD5E1;
+}}
+.badge-acc.badge-warn {{
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+}}
+.matrix-summary-callout {{
+  background: #EFF6FF;
+  border-left: 4px solid #3B82F6;
+  padding: 8px 14px;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.8rem;
+  color: #1E3A8A;
+  line-height: 1.4;
+}}
+
 /* Value Grid (Slide 4) */
 .value-cards-grid {{
   display: grid;

@@ -629,6 +629,213 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.4rem;
 }
 
+/* Root Causes (Slide 3) */
+.root-causes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.root-cause-card {
+  background: var(--gris-surface);
+  border: 1px solid var(--borde-suave);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+.root-cause-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+.cause-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.cause-icon-pill {
+  font-size: 1.3rem;
+  background: #FFFFFF;
+  border: 1px solid var(--borde-card);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.cause-number {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #CBD5E1;
+}
+.cause-category-tag {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 4px;
+}
+.cause-headline {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--negro-suave);
+  margin-bottom: 2px;
+}
+.cause-subhead {
+  font-size: 0.78rem;
+  color: var(--gris-muted);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+.cause-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+.cause-block {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 7px 9px;
+  border-radius: 6px;
+}
+.cause-block.block-error {
+  background: #FFF1F2;
+  border-left: 3px solid #E11D48;
+  color: #881337;
+}
+.cause-block.block-impact {
+  background: #EFF6FF;
+  border-left: 3px solid #2563EB;
+  color: #1E3A8A;
+}
+.cause-block.block-rule {
+  background: #F0FDF4;
+  border-left: 3px solid #16A34A;
+  color: #14532D;
+}
+.cause-block strong {
+  font-weight: 700;
+}
+.cause-block .block-label {
+  font-weight: 700;
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.cause-takeaway-banner {
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-left: 4px solid var(--rojo-vauxoo);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--negro-suave);
+}
+
+/* Movements Matrix (Slide 7) */
+.movements-matrix-container {
+  overflow-x: auto;
+  border: 1px solid var(--borde-suave);
+  border-radius: 8px;
+  background: #FFFFFF;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.movements-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  text-align: left;
+}
+.movements-matrix-table th {
+  background: #0F172A;
+  color: #FFFFFF;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--rojo-vauxoo);
+}
+.movements-matrix-table td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #E2E8F0;
+  vertical-align: middle;
+}
+.movements-matrix-table tr:nth-child(even) {
+  background: #F8FAFC;
+}
+.movements-matrix-table tr:hover {
+  background: #F1F5F9;
+}
+.matrix-doc-code {
+  font-family: monospace;
+  font-size: 0.72rem;
+  background: #E2E8F0;
+  color: #334155;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.badge-phys {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+}
+.badge-phys.badge-yes {
+  background: #E0E7FF;
+  color: #3730A3;
+}
+.badge-phys.badge-no {
+  background: #F1F5F9;
+  color: #64748B;
+}
+.badge-acc {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  letter-spacing: 0.3px;
+}
+.badge-acc.badge-yes {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #86EFAC;
+}
+.badge-acc.badge-no {
+  background: #F1F5F9;
+  color: #64748B;
+  border: 1px solid #CBD5E1;
+}
+.badge-acc.badge-warn {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+}
+.matrix-summary-callout {
+  background: #EFF6FF;
+  border-left: 4px solid #3B82F6;
+  padding: 8px 14px;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.8rem;
+  color: #1E3A8A;
+  line-height: 1.4;
+}
+
 /* Value Grid (Slide 4) */
 .value-cards-grid {
   display: grid;
@@ -1975,8 +2182,8 @@ h1, h2, h3, h4, h5, h6 {
                   Archivos dispersos y scripts manuales para validar saldos.
                 </td>
                 <td>
-                  <span class="badge-new">Menú guiado centralizado</span><br>
-                  <em>Contabilidad > Informes > Inventario / Existencias</em>.
+                  <span class="badge-new">Auditoría nativa directa</span><br>
+                  <em>Inventario > Informes > Movimientos de existencias y Balanza de Comprobación</em>.
                 </td>
                 <td>
                   Validación de consistencia inmediata previa a la emisión de estados financieros.
@@ -2000,60 +2207,66 @@ h1, h2, h3, h4, h5, h6 {
           <table class="comparison-table">
             <thead>
               <tr>
-                <th style="width: 25%;">Movimiento / Documento</th>
-                <th style="width: 20%;">Modelo Odoo</th>
-                <th style="width: 20%;">¿Genera Póliza a 1150?</th>
-                <th style="width: 35%;">Justificación Técnica en Odoo 19</th>
+                <th style="width: 24%;">Movimiento / Documento</th>
+                <th style="width: 18%;">Modelo Odoo</th>
+                <th style="width: 18%;">¿Genera Póliza a 1150?</th>
+                <th style="width: 40%;">Justificación Técnica en Odoo 19</th>
               </tr>
             </thead>
             <tbody>
               <tr>
+                <td><strong>Factura de Proveedor</strong></td>
+                <td><code>account.move (in_invoice)</code></td>
+                <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
+                <td><strong>Cargo 1150 · Abono 201</strong>. Fija el costo real de adquisición en la ponderación AVCO.</td>
+              </tr>
+              <tr>
                 <td><strong>Costes en Destino (Landed Costs)</strong></td>
                 <td><code>stock.landed.cost</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
-                <td>Incrementa el valor del inventario capitalizando fletes, seguros y aranceles sobre las recepciones.</td>
+                <td><strong>Cargo 1150 · Abono Gastos</strong>. Incrementa el activo capitalizando fletes, seguros y aranceles sobre las recepciones.</td>
               </tr>
               <tr>
-                <td><strong>Facturas de Proveedor / Cliente</strong></td>
-                <td><code>account.move</code></td>
+                <td><strong>Factura de Cliente</strong></td>
+                <td><code>account.move (out_invoice)</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
-                <td>Reconoce costo de adquisición en compras o deduce existencias enviando a Costo de Ventas (501).</td>
-              </tr>
-              <tr>
-                <td><strong>Ajustes de Inventario (Mermas/Conteos)</strong></td>
-                <td><code>stock.move</code></td>
-                <td><span class="pill-badge" style="background:#16A34A;">SÍ (SI TIENE CUENTA)</span></td>
-                <td>Genera póliza si la ubicación virtual (Virtual Locations/Inventory adjustment) tiene cuenta contable.</td>
+                <td><strong>Cargo 501 · Abono 1150</strong>. <em>¡Aquí se descarga el inventario en v19!</em> Reconoce el Costo de Ventas directamente al facturar.</td>
               </tr>
               <tr>
                 <td><strong>Órdenes de Producción (MO)</strong></td>
                 <td><code>mrp.production</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
-                <td>Acredita materias primas consumidas y debita el producto terminado ingresado al almacén.</td>
+                <td><strong>Cargo 1150 PT · Abono 1150 MP</strong>. Transforma materias primas en producto terminado sin alterar el valor activo neto.</td>
               </tr>
               <tr>
-                <td><strong>Revalorización de Coste</strong></td>
-                <td><code>stock.valuation.adjustment</code></td>
-                <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
-                <td>Cuando se ejecuta por asistente contable formal, no por simple edición en la ficha.</td>
+                <td><strong>Ajustes de Inventario (Mermas/Conteos)</strong></td>
+                <td><code>stock.quant</code> / <code>stock.move</code></td>
+                <td><span class="pill-badge" style="background:#D97706;">⚠️ CONDICIONAL</span></td>
+                <td><strong>¡Peligro!</strong> Solo genera póliza contable si la ubicación virtual de desecho/ajuste tiene cuenta contrapartida asignada.</td>
               </tr>
               <tr>
-                <td><strong>Pedidos de Venta (SO)</strong></td>
-                <td><code>sale.order</code></td>
+                <td><strong>Entrega a Cliente (Albarán OUT)</strong></td>
+                <td><code>stock.picking (outgoing)</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
-                <td>Compromiso comercial; no altera existencias físicas ni saldos contables.</td>
+                <td><strong>Puramente operativo.</strong> Descuenta existencias físicas del almacén; la póliza contable se genera al emitir la factura.</td>
               </tr>
               <tr>
-                <td><strong>Pedidos de Compra (PO)</strong></td>
-                <td><code>purchase.order</code></td>
+                <td><strong>Recepción de Proveedor (Albarán IN)</strong></td>
+                <td><code>stock.picking (incoming)</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
-                <td>Orden contractual; no representa devengo ni entrega física de mercancía.</td>
+                <td>Registra la entrada física; en flujos directos sin cuentas puente, la valoración se asienta con la factura de compra.</td>
               </tr>
               <tr>
                 <td><strong>Traslados Internos entre Ubicaciones</strong></td>
-                <td><code>stock.picking</code> (internal)</td>
+                <td><code>stock.picking (internal)</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
-                <td>Mover de un estante a otro dentro del mismo almacén/compañía no altera el valor del activo.</td>
+                <td>Mover de un estante a otro dentro del mismo almacén/compañía no altera el valor patrimonial de la cuenta 1150.</td>
+              </tr>
+              <tr>
+                <td><strong>Pedidos de Venta (SO) / Compra (PO)</strong></td>
+                <td><code>sale.order</code> / <code>purchase.order</code></td>
+                <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
+                <td>Compromisos comerciales y contractuales; no alteran existencias físicas ni saldos contables.</td>
               </tr>
             </tbody>
           </table>

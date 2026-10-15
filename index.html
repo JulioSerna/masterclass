@@ -629,6 +629,213 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.4rem;
 }
 
+/* Root Causes (Slide 3) */
+.root-causes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.root-cause-card {
+  background: var(--gris-surface);
+  border: 1px solid var(--borde-suave);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+.root-cause-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+.cause-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.cause-icon-pill {
+  font-size: 1.3rem;
+  background: #FFFFFF;
+  border: 1px solid var(--borde-card);
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+.cause-number {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #CBD5E1;
+}
+.cause-category-tag {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 4px;
+}
+.cause-headline {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--negro-suave);
+  margin-bottom: 2px;
+}
+.cause-subhead {
+  font-size: 0.78rem;
+  color: var(--gris-muted);
+  font-style: italic;
+  margin-bottom: 12px;
+}
+.cause-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+.cause-block {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  padding: 7px 9px;
+  border-radius: 6px;
+}
+.cause-block.block-error {
+  background: #FFF1F2;
+  border-left: 3px solid #E11D48;
+  color: #881337;
+}
+.cause-block.block-impact {
+  background: #EFF6FF;
+  border-left: 3px solid #2563EB;
+  color: #1E3A8A;
+}
+.cause-block.block-rule {
+  background: #F0FDF4;
+  border-left: 3px solid #16A34A;
+  color: #14532D;
+}
+.cause-block strong {
+  font-weight: 700;
+}
+.cause-block .block-label {
+  font-weight: 700;
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.cause-takeaway-banner {
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  border-left: 4px solid var(--rojo-vauxoo);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--negro-suave);
+}
+
+/* Movements Matrix (Slide 7) */
+.movements-matrix-container {
+  overflow-x: auto;
+  border: 1px solid var(--borde-suave);
+  border-radius: 8px;
+  background: #FFFFFF;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+.movements-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  text-align: left;
+}
+.movements-matrix-table th {
+  background: #0F172A;
+  color: #FFFFFF;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--rojo-vauxoo);
+}
+.movements-matrix-table td {
+  padding: 7px 12px;
+  border-bottom: 1px solid #E2E8F0;
+  vertical-align: middle;
+}
+.movements-matrix-table tr:nth-child(even) {
+  background: #F8FAFC;
+}
+.movements-matrix-table tr:hover {
+  background: #F1F5F9;
+}
+.matrix-doc-code {
+  font-family: monospace;
+  font-size: 0.72rem;
+  background: #E2E8F0;
+  color: #334155;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.badge-phys {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+}
+.badge-phys.badge-yes {
+  background: #E0E7FF;
+  color: #3730A3;
+}
+.badge-phys.badge-no {
+  background: #F1F5F9;
+  color: #64748B;
+}
+.badge-acc {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-family: 'Sora', sans-serif;
+  letter-spacing: 0.3px;
+}
+.badge-acc.badge-yes {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #86EFAC;
+}
+.badge-acc.badge-no {
+  background: #F1F5F9;
+  color: #64748B;
+  border: 1px solid #CBD5E1;
+}
+.badge-acc.badge-warn {
+  background: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+}
+.matrix-summary-callout {
+  background: #EFF6FF;
+  border-left: 4px solid #3B82F6;
+  padding: 8px 14px;
+  border-radius: 0 6px 6px 0;
+  font-size: 0.8rem;
+  color: #1E3A8A;
+  line-height: 1.4;
+}
+
 /* Value Grid (Slide 4) */
 .value-cards-grid {
   display: grid;
@@ -2084,13 +2291,13 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-3" data-id="3" data-title="Las 3 Causas Recurrentes del Divorcio" data-notes="Introducir las 3 causas raíz identificadas por Vauxoo: 1. Configuración errática (cambios en caliente); 2. Parches operativos (pólizas manuales del contador); 3. Ceguera de auditoría (esperar al cierre anual)." data-time="00:06 - 00:10">
+    <div class="slide-box bg-white" id="slide-3" data-id="3" data-title="Las 3 Causas Recurrentes del Divorcio" data-notes="Introducir las 3 causas raíz identificadas por Vauxoo: 1. Configuración errática (cambios en caliente); 2. Parches operativos (pólizas manuales del contador a la 1150); 3. Ceguera de auditoría (esperar al cierre anual)." data-time="00:06 - 00:10">
       
       
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge">MARCO CONCEPTUAL</span>
+                  <span class="pill-badge">MARCO CONCEPTUAL · EL ORIGEN DE LA BRECHA</span>
                   <h2 class="slide-title">Las 3 Causas Raíz del Divorcio Contable-Logístico</h2>
                 </div>
                 <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
@@ -2139,29 +2346,90 @@ h1, h2, h3, h4, h5, h6 {
   </g>
 </svg></div>
               </div>
-              <p class="slide-lead">Lo que detectamos en más de una década auditando bases de datos de Odoo en México:</p>
+              <p class="slide-lead">Lo que detectamos tras más de una década auditando bases de datos de Odoo en empresas de México:</p>
               
               <div class="root-causes-grid">
-                <div class="root-cause-card">
-                  <div class="cause-badge">CAUSA 1 · CONFIGURACIÓN</div>
-                  <div class="cause-num">01</div>
-                  <h3>"Dos malas no hacen una buena"</h3>
-                  <p>Cambiar en caliente una categoría de Periódico a Perpetuo o de Estándar a AVCO. Odoo 19 <strong>NO genera pólizas retroactivas</strong> y deja el stock inicial flotando sin cuenta contable.</p>
+                <!-- Causa 1 -->
+                <div class="root-cause-card" style="border-top: 4px solid #E4A900;">
+                  <div class="cause-card-header">
+                    <span class="cause-icon-pill">⚙️</span>
+                    <span class="cause-number">01</span>
+                  </div>
+                  <span class="cause-category-tag" style="color:#B45309;">ERROR DE CONFIGURACIÓN</span>
+                  <h3 class="cause-headline">Cambios de Categoría "en Caliente"</h3>
+                  <div class="cause-subhead">"Dos malas no hacen una buena"</div>
+                  
+                  <div class="cause-blocks">
+                    <div class="cause-block block-error">
+                      <span class="block-label">❌ La Mala Práctica</span>
+                      Cambiar una categoría de <em>Periódico a Perpetuo</em> o de <em>Estándar a AVCO</em> cuando ya existen existencias activas en almacén.
+                    </div>
+                    <div class="cause-block block-impact">
+                      <span class="block-label">💥 El Impacto Real</span>
+                      Odoo 19 <strong>NO genera pólizas retroactivas</strong>. El stock previo queda como inventario fantasma sin respaldo contable en la 1150.
+                    </div>
+                    <div class="cause-block block-rule">
+                      <span class="block-label">🛡️ Regla de Oro</span>
+                      <strong>Nunca edites la valoración de una categoría viva.</strong> Crea una categoría nueva y traslada existencias con un corte limpio.
+                    </div>
+                  </div>
                 </div>
 
-                <div class="root-cause-card">
-                  <div class="cause-badge">CAUSA 2 · OPERACIÓN</div>
-                  <div class="cause-num">02</div>
-                  <h3>El Parche Manual (La Aspirina)</h3>
-                  <p>Ante la presión del cierre, el contador mete un asiento manual directo en la cuenta 1150. Resuelve el papel hoy, pero fractura el sistema para siempre porque no hay movimiento en el almacén.</p>
+                <!-- Causa 2 -->
+                <div class="root-cause-card" style="border-top: 4px solid var(--rojo-vauxoo);">
+                  <div class="cause-card-header">
+                    <span class="cause-icon-pill">🩹</span>
+                    <span class="cause-number">02</span>
+                  </div>
+                  <span class="cause-category-tag" style="color:var(--rojo-vauxoo);">ERROR OPERATIVO</span>
+                  <h3 class="cause-headline">El Parche Manual ("La Aspirina")</h3>
+                  <div class="cause-subhead">"Cuadra el papel hoy, destruye el sistema mañana"</div>
+                  
+                  <div class="cause-blocks">
+                    <div class="cause-block block-error">
+                      <span class="block-label">❌ La Mala Práctica</span>
+                      Ante la urgencia del cierre mensual, el contador mete un asiento manual directo en la cuenta 1150 para forzar el cuadre contra el reporte.
+                    </div>
+                    <div class="cause-block block-impact">
+                      <span class="block-label">💥 El Impacto Real</span>
+                      Cuadra la balanza en papel, pero <strong>fractura el sistema de por vida</strong>: existe dinero en contabilidad que ningún producto ni tarima respalda.
+                    </div>
+                    <div class="cause-block block-rule">
+                      <span class="block-label">🛡️ Regla de Oro</span>
+                      <strong>La cuenta 1150 es sagrada:</strong> solo debe ser alimentada por compras y movimientos de almacén, jamás por pólizas manuales.
+                    </div>
+                  </div>
                 </div>
 
-                <div class="root-cause-card">
-                  <div class="cause-badge">CAUSA 3 · AUDITORÍA</div>
-                  <div class="cause-num">03</div>
-                  <h3>Ceguera por Falta de Cadencia</h3>
-                  <p>Empresas que auditan existencias vs contabilidad una sola vez al año. Cuando intentan cuadrar en diciembre hay 10,000 movimientos intermedios y rastrear el origen es casi imposible.</p>
+                <!-- Causa 3 -->
+                <div class="root-cause-card" style="border-top: 4px solid #172A45;">
+                  <div class="cause-card-header">
+                    <span class="cause-icon-pill">⏳</span>
+                    <span class="cause-number">03</span>
+                  </div>
+                  <span class="cause-category-tag" style="color:#0D9488;">ERROR DE CONTROL</span>
+                  <h3 class="cause-headline">Ceguera por Falta de Cadencia</h3>
+                  <div class="cause-subhead">"Esperar al cierre anual para auditar"</div>
+                  
+                  <div class="cause-blocks">
+                    <div class="cause-block block-error">
+                      <span class="block-label">❌ La Mala Práctica</span>
+                      Revisar la concordancia entre almacén y balanza una sola vez al año cuando llega el auditor externo o la declaración fiscal.
+                    </div>
+                    <div class="cause-block block-impact">
+                      <span class="block-label">💥 El Impacto Real</span>
+                      Tras 12 meses y 20,000 transacciones, rastrear qué recepción, ajuste o nota de crédito causó el desvío es una pesadilla forense interminable.
+                    </div>
+                    <div class="cause-block block-rule">
+                      <span class="block-label">🛡️ Regla de Oro</span>
+                      <strong>Auditoría diaria de 3 minutos:</strong> comparar Balanza vs Existencias todos los días detecta anomalías al vuelo con costo cero.
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              <div class="cause-takeaway-banner">
+                💡 <strong>Axioma Fundamental de la Masterclass:</strong> El inventario no se arregla en el libro diario contable; se cuida, audita y sanea en la disciplina operativa del almacén.
               </div>
             </div>
             
@@ -2268,7 +2536,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-5" data-id="5" data-title="¿Por qué Odoo 19.0 para esta Masterclass?" data-notes="Explicar las 4 grandes razones arquitectónicas de Odoo 19: sin SVL (en stock.move), sin cuentas interim en flujos directos, terminología Formal Periódico/Perpetuo, auditoría visual inmediata en Informes > Inventario." data-time="00:12 - 00:16">
+    <div class="slide-box bg-white" id="slide-5" data-id="5" data-title="¿Por qué Odoo 19.0 para esta Masterclass?" data-notes="Explicar las 4 grandes razones arquitectónicas de Odoo 19: sin tabla SVL (valoración vive directamente en stock.move), sin cuentas interim en flujos directos, terminología formal Periódico/Perpetuo, y auditoría transparente directa en stock.move y balanza." data-time="00:12 - 00:16">
       
       
             <div class="slide-content">
@@ -2323,28 +2591,28 @@ h1, h2, h3, h4, h5, h6 {
   </g>
 </svg></div>
               </div>
-              <p class="slide-lead">Por qué elegimos la versión 19.0 para esta masterclass: auditoría 10 veces más fácil, visual y limpia:</p>
+              <p class="slide-lead">Por qué elegimos la versión 19.0 para esta masterclass: auditoría 10 veces más limpia, transparente y directa:</p>
               
-              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 18px;">
                 <div class="agenda-card" style="border-top: 4px solid var(--rojo-vauxoo);">
-                  <div class="agenda-time">ARQUITECTURA</div>
-                  <div class="agenda-title">Adiós Capas SVL Paralelas</div>
-                  <p class="agenda-desc">En versiones previas, una tabla separada (SVL) se desincronizaba. En Odoo 19 la valoración vive <strong>directamente en cada movimiento de stock (<code>stock.move</code>)</strong>.</p>
+                  <div class="agenda-time">ARQUITECTURA DE DATOS</div>
+                  <div class="agenda-title">Adiós Capas Ocultas (stock_valuation_layer)</div>
+                  <p class="agenda-desc">En versiones previas, la valoración dependía de una tabla intermedia separada propensa a desincronizarse. En Odoo 19 el valor y costo unitario residen <strong>directamente en cada movimiento de stock (<code>stock.move</code>)</strong>.</p>
                 </div>
                 <div class="agenda-card" style="border-top: 4px solid #1E293B;">
-                  <div class="agenda-time">CONTABILIDAD</div>
+                  <div class="agenda-time">SIMPLIFICACIÓN CONTABLE</div>
                   <div class="agenda-title">Adiós Cuentas Puente Interim</div>
-                  <p class="agenda-desc">En flujos directos desaparecen las cuentas intermedias de tránsito. El apunte contable va limpio y directo a la cuenta 1150 de Inventario.</p>
+                  <p class="agenda-desc">En compras y flujos directos desaparecen las cuentas intermedias de tránsito no conciliadas. El apunte contable va limpio y directo a la <strong>cuenta 1150 de Inventario</strong>.</p>
                 </div>
                 <div class="agenda-card" style="border-top: 4px solid #0D9488;">
-                  <div class="agenda-time">ESTÁNDAR</div>
+                  <div class="agenda-time">ESTÁNDAR FINANCIERO</div>
                   <div class="agenda-title">Terminología Periódico vs Perpetuo</div>
-                  <p class="agenda-desc">Se elimina la ambigüedad anglosajona/continental. Odoo adopta la formalidad contable estándar para inventario permanente.</p>
+                  <p class="agenda-desc">Se elimina la ambigüedad continental/anglosajona. Odoo adopta la formalidad contable internacional: <strong>Inventario Periódico</strong> (cierre) vs <strong>Inventario Perpetuo</strong> (tiempo real).</p>
                 </div>
                 <div class="agenda-card" style="border-top: 4px solid #3B82F6;">
-                  <div class="agenda-time">AUDITORÍA VISUAL</div>
-                  <div class="agenda-title">Trazabilidad en 1 Clic</div>
-                  <p class="agenda-desc">El nuevo menú en <em>Contabilidad > Informes > Inventario</em> conecta cada póliza contable con su albarán físico correspondiente de forma bidireccional.</p>
+                  <div class="agenda-time">AUDITORÍA FORENSE</div>
+                  <div class="agenda-title">Trazabilidad Nativa en stock.move</div>
+                  <p class="agenda-desc">Cada movimiento de stock expone su costo y póliza asociada. Desde <em>Inventario > Informes > Movimientos de existencias</em> puedes auditar qué albarán generó el asiento con precisión quirúrgica.</p>
                 </div>
               </div>
             </div>
@@ -2352,13 +2620,13 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-6" data-id="6" data-title="¿Y si mi empresa está en Odoo 16, 17 o 18?" data-notes="Mensaje de tranquilidad: la lógica de Costo Promedio (AVCO), la valoración perpetua y el cuadre balanza vs existencias son idénticos. La diferencia es que en v19 es más visual y directo." data-time="00:16 - 00:20">
+    <div class="slide-box bg-white" id="slide-6" data-id="6" data-title="¿Y si mi empresa está en Odoo 16, 17 o 18?" data-notes="Mensaje de tranquilidad: la lógica de Costo Promedio (AVCO) y el principio de cuadre Balanza vs Existencias son idénticos. Destacar el gran cambio en v19: la entrega de cliente NO genera póliza, el costo de venta se descarga en la factura." data-time="00:16 - 00:20">
       
       
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge" style="background:#1E293B;">BLOQUE 2 · TRANQUILIDAD</span>
+                  <span class="pill-badge" style="background:#1E293B;">BLOQUE 2 · TRANQUILIDAD Y RIGOR TÉCNICO</span>
                   <h2 class="slide-title">¿Y si Mi Empresa Está en Odoo 16, 17 o 18?</h2>
                 </div>
                 <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
@@ -2407,29 +2675,29 @@ h1, h2, h3, h4, h5, h6 {
   </g>
 </svg></div>
               </div>
-              <p class="slide-lead"><strong>Respiren tranquilos: esta masterclass es 100% aplicable para ustedes.</strong></p>
+              <p class="slide-lead"><strong>Respiren tranquilos: los principios de control y las matemáticas son 100% universales.</strong></p>
               
-              <div class="two-col-grid">
+              <div class="two-col-grid" style="gap: 18px;">
                 <div class="disaster-col-card" style="border-left: 4px solid #16A34A;">
                   <div class="card-pill" style="color:#16A34A;">LÓGICA CONTABLE UNIVERSAL</div>
                   <h3>Las Matemáticas No Cambian</h3>
                   <div class="detail-box">
                     <ul class="styled-list">
-                      <li><strong>Fórmula de Costo Promedio (AVCO):</strong> Idéntica en todas las versiones de Odoo.</li>
-                      <li><strong>Inventario Perpetuo:</strong> El reconocimiento de salida contable por cada entrega sigue la misma lógica de negocio.</li>
-                      <li><strong>Principio de Cuadre:</strong> Saldo deudor en Balanza (1150) = Valor total en reporte de existencias.</li>
+                      <li><strong>Fórmula de Costo Promedio (AVCO):</strong> Idéntica en todas las versiones: <code>(Stock &times; Costo + Entrada &times; Costo) &divide; Total</code>.</li>
+                      <li><strong>Principio Sagrado del Cuadre:</strong> En cualquier Odoo, Saldo deudor en Balanza (1150) = Valor total en reporte de existencias.</li>
+                      <li><strong>Mismos Vicios Operativos:</strong> Ajustes de stock sin cuenta contrapartida o compras con moneda equivocada destruyen la conciliación en v16 tanto como en v19.</li>
                     </ul>
                   </div>
                 </div>
 
                 <div class="disaster-col-card" style="border-left: 4px solid var(--rojo-vauxoo);">
-                  <div class="card-pill" style="color:var(--rojo-vauxoo);">LA DIFERENCIA TÉCNICA</div>
-                  <h3>Odoo 19 'Limpió la Casa'</h3>
+                  <div class="card-pill" style="color:var(--rojo-vauxoo);">EL GRAN CAMBIO DE FLUJO EN ODOO 19</div>
+                  <h3>¿Cuándo se Descarga el Inventario?</h3>
                   <div class="detail-box">
                     <ul class="styled-list">
-                      <li><strong>En v16–v18:</strong> La valoración estaba detrás de capas intermedias y cuentas puente que hacían el rastreo más laborioso.</li>
-                      <li><strong>En v19:</strong> Todo está integrado y expuesto de forma transparente para el auditor.</li>
-                      <li><strong>Beneficio hoy:</strong> Lo aprendido les permite sanear su Odoo actual y los prepara para una migración limpia.</li>
+                      <li><strong>En Odoo 16, 17 y 18 (Flujo con Tránsito):</strong> La entrega física (<code>picking OUT</code>) generaba un asiento automático provisional a cuentas puente de salida. La factura luego cancelaba el puente contra Costo de Ventas (501).</li>
+                      <li><strong>En Odoo 19 (Flujo Directo Simplificado):</strong> <strong>¡La entrega física NO genera póliza contable!</strong> Es un evento puramente logístico.</li>
+                      <li><strong>El Costo de Ventas se reconoce en la FACTURA:</strong> Al validar la factura de cliente (<code>out_invoice</code>) se genera directamente: <code>Cargo 501 Costo de Ventas | Abono 1150 Inventario</code>.</li>
                     </ul>
                   </div>
                 </div>
@@ -2439,14 +2707,14 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-7" data-id="7" data-title="Tabla Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?" data-notes="Desmitificar en vivo cuáles movimientos disparan pólizas a la cuenta 1150 y cuáles no. Explicar landed costs, facturas, ajustes con cuenta, MOs vs SO, PO y traslados internos." data-time="00:20 - 00:30">
+    <div class="slide-box bg-white" id="slide-7" data-id="7" data-title="Matriz Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?" data-notes="Desmitificar en vivo cuáles movimientos disparan pólizas a la cuenta 1150 y cuáles no. Explicar facturas de compra/venta, landed costs, MOs, ajustes con cuenta vs eventos neutros (entregas, recepciones directas, traslados, pedidos)." data-time="00:20 - 00:30">
       
       
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge" style="background:#16A34A;">BLOQUE 2 · REGLAS DEL JUEGO</span>
-                  <h2 class="slide-title">Movimientos Logísticos: ¿Cuáles SÍ y Cuáles NO Generan Contabilidad?</h2>
+                  <span class="pill-badge" style="background:#16A34A;">BLOQUE 2 · REGLAS DEL JUEGO CONTABLE</span>
+                  <h2 class="slide-title">Matriz Maestra de Movimientos: ¿Cuáles SÍ y Cuáles NO Generan Contabilidad?</h2>
                 </div>
                 <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
 <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510.52 158.8">
@@ -2494,35 +2762,89 @@ h1, h2, h3, h4, h5, h6 {
   </g>
 </svg></div>
               </div>
-              <p class="slide-lead">La regla de oro para no buscar pólizas donde no existen en Odoo 19.0:</p>
+              <p class="slide-lead">La brújula de auditoría en Odoo 19.0: nunca busques pólizas contables en eventos puramente operativos:</p>
               
-              <div class="two-col-grid" style="gap:16px;">
-                <div class="disaster-col-card" style="border-left: 4px solid #16A34A;">
-                  <div class="card-pill" style="color:#16A34A; background:#DCFCE7;">SÍ GENERAN APUNTE CONTABLE A LA 1150</div>
-                  <h3>Eventos con Impacto Financiero</h3>
-                  <div class="detail-box" style="font-size:0.86rem;">
-                    <ul class="styled-list">
-                      <li><strong>Costes en Destino (Landed Costs):</strong> Capitalizan fletes y aranceles aumentando el valor del activo.</li>
-                      <li><strong>Facturas de Proveedor / Cliente:</strong> Validan coste de adquisición o reconocen Costo de Ventas (501).</li>
-                      <li><strong>Ajustes de Inventario:</strong> Solo si la ubicación virtual (pérdida/merma) tiene cuenta contrapartida.</li>
-                      <li><strong>Órdenes de Producción (MO):</strong> Acreditan materias primas consumidas y debitan producto terminado.</li>
-                      <li><strong>Revalorizaciones de Inventario:</strong> Si se corren vía asistente formal contable.</li>
-                    </ul>
-                  </div>
-                </div>
+              <div class="movements-matrix-container">
+                <table class="movements-matrix-table">
+                  <thead>
+                    <tr>
+                      <th style="width: 24%;">Operación / Evento</th>
+                      <th style="width: 17%;">Documento Odoo</th>
+                      <th style="width: 12%; text-align:center;">¿Físico?</th>
+                      <th style="width: 15%; text-align:center;">¿Póliza 1150?</th>
+                      <th style="width: 32%;">Impacto Financiero / Regla en Odoo 19</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Factura de Proveedor</strong></td>
+                      <td><span class="matrix-doc-code">account.move (in)</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-no">➖ No</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-yes">✅ SÍ GENERA</span></td>
+                      <td><strong>Cargo 1150 · Abono 201</strong>. Fija el costo real de adquisición en la ponderación AVCO.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Costes en Destino (Landed)</strong></td>
+                      <td><span class="matrix-doc-code">stock.landed.cost</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-no">➖ No</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-yes">✅ SÍ GENERA</span></td>
+                      <td><strong>Cargo 1150 · Abono Gastos</strong>. Capitaliza fletes y aranceles sumando valor al activo.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Factura de Cliente</strong></td>
+                      <td><span class="matrix-doc-code">account.move (out)</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-no">➖ No</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-yes">✅ SÍ GENERA</span></td>
+                      <td><strong>Cargo 501 · Abono 1150</strong>. <em>¡Aquí se descarga el inventario en v19 al costo AVCO!</em></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Orden de Producción (MO)</strong></td>
+                      <td><span class="matrix-doc-code">mrp.production</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-yes">✅ SÍ GENERA</span></td>
+                      <td><strong>Cargo 1150 PT · Abono 1150 MP</strong>. Transforma materias primas en producto terminado.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Ajuste de Inventario</strong></td>
+                      <td><span class="matrix-doc-code">stock.quant</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-warn">⚠️ CONDICIONAL</span></td>
+                      <td><strong>¡Peligro!</strong> Solo genera póliza si la ubicación virtual de desecho/ajuste tiene cuenta asignada.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Recepción de Proveedor</strong></td>
+                      <td><span class="matrix-doc-code">stock.picking (in)</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-no">❌ NO GENERA</span></td>
+                      <td>Suma existencias físicas; en flujo directo sin cuentas puente, la contabilidad se asienta con la factura.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Entrega a Cliente</strong></td>
+                      <td><span class="matrix-doc-code">stock.picking (out)</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-no">❌ NO GENERA</span></td>
+                      <td><strong>Puramente operativo.</strong> Descuenta unidades físicas; la póliza contable se genera al facturar.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Traslado Interno</strong></td>
+                      <td><span class="matrix-doc-code">stock.picking (int)</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-no">❌ NO GENERA</span></td>
+                      <td>Mover mercancía entre estantes del mismo almacén/compañía no altera el saldo de la cuenta 1150.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Pedidos Venta (SO) / Compra (PO)</strong></td>
+                      <td><span class="matrix-doc-code">sale / purchase.order</span></td>
+                      <td style="text-align:center;"><span class="badge-phys badge-no">➖ No</span></td>
+                      <td style="text-align:center;"><span class="badge-acc badge-no">❌ NO GENERA</span></td>
+                      <td>Compromiso comercial y contractual puro; cero impacto físico y cero apunte financiero.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
 
-                <div class="disaster-col-card" style="border-left: 4px solid #64748B;">
-                  <div class="card-pill" style="color:#475569; background:#F1F5F9;">NO GENERAN APUNTE CONTABLE (NEUTROS)</div>
-                  <h3>Eventos Puramente Operativos</h3>
-                  <div class="detail-box" style="font-size:0.86rem;">
-                    <ul class="styled-list">
-                      <li><strong>Pedidos de Venta (SO):</strong> Compromiso comercial; no altera existencias ni saldos contables.</li>
-                      <li><strong>Pedidos de Compra (PO):</strong> Contrato con proveedor; no representa devengo ni entrega física.</li>
-                      <li><strong>Traslados Internos entre Ubicaciones:</strong> Mover de un estante a otro en el mismo almacén no cambia el activo.</li>
-                      <li><strong>Recepciones Directas sin Interim:</strong> En v19 sin cuentas puente, la valoración se consolida con el albarán valorado o factura.</li>
-                    </ul>
-                  </div>
-                </div>
+              <div class="matrix-summary-callout">
+                📌 <strong>Regla de Oro para el Auditor en Odoo 19:</strong> No busques pólizas contables en las entregas físicas ni en los traslados internos. Si la Balanza 1150 difiere del Almacén, el origen está en <strong>facturas no generadas, ajustes sin cuenta contable, costos forzados en caliente o pólizas manuales</strong>.
               </div>
             </div>
             
@@ -3809,7 +4131,7 @@ h1, h2, h3, h4, h5, h6 {
     
 
     <button class="thumb-btn" onclick="goToSlide(7)" id="thumb-7">
-      7. Tabla Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?
+      7. Matriz Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?
     </button>
     
 
@@ -4427,8 +4749,8 @@ h1, h2, h3, h4, h5, h6 {
                   Archivos dispersos y scripts manuales para validar saldos.
                 </td>
                 <td>
-                  <span class="badge-new">Menú guiado centralizado</span><br>
-                  <em>Contabilidad > Informes > Inventario / Existencias</em>.
+                  <span class="badge-new">Auditoría nativa directa</span><br>
+                  <em>Inventario > Informes > Movimientos de existencias y Balanza de Comprobación</em>.
                 </td>
                 <td>
                   Validación de consistencia inmediata previa a la emisión de estados financieros.
@@ -4452,60 +4774,66 @@ h1, h2, h3, h4, h5, h6 {
           <table class="comparison-table">
             <thead>
               <tr>
-                <th style="width: 25%;">Movimiento / Documento</th>
-                <th style="width: 20%;">Modelo Odoo</th>
-                <th style="width: 20%;">¿Genera Póliza a 1150?</th>
-                <th style="width: 35%;">Justificación Técnica en Odoo 19</th>
+                <th style="width: 24%;">Movimiento / Documento</th>
+                <th style="width: 18%;">Modelo Odoo</th>
+                <th style="width: 18%;">¿Genera Póliza a 1150?</th>
+                <th style="width: 40%;">Justificación Técnica en Odoo 19</th>
               </tr>
             </thead>
             <tbody>
               <tr>
+                <td><strong>Factura de Proveedor</strong></td>
+                <td><code>account.move (in_invoice)</code></td>
+                <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
+                <td><strong>Cargo 1150 · Abono 201</strong>. Fija el costo real de adquisición en la ponderación AVCO.</td>
+              </tr>
+              <tr>
                 <td><strong>Costes en Destino (Landed Costs)</strong></td>
                 <td><code>stock.landed.cost</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
-                <td>Incrementa el valor del inventario capitalizando fletes, seguros y aranceles sobre las recepciones.</td>
+                <td><strong>Cargo 1150 · Abono Gastos</strong>. Incrementa el activo capitalizando fletes, seguros y aranceles sobre las recepciones.</td>
               </tr>
               <tr>
-                <td><strong>Facturas de Proveedor / Cliente</strong></td>
-                <td><code>account.move</code></td>
+                <td><strong>Factura de Cliente</strong></td>
+                <td><code>account.move (out_invoice)</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
-                <td>Reconoce costo de adquisición en compras o deduce existencias enviando a Costo de Ventas (501).</td>
-              </tr>
-              <tr>
-                <td><strong>Ajustes de Inventario (Mermas/Conteos)</strong></td>
-                <td><code>stock.move</code></td>
-                <td><span class="pill-badge" style="background:#16A34A;">SÍ (SI TIENE CUENTA)</span></td>
-                <td>Genera póliza si la ubicación virtual (Virtual Locations/Inventory adjustment) tiene cuenta contable.</td>
+                <td><strong>Cargo 501 · Abono 1150</strong>. <em>¡Aquí se descarga el inventario en v19!</em> Reconoce el Costo de Ventas directamente al facturar.</td>
               </tr>
               <tr>
                 <td><strong>Órdenes de Producción (MO)</strong></td>
                 <td><code>mrp.production</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
-                <td>Acredita materias primas consumidas y debita el producto terminado ingresado al almacén.</td>
+                <td><strong>Cargo 1150 PT · Abono 1150 MP</strong>. Transforma materias primas en producto terminado sin alterar el valor activo neto.</td>
               </tr>
               <tr>
-                <td><strong>Revalorización de Coste</strong></td>
-                <td><code>stock.valuation.adjustment</code></td>
-                <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
-                <td>Cuando se ejecuta por asistente contable formal, no por simple edición en la ficha.</td>
+                <td><strong>Ajustes de Inventario (Mermas/Conteos)</strong></td>
+                <td><code>stock.quant</code> / <code>stock.move</code></td>
+                <td><span class="pill-badge" style="background:#D97706;">⚠️ CONDICIONAL</span></td>
+                <td><strong>¡Peligro!</strong> Solo genera póliza contable si la ubicación virtual de desecho/ajuste tiene cuenta contrapartida asignada.</td>
               </tr>
               <tr>
-                <td><strong>Pedidos de Venta (SO)</strong></td>
-                <td><code>sale.order</code></td>
+                <td><strong>Entrega a Cliente (Albarán OUT)</strong></td>
+                <td><code>stock.picking (outgoing)</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
-                <td>Compromiso comercial; no altera existencias físicas ni saldos contables.</td>
+                <td><strong>Puramente operativo.</strong> Descuenta existencias físicas del almacén; la póliza contable se genera al emitir la factura.</td>
               </tr>
               <tr>
-                <td><strong>Pedidos de Compra (PO)</strong></td>
-                <td><code>purchase.order</code></td>
+                <td><strong>Recepción de Proveedor (Albarán IN)</strong></td>
+                <td><code>stock.picking (incoming)</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
-                <td>Orden contractual; no representa devengo ni entrega física de mercancía.</td>
+                <td>Registra la entrada física; en flujos directos sin cuentas puente, la valoración se asienta con la factura de compra.</td>
               </tr>
               <tr>
                 <td><strong>Traslados Internos entre Ubicaciones</strong></td>
-                <td><code>stock.picking</code> (internal)</td>
+                <td><code>stock.picking (internal)</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
-                <td>Mover de un estante a otro dentro del mismo almacén/compañía no altera el valor del activo.</td>
+                <td>Mover de un estante a otro dentro del mismo almacén/compañía no altera el valor patrimonial de la cuenta 1150.</td>
+              </tr>
+              <tr>
+                <td><strong>Pedidos de Venta (SO) / Compra (PO)</strong></td>
+                <td><code>sale.order</code> / <code>purchase.order</code></td>
+                <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
+                <td>Compromisos comerciales y contractuales; no alteran existencias físicas ni saldos contables.</td>
               </tr>
             </tbody>
           </table>
