@@ -8,14 +8,14 @@ Ponente: Julio Serna (Vauxoo)
 Catálogo: Hardware y Cómputo (100% Unidades Enteras · Cero NIF · Cero Landed Costs)
 Ejecución: Automatizada sobre la base de datos 'masterclass' usando odoo-mcp CLI.
 
-Casos recreados:
-1. Operación Normal MXN: [TECL-INAL-USB] Teclado Ergonómico (Compras 50@150 + 50@170 = AVCO 160; Venta 30u)
+Casos recreados (ÚNICOS 7 PRODUCTOS EN CATÁLOGO):
+1. Operación Normal MXN: [TECL-INAL-USB] Teclado Ergonómico (Compras 50@150 + 50@170 = AVCO 160; Venta 30u @ 250)
 2. Operación Normal USD: [MON-27-4K] Monitor 4K (Compra 20u @ 100 USD * TC DOF 18.50 = AVCO 1,850 MXN)
 3. Desastre 1: [MOUS-OPT-USB] Mouse Óptico (Ajuste 100u en categoría periódica; omitió póliza contable de $8,500)
-4. Desastre 2: [ROUT-WIFI4-LEG] Router Wi-Fi 4 (Archivado con compra y factura cerrada de $2,400)
-5. Desastre 3: [CAM-WEB-4K] Cámara Web Pro 4K (Error de moneda: $1,500 MXN metidos como 1,500 USD @ 18.50 = $27,750 MXN)
+4. Desastre 2: [ROUT-WIFI4-LEG] Router Wi-Fi 4 Legacy (8u @ $300 = $2,400; archivado con existencias vivas)
+5. Desastre 3: [CAM-WEB-4K] Cámara Web Pro 4K (Error de moneda: $1,500 MXN comprados como 1,500 USD @ 18.50 = $27,750 MXN)
 6. Desastre 4: [MEM-RAM-16GB] Memoria RAM (Costo alterado a mano en ficha de $100 a $121 = brecha de $210)
-7. Desastre 5: [DISC-SSD-1TB] Disco SSD (Salida en negativo de 10u @ $200 y compra posterior de 20u @ $350 = brecha de $1,500)
+7. Desastre 5: [DISC-SSD-1TB] Disco SSD (Salida forzada en negativo de 5u y compra posterior de 15u @ $350 = brecha de $1,500)
 8. El Hook Inicial: Póliza manual indebida en cuenta 1150 de $487,000 MXN sin SKU
 """
 
@@ -41,34 +41,53 @@ def call_kw(model, method, args=[], kwargs={}):
         return None
 
 def clean_previous_transactions():
-    print("🧹 1. Limpiando transacciones previas en Odoo...")
-    # 1. Account moves
-    moves = call_kw("account.move", "search", [[]]) or []
-    if moves:
-        call_kw("account.move", "button_draft", [moves])
-        call_kw("account.move", "button_cancel", [moves])
-        call_kw("account.move", "unlink", [moves])
-        print(f"   ✓ {len(moves)} pólizas contables eliminadas.")
+    print("🧹 1. Limpiando transacciones y productos previos en Odoo (Purga Atómica Total)...")
+    purge_code = """
+tables = [
+    'stock_landed_cost_lines',
+    'stock_landed_cost',
+    'account_partial_reconcile',
+    'account_move_line',
+    'account_move',
+    'purchase_order_line',
+    'purchase_order',
+    'sale_order_line',
+    'sale_order',
+    'stock_quant',
+    'stock_move_line',
+    'stock_move',
+    'stock_picking',
+    'product_supplierinfo',
+    'product_product',
+    'product_template',
+]
+results = {}
+for t in tables:
+    env.cr.execute(f"DELETE FROM {t}")
+    results[t] = f"deleted {env.cr.rowcount}"
 
-    # 2. Sale orders
-    sos = call_kw("sale.order", "search", [[]]) or []
-    if sos:
-        call_kw("sale.order", "action_cancel", [sos])
-        call_kw("sale.order", "unlink", [sos])
-        print(f"   ✓ {len(sos)} órdenes de venta eliminadas.")
+try:
+    env.cr.execute("UPDATE ir_sequence SET number_next = 1 WHERE code IN ('purchase.order', 'sale.order')")
+except Exception:
+    pass
 
-    # 3. Purchase orders
-    pos = call_kw("purchase.order", "search", [[]]) or []
-    if pos:
-        call_kw("purchase.order", "button_cancel", [pos])
-        call_kw("purchase.order", "unlink", [pos])
-        print(f"   ✓ {len(pos)} órdenes de compra eliminadas.")
+action = {'results': results}
+"""
+    # Buscar o crear la acción de purga
+    actions = call_kw("ir.actions.server", "search", [[("name", "=", "Purge Masterclass Database")]])
+    if not actions:
+        act_id = call_kw("ir.actions.server", "create", [{
+            "name": "Purge Masterclass Database",
+            "model_id": 548,
+            "state": "code",
+            "code": purge_code
+        }])
+    else:
+        act_id = actions[0]
+        call_kw("ir.actions.server", "write", [[act_id], {"code": purge_code}])
 
-    # 4. Archivar productos anteriores
-    prods = call_kw("product.product", "search", [[]]) or []
-    if prods:
-        call_kw("product.product", "write", [prods, {"active": False}])
-        print(f"   ✓ {len(prods)} productos anteriores archivados.")
+    res = call_kw("ir.actions.server", "run", [[act_id]])
+    print(f"   ✓ Purga completa ejecutada: {json.dumps(res)}")
 
 def setup_categories_and_partners():
     print("🏢 2. Configurando categorías y contactos...")
@@ -101,7 +120,7 @@ def setup_categories_and_partners():
     return cat_id, cat_periodic_id, partner_prov_mx, partner_prov_usd, partner_cli
 
 def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
-    print("🚀 3. Creando los 7 escenarios de la Masterclass...")
+    print("🚀 3. Creando los 7 escenarios oficiales de la Masterclass...")
 
     # -------------------------------------------------------------
     # CASO 1: FLUJO LIMPIO EN MXN (Teclado Ergonómico Inalámbrico)
@@ -208,10 +227,10 @@ def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
         "is_storable": True,
         "active": True,
         "categ_id": cat_id,
-        "standard_price": 120.0
+        "standard_price": 300.0
     }])
     po_r = call_kw("purchase.order", "create", [{"partner_id": prov_mx}])
-    call_kw("purchase.order.line", "create", [{"order_id": po_r, "product_id": rout, "product_qty": 20.0, "price_unit": 120.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("purchase.order.line", "create", [{"order_id": po_r, "product_id": rout, "product_qty": 8.0, "price_unit": 300.0, "tax_ids": [[6, 0, []]]}])
     call_kw("purchase.order", "button_confirm", [[po_r]])
     pk_r = call_kw("purchase.order", "search_read", [[("id", "=", po_r)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
     for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_r)]], {"fields": ["id", "product_uom_qty"]}):
@@ -286,6 +305,7 @@ def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
         "categ_id": cat_id,
         "standard_price": 200.0
     }])
+    # Salida forzada de 10 unidades dejando stock en -10
     so_ssd = call_kw("sale.order", "create", [{"partner_id": cli}])
     call_kw("sale.order.line", "create", [{"order_id": so_ssd, "product_id": ssd, "product_uom_qty": 10.0, "price_unit": 350.0, "tax_ids": [[6, 0, []]]}])
     call_kw("sale.order", "action_confirm", [[so_ssd]])
@@ -299,7 +319,7 @@ def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
     call_kw("account.move", "write", [[inv_ssd], {"invoice_date": "2026-10-14"}])
     call_kw("account.move", "action_post", [[inv_ssd]])
 
-    # Compra posterior a $350 MXN
+    # Compra posterior de 20 unidades a $350 MXN (Stock remanente: -10 + 20 = 10 unidades @ $350 = $3,500)
     po_ssd = call_kw("purchase.order", "create", [{"partner_id": prov_mx}])
     call_kw("purchase.order.line", "create", [{"order_id": po_ssd, "product_id": ssd, "product_qty": 20.0, "price_unit": 350.0, "tax_ids": [[6, 0, []]]}])
     call_kw("purchase.order", "button_confirm", [[po_ssd]])
@@ -351,5 +371,5 @@ if __name__ == "__main__":
     setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli)
     run_server_action_and_update_downloads()
     print("==================================================")
-    print(" INSTANCIA 100% LISTA Y VERIFICADA PARA LA SESIÓN ")
+    print(" INSTANCIA 100% LIMPIA Y LISTA PARA LA SESIÓN    ")
     print("==================================================")
