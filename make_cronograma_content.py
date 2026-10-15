@@ -32,8 +32,8 @@ def get_cronograma_html(logo_light):
         </div>
         <div class="cron-summary-card">
           <div class="cron-summary-label">DESCUADRE DEL HOOK</div>
-          <div class="cron-summary-val">$473,690.00 MXN</div>
-          <small>Balanza 1150: $812,600 vs Existencias: $338,910</small>
+          <div class="cron-summary-val">$196,190.00 MXN</div>
+          <small>Balanza 1150: $535,100 vs Existencias: $338,910</small>
         </div>
         <div class="cron-summary-card">
           <div class="cron-summary-label">COMPAÑÍA DEMO BD</div>
@@ -58,9 +58,9 @@ def get_cronograma_html(logo_light):
             <div class="cron-element">
               <strong>🖥️ Pantalla en Vivo (Split-Screen):</strong>
               <div style="margin-top:6px; padding:10px; background:#F8FAFC; border-radius:6px; border:1px solid #CBD5E1;">
-                <div>• Balanza de Comprobación (Cuenta <code>115.01.01</code>): <strong>$812,600.00 MXN</strong></div>
+                <div>• Balanza de Comprobación (Cuenta <code>115.01.01</code>): <strong>$535,100.00 MXN</strong></div>
                 <div>• Reporte de Existencias / Valoración de Inventario: <strong>$338,910.00 MXN</strong></div>
-                <div style="color:#AC0340; font-weight:700; margin-top:4px;">• Descuadre real e inaceptable: $473,690.00 MXN</div>
+                <div style="color:#AC0340; font-weight:700; margin-top:4px;">• Descuadre real e inaceptable: $196,190.00 MXN</div>
               </div>
             </div>
             <div class="cron-element">
@@ -70,7 +70,7 @@ def get_cronograma_html(logo_light):
               <strong>💬 Encuesta Relámpago al Chat:</strong> "¿Cada cuánto auditan ustedes el reporte de existencias del almacén contra el saldo contable de inventarios? ¿Diario, semanal, mensual o anual?".
             </div>
             <div class="cron-element">
-              <strong>🎙️ Guión de Promesa:</strong> "En las próximas 2 horas van a dominar el Costo Promedio en Odoo 19.0, blindarán su operación contra errores comunes y resolveremos este descuadre de casi medio millón de pesos en vivo en el Bloque 5".
+              <strong>🎙️ Guión de Promesa:</strong> "En las próximas 2 horas van a dominar el Costo Promedio en Odoo 19.0, blindarán su operación contra errores comunes y resolveremos este descuadre de casi doscientos mil pesos en vivo en el Bloque 5".
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@ def get_cronograma_html(logo_light):
               <strong>1. Los 4 Modelos Esenciales de Auditoría ("Cuadrilátero de Control" - 7 min — 00:55 a 01:02):</strong>
               <div style="margin-top:6px; padding:10px; background:#FFFFFF; border-radius:6px; border:1px solid #CBD5E1; font-size:0.88rem;">
                 <div>1. <strong>Reporte de Existencias:</strong> Stock físico $\times$ costo unitario (Almacén).</div>
-                <div>2. <strong>Reporte de Facturas por Recibir:</strong> Mercancía recibida pendiente de facturación (como los $8,500 de Teclados).</div>
+                <div>2. <strong>Reporte de Facturas por Recibir:</strong> Mercancía recibida pendiente de facturación ($8,500 de Teclados y la compra de Cámaras Web).</div>
                 <div>3. <strong>Reporte Contable (Mayor 115.01.01):</strong> Saldo oficial en Balanza y apuntes detallados.</div>
                 <div>4. <strong>Movimientos de Inventario (<code>stock.move</code>):</strong> Trazabilidad granular de causa raíz.</div>
               </div>
@@ -144,7 +144,7 @@ def get_cronograma_html(logo_light):
               <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
                 <div>• <strong>Caso 1: Ajuste de Inventario sin Cuenta Contable (5 min):</strong> <code>[MOUS-OPT-USB]</code>. 100 u @ $85 = $8,500 en bodega, $0 en 1150. Brecha: -$8,500 MXN.</div>
                 <div>• <strong>Caso 2: Producto Archivado con Existencias (5 min):</strong> <code>[ROUT-WIFI4-LEG]</code>. 8 u @ $300 = $2,400 MXN vivos en 1150 pero ocultos en bodega. Brecha: +$2,400 MXN.</div>
-                <div>• <strong>Caso 3: Costo MXN Comprado en USD por Error (6 min):</strong> <code>[CAM-WEB-4K]</code>. 10 u @ $1,500 USD = $277,500 MXN @ TC 18.50. Costo unitario inflado a $27,750 MXN.</div>
+                <div>• <strong>Caso 3: Costo MXN Comprado en USD por Error (6 min):</strong> <code>[CAM-WEB-4K]</code>. 10 u @ $1,500 USD = $277,500 MXN recibidos y <strong>dejados sin facturar</strong>. Demo en vivo: corrección de divisa/monto en el borrador de la factura.</div>
                 <div>• <strong>Caso 4: Cambio Directo de Costo desde Ficha (6 min):</strong> <code>[MEM-RAM-16GB]</code>. Coste alterado de $100 a $121 en 10 u. Bodega $1,210 vs Contabilidad $1,000. Brecha: -$210 MXN.</div>
                 <div>• <strong>Caso 5: Venta Forzada Dejando Stock Negativo (6 min):</strong> <code>[DISC-SSD-1TB]</code>. Salida forzada de 10 u sin stock. Compra tardía de 20 u @ $350. Brecha: -$1,500 MXN.</div>
               </div>
@@ -162,7 +162,7 @@ def get_cronograma_html(logo_light):
           <div class="cron-block-body">
             <div class="cron-element">
               <strong>1. Caza de la Póliza Manual & Acción de Servidor #589 (15 min — 01:30 a 01:45):</strong>
-              <p>Filtro en 1150 sin producto asignado: Caza de la póliza <strong><code>MISC/2026/09/0001</code></strong> por <strong>+$487,000.00 MXN</strong>. Ejecución de la Acción de Servidor #589 y descarga del CSV con el desglose SKU por SKU explicando el descuadre de $473,690.00 MXN al centavo. Importación de la Plantilla CSV de regularización.</p>
+              <p>Filtro en 1150 sin producto asignado: Caza de la póliza <strong><code>MISC/2026/09/0001</code></strong> por <strong>+$487,000.00 MXN</strong>. Ejecución de la Acción de Servidor #589 y descarga del CSV con el desglose SKU por SKU explicando el descuadre de $196,190.00 MXN al centavo. Importación de la Plantilla CSV de regularización.</p>
             </div>
             <div class="cron-element">
               <strong>2. Estrategias de Saneamiento: El Parche Manual vs Borrón y Cuenta Nueva (15 min — 01:45 a 02:00):</strong>

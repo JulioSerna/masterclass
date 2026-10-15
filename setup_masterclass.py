@@ -259,10 +259,12 @@ def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
     for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_cam)]], {"fields": ["id", "product_uom_qty"]}):
         call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
     call_kw("stock.picking", "button_validate", [[pk_cam]])
-    call_kw("purchase.order", "action_create_invoice", [[po_cam]])
-    b_cam = call_kw("purchase.order", "search_read", [[("id", "=", po_cam)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
-    call_kw("account.move", "write", [[b_cam], {"invoice_date": "2026-10-14"}])
-    call_kw("account.move", "action_post", [[b_cam]])
+    # DEJAR SIN FACTURAR: Para demostrar en vivo cómo auditar el monto pendiente y corregir la moneda en la factura
+    print("   -> [AUDITORÍA] Cámara Web 4K recibida pero DEJADA SIN FACTURAR para demo en vivo.")
+    # call_kw("purchase.order", "action_create_invoice", [[po_cam]])
+    # b_cam = call_kw("purchase.order", "search_read", [[("id", "=", po_cam)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    # call_kw("account.move", "write", [[b_cam], {"invoice_date": "2026-10-14"}])
+    # call_kw("account.move", "action_post", [[b_cam]])
 
     # -------------------------------------------------------------
     # DESASTRE 4: CAMBIO DIRECTO DE COSTO EN FICHA (Memoria RAM 16GB)

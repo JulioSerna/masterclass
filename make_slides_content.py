@@ -57,7 +57,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "bg": "white",
             "time": "00:01 - 00:06",
             "block": "Bloque 1",
-            "notes": "Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($812,600.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $473,690.00 MXN ($487k de póliza manual - $8.5k factura por recibir + $4,810 de descuadres operativos). Plantear el dolor de todo cierre contable.",
+            "notes": "Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($535,100.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $196,190.00 MXN ($487k de póliza manual - facturas por recibir pendientes + descuadres operativos). Plantear el dolor de todo cierre contable.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -74,7 +74,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                   <div class="audit-col-badge">Módulo de Contabilidad</div>
                   <h3 class="audit-col-title">Balanza de Comprobación</h3>
                   <div class="audit-code">Cuenta 115.01.01 · Mercancías en Almacén</div>
-                  <div class="audit-amount">$812,600.00 MXN</div>
+                  <div class="audit-amount">$535,100.00 MXN</div>
                   <div class="audit-detail">Saldo deudor contable al corte mensual</div>
                   <div class="audit-status audit-err">⚠️ Generado por libro mayor contable</div>
                 </div>
@@ -83,7 +83,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                   <div class="audit-diff-card">
                     <span class="diff-label">DESCUADRE REAL</span>
                     <span class="diff-amount doodle-wrap">
-                      $473,690.00 MXN
+                      $196,190.00 MXN
                       {doodle_oval}
                     </span>
                     <span class="diff-warn">¿Cómo conciliar esta brecha en el cierre?</span>
@@ -700,7 +700,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 <div class="agenda-card" style="border-top: 4px solid #AC0340;">
                   <div class="agenda-time">2. COMPRAS EN TRÁNSITO</div>
                   <div class="agenda-title">Facturas por Recibir</div>
-                  <p class="agenda-desc">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de provisión (como los <strong>$8,500.00 MXN</strong> de la PO 2 de Teclados).</p>
+                  <p class="agenda-desc">Cruce de compras con <code>qty_received > qty_invoiced</code>. Mercancía física en almacén pendiente de provisión contable (ej. los <strong>$8,500 MXN</strong> de Teclados y la compra en USD de <strong>Cámara Web</strong>).</p>
                 </div>
                 <div class="agenda-card" style="border-top: 4px solid #E4A900;">
                   <div class="agenda-time">3. CONTABILIDAD</div>
@@ -773,7 +773,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "bg": "white",
             "time": "01:14 - 01:21",
             "block": "Bloque 4",
-            "notes": "Detalle del Desastre 3 (Cámara Web con error de moneda USD) y Desastre 4 (Memoria RAM con costo cambiado a mano).",
+            "notes": "Detalle del Desastre 3 (Cámara Web con error de moneda USD, recibida y dejada sin facturar para corregir en vivo la moneda en la factura) y Desastre 4 (Memoria RAM con costo cambiado a mano).",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -793,7 +793,10 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                     <div class="asiento-box" style="margin-top:10px;">
                       10 unidades &times; 1,500 USD @ TC $18.50 =<br>
                       <strong>Costo unitario Odoo: $27,750.00 MXN</strong><br>
-                      Total Activo Inflado: <strong>$277,500.00 MXN</strong> ($262.5k de sobrecosto por un clic).
+                      Total Activo Inflado: <strong>$277,500.00 MXN</strong> (¡$262.5k de sobrecosto!).
+                    </div>
+                    <div style="margin-top:10px; padding:8px 12px; background:#FEF3C7; border-left:3px solid #D97706; border-radius:4px; font-size:0.85rem; color:#92400E;">
+                      <strong>🔴 Dejado Sin Facturar en Odoo:</strong> En vivo demostramos cómo al crear la Factura de Proveedor se puede <strong>corregir la moneda y monto</strong> antes de validar, sanando el pasivo y recalculando la valoración.
                     </div>
                   </div>
                 </div>

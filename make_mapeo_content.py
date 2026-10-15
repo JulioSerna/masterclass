@@ -329,8 +329,8 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
               <tr>
                 <td><strong>3. Costo MXN en OC de USD</strong><br><small>[CAM-WEB-4K]</small></td>
                 <td>El producto cuesta $1,500 MXN pero por descuido se seleccionó divisa USD en la orden de compra.</td>
-                <td>Recepción a $1,500 USD &times; 18.50 = $27,750 MXN/u. Inflación masiva del costo de inventario ($277,500 vs $15,000).</td>
-                <td>Rectificación de albarán o ajuste de valoración controlado antes de despachar mercancía.</td>
+                <td>Recepción a $1,500 USD &times; 18.50 = $27,750 MXN/u. Inflación masiva del almacén ($277,500 vs $15,000). <strong>Dejado sin facturar</strong>.</td>
+                <td><strong>Demo en vivo:</strong> En la Factura de Proveedor se corrige la moneda a MXN ($1,500 c/u) antes de validar, ajustando el costeo y la provisión sin tocar la BD con parches.</td>
               </tr>
               <tr>
                 <td><strong>4. Edición Directa de Costo en Ficha</strong><br><small>[MEM-RAM-16GB]</small></td>
