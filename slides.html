@@ -2127,7 +2127,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-2" data-id="2" data-title="El Hook: Descuadre de $482,190 MXN" data-notes="Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($821,100.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $482,190.00 MXN ($487k de póliza manual + $4,810 de descuadres operativos). Plantear el dolor de todo cierre contable." data-time="00:01 - 00:06">
+    <div class="slide-box bg-white" id="slide-2" data-id="2" data-title="El Hook: Descuadre de $473,690 MXN" data-notes="Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($812,600.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $473,690.00 MXN ($487k de póliza manual - $8.5k factura por recibir + $4,810 de descuadres operativos). Plantear el dolor de todo cierre contable." data-time="00:01 - 00:06">
       
       
             <div class="slide-content">
@@ -2189,7 +2189,7 @@ h1, h2, h3, h4, h5, h6 {
                   <div class="audit-col-badge">Módulo de Contabilidad</div>
                   <h3 class="audit-col-title">Balanza de Comprobación</h3>
                   <div class="audit-code">Cuenta 115.01.01 · Mercancías en Almacén</div>
-                  <div class="audit-amount">$821,100.00 MXN</div>
+                  <div class="audit-amount">$812,600.00 MXN</div>
                   <div class="audit-detail">Saldo deudor contable al corte mensual</div>
                   <div class="audit-status audit-err">⚠️ Generado por libro mayor contable</div>
                 </div>
@@ -2198,7 +2198,7 @@ h1, h2, h3, h4, h5, h6 {
                   <div class="audit-diff-card">
                     <span class="diff-label">DESCUADRE REAL</span>
                     <span class="diff-amount doodle-wrap">
-                      $482,190.00 MXN
+                      $473,690.00 MXN
                       <svg class="doodle-oval" viewBox="0 0 260 70" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 36 C8 15, 75 7, 150 7 C225 7, 252 20, 248 38 C242 56, 168 62, 96 60 C46 58, 6 48, 15 30" stroke="#AC0340" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </span>
                     <span class="diff-warn">¿Cómo conciliar esta brecha en el cierre?</span>
@@ -2860,7 +2860,7 @@ h1, h2, h3, h4, h5, h6 {
                   <p>50 unidades @ $170.00 MXN</p>
                   <div class="asiento-box">
                     Subtotal: <strong>$8,500.00 MXN</strong><br>
-                    Valor añadido en entrada física
+                    <strong>Pendiente de Facturar</strong> (para auditoría)
                   </div>
                 </div>
 
@@ -2871,7 +2871,7 @@ h1, h2, h3, h4, h5, h6 {
                   <div class="asiento-box" style="background:#EEF2F6; color:var(--azul-marino);">
                     (50&times;$150 + 50&times;$170) &divide; 100 =<br>
                     <strong>Costo Promedio: $160.00 MXN</strong><br>
-                    Saldo en Cuenta 1150: <strong>$16,000.00 MXN</strong>
+                    Valor Físico Almacén: <strong>$16,000.00 MXN</strong>
                   </div>
                 </div>
               </div>
@@ -2884,7 +2884,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-9" data-id="9" data-title="Operación Normal: Venta y Costo de Ventas" data-notes="Mostrar la venta de 30 unidades de [TECL-INAL-USB] @ $160 MXN. Costo de ventas = $4,800. Saldo remanente en almacén = 70 u @ $160 = $11,200 MXN = Balanza contable." data-time="00:38 - 00:45">
+    <div class="slide-box bg-white" id="slide-9" data-id="9" data-title="Operación Normal: Venta y Costo de Ventas" data-notes="Mostrar la venta de 30 unidades de [TECL-INAL-USB] @ $160 MXN. Costo de ventas = $4,800. Saldo remanente en almacén = 70 u @ $160 = $11,200 MXN. Contabilidad tiene $2,700 y Facturas por Recibir tiene $8,500. Cuadre perfecto: $2,700 + $8,500 = $11,200." data-time="00:38 - 00:45">
       
       
             <div class="slide-content">
@@ -2955,14 +2955,14 @@ h1, h2, h3, h4, h5, h6 {
                 </div>
 
                 <div class="disaster-col-card" style="border-left: 4px solid #16A34A;">
-                  <div class="card-pill" style="color:#16A34A;">ESTADO POST-VENTA (CUADRE PERFECTO)</div>
-                  <h3>Sincronía Total al Centavo</h3>
+                  <div class="card-pill" style="color:#16A34A;">ESTADO POST-VENTA (CONCILIACIÓN FORENSE)</div>
+                  <h3>Sincronía Total con Factura por Recibir</h3>
                   <div class="detail-box">
                     <ul class="styled-list">
-                      <li><strong>Existencias Físicas:</strong> 70 unidades en almacén.</li>
-                      <li><strong>Valor en Almacén:</strong> 70 u &times; $160.00 = <strong>$11,200.00 MXN</strong>.</li>
-                      <li><strong>Saldo en Balanza (1150):</strong> $16,000 - $4,800 = <strong>$11,200.00 MXN</strong>.</li>
-                      <li><strong>Diferencia Contable vs Logística:</strong> <span style="color:#16A34A; font-weight:700;">$0.00 MXN</span>.</li>
+                      <li><strong>Existencias Físicas:</strong> 70 unidades @ $160 = <strong>$11,200.00 MXN</strong>.</li>
+                      <li><strong>Saldo en Balanza (1150):</strong> $7,500 (PO 1) - $4,800 (Venta) = <strong>$2,700.00 MXN</strong>.</li>
+                      <li><strong>Facturas por Recibir (PO 2):</strong> 50 u @ $170 = <strong>$8,500.00 MXN</strong>.</li>
+                      <li><strong>Fórmula de Conciliación:</strong> $2,700 (1150) + $8,500 (Por Facturar) = <strong>$11,200.00 MXN</strong> (Dif: <span style="color:#16A34A; font-weight:700;">$0.00</span>).</li>
                     </ul>
                   </div>
                 </div>
@@ -3095,7 +3095,91 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-12" data-id="12" data-title="Desastres 1 y 2: Ajuste Huérfano y Producto Archivado" data-notes="Detalle del Desastre 1 (Mouse Óptico sin cuenta contable en ajuste) y Desastre 2 (Router Legacy archivado con existencias vivas)." data-time="00:58 - 01:07">
+    <div class="slide-box bg-white" id="slide-12" data-id="12" data-title="Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')" data-notes="Presentar los 4 reportes obligatorios para auditar inventarios en Odoo: Existencias, Facturas por recibir, Balanza 1150 y Movimientos stock.move. El mapa de coordenadas del auditor antes de abrir los casos de desastres. Resaltar cómo en el Teclado tenemos $8,500 en Facturas por Recibir que explican el cuadre." data-time="00:58 - 01:06">
+      
+      
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:#0D9488;">BLOQUE 4 · HERRAMIENTAS DE AUDITORÍA</span>
+                  <h2 class="slide-title">Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")</h2>
+                </div>
+                <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510.52 158.8">
+  <!-- Generator: Adobe Illustrator 30.8.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 1)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#Degradado_sin_nombre_16);
+      }
+
+      .st1 {
+        fill: #a20029;
+      }
+
+      .st2 {
+        fill: #3c3c3b;
+      }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_16" data-name="Degradado sin nombre 16" x1="8.84" y1="79.4" x2="82.71" y2="79.4" gradientUnits="userSpaceOnUse">
+      <stop offset=".26" stop-color="#393b4b"/>
+      <stop offset=".33" stop-color="#513246"/>
+      <stop offset=".52" stop-color="#8d1c3a"/>
+      <stop offset=".68" stop-color="#b90d32"/>
+      <stop offset=".81" stop-color="#d4032c"/>
+      <stop offset=".88" stop-color="#de002b"/>
+    </linearGradient>
+  </defs>
+  <path class="st0" d="M35.26,95.79l37.95-37.95,9.49,9.49-37.95,37.95-9.49-9.49ZM31.94,91.99l26.42-26.42-9.77-9.77-26.42,26.42,9.77,9.77ZM18.88,78.93l15.37-15.37-10.04-10.04-15.37,15.37,10.04,10.04Z"/>
+  <g>
+    <path class="st1" d="M101.01,96.38l-9.11-29.81h5.8l7.45,24.51,7.58-24.51h5.8l-9.11,29.81h-8.41Z"/>
+    <path class="st1" d="M119.77,96.38l9.11-29.81h8.41l9.11,29.81h-5.8l-8.12-26.29h1.08l-7.99,26.29h-5.8ZM125.24,90.17v-5.26h15.73v5.26h-15.73Z"/>
+    <path class="st1" d="M164.53,97c-2.4,0-4.51-.49-6.33-1.46-1.82-.97-3.24-2.34-4.26-4.11-1.02-1.77-1.53-3.84-1.53-6.23v-18.59l5.71-.04v18.59c0,.98.17,1.87.5,2.67.33.8.79,1.49,1.38,2.07.59.58,1.27,1.02,2.05,1.33.78.31,1.61.47,2.5.47s1.76-.16,2.54-.48c.78-.32,1.46-.76,2.04-1.34.58-.58,1.03-1.27,1.36-2.07.32-.8.49-1.68.49-2.65v-18.59h5.71v18.63c0,2.39-.51,4.47-1.53,6.23-1.02,1.77-2.44,3.14-4.27,4.11-1.82.97-3.93,1.46-6.33,1.46Z"/>
+    <path class="st1" d="M183.08,96.38l10.02-15.07-9.73-14.74h6.91l6.33,9.94,6.25-9.94h6.96l-9.73,14.74,9.98,15.07h-6.91l-6.54-10.27-6.58,10.27h-6.96Z"/>
+    <path class="st1" d="M228.04,97c-2.98,0-5.55-.65-7.71-1.95s-3.82-3.11-4.99-5.45c-1.17-2.33-1.75-5.04-1.75-8.14s.58-5.8,1.75-8.14c1.17-2.33,2.83-4.15,4.99-5.44,2.16-1.3,4.73-1.95,7.71-1.95s5.55.65,7.71,1.95c2.16,1.3,3.82,3.11,4.99,5.44,1.17,2.33,1.75,5.05,1.75,8.14s-.58,5.8-1.75,8.14c-1.17,2.33-2.83,4.15-4.99,5.45-2.16,1.3-4.73,1.95-7.71,1.95ZM228.04,91.7c1.89.03,3.46-.38,4.72-1.22,1.26-.84,2.2-2.04,2.83-3.58.63-1.54.94-3.35.94-5.42s-.31-3.86-.94-5.38-1.57-2.7-2.83-3.54c-1.26-.84-2.83-1.28-4.72-1.31-1.89-.03-3.46.38-4.72,1.22-1.26.84-2.2,2.04-2.83,3.58-.63,1.55-.94,3.35-.94,5.43s.31,3.86.94,5.38c.63,1.52,1.57,2.7,2.83,3.54,1.26.84,2.83,1.28,4.72,1.3Z"/>
+    <path class="st1" d="M262.53,97c-2.98,0-5.55-.65-7.71-1.95-2.16-1.3-3.82-3.11-4.99-5.45-1.17-2.33-1.75-5.04-1.75-8.14s.58-5.8,1.75-8.14c1.17-2.33,2.83-4.15,4.99-5.44,2.16-1.3,4.73-1.95,7.71-1.95s5.55.65,7.71,1.95c2.16,1.3,3.82,3.11,4.99,5.44,1.17,2.33,1.75,5.05,1.75,8.14s-.58,5.8-1.75,8.14c-1.17,2.33-2.83,4.15-4.99,5.45-2.16,1.3-4.73,1.95-7.71,1.95ZM262.53,91.7c1.89.03,3.46-.38,4.72-1.22,1.26-.84,2.2-2.04,2.83-3.58.63-1.54.94-3.35.94-5.42s-.31-3.86-.94-5.38-1.57-2.7-2.83-3.54c-1.26-.84-2.83-1.28-4.72-1.31-1.89-.03-3.46.38-4.72,1.22-1.26.84-2.2,2.04-2.83,3.58-.63,1.55-.94,3.35-.94,5.43s.31,3.86.94,5.38c.63,1.52,1.57,2.7,2.83,3.54,1.26.84,2.83,1.28,4.72,1.3Z"/>
+    <g>
+      <path class="st2" d="M291.3,98.1l9.98-29.81h5.14l9.98,29.81h-3.83l-9.34-27.66h1.16l-9.25,27.66h-3.83ZM296.1,91.13v-3.46h15.49v3.46h-15.49Z"/>
+      <path class="st2" d="M334.65,98.73c-2.97,0-5.49-.66-7.56-1.97-2.07-1.31-3.65-3.13-4.73-5.47-1.08-2.33-1.63-5.03-1.63-8.09s.54-5.76,1.63-8.1c1.08-2.33,2.66-4.15,4.73-5.47,2.07-1.31,4.59-1.97,7.56-1.97,3.45,0,6.29.88,8.52,2.63,2.23,1.75,3.77,4.11,4.61,7.08l-3.75.99c-.61-2.22-1.69-3.98-3.25-5.26-1.56-1.28-3.6-1.92-6.13-1.92-2.22,0-4.07.5-5.55,1.51-1.48,1.01-2.59,2.41-3.33,4.21-.74,1.8-1.13,3.9-1.14,6.28-.01,2.37.35,4.46,1.1,6.26.74,1.8,1.86,3.21,3.35,4.22,1.49,1.01,3.35,1.52,5.57,1.52,2.53,0,4.57-.65,6.13-1.94,1.56-1.29,2.64-3.04,3.25-5.25l3.75.99c-.84,2.95-2.38,5.31-4.61,7.07-2.23,1.76-5.07,2.64-8.52,2.64Z"/>
+      <path class="st2" d="M352.54,98.1l9.98-29.81h5.14l9.98,29.81h-3.83l-9.34-27.66h1.16l-9.25,27.66h-3.83ZM357.34,91.13v-3.46h15.49v3.46h-15.49Z"/>
+      <path class="st2" d="M384.46,98.1v-29.81h9.19c.3,0,.84,0,1.59.02.76.01,1.48.07,2.18.17,2.3.3,4.23,1.14,5.79,2.52,1.55,1.37,2.72,3.12,3.51,5.23.79,2.11,1.18,4.44,1.18,6.98s-.39,4.86-1.18,6.98c-.79,2.11-1.96,3.85-3.51,5.23-1.55,1.37-3.48,2.21-5.79,2.52-.69.08-1.42.13-2.19.16-.76.02-1.29.03-1.58.03h-9.19ZM388.25,94.59h5.4c.52,0,1.11-.02,1.76-.05.65-.03,1.21-.09,1.7-.18,1.63-.3,2.95-.99,3.95-2.05,1.01-1.06,1.75-2.39,2.22-3.97.47-1.59.7-3.3.7-5.13s-.24-3.61-.71-5.2c-.48-1.59-1.22-2.9-2.23-3.95-1.01-1.05-2.32-1.72-3.93-2.01-.48-.1-1.05-.16-1.72-.19-.66-.03-1.24-.04-1.74-.04h-5.4v22.77Z"/>
+      <path class="st2" d="M415.76,98.1v-29.81h18.84v3.5h-15.15v9.34h12.67v3.5h-12.67v9.98h15.15v3.5h-18.84Z"/>
+      <path class="st2" d="M442.67,98.1v-29.81h3.35l11.26,23.75,11.2-23.75h3.4v29.79h-3.5v-21.7l-10.12,21.72h-1.97l-10.12-21.72v21.72h-3.5Z"/>
+      <path class="st2" d="M487.93,98.1v-12.4l-10.04-17.41h4.29l7.62,13.19,7.6-13.19h4.29l-10.02,17.41v12.4h-3.73Z"/>
+    </g>
+  </g>
+</svg></div>
+              </div>
+              <p class="slide-lead">La caja de herramientas obligatoria: antes de analizar cualquier descuadre, cruzamos estas 4 fuentes de verdad:</p>
+              
+              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                <div class="agenda-card" style="border-top: 4px solid #345D90;">
+                  <div class="agenda-time">1. ALMACÉN</div>
+                  <div class="agenda-title">Reporte de Existencias</div>
+                  <p class="agenda-desc"><em>Inventario > Informes > Existencias</em> (<code>stock.quant</code> / <code>stock.valuation</code>). Cantidades físicas reales en mano multiplicadas por el coste unitario.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #AC0340;">
+                  <div class="agenda-time">2. COMPRAS EN TRÁNSITO</div>
+                  <div class="agenda-title">Facturas por Recibir</div>
+                  <p class="agenda-desc">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de provisión (como los <strong>$8,500.00 MXN</strong> de la PO 2 de Teclados).</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #E4A900;">
+                  <div class="agenda-time">3. CONTABILIDAD</div>
+                  <div class="agenda-title">Mayor de la Cuenta 115.01.01</div>
+                  <p class="agenda-desc">Balanza de Comprobación y Apuntes Contables individuales. Revela asientos huérfanos sin producto y pólizas manuales de diario.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #16A34A;">
+                  <div class="agenda-time">4. TRAZABILIDAD GRANULAR</div>
+                  <div class="agenda-title">Movimientos (stock.move)</div>
+                  <p class="agenda-desc">Histórico de cada entrada, salida y ajuste con fecha efectiva, origen, destino y valor monetario unitario registrado en Odoo 19.</p>
+                </div>
+              </div>
+            </div>
+            
+    </div>
+    
+
+    <div class="slide-box bg-white" id="slide-13" data-id="13" data-title="Desastres 1 y 2: Ajuste Huérfano y Producto Archivado" data-notes="Detalle del Desastre 1 (Mouse Óptico sin cuenta contable en ajuste) y Desastre 2 (Router Legacy archivado con existencias vivas)." data-time="01:06 - 01:14">
       
       
             <div class="slide-content">
@@ -3183,7 +3267,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-13" data-id="13" data-title="Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha" data-notes="Detalle del Desastre 3 (Cámara Web con error de moneda USD) y Desastre 4 (Memoria RAM con costo cambiado a mano)." data-time="01:07 - 01:16">
+    <div class="slide-box bg-white" id="slide-14" data-id="14" data-title="Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha" data-notes="Detalle del Desastre 3 (Cámara Web con error de moneda USD) y Desastre 4 (Memoria RAM con costo cambiado a mano)." data-time="01:14 - 01:21">
       
       
             <div class="slide-content">
@@ -3271,7 +3355,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-14" data-id="14" data-title="Desastre 5: Stock Negativo con Compra Posterior" data-notes="Detalle del Desastre 5 (Disco SSD NVMe con stock negativo): Salida urgente de 5 unidades sin stock previo. Cuando entra la compra después a $350, se pierde la deducción contable real. Descuadre de +$1,500 MXN." data-time="01:16 - 01:25">
+    <div class="slide-box bg-white" id="slide-15" data-id="15" data-title="Desastre 5: Stock Negativo con Compra Posterior" data-notes="Detalle del Desastre 5 (Disco SSD NVMe con stock negativo): Salida urgente de 10 unidades sin stock previo. Cuando entra la compra después de 20 u a $350, se pierde la deducción contable real. Descuadre de -$1,500 MXN." data-time="01:21 - 01:28">
       
       
             <div class="slide-content">
@@ -3330,111 +3414,27 @@ h1, h2, h3, h4, h5, h6 {
               
               <div class="two-col-grid">
                 <div class="disaster-col-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="card-pill" style="color:#B91C1C;">PASO 1 · SALIDA FORZADA (-5 UNIDADES)</div>
+                  <div class="card-pill" style="color:#B91C1C;">PASO 1 · SALIDA FORZADA (-10 UNIDADES)</div>
                   <h3>La Entrega a Ciegas</h3>
                   <div class="detail-box">
-                    <p>Urgencia de entrega: se valida la salida de 5 piezas teniendo existencia en 0. Odoo descarga a costo provisional ($0 o desfasado):</p>
+                    <p>Urgencia de entrega: se valida la salida de 10 piezas teniendo existencia en 0. Odoo descarga a costo provisional ($0 o desfasado):</p>
                     <div class="asiento-box" style="margin-top:10px;">
-                      Stock Físico: <strong>-5 piezas</strong><br>
+                      Stock Físico: <strong>-10 piezas</strong><br>
                       Deducción en Costo de Ventas: <strong>Subvaluada o nula</strong>
                     </div>
                   </div>
                 </div>
 
                 <div class="disaster-col-card" style="border-left: 4px solid var(--rojo-vauxoo);">
-                  <div class="card-pill" style="color:var(--rojo-vauxoo);">PASO 2 · COMPRA TARDÍA (15 UNIDADES)</div>
+                  <div class="card-pill" style="color:var(--rojo-vauxoo);">PASO 2 · COMPRA TARDÍA (20 UNIDADES)</div>
                   <h3>El Costo que Quedó en el Limbo</h3>
                   <div class="detail-box">
-                    <p>Días después se recibe la compra de 15 piezas a $350.00 MXN ($5,250 MXN). El costo real debió deducirse en la venta pero ya quedó cerrado:</p>
+                    <p>Días después se recibe la compra de 20 piezas a $350.00 MXN ($7,000 MXN). El costo real debió deducirse en la venta pero ya quedó cerrado:</p>
                     <div class="asiento-box" style="margin-top:10px; background:#FFF1F2; color:#991B1B;">
-                      Distorsión permanente en Cuenta 1150: <strong>+$1,500.00 MXN</strong><br>
+                      Distorsión permanente en Cuenta 1150: <strong>-$1,500.00 MXN</strong><br>
                       Costo de Ventas subvaluado en el ejercicio fiscal.
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            
-    </div>
-    
-
-    <div class="slide-box bg-white" id="slide-15" data-id="15" data-title="Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')" data-notes="Presentar los 4 reportes obligatorios para auditar inventarios en Odoo: Existencias, Facturas por recibir, Balanza 1150 y Movimientos stock.move. El mapa de coordenadas del auditor." data-time="01:25 - 01:33">
-      
-      
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">BLOQUE 5 · 01:25 - 02:00</span>
-                  <h2 class="slide-title">Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")</h2>
-                </div>
-                <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
-<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510.52 158.8">
-  <!-- Generator: Adobe Illustrator 30.8.1, SVG Export Plug-In . SVG Version: 2.1.4 Build 1)  -->
-  <defs>
-    <style>
-      .st0 {
-        fill: url(#Degradado_sin_nombre_16);
-      }
-
-      .st1 {
-        fill: #a20029;
-      }
-
-      .st2 {
-        fill: #3c3c3b;
-      }
-    </style>
-    <linearGradient id="Degradado_sin_nombre_16" data-name="Degradado sin nombre 16" x1="8.84" y1="79.4" x2="82.71" y2="79.4" gradientUnits="userSpaceOnUse">
-      <stop offset=".26" stop-color="#393b4b"/>
-      <stop offset=".33" stop-color="#513246"/>
-      <stop offset=".52" stop-color="#8d1c3a"/>
-      <stop offset=".68" stop-color="#b90d32"/>
-      <stop offset=".81" stop-color="#d4032c"/>
-      <stop offset=".88" stop-color="#de002b"/>
-    </linearGradient>
-  </defs>
-  <path class="st0" d="M35.26,95.79l37.95-37.95,9.49,9.49-37.95,37.95-9.49-9.49ZM31.94,91.99l26.42-26.42-9.77-9.77-26.42,26.42,9.77,9.77ZM18.88,78.93l15.37-15.37-10.04-10.04-15.37,15.37,10.04,10.04Z"/>
-  <g>
-    <path class="st1" d="M101.01,96.38l-9.11-29.81h5.8l7.45,24.51,7.58-24.51h5.8l-9.11,29.81h-8.41Z"/>
-    <path class="st1" d="M119.77,96.38l9.11-29.81h8.41l9.11,29.81h-5.8l-8.12-26.29h1.08l-7.99,26.29h-5.8ZM125.24,90.17v-5.26h15.73v5.26h-15.73Z"/>
-    <path class="st1" d="M164.53,97c-2.4,0-4.51-.49-6.33-1.46-1.82-.97-3.24-2.34-4.26-4.11-1.02-1.77-1.53-3.84-1.53-6.23v-18.59l5.71-.04v18.59c0,.98.17,1.87.5,2.67.33.8.79,1.49,1.38,2.07.59.58,1.27,1.02,2.05,1.33.78.31,1.61.47,2.5.47s1.76-.16,2.54-.48c.78-.32,1.46-.76,2.04-1.34.58-.58,1.03-1.27,1.36-2.07.32-.8.49-1.68.49-2.65v-18.59h5.71v18.63c0,2.39-.51,4.47-1.53,6.23-1.02,1.77-2.44,3.14-4.27,4.11-1.82.97-3.93,1.46-6.33,1.46Z"/>
-    <path class="st1" d="M183.08,96.38l10.02-15.07-9.73-14.74h6.91l6.33,9.94,6.25-9.94h6.96l-9.73,14.74,9.98,15.07h-6.91l-6.54-10.27-6.58,10.27h-6.96Z"/>
-    <path class="st1" d="M228.04,97c-2.98,0-5.55-.65-7.71-1.95s-3.82-3.11-4.99-5.45c-1.17-2.33-1.75-5.04-1.75-8.14s.58-5.8,1.75-8.14c1.17-2.33,2.83-4.15,4.99-5.44,2.16-1.3,4.73-1.95,7.71-1.95s5.55.65,7.71,1.95c2.16,1.3,3.82,3.11,4.99,5.44,1.17,2.33,1.75,5.05,1.75,8.14s-.58,5.8-1.75,8.14c-1.17,2.33-2.83,4.15-4.99,5.45-2.16,1.3-4.73,1.95-7.71,1.95ZM228.04,91.7c1.89.03,3.46-.38,4.72-1.22,1.26-.84,2.2-2.04,2.83-3.58.63-1.54.94-3.35.94-5.42s-.31-3.86-.94-5.38-1.57-2.7-2.83-3.54c-1.26-.84-2.83-1.28-4.72-1.31-1.89-.03-3.46.38-4.72,1.22-1.26.84-2.2,2.04-2.83,3.58-.63,1.55-.94,3.35-.94,5.43s.31,3.86.94,5.38c.63,1.52,1.57,2.7,2.83,3.54,1.26.84,2.83,1.28,4.72,1.3Z"/>
-    <path class="st1" d="M262.53,97c-2.98,0-5.55-.65-7.71-1.95-2.16-1.3-3.82-3.11-4.99-5.45-1.17-2.33-1.75-5.04-1.75-8.14s.58-5.8,1.75-8.14c1.17-2.33,2.83-4.15,4.99-5.44,2.16-1.3,4.73-1.95,7.71-1.95s5.55.65,7.71,1.95c2.16,1.3,3.82,3.11,4.99,5.44,1.17,2.33,1.75,5.05,1.75,8.14s-.58,5.8-1.75,8.14c-1.17,2.33-2.83,4.15-4.99,5.45-2.16,1.3-4.73,1.95-7.71,1.95ZM262.53,91.7c1.89.03,3.46-.38,4.72-1.22,1.26-.84,2.2-2.04,2.83-3.58.63-1.54.94-3.35.94-5.42s-.31-3.86-.94-5.38-1.57-2.7-2.83-3.54c-1.26-.84-2.83-1.28-4.72-1.31-1.89-.03-3.46.38-4.72,1.22-1.26.84-2.2,2.04-2.83,3.58-.63,1.55-.94,3.35-.94,5.43s.31,3.86.94,5.38c.63,1.52,1.57,2.7,2.83,3.54,1.26.84,2.83,1.28,4.72,1.3Z"/>
-    <g>
-      <path class="st2" d="M291.3,98.1l9.98-29.81h5.14l9.98,29.81h-3.83l-9.34-27.66h1.16l-9.25,27.66h-3.83ZM296.1,91.13v-3.46h15.49v3.46h-15.49Z"/>
-      <path class="st2" d="M334.65,98.73c-2.97,0-5.49-.66-7.56-1.97-2.07-1.31-3.65-3.13-4.73-5.47-1.08-2.33-1.63-5.03-1.63-8.09s.54-5.76,1.63-8.1c1.08-2.33,2.66-4.15,4.73-5.47,2.07-1.31,4.59-1.97,7.56-1.97,3.45,0,6.29.88,8.52,2.63,2.23,1.75,3.77,4.11,4.61,7.08l-3.75.99c-.61-2.22-1.69-3.98-3.25-5.26-1.56-1.28-3.6-1.92-6.13-1.92-2.22,0-4.07.5-5.55,1.51-1.48,1.01-2.59,2.41-3.33,4.21-.74,1.8-1.13,3.9-1.14,6.28-.01,2.37.35,4.46,1.1,6.26.74,1.8,1.86,3.21,3.35,4.22,1.49,1.01,3.35,1.52,5.57,1.52,2.53,0,4.57-.65,6.13-1.94,1.56-1.29,2.64-3.04,3.25-5.25l3.75.99c-.84,2.95-2.38,5.31-4.61,7.07-2.23,1.76-5.07,2.64-8.52,2.64Z"/>
-      <path class="st2" d="M352.54,98.1l9.98-29.81h5.14l9.98,29.81h-3.83l-9.34-27.66h1.16l-9.25,27.66h-3.83ZM357.34,91.13v-3.46h15.49v3.46h-15.49Z"/>
-      <path class="st2" d="M384.46,98.1v-29.81h9.19c.3,0,.84,0,1.59.02.76.01,1.48.07,2.18.17,2.3.3,4.23,1.14,5.79,2.52,1.55,1.37,2.72,3.12,3.51,5.23.79,2.11,1.18,4.44,1.18,6.98s-.39,4.86-1.18,6.98c-.79,2.11-1.96,3.85-3.51,5.23-1.55,1.37-3.48,2.21-5.79,2.52-.69.08-1.42.13-2.19.16-.76.02-1.29.03-1.58.03h-9.19ZM388.25,94.59h5.4c.52,0,1.11-.02,1.76-.05.65-.03,1.21-.09,1.7-.18,1.63-.3,2.95-.99,3.95-2.05,1.01-1.06,1.75-2.39,2.22-3.97.47-1.59.7-3.3.7-5.13s-.24-3.61-.71-5.2c-.48-1.59-1.22-2.9-2.23-3.95-1.01-1.05-2.32-1.72-3.93-2.01-.48-.1-1.05-.16-1.72-.19-.66-.03-1.24-.04-1.74-.04h-5.4v22.77Z"/>
-      <path class="st2" d="M415.76,98.1v-29.81h18.84v3.5h-15.15v9.34h12.67v3.5h-12.67v9.98h15.15v3.5h-18.84Z"/>
-      <path class="st2" d="M442.67,98.1v-29.81h3.35l11.26,23.75,11.2-23.75h3.4v29.79h-3.5v-21.7l-10.12,21.72h-1.97l-10.12-21.72v21.72h-3.5Z"/>
-      <path class="st2" d="M487.93,98.1v-12.4l-10.04-17.41h4.29l7.62,13.19,7.6-13.19h4.29l-10.02,17.41v12.4h-3.73Z"/>
-    </g>
-  </g>
-</svg></div>
-              </div>
-              <p class="slide-lead">Para auditar al centavo en Odoo 19, es obligatorio cruzar estas 4 fuentes de verdad:</p>
-              
-              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 16px;">
-                <div class="agenda-card" style="border-top: 4px solid #345D90;">
-                  <div class="agenda-time">1. ALMACÉN</div>
-                  <div class="agenda-title">Reporte de Existencias</div>
-                  <p class="agenda-desc"><em>Inventario > Informes > Existencias</em> (<code>stock.quant</code> / <code>stock.valuation</code>). Cantidades físicas reales en mano multiplicadas por el coste unitario.</p>
-                </div>
-                <div class="agenda-card" style="border-top: 4px solid #AC0340;">
-                  <div class="agenda-time">2. COMPRAS EN TRÁNSITO</div>
-                  <div class="agenda-title">Facturas por Recibir</div>
-                  <p class="agenda-desc">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de provisión o factura.</p>
-                </div>
-                <div class="agenda-card" style="border-top: 4px solid #E4A900;">
-                  <div class="agenda-time">3. CONTABILIDAD</div>
-                  <div class="agenda-title">Mayor de la Cuenta 115.01.01</div>
-                  <p class="agenda-desc">Balanza de Comprobación y Apuntes Contables individuales. Revela asientos huérfanos sin producto y pólizas manuales de diario.</p>
-                </div>
-                <div class="agenda-card" style="border-top: 4px solid #16A34A;">
-                  <div class="agenda-time">4. TRAZABILIDAD GRANULAR</div>
-                  <div class="agenda-title">Movimientos (stock.move)</div>
-                  <p class="agenda-desc">Histórico de cada entrada, salida y ajuste con fecha efectiva, origen, destino y valor monetario unitario registrado en Odoo 19.</p>
                 </div>
               </div>
             </div>
@@ -4039,7 +4039,7 @@ h1, h2, h3, h4, h5, h6 {
     
 
     <button class="thumb-btn" onclick="goToSlide(2)" id="thumb-2">
-      2. El Hook: Descuadre de $482,190 MXN
+      2. El Hook: Descuadre de $473,690 MXN
     </button>
     
 
@@ -4089,22 +4089,22 @@ h1, h2, h3, h4, h5, h6 {
     
 
     <button class="thumb-btn" onclick="goToSlide(12)" id="thumb-12">
-      12. Desastres 1 y 2: Ajuste Huérfano y Producto Archivado
+      12. Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(13)" id="thumb-13">
-      13. Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha
+      13. Desastres 1 y 2: Ajuste Huérfano y Producto Archivado
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(14)" id="thumb-14">
-      14. Desastre 5: Stock Negativo con Compra Posterior
+      14. Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(15)" id="thumb-15">
-      15. Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')
+      15. Desastre 5: Stock Negativo con Compra Posterior
     </button>
     
 

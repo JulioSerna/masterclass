@@ -229,11 +229,11 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
             <div class="stage-num">2</div>
             <div class="stage-info">
               <h4>Segunda Compra MXN (Precio Superior) — Ponderación AVCO</h4>
-              <p>Recepción de 50 piezas a <strong>$170.00 MXN/u</strong> ($8,500 MXN totales). Total en almacén: 100 piezas.</p>
+              <p>Recepción de 50 piezas a <strong>$170.00 MXN/u</strong> ($8,500 MXN totales). Total en almacén: 100 piezas. <em>Mercancía recibida pero pendiente de facturar para auditoría.</em></p>
               <div class="asiento-mini">
                 <div>(50 &times; $150 + 50 &times; $170) &divide; 100 = <strong>$160.00 MXN / pieza</strong></div>
               </div>
-              <div class="stage-memo">📌 <em>Saldo en cuenta 115.01.01: $16,000.00 MXN acumulados.</em></div>
+              <div class="stage-memo">📌 <em>Valor físico en almacén: $16,000.00 MXN acumulados.</em></div>
             </div>
           </div>
 
@@ -252,13 +252,13 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
           <div class="lifecycle-stage">
             <div class="stage-num">4</div>
             <div class="stage-info">
-              <h4>Factura de Cliente y Reconocimiento del Costo de Ventas</h4>
+              <h4>Factura de Cliente y Conciliación Forense</h4>
               <p>Factura emitida con asiento automático instantáneo de Costo de Ventas en Odoo 19:</p>
               <div class="asiento-mini">
                 <div>CARGO: 501.01.01 Costo de Ventas → <strong>$4,800.00 MXN</strong> (30u &times; $160)</div>
                 <div>ABONO: 115.01.01 Inventario → <strong>$4,800.00 MXN</strong></div>
               </div>
-              <div class="stage-memo">📌 <em>Resultado: Saldo en cuenta 1150 = $11,200.00 MXN. Cuadre exacto con almacén ($11,200.00 MXN).</em></div>
+              <div class="stage-memo">📌 <em>Resultado: Saldo en cuenta 1150 = $2,700.00 MXN + Facturas por Recibir (PO 2) = $8,500.00 MXN $\rightarrow$ Total conciliado: $11,200.00 MXN (Almacén). Cuadre perfecto (Dif: $0.00 MXN).</em></div>
             </div>
           </div>
 
@@ -368,13 +368,13 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px;">
           <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-top:4px solid #345D90; border-radius:8px; padding:16px;">
             <strong style="color:#172A45; font-size:1rem;">1. Reporte de Existencias</strong>
-            <p style="font-size:0.85rem; color:#475569; margin:8px 0;">Menú: <em>Inventario > Informes > Existencias</em> (o <em>Contabilidad > Informes > Inventario</em>). Muestra unidades físicas $\times$ coste unitario de la ficha.</p>
+            <p style="font-size:0.85rem; color:#475569; margin:8px 0;">Menú: <em>Inventario > Informes > Existencias</em> (o movimientos de existencias). Muestra unidades físicas $\times$ coste unitario de la ficha.</p>
             <small style="color:#345D90; font-weight:600;">Objetivo: Conocer el valor físico en bodega.</small>
           </div>
 
           <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-top:4px solid #AC0340; border-radius:8px; padding:16px;">
             <strong style="color:#172A45; font-size:1rem;">2. Facturas por Recibir</strong>
-            <p style="font-size:0.85rem; color:#475569; margin:8px 0;">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de factura del proveedor.</p>
+            <p style="font-size:0.85rem; color:#475569; margin:8px 0;">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de factura del proveedor (como los <strong>$8,500.00 MXN</strong> de Teclados).</p>
             <small style="color:#AC0340; font-weight:600;">Objetivo: Auditar provisiones en tránsito.</small>
           </div>
 

@@ -147,7 +147,7 @@ def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
     call_kw("account.move", "write", [[b1], {"invoice_date": "2026-10-14"}])
     call_kw("account.move", "action_post", [[b1]])
 
-    # PO 2: 50 @ 170
+    # PO 2: 50 @ 170 (Recibida pero PENDIENTE DE FACTURAR para auditoría)
     po2 = call_kw("purchase.order", "create", [{"partner_id": prov_mx}])
     call_kw("purchase.order.line", "create", [{"order_id": po2, "product_id": tecl, "product_qty": 50.0, "price_unit": 170.0, "tax_ids": [[6, 0, []]]}])
     call_kw("purchase.order", "button_confirm", [[po2]])
@@ -155,10 +155,7 @@ def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
     for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk2)]], {"fields": ["id", "product_uom_qty"]}):
         call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
     call_kw("stock.picking", "button_validate", [[pk2]])
-    call_kw("purchase.order", "action_create_invoice", [[po2]])
-    b2 = call_kw("purchase.order", "search_read", [[("id", "=", po2)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
-    call_kw("account.move", "write", [[b2], {"invoice_date": "2026-10-14"}])
-    call_kw("account.move", "action_post", [[b2]])
+    # NOTA: Omitimos la factura intencionalmente para demostrar "Facturas por Recibir" en la auditoría ($8,500 MXN)
 
     # Venta de 30 unidades
     so = call_kw("sale.order", "create", [{"partner_id": cli}])

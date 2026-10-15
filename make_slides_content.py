@@ -50,14 +50,14 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 2: El Hook - Descuadre de $482,190 MXN
+        # Slide 2: El Hook - Descuadre de $473,690 MXN
         {
             "id": 2,
-            "title": "El Hook: Descuadre de $482,190 MXN",
+            "title": "El Hook: Descuadre de $473,690 MXN",
             "bg": "white",
             "time": "00:01 - 00:06",
             "block": "Bloque 1",
-            "notes": "Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($821,100.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $482,190.00 MXN ($487k de póliza manual + $4,810 de descuadres operativos). Plantear el dolor de todo cierre contable.",
+            "notes": "Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($812,600.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $473,690.00 MXN ($487k de póliza manual - $8.5k factura por recibir + $4,810 de descuadres operativos). Plantear el dolor de todo cierre contable.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -74,7 +74,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                   <div class="audit-col-badge">Módulo de Contabilidad</div>
                   <h3 class="audit-col-title">Balanza de Comprobación</h3>
                   <div class="audit-code">Cuenta 115.01.01 · Mercancías en Almacén</div>
-                  <div class="audit-amount">$821,100.00 MXN</div>
+                  <div class="audit-amount">$812,600.00 MXN</div>
                   <div class="audit-detail">Saldo deudor contable al corte mensual</div>
                   <div class="audit-status audit-err">⚠️ Generado por libro mayor contable</div>
                 </div>
@@ -83,7 +83,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                   <div class="audit-diff-card">
                     <span class="diff-label">DESCUADRE REAL</span>
                     <span class="diff-amount doodle-wrap">
-                      $482,190.00 MXN
+                      $473,690.00 MXN
                       {doodle_oval}
                     </span>
                     <span class="diff-warn">¿Cómo conciliar esta brecha en el cierre?</span>
@@ -511,7 +511,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                   <p>50 unidades @ $170.00 MXN</p>
                   <div class="asiento-box">
                     Subtotal: <strong>$8,500.00 MXN</strong><br>
-                    Valor añadido en entrada física
+                    <strong>Pendiente de Facturar</strong> (para auditoría)
                   </div>
                 </div>
 
@@ -522,7 +522,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                   <div class="asiento-box" style="background:#EEF2F6; color:var(--azul-marino);">
                     (50&times;$150 + 50&times;$170) &divide; 100 =<br>
                     <strong>Costo Promedio: $160.00 MXN</strong><br>
-                    Saldo en Cuenta 1150: <strong>$16,000.00 MXN</strong>
+                    Valor Físico Almacén: <strong>$16,000.00 MXN</strong>
                   </div>
                 </div>
               </div>
@@ -541,7 +541,7 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             "bg": "white",
             "time": "00:38 - 00:45",
             "block": "Bloque 3",
-            "notes": "Mostrar la venta de 30 unidades de [TECL-INAL-USB] @ $160 MXN. Costo de ventas = $4,800. Saldo remanente en almacén = 70 u @ $160 = $11,200 MXN = Balanza contable.",
+            "notes": "Mostrar la venta de 30 unidades de [TECL-INAL-USB] @ $160 MXN. Costo de ventas = $4,800. Saldo remanente en almacén = 70 u @ $160 = $11,200 MXN. Contabilidad tiene $2,700 y Facturas por Recibir tiene $8,500. Cuadre perfecto: $2,700 + $8,500 = $11,200.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -567,14 +567,14 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
                 </div>
 
                 <div class="disaster-col-card" style="border-left: 4px solid #16A34A;">
-                  <div class="card-pill" style="color:#16A34A;">ESTADO POST-VENTA (CUADRE PERFECTO)</div>
-                  <h3>Sincronía Total al Centavo</h3>
+                  <div class="card-pill" style="color:#16A34A;">ESTADO POST-VENTA (CONCILIACIÓN FORENSE)</div>
+                  <h3>Sincronía Total con Factura por Recibir</h3>
                   <div class="detail-box">
                     <ul class="styled-list">
-                      <li><strong>Existencias Físicas:</strong> 70 unidades en almacén.</li>
-                      <li><strong>Valor en Almacén:</strong> 70 u &times; $160.00 = <strong>$11,200.00 MXN</strong>.</li>
-                      <li><strong>Saldo en Balanza (1150):</strong> $16,000 - $4,800 = <strong>$11,200.00 MXN</strong>.</li>
-                      <li><strong>Diferencia Contable vs Logística:</strong> <span style="color:#16A34A; font-weight:700;">$0.00 MXN</span>.</li>
+                      <li><strong>Existencias Físicas:</strong> 70 unidades @ $160 = <strong>$11,200.00 MXN</strong>.</li>
+                      <li><strong>Saldo en Balanza (1150):</strong> $7,500 (PO 1) - $4,800 (Venta) = <strong>$2,700.00 MXN</strong>.</li>
+                      <li><strong>Facturas por Recibir (PO 2):</strong> 50 u @ $170 = <strong>$8,500.00 MXN</strong>.</li>
+                      <li><strong>Fórmula de Conciliación:</strong> $2,700 (1150) + $8,500 (Por Facturar) = <strong>$11,200.00 MXN</strong> (Dif: <span style="color:#16A34A; font-weight:700;">$0.00</span>).</li>
                     </ul>
                   </div>
                 </div>
@@ -672,12 +672,57 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 12: Desastres 1 y 2 (Mouse y Router)
+        # Slide 12: Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")
         {
             "id": 12,
+            "title": "Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')",
+            "bg": "white",
+            "time": "00:58 - 01:06",
+            "block": "Bloque 4",
+            "notes": "Presentar los 4 reportes obligatorios para auditar inventarios en Odoo: Existencias, Facturas por recibir, Balanza 1150 y Movimientos stock.move. El mapa de coordenadas del auditor antes de abrir los casos de desastres. Resaltar cómo en el Teclado tenemos $8,500 en Facturas por Recibir que explican el cuadre.",
+            "html": f'''
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:#0D9488;">BLOQUE 4 · HERRAMIENTAS DE AUDITORÍA</span>
+                  <h2 class="slide-title">Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")</h2>
+                </div>
+                <div class="slide-header-logo">{logo_light}</div>
+              </div>
+              <p class="slide-lead">La caja de herramientas obligatoria: antes de analizar cualquier descuadre, cruzamos estas 4 fuentes de verdad:</p>
+              
+              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                <div class="agenda-card" style="border-top: 4px solid #345D90;">
+                  <div class="agenda-time">1. ALMACÉN</div>
+                  <div class="agenda-title">Reporte de Existencias</div>
+                  <p class="agenda-desc"><em>Inventario > Informes > Existencias</em> (<code>stock.quant</code> / <code>stock.valuation</code>). Cantidades físicas reales en mano multiplicadas por el coste unitario.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #AC0340;">
+                  <div class="agenda-time">2. COMPRAS EN TRÁNSITO</div>
+                  <div class="agenda-title">Facturas por Recibir</div>
+                  <p class="agenda-desc">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de provisión (como los <strong>$8,500.00 MXN</strong> de la PO 2 de Teclados).</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #E4A900;">
+                  <div class="agenda-time">3. CONTABILIDAD</div>
+                  <div class="agenda-title">Mayor de la Cuenta 115.01.01</div>
+                  <p class="agenda-desc">Balanza de Comprobación y Apuntes Contables individuales. Revela asientos huérfanos sin producto y pólizas manuales de diario.</p>
+                </div>
+                <div class="agenda-card" style="border-top: 4px solid #16A34A;">
+                  <div class="agenda-time">4. TRAZABILIDAD GRANULAR</div>
+                  <div class="agenda-title">Movimientos (stock.move)</div>
+                  <p class="agenda-desc">Histórico de cada entrada, salida y ajuste con fecha efectiva, origen, destino y valor monetario unitario registrado en Odoo 19.</p>
+                </div>
+              </div>
+            </div>
+            '''
+        },
+
+        # Slide 13: Desastres 1 y 2 (Mouse y Router)
+        {
+            "id": 13,
             "title": "Desastres 1 y 2: Ajuste Huérfano y Producto Archivado",
             "bg": "white",
-            "time": "00:58 - 01:07",
+            "time": "01:06 - 01:14",
             "block": "Bloque 4",
             "notes": "Detalle del Desastre 1 (Mouse Óptico sin cuenta contable en ajuste) y Desastre 2 (Router Legacy archivado con existencias vivas).",
             "html": f'''
@@ -721,12 +766,12 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 13: Desastres 3 y 4 (Cámara Web y Memoria RAM)
+        # Slide 14: Desastres 3 y 4 (Cámara Web y Memoria RAM)
         {
-            "id": 13,
+            "id": 14,
             "title": "Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha",
             "bg": "white",
-            "time": "01:07 - 01:16",
+            "time": "01:14 - 01:21",
             "block": "Bloque 4",
             "notes": "Detalle del Desastre 3 (Cámara Web con error de moneda USD) y Desastre 4 (Memoria RAM con costo cambiado a mano).",
             "html": f'''
@@ -770,14 +815,14 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
             '''
         },
 
-        # Slide 14: Desastre 5 (Disco SSD - Stock Negativo)
+        # Slide 15: Desastre 5 (Disco SSD - Stock Negativo)
         {
-            "id": 14,
+            "id": 15,
             "title": "Desastre 5: Stock Negativo con Compra Posterior",
             "bg": "white",
-            "time": "01:16 - 01:25",
+            "time": "01:21 - 01:28",
             "block": "Bloque 4",
-            "notes": "Detalle del Desastre 5 (Disco SSD NVMe con stock negativo): Salida urgente de 5 unidades sin stock previo. Cuando entra la compra después a $350, se pierde la deducción contable real. Descuadre de +$1,500 MXN.",
+            "notes": "Detalle del Desastre 5 (Disco SSD NVMe con stock negativo): Salida urgente de 10 unidades sin stock previo. Cuando entra la compra después de 20 u a $350, se pierde la deducción contable real. Descuadre de -$1,500 MXN.",
             "html": f'''
             <div class="slide-content">
               <div class="slide-header">
@@ -791,72 +836,27 @@ def get_slides(doodle_oval, doodle_arrow, doodle_underline, logo_white, logo_lig
               
               <div class="two-col-grid">
                 <div class="disaster-col-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="card-pill" style="color:#B91C1C;">PASO 1 · SALIDA FORZADA (-5 UNIDADES)</div>
+                  <div class="card-pill" style="color:#B91C1C;">PASO 1 · SALIDA FORZADA (-10 UNIDADES)</div>
                   <h3>La Entrega a Ciegas</h3>
                   <div class="detail-box">
-                    <p>Urgencia de entrega: se valida la salida de 5 piezas teniendo existencia en 0. Odoo descarga a costo provisional ($0 o desfasado):</p>
+                    <p>Urgencia de entrega: se valida la salida de 10 piezas teniendo existencia en 0. Odoo descarga a costo provisional ($0 o desfasado):</p>
                     <div class="asiento-box" style="margin-top:10px;">
-                      Stock Físico: <strong>-5 piezas</strong><br>
+                      Stock Físico: <strong>-10 piezas</strong><br>
                       Deducción en Costo de Ventas: <strong>Subvaluada o nula</strong>
                     </div>
                   </div>
                 </div>
 
                 <div class="disaster-col-card" style="border-left: 4px solid var(--rojo-vauxoo);">
-                  <div class="card-pill" style="color:var(--rojo-vauxoo);">PASO 2 · COMPRA TARDÍA (15 UNIDADES)</div>
+                  <div class="card-pill" style="color:var(--rojo-vauxoo);">PASO 2 · COMPRA TARDÍA (20 UNIDADES)</div>
                   <h3>El Costo que Quedó en el Limbo</h3>
                   <div class="detail-box">
-                    <p>Días después se recibe la compra de 15 piezas a $350.00 MXN ($5,250 MXN). El costo real debió deducirse en la venta pero ya quedó cerrado:</p>
+                    <p>Días después se recibe la compra de 20 piezas a $350.00 MXN ($7,000 MXN). El costo real debió deducirse en la venta pero ya quedó cerrado:</p>
                     <div class="asiento-box" style="margin-top:10px; background:#FFF1F2; color:#991B1B;">
-                      Distorsión permanente en Cuenta 1150: <strong>+$1,500.00 MXN</strong><br>
+                      Distorsión permanente en Cuenta 1150: <strong>-$1,500.00 MXN</strong><br>
                       Costo de Ventas subvaluado en el ejercicio fiscal.
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            '''
-        },
-
-        # Slide 15: NUEVA SLIDE - Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")
-        {
-            "id": 15,
-            "title": "Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')",
-            "bg": "white",
-            "time": "01:25 - 01:33",
-            "block": "Bloque 5",
-            "notes": "Presentar los 4 reportes obligatorios para auditar inventarios en Odoo: Existencias, Facturas por recibir, Balanza 1150 y Movimientos stock.move. El mapa de coordenadas del auditor.",
-            "html": f'''
-            <div class="slide-content">
-              <div class="slide-header">
-                <div>
-                  <span class="pill-badge">BLOQUE 5 · 01:25 - 02:00</span>
-                  <h2 class="slide-title">Los 4 Modelos Esenciales de Auditoría ("El Cuadrilátero de Control")</h2>
-                </div>
-                <div class="slide-header-logo">{logo_light}</div>
-              </div>
-              <p class="slide-lead">Para auditar al centavo en Odoo 19, es obligatorio cruzar estas 4 fuentes de verdad:</p>
-              
-              <div class="agenda-grid" style="grid-template-columns: repeat(2, 1fr); gap: 16px;">
-                <div class="agenda-card" style="border-top: 4px solid #345D90;">
-                  <div class="agenda-time">1. ALMACÉN</div>
-                  <div class="agenda-title">Reporte de Existencias</div>
-                  <p class="agenda-desc"><em>Inventario > Informes > Existencias</em> (<code>stock.quant</code> / <code>stock.valuation</code>). Cantidades físicas reales en mano multiplicadas por el coste unitario.</p>
-                </div>
-                <div class="agenda-card" style="border-top: 4px solid #AC0340;">
-                  <div class="agenda-time">2. COMPRAS EN TRÁNSITO</div>
-                  <div class="agenda-title">Facturas por Recibir</div>
-                  <p class="agenda-desc">Cruce de líneas de compra con <code>qty_received > qty_invoiced</code>. Refleja mercancía física en almacén pendiente de provisión o factura.</p>
-                </div>
-                <div class="agenda-card" style="border-top: 4px solid #E4A900;">
-                  <div class="agenda-time">3. CONTABILIDAD</div>
-                  <div class="agenda-title">Mayor de la Cuenta 115.01.01</div>
-                  <p class="agenda-desc">Balanza de Comprobación y Apuntes Contables individuales. Revela asientos huérfanos sin producto y pólizas manuales de diario.</p>
-                </div>
-                <div class="agenda-card" style="border-top: 4px solid #16A34A;">
-                  <div class="agenda-time">4. TRAZABILIDAD GRANULAR</div>
-                  <div class="agenda-title">Movimientos (stock.move)</div>
-                  <p class="agenda-desc">Histórico de cada entrada, salida y ajuste con fecha efectiva, origen, destino y valor monetario unitario registrado en Odoo 19.</p>
                 </div>
               </div>
             </div>
