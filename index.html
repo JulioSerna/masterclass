@@ -779,12 +779,16 @@ h1, h2, h3, h4, h5, h6 {
   background: #F1F5F9;
 }
 .matrix-doc-code {
-  font-family: monospace;
-  font-size: 0.72rem;
-  background: #E2E8F0;
-  color: #334155;
-  padding: 2px 6px;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: #F1F5F9;
+  color: #1E293B;
+  padding: 3px 8px;
   border-radius: 4px;
+  border: 1px solid #E2E8F0;
+  display: inline-block;
+  white-space: nowrap;
 }
 .badge-phys {
   display: inline-block;
@@ -2778,63 +2782,63 @@ h1, h2, h3, h4, h5, h6 {
                   <tbody>
                     <tr>
                       <td><strong>Factura de Proveedor</strong></td>
-                      <td><span class="matrix-doc-code">account.move (in)</span></td>
+                      <td><span class="matrix-doc-code">Factura de Compra</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-no">➖ No</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-yes">✅ SÍ GENERA</span></td>
                       <td><strong>Cargo 1150 · Abono 201</strong>. Fija el costo real de adquisición en la ponderación AVCO.</td>
                     </tr>
                     <tr>
                       <td><strong>Costes en Destino (Landed)</strong></td>
-                      <td><span class="matrix-doc-code">stock.landed.cost</span></td>
+                      <td><span class="matrix-doc-code">Coste en Destino (Landed)</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-no">➖ No</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-yes">✅ SÍ GENERA</span></td>
                       <td><strong>Cargo 1150 · Abono Gastos</strong>. Capitaliza fletes y aranceles sumando valor al activo.</td>
                     </tr>
                     <tr>
                       <td><strong>Factura de Cliente</strong></td>
-                      <td><span class="matrix-doc-code">account.move (out)</span></td>
+                      <td><span class="matrix-doc-code">Factura de Cliente</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-no">➖ No</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-yes">✅ SÍ GENERA</span></td>
                       <td><strong>Cargo 501 · Abono 1150</strong>. <em>¡Aquí se descarga el inventario en v19 al costo AVCO!</em></td>
                     </tr>
                     <tr>
                       <td><strong>Orden de Producción (MO)</strong></td>
-                      <td><span class="matrix-doc-code">mrp.production</span></td>
+                      <td><span class="matrix-doc-code">Orden de Producción</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-yes">✅ SÍ GENERA</span></td>
                       <td><strong>Cargo 1150 PT · Abono 1150 MP</strong>. Transforma materias primas en producto terminado.</td>
                     </tr>
                     <tr>
                       <td><strong>Ajuste de Inventario</strong></td>
-                      <td><span class="matrix-doc-code">stock.quant</span></td>
+                      <td><span class="matrix-doc-code">Ajuste de Conteo Físico</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-warn">⚠️ CONDICIONAL</span></td>
                       <td><strong>¡Peligro!</strong> Solo genera póliza si la ubicación virtual de desecho/ajuste tiene cuenta asignada.</td>
                     </tr>
                     <tr>
                       <td><strong>Recepción de Proveedor</strong></td>
-                      <td><span class="matrix-doc-code">stock.picking (in)</span></td>
+                      <td><span class="matrix-doc-code">Albarán de Recepción</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-no">❌ NO GENERA</span></td>
                       <td>Suma existencias físicas; en flujo directo sin cuentas puente, la contabilidad se asienta con la factura.</td>
                     </tr>
                     <tr>
                       <td><strong>Entrega a Cliente</strong></td>
-                      <td><span class="matrix-doc-code">stock.picking (out)</span></td>
+                      <td><span class="matrix-doc-code">Albarán de Entrega</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-no">❌ NO GENERA</span></td>
                       <td><strong>Puramente operativo.</strong> Descuenta unidades físicas; la póliza contable se genera al facturar.</td>
                     </tr>
                     <tr>
                       <td><strong>Traslado Interno</strong></td>
-                      <td><span class="matrix-doc-code">stock.picking (int)</span></td>
+                      <td><span class="matrix-doc-code">Transferencia Interna</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-yes">📦 SÍ</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-no">❌ NO GENERA</span></td>
                       <td>Mover mercancía entre estantes del mismo almacén/compañía no altera el saldo de la cuenta 1150.</td>
                     </tr>
                     <tr>
-                      <td><strong>Pedidos Venta (SO) / Compra (PO)</strong></td>
-                      <td><span class="matrix-doc-code">sale / purchase.order</span></td>
+                      <td><strong>Pedidos Venta / Compra</strong></td>
+                      <td><span class="matrix-doc-code">Pedido de Venta / Compra</span></td>
                       <td style="text-align:center;"><span class="badge-phys badge-no">➖ No</span></td>
                       <td style="text-align:center;"><span class="badge-acc badge-no">❌ NO GENERA</span></td>
                       <td>Compromiso comercial y contractual puro; cero impacto físico y cero apunte financiero.</td>
@@ -4774,64 +4778,64 @@ h1, h2, h3, h4, h5, h6 {
           <table class="comparison-table">
             <thead>
               <tr>
-                <th style="width: 24%;">Movimiento / Documento</th>
-                <th style="width: 18%;">Modelo Odoo</th>
-                <th style="width: 18%;">¿Genera Póliza a 1150?</th>
+                <th style="width: 24%;">Movimiento / Evento</th>
+                <th style="width: 20%;">Documento Funcional</th>
+                <th style="width: 16%;">¿Genera Póliza a 1150?</th>
                 <th style="width: 40%;">Justificación Técnica en Odoo 19</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>Factura de Proveedor</strong></td>
-                <td><code>account.move (in_invoice)</code></td>
+                <td><code>Factura de Compra</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
                 <td><strong>Cargo 1150 · Abono 201</strong>. Fija el costo real de adquisición en la ponderación AVCO.</td>
               </tr>
               <tr>
                 <td><strong>Costes en Destino (Landed Costs)</strong></td>
-                <td><code>stock.landed.cost</code></td>
+                <td><code>Coste en Destino (Landed)</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
                 <td><strong>Cargo 1150 · Abono Gastos</strong>. Incrementa el activo capitalizando fletes, seguros y aranceles sobre las recepciones.</td>
               </tr>
               <tr>
                 <td><strong>Factura de Cliente</strong></td>
-                <td><code>account.move (out_invoice)</code></td>
+                <td><code>Factura de Cliente</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
                 <td><strong>Cargo 501 · Abono 1150</strong>. <em>¡Aquí se descarga el inventario en v19!</em> Reconoce el Costo de Ventas directamente al facturar.</td>
               </tr>
               <tr>
                 <td><strong>Órdenes de Producción (MO)</strong></td>
-                <td><code>mrp.production</code></td>
+                <td><code>Orden de Producción</code></td>
                 <td><span class="pill-badge" style="background:#16A34A;">SÍ GENERA</span></td>
                 <td><strong>Cargo 1150 PT · Abono 1150 MP</strong>. Transforma materias primas en producto terminado sin alterar el valor activo neto.</td>
               </tr>
               <tr>
                 <td><strong>Ajustes de Inventario (Mermas/Conteos)</strong></td>
-                <td><code>stock.quant</code> / <code>stock.move</code></td>
+                <td><code>Ajuste de Conteo Físico</code></td>
                 <td><span class="pill-badge" style="background:#D97706;">⚠️ CONDICIONAL</span></td>
                 <td><strong>¡Peligro!</strong> Solo genera póliza contable si la ubicación virtual de desecho/ajuste tiene cuenta contrapartida asignada.</td>
               </tr>
               <tr>
-                <td><strong>Entrega a Cliente (Albarán OUT)</strong></td>
-                <td><code>stock.picking (outgoing)</code></td>
+                <td><strong>Entrega a Cliente (Salida)</strong></td>
+                <td><code>Albarán de Entrega</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
                 <td><strong>Puramente operativo.</strong> Descuenta existencias físicas del almacén; la póliza contable se genera al emitir la factura.</td>
               </tr>
               <tr>
-                <td><strong>Recepción de Proveedor (Albarán IN)</strong></td>
-                <td><code>stock.picking (incoming)</code></td>
+                <td><strong>Recepción de Proveedor (Entrada)</strong></td>
+                <td><code>Albarán de Recepción</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
                 <td>Registra la entrada física; en flujos directos sin cuentas puente, la valoración se asienta con la factura de compra.</td>
               </tr>
               <tr>
                 <td><strong>Traslados Internos entre Ubicaciones</strong></td>
-                <td><code>stock.picking (internal)</code></td>
+                <td><code>Transferencia Interna</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
                 <td>Mover de un estante a otro dentro del mismo almacén/compañía no altera el valor patrimonial de la cuenta 1150.</td>
               </tr>
               <tr>
                 <td><strong>Pedidos de Venta (SO) / Compra (PO)</strong></td>
-                <td><code>sale.order</code> / <code>purchase.order</code></td>
+                <td><code>Pedido de Venta / Compra</code></td>
                 <td><span class="pill-badge" style="background:#64748B;">NO GENERA</span></td>
                 <td>Compromisos comerciales y contractuales; no alteran existencias físicas ni saldos contables.</td>
               </tr>

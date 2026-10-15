@@ -813,12 +813,16 @@ h1, h2, h3, h4, h5, h6 {{
   background: #F1F5F9;
 }}
 .matrix-doc-code {{
-  font-family: monospace;
-  font-size: 0.72rem;
-  background: #E2E8F0;
-  color: #334155;
-  padding: 2px 6px;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: #F1F5F9;
+  color: #1E293B;
+  padding: 3px 8px;
   border-radius: 4px;
+  border: 1px solid #E2E8F0;
+  display: inline-block;
+  white-space: nowrap;
 }}
 .badge-phys {{
   display: inline-block;
