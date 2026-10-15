@@ -1,5 +1,9 @@
 ref,date,journal_id,line_ids/account_id,line_ids/name,line_ids/product_id,line_ids/debit,line_ids/credit
-REG-INV-2026-001,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - ZZ-PRUEBA-01,ZZ-PRUEBA-01,2500.00,0.00
-,,,501.01.02,Contrapartida variacion inventario - ZZ-PRUEBA-01,,0.00,2500.00
-REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Valvula,VALVULA-NEG,3500.00,0.00
-,,,501.01.02,Contrapartida variacion inventario - Valvula,,0.00,3500.00
+REG-INV-2026-001,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Mouse Optico,MOUS-OPT-USB,8500.00,0.00
+,,,501.01.02,Contrapartida variacion inventario - Mouse Optico,,0.00,8500.00
+REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion cambio costo manual - Memoria RAM,MEM-RAM-16GB,210.00,0.00
+,,,501.01.02,Contrapartida variacion inventario - Memoria RAM,,0.00,210.00
+REG-INV-2026-003,2026-10-14,MISC,115.01.01,Regularizacion producto archivado con saldo - Router Legacy,ROUT-WIFI4-LEG,0.00,2400.00
+,,,501.01.02,Contrapartida variacion inventario - Router Legacy,,2400.00,0.00
+REG-INV-2026-004,2026-10-14,MISC,115.01.01,Regularizacion stock negativo - Disco SSD 1TB,DISC-SSD-1TB,0.00,1500.00
+,,,501.01.02,Contrapartida variacion inventario - Disco SSD 1TB,,1500.00,0.00

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Content for Entregable #1: Checklist de Auditoría Logística-Contable (Odoo 19.0 · México)
-# STRICTLY FOLLOWING masterclass-plan-final.md v5
+# STRICTLY FOLLOWING masterclass-plan-final.md v7
 
 
 def get_checklist_html(logo_light, doodle_underline):
@@ -24,7 +24,7 @@ def get_checklist_html(logo_light, doodle_underline):
           <div class="progress-bar-wrap">
             <div class="progress-bar-fill" id="checklistProgress" style="width: 0%;"></div>
           </div>
-          <span class="stats-text" id="checklistStats">0 de 14 puntos validados (0%)</span>
+          <span class="stats-text" id="checklistStats">0 de 18 puntos validados (0%)</span>
         </div>
         <div class="toolbar-actions">
           <button class="btn btn-sm btn-light" onclick="checkAllItems(true)">Marcar Todos</button>
@@ -332,9 +332,9 @@ def get_checklist_html(logo_light, doodle_underline):
       <!-- Footer Note -->
       <div class="doc-footer">
         <span>Vauxoo Academy · Masterclass 2026: Domina la valoración de inventarios en Odoo 19.0</span>
-        <span>Plan Definitivo v5 · Control Contable-Logístico</span>
+        <span>Plan Definitivo v7 · Control Contable-Logístico</span>
       </div>
     </div>
     '''
 
-print("Checklist module v5 compiled successfully.")
+print("Checklist module v7 compiled successfully.")

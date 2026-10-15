@@ -45,7 +45,7 @@ def get_kit_html():
           <span style="font-size: 0.8rem; font-weight: 700; color: #345D90; text-transform: uppercase;">COMPONENTE B</span>
           <h3 style="font-size: 1.25rem; margin: 8px 0 10px 0; color: #27282F;">Acción de Servidor (Reporte CSV)</h3>
           <p style="font-size: 0.9rem; color: #5A6578; margin-bottom: 16px;">
-            Script en Python (compatible con <code>safe_eval</code>) para desplegar el reporte SKU por SKU con las 7 columnas de conciliación y la fórmula matemática de cuadre.
+            Script en Python (compatible con <code>safe_eval</code>) para desplegar el reporte SKU por SKU con las columnas de conciliación, estado de producto y fórmula de cuadre.
           </p>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <a href="#componente-accion" class="btn btn-sm" style="background:#345D90; color:#fff; text-decoration:none;">
@@ -68,7 +68,7 @@ def get_kit_html():
         <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
           <h4 style="margin-top:0; color:#172A45; font-size:1.15rem;">¿Por qué una plantilla especializada?</h4>
           <p style="font-size:0.95rem; color:#475569; line-height:1.6;">
-            Cuando existen ajustes de inventario físicos que por error de configuración histórica no generaron póliza contable (o cuando se requiere reclasificar variaciones de costo), <strong>NUNCA</strong> debe crearse un apunte ciego directo a la cuenta <code>115.01.01</code> sin asociar el producto. Si el producto se omite, el libro mayor registrará el saldo pero la auditoría por SKU quedará rota para siempre.
+            Cuando existen ajustes de inventario físicos que por error de configuración histórica no generaron póliza contable (o cuando se requiere reclasificar variaciones de costo o productos archivados con saldo), <strong>NUNCA</strong> debe crearse un apunte ciego directo a la cuenta <code>115.01.01</code> sin asociar el producto. Si el producto se omite, el libro mayor registrará el saldo pero la auditoría por SKU quedará rota para siempre.
           </p>
           <p style="font-size:0.95rem; color:#475569; line-height:1.6;">
             Esta plantilla utiliza las cabeceras nativas de Odoo 19 para importar simultáneamente la cabecera del asiento (<code>account.move</code>) y el detalle balanceado de líneas (<code>account.move.line</code>) vinculando el código o referencia interna del producto:
@@ -81,10 +81,14 @@ def get_kit_html():
               <button onclick="navigator.clipboard.writeText(document.getElementById('csvCodeBlock').innerText); alert('CSV copiado al portapapeles');" style="background: #334155; color: #fff; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">Copiar CSV</button>
             </div>
             <pre id="csvCodeBlock" style="margin: 0; background: #1E293B; color: #F8FAFC; padding: 16px; border-radius: 0 0 6px 6px; font-family: 'Consolas', 'Monaco', monospace; font-size: 0.85rem; overflow-x: auto; line-height: 1.5;">ref,date,journal_id,line_ids/account_id,line_ids/name,line_ids/product_id,line_ids/debit,line_ids/credit
-REG-INV-2026-001,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - ZZ-PRUEBA-01,ZZ-PRUEBA-01,2500.00,0.00
-,,,501.01.02,Contrapartida variacion inventario - ZZ-PRUEBA-01,,0.00,2500.00
-REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Valvula,VALVULA-NEG,3500.00,0.00
-,,,501.01.02,Contrapartida variacion inventario - Valvula,,0.00,3500.00</pre>
+REG-INV-2026-001,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Mouse Optico,MOUS-OPT-USB,8500.00,0.00
+,,,501.01.02,Contrapartida variacion inventario - Mouse Optico,,0.00,8500.00
+REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion cambio costo manual - Memoria RAM,MEM-RAM-16GB,210.00,0.00
+,,,501.01.02,Contrapartida variacion inventario - Memoria RAM,,0.00,210.00
+REG-INV-2026-003,2026-10-14,MISC,115.01.01,Regularizacion producto archivado con saldo - Router Legacy,ROUT-WIFI4-LEG,0.00,2400.00
+,,,501.01.02,Contrapartida variacion inventario - Router Legacy,,2400.00,0.00
+REG-INV-2026-004,2026-10-14,MISC,115.01.01,Regularizacion stock negativo - Disco SSD 1TB,DISC-SSD-1TB,0.00,1500.00
+,,,501.01.02,Contrapartida variacion inventario - Disco SSD 1TB,,1500.00,0.00</pre>
           </div>
 
           <!-- Explanation Table -->
@@ -158,7 +162,7 @@ REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Valvu
         <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
           <h4 style="margin-top:0; color:#172A45; font-size:1.15rem;">La Fórmula Matemática de Cuadre</h4>
           <p style="font-size:0.95rem; color:#475569; line-height:1.6;">
-            La acción de servidor ejecuta automáticamente la reconciliación entre 4 fuentes de datos de Odoo 19 para cada producto activo con existencias internas:
+            La acción de servidor ejecuta automáticamente la reconciliación entre 4 fuentes de datos de Odoo 19 para cada producto activo o archivado con saldo contable:
           </p>
           
           <div style="background:#F1F5F9; border-left:4px solid #345D90; padding:16px; border-radius:0 6px 6px 0; margin-bottom:20px; font-family:monospace; font-size:0.92rem; color:#1E293B;">
@@ -166,7 +170,7 @@ REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Valvu
           </div>
 
           <p style="font-size:0.95rem; color:#475569; line-height:1.6;">
-            <strong>Comportamiento Global:</strong> La acción está diseñada para exportar <em>todos</em> los productos activos con existencias en ubicaciones internas, sin importar si el usuario seleccionó 1 o varias filas en la vista de lista.
+            <strong>Detección de Productos Archivados:</strong> A diferencia de las vistas estándar que ocultan los productos inactivos, la acción audita automáticamente cualquier SKU archivado que conserve movimientos o saldo en la cuenta <code>115.01.01</code>.
           </p>
 
           <!-- Server Action Code -->
@@ -175,27 +179,45 @@ REG-INV-2026-002,2026-10-14,MISC,115.01.01,Regularizacion ajuste omitido - Valvu
               <span>Código Python (Odoo 19 Server Action · safe_eval compliant)</span>
               <button onclick="navigator.clipboard.writeText(document.getElementById('pythonCodeBlock').innerText); alert('Código de Acción de Servidor copiado al portapapeles');" style="background: #334155; color: #fff; border: none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem;">Copiar Código</button>
             </div>
-            <pre id="pythonCodeBlock" style="margin: 0; background: #1E293B; color: #F8FAFC; padding: 18px; border-radius: 0 0 6px 6px; font-family: 'Consolas', 'Monaco', monospace; font-size: 0.82rem; overflow-x: auto; line-height: 1.45;"># 1. Obtener SIEMPRE todos los productos activos con existencias en ubicaciones internas (sin importar la seleccion)
+            <pre id="pythonCodeBlock" style="margin: 0; background: #1E293B; color: #F8FAFC; padding: 18px; border-radius: 0 0 6px 6px; font-family: 'Consolas', 'Monaco', monospace; font-size: 0.82rem; overflow-x: auto; line-height: 1.45;"># 1. Obtener productos activos en ubicaciones internas
 quants = env['stock.quant'].search([
     ('location_id.usage', '=', 'internal'),
     ('product_id.active', '=', True)
 ])
 
+product_ids_set = set()
 product_data = {}
+
 for q in quants:
     p = q.product_id
+    product_ids_set.add(p.id)
     if p.id not in product_data:
-        product_data[p.id] = {
-            'product': p,
-            'qty': 0.0,
-            'stock_value': 0.0,
-        }
+        product_data[p.id] = {'product': p, 'qty': 0.0, 'stock_value': 0.0}
     product_data[p.id]['qty'] += q.quantity
     product_data[p.id]['stock_value'] += q.value
 
-product_ids = list(product_data.keys())
+# 2. Agregar productos archivados que tengan saldo contable en la 1150
+amls_archived = env['account.move.line'].search([
+    ('account_id.code', '=', '115.01.01'),
+    ('move_id.state', '=', 'posted'),
+    ('product_id.active', '=', False),
+    ('product_id', '!=', False)
+])
+for aml in amls_archived:
+    p = aml.product_id
+    product_ids_set.add(p.id)
+    if p.id not in product_data:
+        q_arch = env['stock.quant'].search([
+            ('location_id.usage', '=', 'internal'),
+            ('product_id', '=', p.id)
+        ])
+        q_sum = sum(q_arch.mapped('quantity'))
+        v_sum = sum(q_arch.mapped('value'))
+        product_data[p.id] = {'product': p, 'qty': q_sum, 'stock_value': v_sum}
 
-# 2. Valor por facturar (purchase.order.line con bill_to_receive = True)
+product_ids = list(product_ids_set)
+
+# 3. Valor por facturar (purchase.order.line con bill_to_receive = True)
 val_por_facturar = {pid: 0.0 for pid in product_ids}
 if product_ids:
     pols = env['purchase.order.line'].search([
@@ -207,28 +229,19 @@ if product_ids:
         v = pol.amount_to_invoice_at_date or ((pol.qty_received - pol.qty_invoiced) * pol.price_unit)
         val_por_facturar[pid] = val_por_facturar.get(pid, 0.0) + v
 
-# 3. Valor en contabilidad (account.move.line publicados con cuenta de inventario de su categoria)
+# 4. Valor en contabilidad (cuenta 115.01.01)
 val_contabilidad = {pid: 0.0 for pid in product_ids}
 if product_ids:
-    acc_map = {}
-    for pid in product_ids:
-        acc = product_data[pid]['product'].categ_id.property_stock_valuation_account_id
-        if acc:
-            acc_map[pid] = acc.id
-    
-    unique_accs = list(set(acc_map.values()))
-    if unique_accs:
-        amls = env['account.move.line'].search([
-            ('account_id', 'in', unique_accs),
-            ('move_id.state', '=', 'posted'),
-            ('product_id', 'in', product_ids)
-        ])
-        for aml in amls:
-            pid = aml.product_id.id
-            if aml.account_id.id == acc_map.get(pid):
-                val_contabilidad[pid] = val_contabilidad.get(pid, 0.0) + (aml.debit - aml.credit)
+    amls = env['account.move.line'].search([
+        ('account_id.code', '=', '115.01.01'),
+        ('move_id.state', '=', 'posted'),
+        ('product_id', 'in', product_ids)
+    ])
+    for aml in amls:
+        pid = aml.product_id.id
+        val_contabilidad[pid] = val_contabilidad.get(pid, 0.0) + (aml.debit - aml.credit)
 
-# 4. Valor no reconocido: stock.move.line de ajuste de inventario hechos sin poliza generada
+# 5. Valor no reconocido: stock.move.line de ajuste de inventario sin poliza
 val_no_reconocido = {pid: 0.0 for pid in product_ids}
 if product_ids:
     smls = env['stock.move.line'].search([
@@ -245,16 +258,15 @@ if product_ids:
         else:
             v = sml.quantity * (m.price_unit or sml.product_id.standard_price)
         
-        # Origen no interna -> suma
         if sml.location_id.usage != 'internal' and sml.location_dest_id.usage == 'internal':
             val_no_reconocido[pid] = val_no_reconocido.get(pid, 0.0) + v
-        # Origen interna -> resta
         elif sml.location_id.usage == 'internal' and sml.location_dest_id.usage != 'internal':
             val_no_reconocido[pid] = val_no_reconocido.get(pid, 0.0) - v
 
-# 5. Generar reporte CSV
+# 6. Generar reporte CSV
 header = [
     "Producto",
+    "Estado",
     "Costo",
     "Cantidad",
     "Valor en existencias",
@@ -264,11 +276,12 @@ header = [
     "Diferencia (Cuadre)"
 ]
 
-lines = [",".join(f'"{h}"' for h in header)]
+lines = [",".join(f'\"{h}\"' for h in header)]
 for pid in sorted(product_ids):
     data = product_data[pid]
     prod = data['product']
-    name = (prod.display_name or prod.name or '').replace('"', '""')
+    name = (prod.display_name or prod.name or '').replace('\"', '\"\"')
+    status = "Activo" if prod.active else "Archivado"
     cost = prod.standard_price or 0.0
     qty = data['qty']
     v_exist = data['stock_value']
@@ -278,7 +291,8 @@ for pid in sorted(product_ids):
     dif = v_exist - (v_fact + v_cont + v_norec)
     
     row = [
-        f'"{name}"',
+        f'\"{name}\"',
+        f'\"{status}\"',
         f'{cost:.2f}',
         f'{qty:.2f}',
         f'{v_exist:.2f}',

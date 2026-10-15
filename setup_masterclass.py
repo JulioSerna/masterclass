@@ -2,433 +2,354 @@
 # -*- coding: utf-8 -*-
 """
 Script Maestro de Configuración y Carga de Datos: Masterclass Odoo 19.0
-"De la logística a la contabilidad: Domina la valoración de inventarios en Odoo"
+"De la logística a la contabilidad: Domina la valoración de inventarios en Odoo 19"
 
 Ponente: Julio Serna (Vauxoo)
-Instancia Odoo: https://julioserna-masterclass-main-38706787.dev.odoo.com/
-Base de datos: julioserna-masterclass-main-38706787
-Usuario: admin
-Password: 123456789
+Catálogo: Hardware y Cómputo (100% Unidades Enteras · Cero NIF · Cero Landed Costs)
+Ejecución: Automatizada sobre la base de datos 'masterclass' usando odoo-mcp CLI.
 
-Este script puede ser ejecutado directamente en local (requiere conexión a internet)
-o mediante las herramientas de MCP/RPC para:
-1. Configuración completa desde cero (--init / --all)
-2. Reseteo y recarga de datos de demo iniciales (--reset-data)
-3. Verificación de estado (--status)
+Casos recreados:
+1. Operación Normal MXN: [TECL-INAL-USB] Teclado Ergonómico (Compras 50@150 + 50@170 = AVCO 160; Venta 30u)
+2. Operación Normal USD: [MON-27-4K] Monitor 4K (Compra 20u @ 100 USD * TC DOF 18.50 = AVCO 1,850 MXN)
+3. Desastre 1: [MOUS-OPT-USB] Mouse Óptico (Ajuste 100u en categoría periódica; omitió póliza contable de $8,500)
+4. Desastre 2: [ROUT-WIFI4-LEG] Router Wi-Fi 4 (Archivado con compra y factura cerrada de $2,400)
+5. Desastre 3: [CAM-WEB-4K] Cámara Web Pro 4K (Error de moneda: $1,500 MXN metidos como 1,500 USD @ 18.50 = $27,750 MXN)
+6. Desastre 4: [MEM-RAM-16GB] Memoria RAM (Costo alterado a mano en ficha de $100 a $121 = brecha de $210)
+7. Desastre 5: [DISC-SSD-1TB] Disco SSD (Salida en negativo de 10u @ $200 y compra posterior de 20u @ $350 = brecha de $1,500)
+8. El Hook Inicial: Póliza manual indebida en cuenta 1150 de $487,000 MXN sin SKU
 """
 
+import subprocess
+import json
+import time
 import sys
-import xmlrpc.client
-import argparse
 
-# Configuración de conexión por defecto
-DEFAULT_URL = "https://julioserna-masterclass-main-38706787.dev.odoo.com/"
-DEFAULT_DB = "julioserna-masterclass-main-38706787"
-DEFAULT_USER = "admin"
-DEFAULT_PASS = "123456789"
+PROFILE = "masterclass"
 
+def call_kw(model, method, args=[], kwargs={}):
+    cmd = ["odoo-mcp", "execute-kw", "--profile", PROFILE, "--model", model, "--method", method, "--args", json.dumps(args)]
+    if kwargs:
+        cmd.extend(["--kwargs", json.dumps(kwargs)])
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    try:
+        data = json.loads(r.stdout)
+        if isinstance(data, dict) and "result" in data:
+            return data["result"]
+        return data
+    except Exception as e:
+        print(f"Error calling {model}.{method}: {r.stderr or r.stdout}")
+        return None
 
-class HeaderTransport(xmlrpc.client.SafeTransport):
-    """Transporte XML-RPC con User-Agent personalizado para evitar bloqueos Cloudflare/WAF"""
-    def send_headers(self, connection, headers):
-        headers.append(('User-Agent', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'))
-        super().send_headers(connection, headers)
+def clean_previous_transactions():
+    print("🧹 1. Limpiando transacciones previas en Odoo...")
+    # 1. Account moves
+    moves = call_kw("account.move", "search", [[]]) or []
+    if moves:
+        call_kw("account.move", "button_draft", [moves])
+        call_kw("account.move", "button_cancel", [moves])
+        call_kw("account.move", "unlink", [moves])
+        print(f"   ✓ {len(moves)} pólizas contables eliminadas.")
 
+    # 2. Sale orders
+    sos = call_kw("sale.order", "search", [[]]) or []
+    if sos:
+        call_kw("sale.order", "action_cancel", [sos])
+        call_kw("sale.order", "unlink", [sos])
+        print(f"   ✓ {len(sos)} órdenes de venta eliminadas.")
 
-class OdooMasterclassManager:
-    def __init__(self, url=DEFAULT_URL, db=DEFAULT_DB, user=DEFAULT_USER, password=DEFAULT_PASS):
-        self.url = url.rstrip('/')
-        self.db = db
-        self.user = user
-        self.password = password
-        self.transport = HeaderTransport() if self.url.startswith('https') else None
-        
-        # Conexión XML-RPC
-        self.common = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/common", transport=self.transport)
-        self.uid = self.common.authenticate(self.db, self.user, self.password, {})
-        if not self.uid:
-            raise ConnectionError(f"Error de autenticación en {self.url} para usuario {self.user}")
-        self.models = xmlrpc.client.ServerProxy(f"{self.url}/xmlrpc/2/object", transport=self.transport)
-        print(f"✓ Conectado exitosamente como UID {self.uid} en BD '{self.db}'")
+    # 3. Purchase orders
+    pos = call_kw("purchase.order", "search", [[]]) or []
+    if pos:
+        call_kw("purchase.order", "button_cancel", [pos])
+        call_kw("purchase.order", "unlink", [pos])
+        print(f"   ✓ {len(pos)} órdenes de compra eliminadas.")
 
-    def execute(self, model, method, *args, **kwargs):
-        return self.models.execute_kw(self.db, self.uid, self.password, model, method, list(args), kwargs)
+    # 4. Archivar productos anteriores
+    prods = call_kw("product.product", "search", [[]]) or []
+    if prods:
+        call_kw("product.product", "write", [prods, {"active": False}])
+        print(f"   ✓ {len(prods)} productos anteriores archivados.")
 
-    # -------------------------------------------------------------
-    # FASE 1: INSTALACIÓN DE MÓDULOS
-    # -------------------------------------------------------------
-    def install_required_modules(self):
-        """Instala los módulos indispensables para la masterclass"""
-        modules = ['stock', 'account_accountant', 'purchase', 'sale_management', 'stock_landed_costs', 'l10n_mx', 'l10n_mx_edi']
-        print(f"📦 Verificando/instalando módulos: {modules}...")
-        mod_records = self.execute('ir.module.module', 'search_read', [('name', 'in', modules)], ['name', 'state'])
-        to_install = [m['id'] for m in mod_records if m['state'] != 'installed']
-        if to_install:
-            print(f"Instalando IDs de módulos {to_install} (esto puede demorar ~1-2 min)...")
-            self.execute('ir.module.module', 'button_immediate_install', to_install)
-            print("✓ Módulos instalados correctamente.")
-        else:
-            print("✓ Todos los módulos ya están instalados.")
+def setup_categories_and_partners():
+    print("🏢 2. Configurando categorías y contactos...")
+    # Categoría Perpetua AVCO
+    cat_id = 4 # Almacenable - AVCO (Perpetuo México)
+    call_kw("product.category", "write", [[cat_id], {
+        "property_cost_method": "average",
+        "property_valuation": "real_time"
+    }])
 
-    # -------------------------------------------------------------
-    # FASE 2: IDIOMA ESPAÑOL MÉXICO (es_MX)
-    # -------------------------------------------------------------
-    def install_spanish_language(self):
-        """Instala y activa Español (MX) como idioma predeterminado"""
-        print("🌐 Instalando y configurando Español (MX)...")
-        # Verificar si es_MX ya está activo
-        lang_mx = self.execute('res.lang', 'search_read', [('code', '=', 'es_MX')], ['id', 'active'])
-        if not lang_mx or not lang_mx[0]['active']:
-            # Buscar el ID inactivo de es_MX
-            all_langs = self.execute('res.lang', 'search_read', [[('code', '=', 'es_MX')]], {'context': {'active_test': False}, 'fields': ['id']})
-            if all_langs:
-                es_mx_id = all_langs[0]['id']
-                wiz_id = self.execute('base.language.install', 'create', {'lang_ids': [[6, 0, [es_mx_id]]], 'overwrite': True})
-                self.execute('base.language.install', 'lang_install', [wiz_id])
-                print("✓ Idioma es_MX instalado.")
+    # Categoría Periódica para recrear el error del Mouse
+    cat_periodic = call_kw("product.category", "search", [[("name", "=", "Tecnología / Periódico (Error de Configuración)")]])
+    if not cat_periodic:
+        cat_periodic_id = call_kw("product.category", "create", [{
+            "name": "Tecnología / Periódico (Error de Configuración)",
+            "property_cost_method": "average",
+            "property_valuation": "periodic"
+        }])
+    else:
+        cat_periodic_id = cat_periodic[0]
+        call_kw("product.category", "write", [[cat_periodic_id], {
+            "property_cost_method": "average",
+            "property_valuation": "periodic"
+        }])
 
-        # Establecer idioma en ir.default para que todo nuevo usuario/contacto nazca en es_MX
-        default_lang = self.execute('ir.default', 'search', [('field_id.name', '=', 'lang')])
-        if default_lang:
-            self.execute('ir.default', 'write', default_lang, {'json_value': '"es_MX"'})
-        
-        # Asignar es_MX al usuario admin y a su partner
-        self.execute('res.users', 'write', [self.uid], {'lang': 'es_MX'})
-        admin_partner = self.execute('res.users', 'search_read', [('id', '=', self.uid)], ['partner_id'])[0]['partner_id'][0]
-        self.execute('res.partner', 'write', [admin_partner], {'lang': 'es_MX'})
-        print("✓ Usuario administrador y sistema configurados en Español (MX).")
+    partner_prov_mx = 8  # Distribuidora Nacional de Insumos
+    partner_prov_usd = 9 # Global Supply Tech LLC
+    partner_cli = 11     # Cliente Industrial de México
 
-    # -------------------------------------------------------------
-    # FASE 3: PERMISOS DE CONTABILIDAD COMPLETA
-    # -------------------------------------------------------------
-    def assign_accounting_security_groups(self):
-        """Asigna permisos de Full Accounting Features y Administrador de Contabilidad"""
-        print("🔐 Habilitando permisos de Contabilidad Completa para el Administrador...")
-        # Buscar grupos por XML ID
-        group_data = self.execute('ir.model.data', 'search_read', [
-            ('model', '=', 'res.groups'),
-            ('module', '=', 'account'),
-            ('name', 'in', ['group_account_user', 'group_account_manager', 'group_account_basic', 'group_account_secured'])
-        ], ['res_id'])
-        group_ids = [g['res_id'] for g in group_data]
-        if group_ids:
-            self.execute('res.groups', 'write', group_ids, {'user_ids': [[4, self.uid]]})
-        print("✓ Permisos de Contabilidad Completa (Full Accounting Features) asignados.")
+    return cat_id, cat_periodic_id, partner_prov_mx, partner_prov_usd, partner_cli
+
+def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
+    print("🚀 3. Creando los 7 escenarios de la Masterclass...")
 
     # -------------------------------------------------------------
-    # FASE 4: CONFIGURACIÓN BASE (MÉXICO / MXN / PLAN CONTABLE)
+    # CASO 1: FLUJO LIMPIO EN MXN (Teclado Ergonómico Inalámbrico)
     # -------------------------------------------------------------
-    def configure_company_and_currency(self):
-        """Configura la compañía en México, MXN y tipos de cambio USD"""
-        print("🇲🇽 Configurando compañía en México (MXN)...")
-        mx_country = self.execute('res.country', 'search_read', [('code', '=', 'MX')], ['id'])[0]['id']
-        mxn_curr = self.execute('res.currency', 'search_read', [('name', '=', 'MXN')], ['id'])[0]['id']
-        usd_curr = self.execute('res.currency', 'search_read', [('name', '=', 'USD')], ['id'])[0]['id']
+    print("   -> Creando Caso 1: Teclado Ergonómico (MXN Limpio)...")
+    tecl = call_kw("product.product", "create", [{
+        "name": "Teclado Ergonómico Inalámbrico",
+        "default_code": "TECL-INAL-USB",
+        "is_storable": True,
+        "active": True,
+        "categ_id": cat_id,
+        "standard_price": 150.0
+    }])
+    # PO 1: 50 @ 150
+    po1 = call_kw("purchase.order", "create", [{"partner_id": prov_mx}])
+    call_kw("purchase.order.line", "create", [{"order_id": po1, "product_id": tecl, "product_qty": 50.0, "price_unit": 150.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("purchase.order", "button_confirm", [[po1]])
+    pk1 = call_kw("purchase.order", "search_read", [[("id", "=", po1)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk1)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk1]])
+    call_kw("purchase.order", "action_create_invoice", [[po1]])
+    b1 = call_kw("purchase.order", "search_read", [[("id", "=", po1)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[b1], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[b1]])
 
-        self.execute('res.company', 'write', [1], {
-            'name': 'Masterclass México, S.A. de C.V.',
-            'country_id': mx_country,
-            'currency_id': mxn_curr,
-            'vat': 'EKU9003173C9',
-            'anglo_saxon_accounting': True,
-            'inventory_period': 'manual',
-        })
+    # PO 2: 50 @ 170
+    po2 = call_kw("purchase.order", "create", [{"partner_id": prov_mx}])
+    call_kw("purchase.order.line", "create", [{"order_id": po2, "product_id": tecl, "product_qty": 50.0, "price_unit": 170.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("purchase.order", "button_confirm", [[po2]])
+    pk2 = call_kw("purchase.order", "search_read", [[("id", "=", po2)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk2)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk2]])
+    call_kw("purchase.order", "action_create_invoice", [[po2]])
+    b2 = call_kw("purchase.order", "search_read", [[("id", "=", po2)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[b2], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[b2]])
 
-        # Desactivar cron de cierre periódico de inventario para evitar asientos automáticos
-        cron_closing = self.execute('ir.cron', 'search', [('name', '=', 'Stock Account: Inventory Valuation Closing')])
-        if cron_closing:
-            self.execute('ir.cron', 'write', cron_closing, {'active': False})
+    # Venta de 30 unidades
+    so = call_kw("sale.order", "create", [{"partner_id": cli}])
+    call_kw("sale.order.line", "create", [{"order_id": so, "product_id": tecl, "product_uom_qty": 30.0, "price_unit": 250.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("sale.order", "action_confirm", [[so]])
+    pk_s = call_kw("sale.order", "search_read", [[("id", "=", so)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_s)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk_s]])
+    wiz = call_kw("sale.advance.payment.inv", "create", [{}], {"context": {"active_ids": [so], "active_model": "sale.order"}})
+    call_kw("sale.advance.payment.inv", "create_invoices", [[wiz]], {"context": {"active_ids": [so], "active_model": "sale.order"}})
+    so_inv = call_kw("sale.order", "search_read", [[("id", "=", so)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[so_inv], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[so_inv]])
 
-        # Habilitar USD y crear tasas de cambio históricas
-        self.execute('res.currency', 'write', [usd_curr], {'active': True})
-        
-        rates = [
-            ('2026-09-01', 0.054884742),  # 18.22 MXN/USD
-            ('2026-09-10', 0.055401662),  # 18.05 MXN/USD
-            ('2026-09-15', 0.054054054),  # 18.50 MXN/USD
+    # -------------------------------------------------------------
+    # CASO 2: FLUJO LIMPIO EN USD (Monitor Profesional 27" 4K)
+    # -------------------------------------------------------------
+    print("   -> Creando Caso 2: Monitor Profesional 27\" 4K (USD Limpio)...")
+    mon = call_kw("product.product", "create", [{
+        "name": "Monitor Profesional 27\" 4K",
+        "default_code": "MON-27-4K",
+        "is_storable": True,
+        "active": True,
+        "categ_id": cat_id,
+        "standard_price": 0.0
+    }])
+    po_mon = call_kw("purchase.order", "create", [{"partner_id": prov_usd, "currency_id": 1}])
+    call_kw("purchase.order.line", "create", [{"order_id": po_mon, "product_id": mon, "product_qty": 20.0, "price_unit": 100.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("purchase.order", "button_confirm", [[po_mon]])
+    pk_mon = call_kw("purchase.order", "search_read", [[("id", "=", po_mon)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_mon)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk_mon]])
+    call_kw("purchase.order", "action_create_invoice", [[po_mon]])
+    b_mon = call_kw("purchase.order", "search_read", [[("id", "=", po_mon)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[b_mon], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[b_mon]])
+
+    # -------------------------------------------------------------
+    # DESASTRE 1: AJUSTE INICIAL SIN CUENTA CONTABLE (Mouse Óptico)
+    # -------------------------------------------------------------
+    print("   -> Creando Desastre 1: Mouse Óptico (Ajuste sin póliza contable)...")
+    mous = call_kw("product.product", "create", [{
+        "name": "Mouse Óptico Ergonómico USB",
+        "default_code": "MOUS-OPT-USB",
+        "is_storable": True,
+        "active": True,
+        "categ_id": cat_periodic_id, # Permanece en periódica para que no tenga póliza contable
+        "standard_price": 85.0
+    }])
+    quant_m = call_kw("stock.quant", "create", [{
+        "product_id": mous,
+        "location_id": 5, # WH/Stock
+        "inventory_quantity": 100.0
+    }])
+    call_kw("stock.quant", "action_apply_inventory", [[quant_m]])
+
+    # -------------------------------------------------------------
+    # DESASTRE 2: PRODUCTO ARCHIVADO CON SALDO (Router Wi-Fi 4 Legacy)
+    # -------------------------------------------------------------
+    print("   -> Creando Desastre 2: Router Legacy (Archivado con saldo)...")
+    rout = call_kw("product.product", "create", [{
+        "name": "Router Inalámbrico Wi-Fi 4 (Legacy)",
+        "default_code": "ROUT-WIFI4-LEG",
+        "is_storable": True,
+        "active": True,
+        "categ_id": cat_id,
+        "standard_price": 120.0
+    }])
+    po_r = call_kw("purchase.order", "create", [{"partner_id": prov_mx}])
+    call_kw("purchase.order.line", "create", [{"order_id": po_r, "product_id": rout, "product_qty": 20.0, "price_unit": 120.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("purchase.order", "button_confirm", [[po_r]])
+    pk_r = call_kw("purchase.order", "search_read", [[("id", "=", po_r)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_r)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk_r]])
+    call_kw("purchase.order", "action_create_invoice", [[po_r]])
+    b_r = call_kw("purchase.order", "search_read", [[("id", "=", po_r)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[b_r], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[b_r]])
+    # Se archiva teniendo existencias y póliza activa:
+    call_kw("product.product", "write", [[rout], {"active": False}])
+
+    # -------------------------------------------------------------
+    # DESASTRE 3: ERROR DE MONEDA (Cámara Web Pro 4K)
+    # -------------------------------------------------------------
+    print("   -> Creando Desastre 3: Cámara Web (Error de moneda USD)...")
+    cam = call_kw("product.product", "create", [{
+        "name": "Cámara Web Pro 4K",
+        "default_code": "CAM-WEB-4K",
+        "is_storable": True,
+        "active": True,
+        "categ_id": cat_id,
+        "standard_price": 1500.0
+    }])
+    po_cam = call_kw("purchase.order", "create", [{"partner_id": prov_usd, "currency_id": 1}])
+    call_kw("purchase.order.line", "create", [{"order_id": po_cam, "product_id": cam, "product_qty": 10.0, "price_unit": 1500.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("purchase.order", "button_confirm", [[po_cam]])
+    pk_cam = call_kw("purchase.order", "search_read", [[("id", "=", po_cam)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_cam)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk_cam]])
+    call_kw("purchase.order", "action_create_invoice", [[po_cam]])
+    b_cam = call_kw("purchase.order", "search_read", [[("id", "=", po_cam)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[b_cam], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[b_cam]])
+
+    # -------------------------------------------------------------
+    # DESASTRE 4: CAMBIO DIRECTO DE COSTO EN FICHA (Memoria RAM 16GB)
+    # -------------------------------------------------------------
+    print("   -> Creando Desastre 4: Memoria RAM (Costo alterado a mano en ficha)...")
+    ram = call_kw("product.product", "create", [{
+        "name": "Memoria RAM DDR5 16GB",
+        "default_code": "MEM-RAM-16GB",
+        "is_storable": True,
+        "active": True,
+        "categ_id": cat_id,
+        "standard_price": 100.0
+    }])
+    po_ram = call_kw("purchase.order", "create", [{"partner_id": prov_mx}])
+    call_kw("purchase.order.line", "create", [{"order_id": po_ram, "product_id": ram, "product_qty": 10.0, "price_unit": 100.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("purchase.order", "button_confirm", [[po_ram]])
+    pk_ram = call_kw("purchase.order", "search_read", [[("id", "=", po_ram)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_ram)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk_ram]])
+    call_kw("purchase.order", "action_create_invoice", [[po_ram]])
+    b_ram = call_kw("purchase.order", "search_read", [[("id", "=", po_ram)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[b_ram], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[b_ram]])
+    # Alterar costo a mano en la ficha sin póliza:
+    call_kw("product.product", "write", [[ram], {"standard_price": 121.0}])
+
+    # -------------------------------------------------------------
+    # DESASTRE 5: STOCK NEGATIVO FORZADO (Disco Sólido SSD 1TB)
+    # -------------------------------------------------------------
+    print("   -> Creando Desastre 5: Disco SSD (Stock negativo con compra posterior)...")
+    ssd = call_kw("product.product", "create", [{
+        "name": "Disco Sólido SSD NVMe 1TB",
+        "default_code": "DISC-SSD-1TB",
+        "is_storable": True,
+        "active": True,
+        "categ_id": cat_id,
+        "standard_price": 200.0
+    }])
+    so_ssd = call_kw("sale.order", "create", [{"partner_id": cli}])
+    call_kw("sale.order.line", "create", [{"order_id": so_ssd, "product_id": ssd, "product_uom_qty": 10.0, "price_unit": 350.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("sale.order", "action_confirm", [[so_ssd]])
+    pk_out = call_kw("sale.order", "search_read", [[("id", "=", so_ssd)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_out)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk_out]])
+    wiz_ssd = call_kw("sale.advance.payment.inv", "create", [{}], {"context": {"active_ids": [so_ssd], "active_model": "sale.order"}})
+    call_kw("sale.advance.payment.inv", "create_invoices", [[wiz_ssd]], {"context": {"active_ids": [so_ssd], "active_model": "sale.order"}})
+    inv_ssd = call_kw("sale.order", "search_read", [[("id", "=", so_ssd)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[inv_ssd], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[inv_ssd]])
+
+    # Compra posterior a $350 MXN
+    po_ssd = call_kw("purchase.order", "create", [{"partner_id": prov_mx}])
+    call_kw("purchase.order.line", "create", [{"order_id": po_ssd, "product_id": ssd, "product_qty": 20.0, "price_unit": 350.0, "tax_ids": [[6, 0, []]]}])
+    call_kw("purchase.order", "button_confirm", [[po_ssd]])
+    pk_in = call_kw("purchase.order", "search_read", [[("id", "=", po_ssd)]], {"fields": ["picking_ids"]})[0]["picking_ids"][0]
+    for m in call_kw("stock.move", "search_read", [[("picking_id", "=", pk_in)]], {"fields": ["id", "product_uom_qty"]}):
+        call_kw("stock.move", "write", [[m["id"]], {"quantity": m["product_uom_qty"]}])
+    call_kw("stock.picking", "button_validate", [[pk_in]])
+    call_kw("purchase.order", "action_create_invoice", [[po_ssd]])
+    b_ssd = call_kw("purchase.order", "search_read", [[("id", "=", po_ssd)]], {"fields": ["invoice_ids"]})[0]["invoice_ids"][0]
+    call_kw("account.move", "write", [[b_ssd], {"invoice_date": "2026-10-14"}])
+    call_kw("account.move", "action_post", [[b_ssd]])
+
+    # -------------------------------------------------------------
+    # EL HOOK INICIAL: PÓLIZA MANUAL INDEBIDA EN CUENTA 1150
+    # -------------------------------------------------------------
+    print("   -> Creando El Hook: Póliza manual de $487,000 MXN en cuenta 1150...")
+    acc_115 = 14
+    acc_var = 88
+    m_hook = call_kw("account.move", "create", [{
+        "date": "2026-09-01",
+        "journal_id": 3, # MISC
+        "move_type": "entry",
+        "ref": "Ajuste manual auditoría interna (Error contable)",
+        "line_ids": [
+            [0, 0, {"account_id": acc_115, "debit": 487000.0, "credit": 0.0, "name": "Ajuste manual a inventario (indebido)"}],
+            [0, 0, {"account_id": acc_var, "debit": 0.0, "credit": 487000.0, "name": "Contrapartida ajuste manual"}]
         ]
-        for date_str, rate_val in rates:
-            existing = self.execute('res.currency.rate', 'search', [
-                ('currency_id', '=', usd_curr),
-                ('name', '=', date_str),
-                ('company_id', '=', 1)
-            ])
-            if not existing:
-                self.execute('res.currency.rate', 'create', {
-                    'currency_id': usd_curr,
-                    'company_id': 1,
-                    'name': date_str,
-                    'rate': rate_val,
-                })
-        print("✓ Moneda USD y tasas de cambio configuradas (18.22, 18.05, 18.50 MXN).")
+    }])
+    call_kw("account.move", "action_post", [[m_hook]])
 
-    # -------------------------------------------------------------
-    # FASE 5: MENÚS Y REPORTE DE VALORACIÓN DE INVENTARIO EN ESPAÑOL
-    # -------------------------------------------------------------
-    def configure_menus_and_shortcuts(self):
-        """Traduce menús clave y crea accesos directos al Reporte de Valoración de Inventario"""
-        print("📑 Configurando menús en Español y accesos directos al Reporte de Valoración...")
-        # 1. Renombrar menú raíz Invoicing a Contabilidad
-        self.execute('ir.ui.menu', 'write', [130], {'name': 'Contabilidad'})
-        self.execute('ir.ui.menu', 'write', [189], {'name': 'Inventario'})
-        self.execute('ir.ui.menu', 'write', [239], {'name': 'Compras'})
-        self.execute('ir.ui.menu', 'write', [291], {'name': 'Ventas'})
-        
-        # Submenús contables
-        submenus = {
-            131: 'Tablero',
-            132: 'Clientes',
-            138: 'Proveedores',
-            144: 'Contabilidad',
-            149: 'Revisión y Cierre',
-            153: 'Informes',
-            160: 'Configuración',
-            280: 'Inventario',
-            335: 'Valoración de inventario'
-        }
-        for m_id, m_name in submenus.items():
-            try:
-                self.execute('ir.ui.menu', 'write', [m_id], {'name': m_name})
-            except Exception:
-                pass
+    print("🎉 ¡TODOS LOS ESCENARIOS CREADOS CON ÉXITO!")
 
-        # 2. Crear accesos directos visibles en Informes de Contabilidad y de Inventario
-        # Menú bajo Informes Contables (153)
-        existing_acc = self.execute('ir.ui.menu', 'search', [('parent_id', '=', 153), ('action', '=', 'ir.actions.client,459')])
-        if not existing_acc:
-            self.execute('ir.ui.menu', 'create', {
-                'name': 'Valoración de inventario',
-                'parent_id': 153,
-                'action': 'ir.actions.client,459',
-                'sequence': 20
-            })
-
-        # Menú bajo Informes de Inventario (202)
-        existing_stock = self.execute('ir.ui.menu', 'search', [('parent_id', '=', 202), ('action', '=', 'ir.actions.client,459')])
-        if not existing_stock:
-            self.execute('ir.ui.menu', 'create', {
-                'name': 'Valoración de inventario',
-                'parent_id': 202,
-                'action': 'ir.actions.client,459',
-                'sequence': 5
-            })
-        print("✓ Reporte de Valoración de Inventario disponible en Contabilidad > Informes y Contabilidad > Revisión y Cierre.")
-
-    # -------------------------------------------------------------
-    # FASE 6: CATEGORÍAS DE PRODUCTO AVCO EN ODOO 19.0
-    # -------------------------------------------------------------
-    def configure_product_categories(self):
-        """Crea y configura la categoría Almacenable - AVCO (Perpetuo México)"""
-        print("⚙️ Configurando categoría AVCO en Odoo 19.0...")
-        acc_115 = self.execute('account.account', 'search', [('code', '=', '115.01.01')])[0]
-        acc_501 = self.execute('account.account', 'search', [('code', '=', '501.01.01')])[0]
-        acc_var = self.execute('account.account', 'search', [('code', '=', '501.01.02')])[0]
-        acc_diff = self.execute('account.account', 'search', [('code', '=', '701.01.01')])[0]
-        acc_sales = self.execute('account.account', 'search', [('code', '=', '401.01.01')])[0] if self.execute('account.account', 'search', [('code', '=', '401.01.01')]) else 84
-        journal_stock = self.execute('account.journal', 'search', [('code', '=', 'STJ')])[0]
-
-        existing = self.execute('product.category', 'search', [('name', '=', 'Almacenable - AVCO (Perpetuo México)')])
-        cat_vals = {
-            'name': 'Almacenable - AVCO (Perpetuo México)',
-            'property_cost_method': 'average',
-            'property_valuation': 'real_time', # Perpetual en Odoo 19
-            'property_stock_valuation_account_id': acc_115,
-            'property_stock_journal': journal_stock,
-            'property_account_expense_categ_id': acc_501,
-            'property_account_income_categ_id': acc_sales,
-            'property_price_difference_account_id': acc_diff,
-            'account_stock_variation_id': acc_var,
-        }
-        if existing:
-            self.execute('product.category', 'write', existing, cat_vals)
-            cat_id = existing[0]
-        else:
-            cat_id = self.execute('product.category', 'create', cat_vals)
-        print(f"✓ Categoría AVCO configurada (ID {cat_id}).")
-        return cat_id
-
-    # -------------------------------------------------------------
-    # FASE 7: PARTNERS Y PRODUCTOS DE DEMO
-    # -------------------------------------------------------------
-    def create_partners_and_products(self, cat_id):
-        """Crea los contactos y productos del temario"""
-        print("👥 Creando contactos y catálogo de productos...")
-        partners_data = {
-            'vendor_mx': {
-                'name': 'Distribuidora Nacional de Insumos, S.A. de C.V.',
-                'is_company': True,
-                'country_id': 156,
-                'vat': 'DNI120315AA1',
-                'property_purchase_currency_id': 33,
-                'supplier_rank': 1,
-                'lang': 'es_MX'
-            },
-            'vendor_usd': {
-                'name': 'Global Supply Tech LLC',
-                'is_company': True,
-                'country_id': 233,
-                'property_purchase_currency_id': 1,
-                'supplier_rank': 1,
-                'lang': 'es_MX'
-            },
-            'agent_aduanal': {
-                'name': 'Agencia Aduanal del Norte, S.C.',
-                'is_company': True,
-                'country_id': 156,
-                'vat': 'AAN150620BC2',
-                'property_purchase_currency_id': 33,
-                'supplier_rank': 1,
-                'lang': 'es_MX'
-            },
-            'customer_mx': {
-                'name': 'Cliente Industrial de México, S.A. de C.V.',
-                'is_company': True,
-                'country_id': 156,
-                'vat': 'CIM180801KL3',
-                'customer_rank': 1,
-                'lang': 'es_MX'
-            }
-        }
-        partner_ids = {}
-        for key, pvals in partners_data.items():
-            existing = self.execute('res.partner', 'search', [('name', '=', pvals['name'])])
-            if existing:
-                self.execute('res.partner', 'write', existing, {'lang': 'es_MX'})
-                partner_ids[key] = existing[0]
-            else:
-                partner_ids[key] = self.execute('res.partner', 'create', pvals)
-
-        products_data = {
-            'landed_cost': {
-                'name': 'Gastos Aduanales y Flete (Landed Cost)',
-                'default_code': 'LANDED-COST',
-                'type': 'service',
-                'is_storable': False,
-                'landed_cost_ok': True,
-                'split_method_landed_cost': 'by_current_cost_price',
-                'categ_id': 2,
-                'standard_price': 5000.0,
-                'list_price': 0.0
-            },
-            'widget_mx': {
-                'name': 'Widget Nacional MX (AVCO)',
-                'default_code': 'WIDGET-MX',
-                'type': 'consu',
-                'is_storable': True,
-                'categ_id': cat_id,
-                'standard_price': 150.0,
-                'list_price': 250.0
-            },
-            'sensor_usd': {
-                'name': 'Sensor Industrial USD (AVCO)',
-                'default_code': 'SENSOR-USD',
-                'type': 'consu',
-                'is_storable': True,
-                'categ_id': cat_id,
-                'standard_price': 0.0,
-                'list_price': 3500.0
-            },
-            'valvula_neg': {
-                'name': 'Válvula Reguladora (Stock Negativo Demo)',
-                'default_code': 'VALVULA-NEG',
-                'type': 'consu',
-                'is_storable': True,
-                'categ_id': cat_id,
-                'standard_price': 200.0,
-                'list_price': 350.0
-            },
-            'mcu_tc_err': {
-                'name': 'Microcontrolador TX (TC Erróneo Demo)',
-                'default_code': 'MCU-TC-ERR',
-                'type': 'consu',
-                'is_storable': True,
-                'categ_id': cat_id,
-                'standard_price': 0.0,
-                'list_price': 800.0
-            },
-            'cable_merma': {
-                'name': 'Cable Blindado (Merma Demo)',
-                'default_code': 'CABLE-MERMA',
-                'type': 'consu',
-                'is_storable': True,
-                'categ_id': cat_id,
-                'standard_price': 85.0,
-                'list_price': 150.0
-            },
-            'tarjeta_obs': {
-                'name': 'Tarjeta Madre Legacy (Obsolescencia Demo)',
-                'default_code': 'TARJETA-OBS',
-                'type': 'consu',
-                'is_storable': True,
-                'categ_id': cat_id,
-                'standard_price': 1200.0,
-                'list_price': 2200.0
-            }
-        }
-        prod_ids = {}
-        for key, vals in products_data.items():
-            existing = self.execute('product.template', 'search', [('default_code', '=', vals['default_code'])])
-            if existing:
-                prod_tmpl_id = existing[0]
-            else:
-                prod_tmpl_id = self.execute('product.template', 'create', vals)
-            variant = self.execute('product.product', 'search', [('product_tmpl_id', '=', prod_tmpl_id)])[0]
-            prod_ids[key] = variant
-
-        print("✓ Contactos y productos listos.")
-        return partner_ids, prod_ids
-
-    # -------------------------------------------------------------
-    # FASE 8: RECARGA DE ESCENARIOS Y TRANSACCIONES
-    # -------------------------------------------------------------
-    def setup_demo_scenarios(self, partner_ids, prod_ids):
-        """Crea todas las transacciones pre-cargadas de la masterclass"""
-        print("🎬 Generando transacciones pre-cargadas para la sesión...")
-
-        # 1. EL HOOK: Única póliza manual en todo el sistema ($487,000 MXN en cuenta 1150)
-        # NOTA: Se omite intencionalmente cualquier póliza adicional (como MISC/2026/09/0002)
-        # para que la única anomalía contable a auditar sea estrictamente este hook del ponente.
-        hook_move = self.execute('account.move', 'search', [('ref', '=', 'Ajuste manual auditoría interna (Error contable)')])
-        if not hook_move:
-            acc_115 = self.execute('account.account', 'search', [('code', '=', '115.01.01')])[0]
-            acc_var = self.execute('account.account', 'search', [('code', '=', '501.01.02')])[0]
-            journal_misc = self.execute('account.journal', 'search', [('code', '=', 'MISC')])[0]
-            m_id = self.execute('account.move', 'create', {
-                'date': '2026-09-01',
-                'journal_id': journal_misc,
-                'move_type': 'entry',
-                'ref': 'Ajuste manual auditoría interna (Error contable)',
-                'line_ids': [
-                    [0, 0, {'account_id': acc_115, 'debit': 487000.0, 'credit': 0.0, 'name': 'Ajuste manual a inventario (indebido)'}],
-                    [0, 0, {'account_id': acc_var, 'debit': 0.0, 'credit': 487000.0, 'name': 'Contrapartida ajuste manual'}]
-                ]
-            })
-            self.execute('account.move', 'action_post', [m_id])
-            print("✓ Hook inicial cargado: Póliza manual de $487,000 en cuenta 1150.")
-
-        print("✓ Escenarios de masterclass generados y verificados.")
-
-    def run_all(self):
-        print("🚀 INICIANDO CONFIGURACIÓN INTEGRAL DE LA MASTERCLASS...")
-        self.install_required_modules()
-        self.install_spanish_language()
-        self.assign_accounting_security_groups()
-        self.configure_company_and_currency()
-        self.configure_menus_and_shortcuts()
-        cat_id = self.configure_product_categories()
-        p_ids, pr_ids = self.create_partners_and_products(cat_id)
-        self.setup_demo_scenarios(p_ids, pr_ids)
-        print("🎉 ¡INSTANCIA CONFIGURADA AL 100%! Lista para transmitir en Español (MX).")
-
+def run_server_action_and_update_downloads():
+    print("📊 4. Ejecutando Acción de Servidor para exportar CSV a Downloads...")
+    call_kw("ir.actions.server", "run", [[589]])
+    att = call_kw("ir.attachment", "search_read", [[("res_model", "=", "stock.quant")]], {"fields": ["raw"], "limit": 1, "order": "id desc"})
+    if att:
+        raw_csv = att[0]["raw"]
+        with open("/Users/julioserna/Downloads/conciliacion_inventario.csv", "w", encoding="utf-8") as f:
+            f.write(raw_csv)
+        print("   ✓ conciliation_inventario.csv actualizado en Downloads.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Gestor de datos de la Masterclass Odoo 19")
-    parser.add_argument("--url", default=DEFAULT_URL, help="URL de la instancia Odoo")
-    parser.add_argument("--db", default=DEFAULT_DB, help="Nombre de la base de datos")
-    parser.add_argument("--user", default=DEFAULT_USER, help="Usuario administrador")
-    parser.add_argument("--password", default=DEFAULT_PASS, help="Password")
-    parser.add_argument("--all", action="store_true", help="Ejecutar configuración completa desde cero")
-    args = parser.parse_args()
-
-    manager = OdooMasterclassManager(args.url, args.db, args.user, args.password)
-    manager.run_all()
+    print("==================================================")
+    print(" REINICIO Y RECARGA DE DATOS: MASTERCLASS ODOO 19 ")
+    print("==================================================")
+    clean_previous_transactions()
+    cat_id, cat_periodic_id, prov_mx, prov_usd, cli = setup_categories_and_partners()
+    setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli)
+    run_server_action_and_update_downloads()
+    print("==================================================")
+    print(" INSTANCIA 100% LISTA Y VERIFICADA PARA LA SESIÓN ")
+    print("==================================================")
