@@ -21,19 +21,25 @@ import sys
 
 PROFILE = "masterclass-julio121"
 
-def call_kw(model, method, args=[], kwargs={}):
+def call_kw(model, method, args=[], kwargs={}, retries=4):
     cmd = ["odoo-mcp", "execute-kw", "--profile", PROFILE, "--model", model, "--method", method, "--args", json.dumps(args)]
     if kwargs:
         cmd.extend(["--kwargs", json.dumps(kwargs)])
-    r = subprocess.run(cmd, capture_output=True, text=True)
-    try:
-        data = json.loads(r.stdout)
-        if isinstance(data, dict) and "result" in data:
-            return data["result"]
-        return data
-    except Exception as e:
-        print(f"Error calling {model}.{method}: {r.stderr or r.stdout}")
-        return None
+    for attempt in range(retries):
+        r = subprocess.run(cmd, capture_output=True, text=True)
+        try:
+            data = json.loads(r.stdout)
+            if isinstance(data, dict) and "result" in data:
+                return data["result"]
+            if data is not None:
+                return data
+        except Exception:
+            if attempt < retries - 1:
+                time.sleep(2)
+                continue
+            print(f"Error calling {model}.{method}: {r.stderr or r.stdout}")
+            return None
+    return None
 
 def clean_secondary_transactions():
     print("🧹 1. Limpiando transacciones previas en Instancia Secundaria (Purga Atómica Total)...")
