@@ -2040,7 +2040,7 @@ h1, h2, h3, h4, h5, h6 {
     <!-- Top Bar -->
     <div class="deck-top-bar" style="border-radius:0;">
       <div class="deck-info">
-        <span class="pill-badge">Slide <span id="currentSlideNum">1</span> / 23</span>
+        <span class="pill-badge">Slide <span id="currentSlideNum">1</span> / 24</span>
         <strong id="currentSlideTitle" style="color:#FFFFFF;">Portada Oficial</strong>
         <span class="pill-badge-outline">Tiempo: <span id="slideTargetTime">00:00</span></span>
       </div>
@@ -2632,7 +2632,113 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-7" data-id="7" data-title="¿Y si mi empresa está en Odoo 16, 17 o 18?" data-notes="Mensaje de tranquilidad: la lógica de Costo Promedio (AVCO) y el principio de cuadre Balanza vs Existencias son idénticos. Destacar el gran cambio en v19: la entrega de cliente NO genera póliza, el costo de venta se descarga en la factura." data-time="00:16 - 00:20">
+        <div class="slide-box bg-white" id="slide-7" data-id="7" data-title="El Nuevo Reporte de Inventario en Odoo 19.0" data-notes="Explicar el nuevo reporte de Odoo 19 de valoración y variación de existencias: cómo lee el Balance Inicial ($535,100), cómo calcula la Variación del Inventario ($196,190 con cargo a 501.01.02 y abono a 115.01.01) y cómo concilia con el Inventario Final físico ($338,910). Destacar que en versiones anteriores esto requería cruces manuales en Excel, mientras que en Odoo 19 viene integrado y validable columna por columna." data-time="00:20 - 00:25">
+      
+      
+            <div class="slide-content">
+              <div class="slide-header">
+                <div>
+                  <span class="pill-badge" style="background:var(--rojo-vauxoo);">NOVEDAD ODOO 19.0 · INFORME DE VALUACIÓN</span>
+                  <h2 class="slide-title">El Nuevo Reporte de Inventario en Odoo 19.0</h2>
+                </div>
+                <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510.52 158.8">
+  <defs>
+    <style>
+      .st0 { fill: url(#Degradado_sin_nombre_16); }
+      .st1 { fill: #a20029; }
+      .st2 { fill: #3c3c3b; }
+    </style>
+    <linearGradient id="Degradado_sin_nombre_16" data-name="Degradado sin nombre 16" x1="8.84" y1="79.4" x2="82.71" y2="79.4" gradientUnits="userSpaceOnUse">
+      <stop offset=".26" stop-color="#393b4b"/>
+      <stop offset=".33" stop-color="#513246"/>
+      <stop offset=".52" stop-color="#8d1c3a"/>
+      <stop offset=".68" stop-color="#b90d32"/>
+      <stop offset=".81" stop-color="#d4032c"/>
+      <stop offset=".88" stop-color="#de002b"/>
+    </linearGradient>
+  </defs>
+  <path class="st0" d="M35.26,95.79l37.95-37.95,9.49,9.49-37.95,37.95-9.49-9.49ZM31.94,91.99l26.42-26.42-9.77-9.77-26.42,26.42,9.77,9.77ZM18.88,78.93l15.37-15.37-10.04-10.04-15.37,15.37,10.04,10.04Z"/>
+  <g>
+    <path class="st1" d="M101.01,96.38l-9.11-29.81h5.8l7.45,24.51,7.58-24.51h5.8l-9.11,29.81h-8.41Z"/>
+    <path class="st1" d="M119.77,96.38l9.11-29.81h8.41l9.11,29.81h-5.8l-8.12-26.29h1.08l-7.99,26.29h-5.8ZM125.24,90.17v-5.26h15.73v5.26h-15.73Z"/>
+    <path class="st1" d="M164.53,97c-2.4,0-4.51-.49-6.33-1.46-1.82-.97-3.24-2.34-4.26-4.11-1.02-1.77-1.53-3.84-1.53-6.23v-18.59l5.71-.04v18.59c0,.98.17,1.87.5,2.67.33.8.79,1.49,1.38,2.07.59.58,1.27,1.02,2.05,1.33.78.31,1.61.47,2.5.47s1.76-.16,2.54-.48c.78-.32,1.46-.76,2.04-1.34.58-.58,1.03-1.27,1.36-2.07.32-.8.49-1.68.49-2.65v-18.59h5.71v18.63c0,2.39-.51,4.47-1.53,6.23-1.02,1.77-2.44,3.14-4.27,4.11-1.82.97-3.93,1.46-6.33,1.46Z"/>
+    <path class="st1" d="M183.08,96.38l10.02-15.07-9.73-14.74h6.91l6.33,9.94,6.25-9.94h6.96l-9.73,14.74,9.98,15.07h-6.91l-6.54-10.27-6.58,10.27h-6.96Z"/>
+    <path class="st1" d="M228.04,97c-2.98,0-5.55-.65-7.71-1.95s-3.82-3.11-4.99-5.45c-1.17-2.33-1.75-5.04-1.75-8.14s.58-5.8,1.75-8.14c1.17-2.33,2.83-4.15,4.99-5.44,2.16-1.3,4.73-1.95,7.71-1.95s5.55.65,7.71,1.95c2.16,1.3,3.82,3.11,4.99,5.44,1.17,2.33,1.75,5.05,1.75,8.14s-.58,5.8-1.75,8.14c-1.17,2.33-2.83,4.15-4.99,5.45-2.16,1.3-4.73,1.95-7.71,1.95ZM228.04,91.7c1.89.03,3.46-.38,4.72-1.22,1.26-.84,2.2-2.04,2.83-3.58.63-1.54.94-3.35.94-5.42s-.31-3.86-.94-5.38-1.57-2.7-2.83-3.54c-1.26-.84-2.83-1.28-4.72-1.31-1.89-.03-3.46.38-4.72,1.22-1.26.84-2.2,2.04-2.83,3.58-.63,1.55-.94,3.35-.94,5.43s.31,3.86.94,5.38c.63,1.52,1.57,2.7,2.83,3.54,1.26.84,2.83,1.28,4.72,1.3Z"/>
+    <path class="st1" d="M262.53,97c-2.98,0-5.55-.65-7.71-1.95-2.16-1.3-3.82-3.11-4.99-5.45-1.17-2.33-1.75-5.04-1.75-8.14s.58-5.8,1.75-8.14c1.17-2.33,2.83-4.15,4.99-5.44,2.16-1.3,4.73-1.95,7.71-1.95s5.55.65,7.71,1.95c2.16,1.3,3.82,3.11,4.99,5.44,1.17,2.33,1.75,5.05,1.75,8.14s-.58,5.8-1.75,8.14c-1.17,2.33-2.83,4.15-4.99,5.45-2.16,1.3-4.73,1.95-7.71,1.95ZM262.53,91.7c1.89.03,3.46-.38,4.72-1.22,1.26-.84,2.2-2.04,2.83-3.58.63-1.54.94-3.35.94-5.42s-.31-3.86-.94-5.38-1.57-2.7-2.83-3.54c-1.26-.84-2.83-1.28-4.72-1.31-1.89-.03-3.46.38-4.72,1.22-1.26.84-2.2,2.04-2.83,3.58-.63,1.55-.94,3.35-.94,5.43s.31,3.86.94,5.38c.63,1.52,1.57,2.7,2.83,3.54,1.26.84,2.83,1.28,4.72,1.3Z"/>
+    <g>
+      <path class="st2" d="M291.3,98.1l9.98-29.81h5.14l9.98,29.81h-3.83l-9.34-27.66h1.16l-9.25,27.66h-3.83ZM296.1,91.13v-3.46h15.49v3.46h-15.49Z"/>
+      <path class="st2" d="M334.65,98.73c-2.97,0-5.49-.66-7.56-1.97-2.07-1.31-3.65-3.13-4.73-5.47-1.08-2.33-1.63-5.03-1.63-8.09s.54-5.76,1.63-8.1c1.08-2.33,2.66-4.15,4.73-5.47,2.07-1.31,4.59-1.97,7.56-1.97,3.45,0,6.29.88,8.52,2.63,2.23,1.75,3.77,4.11,4.61,7.08l-3.75.99c-.61-2.22-1.69-3.98-3.25-5.26-1.56-1.28-3.6-1.92-6.13-1.92-2.22,0-4.07.5-5.55,1.51-1.48,1.01-2.59,2.41-3.33,4.21-.74,1.8-1.13,3.9-1.14,6.28-.01,2.37.35,4.46,1.1,6.26.74,1.8,1.86,3.21,3.35,4.22,1.49,1.01,3.35,1.52,5.57,1.52,2.53,0,4.57-.65,6.13-1.94,1.56-1.29,2.64-3.04,3.25-5.25l3.75.99c-.84,2.95-2.38,5.31-4.61,7.07-2.23,1.76-5.07,2.64-8.52,2.64Z"/>
+      <path class="st2" d="M352.54,98.1l9.98-29.81h5.14l9.98,29.81h-3.83l-9.34-27.66h1.16l-9.25,27.66h-3.83ZM357.34,91.13v-3.46h15.49v3.46h-15.49Z"/>
+      <path class="st2" d="M384.46,98.1v-29.81h9.19c.3,0,.84,0,1.59.02.76.01,1.48.07,2.18.17,2.3.3,4.23,1.14,5.79,2.52,1.55,1.37,2.72,3.12,3.51,5.23.79,2.11,1.18,4.44,1.18,6.98s-.39,4.86-1.18,6.98c-.79,2.11-1.96,3.85-3.51,5.23-1.55,1.37-3.48,2.21-5.79,2.52-.69.08-1.42.13-2.19.16-.76.02-1.29.03-1.58.03h-9.19ZM388.25,94.59h5.4c.52,0,1.11-.02,1.76-.05.65-.03,1.21-.09,1.7-.18,1.63-.3,2.95-.99,3.95-2.05,1.01-1.06,1.75-2.39,2.22-3.97.47-1.59.7-3.3.7-5.13s-.24-3.61-.71-5.2c-.48-1.59-1.22-2.9-2.23-3.95-1.01-1.05-2.32-1.72-3.93-2.01-.48-.1-1.05-.16-1.72-.19-.66-.03-1.24-.04-1.74-.04h-5.4v22.77Z"/>
+      <path class="st2" d="M415.76,98.1v-29.81h18.84v3.5h-15.15v9.34h12.67v3.5h-12.67v9.98h15.15v3.5h-18.84Z"/>
+      <path class="st2" d="M442.67,98.1v-29.81h3.35l11.26,23.75,11.2-23.75h3.4v29.79h-3.5v-21.7l-10.12,21.72h-1.97l-10.12-21.72v21.72h-3.5Z"/>
+      <path class="st2" d="M487.93,98.1v-12.4l-10.04-17.41h4.29l7.62,13.19,7.6-13.19h4.29l-10.02,17.41v12.4h-3.73Z"/>
+    </g>
+  </g>
+</svg></div>
+              </div>
+              <p class="slide-lead">La gran innovación contable de Odoo 19: un informe nativo que conecta Balance Inicial, Variación de Existencias e Inventario Final sin hojas de cálculo:</p>
+              
+              <div style="display:grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: start; margin-bottom: 16px;">
+                <div style="background:#1E293B; border-radius:8px; padding:12px; border:1px solid #334155; text-align:center;">
+                  <img src="img/reporte_valuacion_odoo19.png" alt="Reporte de Valuación y Variación de Inventario en Odoo 19" style="width:100%; height:auto; border-radius:6px; display:block; box-shadow:0 4px 12px rgba(0,0,0,0.25);">
+                  <div style="margin-top:8px; font-size:0.75rem; color:#94A3B8; text-align:left; line-height:1.4;">
+                    📸 <em>Vista oficial en Odoo 19: Contabilidad > Informes > Inventario (Variación de Existencias).</em>
+                  </div>
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <div style="background:#F8FAFC; border:1px solid #CBD5E1; border-left:4px solid #345D90; border-radius:6px; padding:10px 14px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                      <strong style="color:#1E293B; font-size:0.9rem;">1. Balance Inicial</strong>
+                      <span class="pill-badge" style="background:#345D90; font-size:0.75rem;">MX$ 535,100.00</span>
+                    </div>
+                    <p style="font-size:0.8rem; color:#475569; margin:4px 0 0;">
+                      <strong>Qué es:</strong> Saldo deudor en libros de la cuenta <code>115.01.01</code> al corte.<br>
+                      <strong>Cómo se valida:</strong> Se coteja directo contra la Balanza de Comprobación y Mayor Contable.
+                    </p>
+                  </div>
+
+                  <div style="background:#F8FAFC; border:1px solid #CBD5E1; border-left:4px solid var(--rojo-vauxoo); border-radius:6px; padding:10px 14px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                      <strong style="color:#1E293B; font-size:0.9rem;">2. Variación del Inventario</strong>
+                      <span class="pill-badge" style="background:var(--rojo-vauxoo); font-size:0.75rem;">MX$ 196,190.00</span>
+                    </div>
+                    <p style="font-size:0.8rem; color:#475569; margin:4px 0 0;">
+                      <strong>Cómo se lee el asiento (Deber / Haber):</strong><br>
+                      • <strong>Deber (Cargo):</strong> <code>501.01.02 Variación de Existencias</code> por $196.1k (Costo).<br>
+                      • <strong>Haber (Abono):</strong> <code>115.01.01 Inventario</code> por $196.1k (Descarga balance).<br>
+                      <strong>Cómo se valida:</strong> Representa con precisión el descuadre neto total del periodo.
+                    </p>
+                  </div>
+
+                  <div style="background:#F8FAFC; border:1px solid #CBD5E1; border-left:4px solid #16A34A; border-radius:6px; padding:10px 14px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                      <strong style="color:#1E293B; font-size:0.9rem;">3. Inventario Final</strong>
+                      <span class="pill-badge" style="background:#16A34A; font-size:0.75rem;">MX$ 338,910.00</span>
+                    </div>
+                    <p style="font-size:0.8rem; color:#475569; margin:4px 0 0;">
+                      <strong>Qué es:</strong> El saldo resultante con el que queda la cuenta <code>115.01.01</code>.<br>
+                      <strong>Cómo se valida:</strong> Idéntico al Reporte de Existencias / Valoración de Almacén.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="interactive-chat-prompt" style="background:#F0FDF4; border:1px solid #BBF7D0;">
+                <span class="prompt-icon">⚖️</span>
+                <span class="prompt-text" style="color:#166534; font-size:0.88rem; line-height:1.5;">
+                  <strong>Ecuación de Cuadre en 1 Clic (La Ventaja de Odoo 19):</strong><br>
+                  <code>Balance Inicial ($535,100.00) &minus; Variación en Haber ($196,190.00) = Inventario Final ($338,910.00 MXN)</code><br>
+                  <span style="color:#15803D; font-size:0.82rem;">En versiones previas requería armar cruces manuales en Excel. En Odoo 19 el sistema expone y concilia el movimiento contable en tiempo real.</span>
+                </span>
+              </div>
+            </div>
+            
+    </div>
+    
+<div class="slide-box bg-white" id="slide-8" data-id="8" data-title="¿Y si mi empresa está en Odoo 16, 17 o 18?" data-notes="Mensaje de tranquilidad: la lógica de Costo Promedio (AVCO) y el principio de cuadre Balanza vs Existencias son idénticos. Destacar el gran cambio en v19: la entrega de cliente NO genera póliza, el costo de venta se descarga en la factura." data-time="00:16 - 00:20">
       
       
             <div class="slide-content">
@@ -2719,7 +2825,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-8" data-id="8" data-title="Matriz Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?" data-notes="Desmitificar en vivo cuáles movimientos disparan pólizas a la cuenta 1150 y cuáles no. Explicar facturas de compra/venta, landed costs, MOs, ajustes con cuenta vs eventos neutros (entregas, recepciones directas, traslados, pedidos)." data-time="00:20 - 00:30">
+    <div class="slide-box bg-white" id="slide-9" data-id="9" data-title="Matriz Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?" data-notes="Desmitificar en vivo cuáles movimientos disparan pólizas a la cuenta 1150 y cuáles no. Explicar facturas de compra/venta, landed costs, MOs, ajustes con cuenta vs eventos neutros (entregas, recepciones directas, traslados, pedidos)." data-time="00:20 - 00:30">
       
       
             <div class="slide-content">
@@ -2863,7 +2969,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-9" data-id="9" data-title="Operación Normal: Compra Progresiva en MXN" data-notes="Mostrar la compra progresiva y el cálculo ponderado en Odoo 19 con [TECL-INAL-USB]. 50 u @ $150 + 50 u @ $170 = 100 u @ $160 MXN. Cuenta 1150 suma $16,000 MXN." data-time="00:30 - 00:38">
+    <div class="slide-box bg-white" id="slide-10" data-id="10" data-title="Operación Normal: Compra Progresiva en MXN" data-notes="Mostrar la compra progresiva y el cálculo ponderado en Odoo 19 con [TECL-INAL-USB]. 50 u @ $150 + 50 u @ $170 = 100 u @ $160 MXN. Cuenta 1150 suma $16,000 MXN." data-time="00:30 - 00:38">
       
       
             <div class="slide-content">
@@ -2961,7 +3067,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-10" data-id="10" data-title="Operación Normal: Venta y Costo de Ventas" data-notes="Mostrar la venta de 30 unidades de [TECL-INAL-USB] @ $160 MXN. Costo de ventas = $4,800. Saldo remanente en almacén = 70 u @ $160 = $11,200 MXN. Contabilidad tiene $2,700 y Facturas por Recibir tiene $8,500. Cuadre perfecto: $2,700 + $8,500 = $11,200." data-time="00:38 - 00:45">
+    <div class="slide-box bg-white" id="slide-11" data-id="11" data-title="Operación Normal: Venta y Costo de Ventas" data-notes="Mostrar la venta de 30 unidades de [TECL-INAL-USB] @ $160 MXN. Costo de ventas = $4,800. Saldo remanente en almacén = 70 u @ $160 = $11,200 MXN. Contabilidad tiene $2,700 y Facturas por Recibir tiene $8,500. Cuadre perfecto: $2,700 + $8,500 = $11,200." data-time="00:38 - 00:45">
       
       
             <div class="slide-content">
@@ -3049,7 +3155,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-11" data-id="11" data-title="Operación Normal: Compra de Importación en USD" data-notes="Mostrar la compra en USD con [MON-27-4K]. 20 u @ $100 USD (TC oficial $18.50) = $37,000 MXN. En Odoo 19 la recepción fija la valoración física en stock.move sin generar póliza, y la Factura del Proveedor asienta el Cargo 1150 / Abono 201." data-time="00:45 - 00:55">
+    <div class="slide-box bg-white" id="slide-12" data-id="12" data-title="Operación Normal: Compra de Importación en USD" data-notes="Mostrar la compra en USD con [MON-27-4K]. 20 u @ $100 USD (TC oficial $18.50) = $37,000 MXN. En Odoo 19 la recepción fija la valoración física en stock.move sin generar póliza, y la Factura del Proveedor asienta el Cargo 1150 / Abono 201." data-time="00:45 - 00:55">
       
       
             <div class="slide-content">
@@ -3150,7 +3256,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-gradient" id="slide-12" data-id="12" data-title="La Clínica de Desastres: 5 Errores Reales" data-notes="Entrada al Bloque 4: La Clínica de Desastres. 5 errores operativos y de configuración comunes que cuestan millones." data-time="00:55 - 00:58">
+    <div class="slide-box bg-gradient" id="slide-13" data-id="13" data-title="La Clínica de Desastres: 5 Errores Reales" data-notes="Entrada al Bloque 4: La Clínica de Desastres. 5 errores operativos y de configuración comunes que cuestan millones." data-time="00:55 - 00:58">
       <div class="texture-overlay"></div>
       
             <div class="slide-content cover-slide">
@@ -3172,7 +3278,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-13" data-id="13" data-title="Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')" data-notes="Presentar los 4 reportes obligatorios para auditar inventarios en Odoo: Existencias, Facturas por recibir, Balanza 1150 y Movimientos stock.move. El mapa de coordenadas del auditor antes de abrir los casos de desastres. Resaltar cómo en el Teclado tenemos $8,500 en Facturas por Recibir que explican el cuadre." data-time="00:58 - 01:06">
+    <div class="slide-box bg-white" id="slide-14" data-id="14" data-title="Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')" data-notes="Presentar los 4 reportes obligatorios para auditar inventarios en Odoo: Existencias, Facturas por recibir, Balanza 1150 y Movimientos stock.move. El mapa de coordenadas del auditor antes de abrir los casos de desastres. Resaltar cómo en el Teclado tenemos $8,500 en Facturas por Recibir que explican el cuadre." data-time="00:58 - 01:06">
       
       
             <div class="slide-content">
@@ -3256,7 +3362,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-14" data-id="14" data-title="Metodología de Auditoría Forense: SKU por SKU" data-notes="Paso a paso de la resolución forense: 1. Aislar póliza manual de $487,000 MXN en cuenta 1150 sin SKU; 2. Ejecutar Acción de Servidor 589 con 1 clic; 3. Regularización SKU por SKU con plantilla CSV." data-time="01:06 - 01:12">
+    <div class="slide-box bg-white" id="slide-15" data-id="15" data-title="Metodología de Auditoría Forense: SKU por SKU" data-notes="Paso a paso de la resolución forense: 1. Aislar póliza manual de $487,000 MXN en cuenta 1150 sin SKU; 2. Ejecutar Acción de Servidor 589 con 1 clic; 3. Regularización SKU por SKU con plantilla CSV." data-time="01:06 - 01:12">
       
       
             <div class="slide-content">
@@ -3356,7 +3462,7 @@ h1, h2, h3, h4, h5, h6 {
               </div>
             </div>
             
-    </div><div class="slide-box bg-white" id="slide-15" data-id="15" data-title="Desastres 1 y 2: Ajuste Huérfano y Producto Archivado" data-notes="Detalle del Desastre 1 (Mouse Óptico en categoría Perpetua AVCO, pero la ubicación virtual Inventory adjustment viene vacía de cuenta contable por defecto en Odoo 19) y Desastre 2 (Router Legacy archivado con existencias vivas)." data-time="01:12 - 01:19">
+    </div><div class="slide-box bg-white" id="slide-16" data-id="16" data-title="Desastres 1 y 2: Ajuste Huérfano y Producto Archivado" data-notes="Detalle del Desastre 1 (Mouse Óptico en categoría Perpetua AVCO, pero la ubicación virtual Inventory adjustment viene vacía de cuenta contable por defecto en Odoo 19) y Desastre 2 (Router Legacy archivado con existencias vivas)." data-time="01:12 - 01:19">
       
       
             <div class="slide-content">
@@ -3444,7 +3550,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-16" data-id="16" data-title="Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha" data-notes="Detalle del Desastre 3 (Cámara Web con error de moneda USD, recibida y dejada sin facturar para corregir en vivo la moneda en la factura) y Desastre 4 (Memoria RAM con costo cambiado a mano)." data-time="01:19 - 01:25">
+    <div class="slide-box bg-white" id="slide-17" data-id="17" data-title="Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha" data-notes="Detalle del Desastre 3 (Cámara Web con error de moneda USD, recibida y dejada sin facturar para corregir en vivo la moneda en la factura) y Desastre 4 (Memoria RAM con costo cambiado a mano)." data-time="01:19 - 01:25">
       
       
             <div class="slide-content">
@@ -3535,7 +3641,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-17" data-id="17" data-title="Desastre 5: Stock Negativo con Compra Posterior" data-notes="Detalle del Desastre 5 (Disco SSD NVMe con stock negativo): Salida urgente de 10 unidades sin stock previo. Cuando entra la compra después de 20 u a $350, se pierde la deducción contable real. Descuadre de -$1,500 MXN." data-time="01:25 - 01:30">
+    <div class="slide-box bg-white" id="slide-18" data-id="18" data-title="Desastre 5: Stock Negativo con Compra Posterior" data-notes="Detalle del Desastre 5 (Disco SSD NVMe con stock negativo): Salida urgente de 10 unidades sin stock previo. Cuando entra la compra después de 20 u a $350, se pierde la deducción contable real. Descuadre de -$1,500 MXN." data-time="01:25 - 01:30">
       
       
             <div class="slide-content">
@@ -3625,7 +3731,7 @@ h1, h2, h3, h4, h5, h6 {
     
     
 
-    <div class="slide-box bg-gradient" id="slide-18" data-id="18" data-title="Cuadre Perfecto al Centavo ($78,810 = $78,810)" data-notes="Celebrar el cuadre perfecto al centavo tras desinflar el error de USD en la Cámara Web (-$262,500), facturar pendientes, desarchivar el Router (+$2,400), cancelar la póliza manual (-$487,000) y regularizar por SKU: Balanza ($78,810.00) = Existencias ($78,810.00). Diferencia $0.00 MXN." data-time="01:40 - 01:48">
+    <div class="slide-box bg-gradient" id="slide-19" data-id="19" data-title="Cuadre Perfecto al Centavo ($78,810 = $78,810)" data-notes="Celebrar el cuadre perfecto al centavo tras desinflar el error de USD en la Cámara Web (-$262,500), facturar pendientes, desarchivar el Router (+$2,400), cancelar la póliza manual (-$487,000) y regularizar por SKU: Balanza ($78,810.00) = Existencias ($78,810.00). Diferencia $0.00 MXN." data-time="01:40 - 01:48">
       <div class="texture-overlay"></div>
       
             <div class="slide-content">
@@ -3704,7 +3810,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-19" data-id="19" data-title="Estrategias de Saneamiento: ¿Cuándo Regularizar vs Borrón y Cuenta Nueva?" data-notes="Regla de decisión clara para no confundir al participante entre la Plantilla CSV con product_id (Slide 16) y el Protocolo Borrón y Cuenta Nueva (Slide 18), dejando claro por qué el Parche Manual sin SKU siempre está prohibido." data-time="01:48 - 01:56">
+    <div class="slide-box bg-white" id="slide-20" data-id="20" data-title="Estrategias de Saneamiento: ¿Cuándo Regularizar vs Borrón y Cuenta Nueva?" data-notes="Regla de decisión clara para no confundir al participante entre la Plantilla CSV con product_id (Slide 16) y el Protocolo Borrón y Cuenta Nueva (Slide 18), dejando claro por qué el Parche Manual sin SKU siempre está prohibido." data-time="01:48 - 01:56">
       
       
             <div class="slide-content">
@@ -3793,7 +3899,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-20" data-id="20" data-title="Las 5 Reglas de Oro Blindadas de Vauxoo" data-notes="Las 5 Reglas de Oro Blindadas de Vauxoo: 1. Cero Asientos Manuales en la 1150; 2. Cero Salidas sin Recepción; 3. Configuración y Cadencia; 4. Cero Cambios Manuales de Coste; 5. Auditoría SKU y product_id." data-time="01:56 - 02:00">
+    <div class="slide-box bg-white" id="slide-21" data-id="21" data-title="Las 5 Reglas de Oro Blindadas de Vauxoo" data-notes="Las 5 Reglas de Oro Blindadas de Vauxoo: 1. Cero Asientos Manuales en la 1150; 2. Cero Salidas sin Recepción; 3. Configuración y Cadencia; 4. Cero Cambios Manuales de Coste; 5. Auditoría SKU y product_id." data-time="01:56 - 02:00">
       
       
             <div class="slide-content">
@@ -3891,7 +3997,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-gradient" id="slide-21" data-id="21" data-title="Bloque 6: Q&A Hot Seat (Consultoría en Vivo)" data-notes="Bloque 6: Q&A Hot Seat - Consultoría en Vivo (30 minutos completos). Los asistentes exponen sus dudas operativas, configuraciones o descuadres reales en vivo. Julio responde en pantalla sobre Odoo 19." data-time="02:00 - 02:27">
+    <div class="slide-box bg-gradient" id="slide-22" data-id="22" data-title="Bloque 6: Q&A Hot Seat (Consultoría en Vivo)" data-notes="Bloque 6: Q&A Hot Seat - Consultoría en Vivo (30 minutos completos). Los asistentes exponen sus dudas operativas, configuraciones o descuadres reales en vivo. Julio responde en pantalla sobre Odoo 19." data-time="02:00 - 02:27">
       <div class="texture-overlay"></div>
       
             <div class="slide-content">
@@ -3955,7 +4061,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-22" data-id="22" data-title="Paquete de Entregables Oficiales" data-notes="Presentación de los entregables: 1. Checklist de Auditoría Logística-Contable con Matriz de Cadencia; 2. Tabla de Mapeo Conceptual v18 -> v19 y Matriz de Movimientos; 3. Kit Técnico de Regularización y Acción de Servidor; 4. Grabación HD y Certificado." data-time="02:27 - 02:29">
+    <div class="slide-box bg-white" id="slide-23" data-id="23" data-title="Paquete de Entregables Oficiales" data-notes="Presentación de los entregables: 1. Checklist de Auditoría Logística-Contable con Matriz de Cadencia; 2. Tabla de Mapeo Conceptual v18 -> v19 y Matriz de Movimientos; 3. Kit Técnico de Regularización y Acción de Servidor; 4. Grabación HD y Certificado." data-time="02:27 - 02:29">
       
       
             <div class="slide-content">
@@ -4045,7 +4151,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-gradient" id="slide-23" data-id="23" data-title="Cierre y Agradecimientos" data-notes="Agradecimiento final de Julio Serna. Contacto y cierre de la masterclass." data-time="02:30">
+    <div class="slide-box bg-gradient" id="slide-24" data-id="24" data-title="Cierre y Agradecimientos" data-notes="Agradecimiento final de Julio Serna. Contacto y cierre de la masterclass." data-time="02:30">
       <div class="texture-overlay"></div>
       
             <div class="slide-content cover-slide">
@@ -4117,7 +4223,7 @@ h1, h2, h3, h4, h5, h6 {
     <!-- Thumbnails -->
     <div class="deck-thumbnails-strip">
       
-        <button class="thumb-btn active" onclick="goToSlide(1)" id="thumb-1">
+            <button class="thumb-btn active" onclick="goToSlide(1)" id="thumb-1">
       1. Portada Oficial
     </button>
     
@@ -4148,87 +4254,92 @@ h1, h2, h3, h4, h5, h6 {
     
 
     <button class="thumb-btn" onclick="goToSlide(7)" id="thumb-7">
-      7. ¿Y si mi empresa está en Odoo 16, 17 o 18?
+      7. El Nuevo Reporte de Inventario en Odoo 19.0
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(8)" id="thumb-8">
-      8. Matriz Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?
+      8. ¿Y si mi empresa está en Odoo 16, 17 o 18?
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(9)" id="thumb-9">
-      9. Operación Normal: Compra Progresiva en MXN
+      9. Matriz Maestra de Movimientos: ¿Cuáles Sí y Cuáles No Generan Contabilidad?
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(10)" id="thumb-10">
-      10. Operación Normal: Venta y Costo de Ventas
+      10. Operación Normal: Compra Progresiva en MXN
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(11)" id="thumb-11">
-      11. Operación Normal: Compra de Importación en USD
+      11. Operación Normal: Venta y Costo de Ventas
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(12)" id="thumb-12">
-      12. La Clínica de Desastres: 5 Errores Reales
+      12. Operación Normal: Compra de Importación en USD
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(13)" id="thumb-13">
-      13. Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')
+      13. La Clínica de Desastres: 5 Errores Reales
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(14)" id="thumb-14">
-      14. Metodología de Auditoría Forense: SKU por SKU
+      14. Los 4 Modelos Esenciales de Auditoría ('El Cuadrilátero de Control')
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(15)" id="thumb-15">
-      15. Desastres 1 y 2: Ajuste Huérfano y Producto Archivado
+      15. Metodología de Auditoría Forense: SKU por SKU
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(16)" id="thumb-16">
-      16. Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha
+      16. Desastres 1 y 2: Ajuste Huérfano y Producto Archivado
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(17)" id="thumb-17">
-      17. Desastre 5: Stock Negativo con Compra Posterior
+      17. Desastres 3 y 4: Error de Moneda y Costo Manual en Ficha
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(18)" id="thumb-18">
-      18. Cuadre Perfecto al Centavo ($78,810 = $78,810)
+      18. Desastre 5: Stock Negativo con Compra Posterior
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(19)" id="thumb-19">
-      19. Estrategias de Saneamiento: ¿Cuándo Regularizar vs Borrón y Cuenta Nueva?
+      19. Cuadre Perfecto al Centavo ($78,810 = $78,810)
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(20)" id="thumb-20">
-      20. Las 5 Reglas de Oro Blindadas de Vauxoo
+      20. Estrategias de Saneamiento: ¿Cuándo Regularizar vs Borrón y Cuenta Nueva?
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(21)" id="thumb-21">
-      21. Bloque 6: Q&A Hot Seat (Consultoría en Vivo)
+      21. Las 5 Reglas de Oro Blindadas de Vauxoo
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(22)" id="thumb-22">
-      22. Paquete de Entregables Oficiales
+      22. Bloque 6: Q&A Hot Seat (Consultoría en Vivo)
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(23)" id="thumb-23">
-      23. Cierre y Agradecimientos
+      23. Paquete de Entregables Oficiales
+    </button>
+    
+
+    <button class="thumb-btn" onclick="goToSlide(24)" id="thumb-24">
+      24. Cierre y Agradecimientos
     </button>
     
     </div>
@@ -4236,7 +4347,7 @@ h1, h2, h3, h4, h5, h6 {
 
   <script>
   let currentSlide = 1;
-  const totalSlides = 23;
+  const totalSlides = 24;
   let timerSeconds = 0;
   let timerInterval = null;
   let timerRunning = false;
