@@ -2468,14 +2468,14 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-        <div class="slide-box bg-white" id="slide-5" data-id="5" data-title="Fundamento de Valoración: ¿Por qué Costo Promedio (AVCO)?" data-notes="Fundamento contable y operativo de la elección de Costo Promedio Ponderado (AVCO / Moving Average) para esta masterclass: NIF C-4 y NIC 2, amortiguación de inflación frente a FIFO, eliminación de desviaciones ficticias frente a Estándar, y la fórmula de ponderación en tiempo real en Odoo 19." data-time="00:12 - 00:16">
+        <div class="slide-box bg-white" id="slide-5" data-id="5" data-title="¿Por qué Costo Promedio (Average) para Auditar?" data-notes="Explicar por qué usamos Costo Promedio (Average / AVCO) en la masterclass: porque es el método más limpio y directo para auditar en Odoo 19. Un solo costo de referencia por producto, validación matemática inmediata (Cantidad x Coste = Valor) y trazabilidad clara en cada movimiento de stock." data-time="00:12 - 00:16">
       
       
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge" style="background:#0D9488;">FUNDAMENTO DE VALORACIÓN</span>
-                  <h2 class="slide-title">¿Por qué Costo Promedio Ponderado (AVCO)?</h2>
+                  <span class="pill-badge" style="background:#0D9488;">ENFOQUE DE AUDITORÍA</span>
+                  <h2 class="slide-title">¿Por qué Costo Promedio (Average)?</h2>
                 </div>
                 <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
 <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510.52 158.8">
@@ -2514,34 +2514,34 @@ h1, h2, h3, h4, h5, h6 {
   </g>
 </svg></div>
               </div>
-              <p class="slide-lead">El estándar financiero y operativo adoptado para esta masterclass: qué ventajas ofrece y cómo recalcula en tiempo real:</p>
+              <p class="slide-lead">Por qué elegimos Costo Promedio (Average / AVCO) para esta masterclass: la máxima ventaja para auditar con claridad y precisión:</p>
               
               <div class="agenda-grid" style="grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px;">
                 <div class="agenda-card" style="border-top: 4px solid #0D9488;">
-                  <div class="agenda-time">NORMATIVA & ESTABILIDAD</div>
-                  <div class="agenda-title">NIF C-4 e IFRS (NIC 2)</div>
-                  <p class="agenda-desc">El método predilecto para comercializadoras en México y Latinoamérica. Suaviza la inflación y variaciones de precio entre compras sin el castigo de picos abruptos en márgenes.</p>
+                  <div class="agenda-time">AUDITORÍA INMEDIATA</div>
+                  <div class="agenda-title">Un Solo Costo de Referencia</div>
+                  <p class="agenda-desc">En cada producto existe un valor unitario único y visible en su ficha. Auditar el valor de cualquier producto es tan simple como multiplicar <strong>Existencias &times; Costo</strong>.</p>
                 </div>
                 
                 <div class="agenda-card" style="border-top: 4px solid #1E293B;">
-                  <div class="agenda-time">AVCO VS. FIFO (PEPS)</div>
-                  <div class="agenda-title">Sin Cientos de Capas Ocultas</div>
-                  <p class="agenda-desc">PEPS genera una capa contable por cada remesa, dificultando devoluciones y auditorías forenses. En AVCO <strong>existe un solo costo vigente por producto</strong> en cada instante.</p>
+                  <div class="agenda-time">CONCILIACIÓN MATEMÁTICA</div>
+                  <div class="agenda-title">Cruce Directo en Balanza</div>
+                  <p class="agenda-desc">El saldo en la cuenta 1150 debe ser exactamente la suma del valor de cada SKU en almacén. Cualquier descuadre salta a la vista sin tener que rastrear capas históricas.</p>
                 </div>
 
                 <div class="agenda-card" style="border-top: 4px solid var(--rojo-vauxoo);">
-                  <div class="agenda-time">AVCO VS. ESTÁNDAR</div>
-                  <div class="agenda-title">Cero Variaciones Ficticias</div>
-                  <p class="agenda-desc">El costo estándar exige cuentas de desviación en compra y no refleja tipos de cambio volátiles en USD. AVCO absorbe fletes (Landed Costs) y compras de forma directa y orgánica.</p>
+                  <div class="agenda-time">TRAZABILIDAD EN ODOO 19</div>
+                  <div class="agenda-title">Costo Vivo en stock.move</div>
+                  <p class="agenda-desc">Cada recepción o factura suma valor directamente al stock, y cada salida descarga inventario y costo de ventas al costo promedio exacto del momento.</p>
                 </div>
               </div>
 
               <div class="interactive-chat-prompt" style="background:#F8FAFC; border:1px solid #CBD5E1;">
-                <span class="prompt-icon">🧮</span>
+                <span class="prompt-icon">💡</span>
                 <span class="prompt-text" style="color:#1E293B; font-size:0.88rem; line-height:1.5;">
-                  <strong>Mecánica Matemática en Odoo 19 (Perpetuo en Tiempo Real):</strong><br>
-                  <code>Nuevo Costo Ponderado = [ (Existencia Previa &times; Costo Actual) + (Unidades Recibidas &times; Precio Compra / Factura) ] / [ Existencia Previa + Unidades Recibidas ]</code><br>
-                  <span style="color:#64748B; font-size:0.82rem;">Cada salida o venta descuenta exactamente a este costo unitario, reconociendo el costo de ventas sin desfase contable.</span>
+                  <strong>La Regla de Oro para Auditar en Odoo 19:</strong><br>
+                  <code>Valor en Almacén = Cantidad en Mano &times; Costo Unitario</code><br>
+                  <span style="color:#475569; font-size:0.82rem;">Si tienes 100 piezas valoradas en $15,000 en la cuenta 1150, cada pieza vale exactamente $150. Auditar es así de directo: sin fórmulas complejas, sin capas ocultas y comprobable en 1 clic.</span>
                 </span>
               </div>
             </div>
@@ -4138,7 +4138,7 @@ h1, h2, h3, h4, h5, h6 {
     
 
     <button class="thumb-btn" onclick="goToSlide(5)" id="thumb-5">
-      5. Fundamento de Valoración: ¿Por qué Costo Promedio (AVCO)?
+      5. ¿Por qué Costo Promedio (Average) para Auditar?
     </button>
     
 
