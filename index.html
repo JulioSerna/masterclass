@@ -2196,7 +2196,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-2" data-id="2" data-title="El Hook: Descuadre de $473,690 MXN" data-notes="Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($535,100.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $196,190.00 MXN ($487k de póliza manual - facturas por recibir pendientes + descuadres operativos). Plantear el dolor de todo cierre contable." data-time="00:01 - 00:06">
+    <div class="slide-box bg-white" id="slide-2" data-id="2" data-title="El Hook: Descuadre de $196,190 MXN" data-notes="Mostrar el split view en vivo en Odoo 19: Balanza 115.01.01 ($535,100.00 MXN) vs Reporte de Existencias ($338,910.00 MXN) -> Descuadre real de $196,190.00 MXN ($487k de póliza manual - facturas por recibir pendientes + descuadres operativos). Plantear el dolor de todo cierre contable." data-time="00:01 - 00:06">
       
       
             <div class="slide-content">
@@ -3041,7 +3041,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-10" data-id="10" data-title="Operación Normal: Compra de Importación en USD" data-notes="Mostrar la compra en USD con [MON-27-4K]. 20 u @ $100 USD (TC oficial $18.50) = $37,000 MXN. Explicar por qué el TC de la recepción física manda sobre el costo contable del inventario." data-time="00:45 - 00:55">
+    <div class="slide-box bg-white" id="slide-10" data-id="10" data-title="Operación Normal: Compra de Importación en USD" data-notes="Mostrar la compra en USD con [MON-27-4K]. 20 u @ $100 USD (TC oficial $18.50) = $37,000 MXN. En Odoo 19 la recepción fija la valoración física en stock.move sin generar póliza, y la Factura del Proveedor asienta el Cargo 1150 / Abono 201." data-time="00:45 - 00:55">
       
       
             <div class="slide-content">
@@ -3105,28 +3105,28 @@ h1, h2, h3, h4, h5, h6 {
                   <p>20 unidades @ $100.00 USD</p>
                   <div class="asiento-box">
                     Total: <strong>$2,000.00 USD</strong><br>
-                    <em>No fija el costo contable de bodega</em>
-                  </div>
-                </div>
-
-                <div class="flow-step-card" style="border: 2px solid var(--rojo-vauxoo);">
-                  <div class="step-badge" style="background:var(--rojo-vauxoo);">2. RECEPCIÓN FÍSICA (WH/IN)</div>
-                  <h4>El Momento Clave del Costo</h4>
-                  <p>Tipo de Cambio Oficial: <strong>$18.50 MXN</strong></p>
-                  <div class="asiento-box" style="background:#FFF1F2; color:#991B1B;">
-                    $100 USD &times; $18.50 =<br>
-                    <strong>Costo Almacén: $1,850.00 MXN/u</strong><br>
-                    Entrada a 1150: <strong>$37,000.00 MXN</strong>
+                    <em>Compromiso comercial (sin impacto físico ni contable)</em>
                   </div>
                 </div>
 
                 <div class="flow-step-card">
-                  <div class="step-badge">3. FACTURA DEL PROVEEDOR</div>
-                  <h4>Cierre del Ciclo</h4>
-                  <p>Factura recibida con TC de $18.50 MXN</p>
+                  <div class="step-badge">2. RECEPCIÓN FÍSICA (WH/IN)</div>
+                  <h4>Valoración Logística Inicial</h4>
+                  <p>Tipo de Cambio Oficial: <strong>$18.50 MXN</strong></p>
                   <div class="asiento-box">
-                    Pasivo Proveedor: <strong>$37,000.00 MXN</strong><br>
-                    <strong>Cero diferencial cambiario distorsivo</strong>
+                    $100 USD &times; $18.50 = <strong>$1,850.00 MXN/u</strong><br>
+                    Valor en <code>stock.move</code>: <strong>$37,000.00 MXN</strong><br>
+                    <em>(En Odoo 19 la recepción NO genera póliza)</em>
+                  </div>
+                </div>
+
+                <div class="flow-step-card" style="border: 2px solid var(--rojo-vauxoo);">
+                  <div class="step-badge" style="background:var(--rojo-vauxoo);">3. FACTURA DEL PROVEEDOR</div>
+                  <h4>Nace la Póliza Contable</h4>
+                  <p>Factura validada con TC $18.50 MXN</p>
+                  <div class="asiento-box" style="background:#FFF1F2; color:#991B1B;">
+                    <strong>Cargo 1150 · Abono 201: $37,000.00 MXN</strong><br>
+                    ¡Aquí se registra en Balanza y se confirma el costo!
                   </div>
                 </div>
               </div>
@@ -3134,7 +3134,7 @@ h1, h2, h3, h4, h5, h6 {
               <div class="interactive-chat-prompt" style="background:#F0FDF4; border:1px solid #BBF7D0;">
                 <span class="prompt-icon">💡</span>
                 <span class="prompt-text" style="color:#166534;">
-                  <strong>Regla de Oro Vauxoo:</strong> El costo unitario contable del inventario lo define estrictamente el <strong>Tipo de Cambio a la fecha de la recepción física en almacén</strong>.
+                  <strong>Regla de Oro en Odoo 19.0:</strong> La recepción física valora el stock en almacén al TC del día, pero la <strong>póliza en la cuenta 1150 nace al validar la Factura del Proveedor</strong> (ajustando automáticamente el costo si cambia el TC o la moneda).
                 </span>
               </div>
             </div>
@@ -3248,7 +3248,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-13" data-id="13" data-title="Desastres 1 y 2: Ajuste Huérfano y Producto Archivado" data-notes="Detalle del Desastre 1 (Mouse Óptico sin cuenta contable en ajuste) y Desastre 2 (Router Legacy archivado con existencias vivas)." data-time="01:06 - 01:14">
+    <div class="slide-box bg-white" id="slide-13" data-id="13" data-title="Desastres 1 y 2: Ajuste Huérfano y Producto Archivado" data-notes="Detalle del Desastre 1 (Mouse Óptico en categoría Perpetua AVCO, pero la ubicación virtual Inventory adjustment viene vacía de cuenta contable por defecto en Odoo 19) y Desastre 2 (Router Legacy archivado con existencias vivas)." data-time="01:06 - 01:14">
       
       
             <div class="slide-content">
@@ -3307,13 +3307,13 @@ h1, h2, h3, h4, h5, h6 {
               <div class="two-col-grid">
                 <div class="disaster-col-card" style="border-left: 4px solid #B91C1C;">
                   <div class="card-pill" style="color:#B91C1C;">CASO 1 · MOUSE ÓPTICO (MOUS-OPT-USB)</div>
-                  <h3>Ajuste de Inventario sin Cuenta Contable</h3>
+                  <h3>Ajuste sin Cuenta en Ubicación Virtual</h3>
                   <div class="detail-box">
-                    <p>Se realiza un ajuste físico inicial de 100 piezas a $85.00 MXN en una categoría sin cuenta en la ubicación virtual de merma:</p>
+                    <p>El producto <strong>sí está en Categoría Perpetua AVCO</strong>, pero en Odoo 19 la ubicación <em>Inventory adjustment</em> viene sin cuenta contable asignada de fábrica:</p>
                     <ul class="styled-list">
                       <li><strong>En Almacén:</strong> 100 piezas valoradas en <strong>$8,500.00 MXN</strong>.</li>
-                      <li><strong>En Contabilidad:</strong> <strong>$0.00 MXN</strong> (nunca nació la póliza).</li>
-                      <li><strong>Diagnóstico:</strong> Valor no reconocido que genera una brecha silenciosa de -$8,500 MXN.</li>
+                      <li><strong>En Contabilidad:</strong> <strong>$0.00 MXN</strong> (ajuste físico sin póliza).</li>
+                      <li><strong>Diagnóstico:</strong> "Valor no reconocido" de -$8,500 MXN pese a tener contabilidad perpetua.</li>
                     </ul>
                   </div>
                 </div>
@@ -3601,15 +3601,15 @@ h1, h2, h3, h4, h5, h6 {
                 </div>
 
                 <div class="agenda-card" style="border-top: 4px solid #0D9488;">
-                  <div class="agenda-time">PASO 3 · REGULARIZACIÓN LIMPIA</div>
-                  <div class="agenda-title">Plantilla CSV con product_id</div>
-                  <p class="agenda-desc">Importar la póliza balanceada asignando obligatoriamente el producto en la 1150 para sanear Mouse, Router, RAM y SSD.</p>
+                  <div class="agenda-time">PASO 3 · REGULARIZACIÓN QUIRÚRGICA</div>
+                  <div class="agenda-title">Plantilla CSV con <code>product_id</code></div>
+                  <p class="agenda-desc"><strong>Solo cuando el stock y costo en almacén son correctos:</strong> importar póliza asignando obligatoriamente el SKU para alinear contabilidad.</p>
                 </div>
 
                 <div class="agenda-card" style="border-top: 4px solid #475569;">
                   <div class="agenda-time">PASO 4 · CANDADOS PREVENTIVOS</div>
                   <div class="agenda-title">Bloqueo de Modificaciones y Negativos</div>
-                  <p class="agenda-desc">Prohibir asientos manuales, congelar categorías en caliente y activar bloqueo de stock negativo.</p>
+                  <p class="agenda-desc">Prohibir asientos manuales, configurar cuenta en ubicación de ajuste y bloquear stock negativo.</p>
                 </div>
               </div>
             </div>
@@ -3617,7 +3617,7 @@ h1, h2, h3, h4, h5, h6 {
     </div>
     
 
-    <div class="slide-box bg-gradient" id="slide-17" data-id="17" data-title="Cuadre Perfecto al Centavo ($338,910 = $338,910)" data-notes="Celebrar el cuadre perfecto al centavo. Balanza ($338,910.00) = Existencias ($338,910.00). Diferencia $0.00 MXN en todos los productos." data-time="01:40 - 01:48">
+    <div class="slide-box bg-gradient" id="slide-17" data-id="17" data-title="Cuadre Perfecto al Centavo ($78,810 = $78,810)" data-notes="Celebrar el cuadre perfecto al centavo tras desinflar el error de USD en la Cámara Web (-$262,500), facturar pendientes, desarchivar el Router (+$2,400), cancelar la póliza manual (-$487,000) y regularizar por SKU: Balanza ($78,810.00) = Existencias ($78,810.00). Diferencia $0.00 MXN." data-time="01:40 - 01:48">
       <div class="texture-overlay"></div>
       
             <div class="slide-content">
@@ -3659,47 +3659,51 @@ h1, h2, h3, h4, h5, h6 {
 </svg></div>
               </div>
               <p class="slide-lead" style="color: rgba(255,255,255,0.9);">
-                Al remover el parche manual y aplicar la plantilla de regularización por SKU, el sistema recupera su coherencia matemática:
+                Tras corregir la factura en USD de las Cámaras Web a MXN, desarchivar el Router, cancelar el parche manual y regularizar SKU por SKU:
               </p>
               
-              <div class="split-audit-container" style="margin-top:30px;">
+              <div class="split-audit-container" style="margin-top:20px;">
                 <div class="audit-col" style="background: rgba(255,255,255,0.1); border: 2px solid #16A34A; color:#fff;">
                   <div class="audit-col-badge" style="background:#16A34A; color:#fff;">Libro Mayor Saneado</div>
                   <h3 class="audit-col-title" style="color:#fff;">Balanza de Comprobación</h3>
-                  <div class="audit-code" style="color:rgba(255,255,255,0.8);">Cuenta 115.01.01 · Inventario</div>
-                  <div class="audit-amount" style="color:#fff;">$338,910.00 MXN</div>
-                  <div class="audit-status audit-ok" style="background:rgba(22,163,74,0.2); color:#4ADE80;">✅ Saldo Real Verificado</div>
+                  <div class="audit-code" style="color:rgba(255,255,255,0.8);">Cuenta 115.01.01 · Inventario Real</div>
+                  <div class="audit-amount" style="color:#fff;">$78,810.00 MXN</div>
+                  <div class="audit-status audit-ok" style="background:rgba(22,163,74,0.2); color:#4ADE80;">✅ Sin Pólizas Huérfanas ni Sobrecostos</div>
                 </div>
 
                 <div class="audit-vs">
                   <div class="audit-diff-card" style="background:#fff; border-color:#16A34A;">
                     <span class="diff-label" style="color:#16A34A;">CONCILIACIÓN 100% CUADRADA</span>
                     <span class="diff-amount" style="color:#16A34A; font-size:2.2rem;">$0.00 MXN</span>
-                    <span class="diff-warn" style="color:#16A34A; font-weight:600;">Sincronía Contable y Logística</span>
+                    <span class="diff-warn" style="color:#16A34A; font-weight:600;">7 de 7 SKUs en $0.00</span>
                   </div>
                 </div>
 
                 <div class="audit-col" style="background: rgba(255,255,255,0.1); border: 2px solid #16A34A; color:#fff;">
                   <div class="audit-col-badge" style="background:#16A34A; color:#fff;">Almacén Saneado</div>
                   <h3 class="audit-col-title" style="color:#fff;">Reporte de Existencias</h3>
-                  <div class="audit-code" style="color:rgba(255,255,255,0.8);">Valoración de Stock (Valuation)</div>
-                  <div class="audit-amount" style="color:#fff;">$338,910.00 MXN</div>
-                  <div class="audit-status audit-ok" style="background:rgba(22,163,74,0.2); color:#4ADE80;">📦 Stock Físico Respaldado</div>
+                  <div class="audit-code" style="color:rgba(255,255,255,0.8);">Valoración Real de los 7 Productos</div>
+                  <div class="audit-amount" style="color:#fff;">$78,810.00 MXN</div>
+                  <div class="audit-status audit-ok" style="background:rgba(22,163,74,0.2); color:#4ADE80;">📦 Costo AVCO Real Auditado</div>
                 </div>
+              </div>
+
+              <div style="margin-top:18px; padding:12px 16px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); border-radius:8px; color:#fff; font-size:0.88rem; text-align:center;">
+                <strong>Puente de Saneamiento:</strong> Almacén Inicial (<strong>$338,910</strong>) &minus; Sobrevaluación USD Cámara Web (<strong>$262,500</strong>) + Router Desarchivado (<strong>$2,400</strong>) = <strong>$78,810.00 MXN</strong>
               </div>
             </div>
             
     </div>
     
 
-    <div class="slide-box bg-white" id="slide-18" data-id="18" data-title="Estrategias de Saneamiento: El Parche Manual vs Borrón y Cuenta Nueva" data-notes="Comparar las dos vías para sanear un inventario en producción. Por qué la póliza manual es una aspirina tóxica y cómo ejecutar el protocolo formal de Borrón y Cuenta Nueva." data-time="01:48 - 01:56">
+    <div class="slide-box bg-white" id="slide-18" data-id="18" data-title="Estrategias de Saneamiento: ¿Cuándo Regularizar vs Borrón y Cuenta Nueva?" data-notes="Regla de decisión clara para no confundir al participante entre la Plantilla CSV con product_id (Slide 16) y el Protocolo Borrón y Cuenta Nueva (Slide 18), dejando claro por qué el Parche Manual sin SKU siempre está prohibido." data-time="01:48 - 01:56">
       
       
             <div class="slide-content">
               <div class="slide-header">
                 <div>
-                  <span class="pill-badge" style="background:var(--rojo-vauxoo);">BLOQUE 5 · PLAN DE RESCATE</span>
-                  <h2 class="slide-title">¿Cómo Sanear en Producción? Dos Caminos Frente al Descuadre</h2>
+                  <span class="pill-badge" style="background:var(--rojo-vauxoo);">BLOQUE 5 · REGLA DE DECISIÓN EN PRODUCCIÓN</span>
+                  <h2 class="slide-title">¿Cuándo Usar Regularización por SKU vs. Borrón y Cuenta Nueva?</h2>
                 </div>
                 <div class="slide-header-logo"><?xml version="1.0" encoding="UTF-8"?>
 <svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 510.52 158.8">
@@ -3747,31 +3751,31 @@ h1, h2, h3, h4, h5, h6 {
   </g>
 </svg></div>
               </div>
-              <p class="slide-lead">Cuando la base de datos ya tiene meses de descuadre acumulado, ¿cuál es la mejor estrategia?</p>
+              <p class="slide-lead">No todos los descuadres se curan igual. Esta es la matriz de decisión para elegir la cirugía correcta:</p>
               
               <div class="two-col-grid" style="gap:16px;">
-                <div class="disaster-col-card" style="border-left: 4px solid #B91C1C;">
-                  <div class="card-pill" style="color:#B91C1C; background:#FEF2F2;">❌ VÍA A: EL PARCHE MANUAL ("LA ASPIRINA")</div>
-                  <h3>Póliza Directa a la Cuenta 1150</h3>
+                <div class="disaster-col-card" style="border-left: 4px solid #0D9488;">
+                  <div class="card-pill" style="color:#0D9488; background:#CCFBF1;">🎯 ESCENARIO 1: ALMACÉN SANO, CONTABILIDAD DESFASADA</div>
+                  <h3>Regularización Quirúrgica con <code>product_id</code></h3>
                   <div class="detail-box" style="font-size:0.85rem;">
-                    <p><strong>Lo que hace el contador:</strong> Inyecta un asiento de diario tipo MISC para forzar que el saldo contable coincida con el reporte de existencias.</p>
-                    <div style="background:#FFF1F2; padding:10px; border-radius:6px; color:#991B1B; margin-top:8px;">
-                      <strong>Por qué fracasa rotundamente:</strong> No modifica las existencias físicas ni el costo de las fichas. En la siguiente venta, Odoo vuelve a costear con datos desfasados y reabre el descuadre de inmediato.
-                    </div>
+                    <p><strong>¿Cuándo aplica?</strong> Cuando las existencias y el costo promedio (AVCO) en almacén <strong>ya son correctos</strong> y los casos están identificados (ej. un ajuste inicial sin cuenta o un cambio puntual de costo).</p>
+                    <ul class="styled-list" style="margin-top:8px;">
+                      <li><strong>Qué hacer:</strong> Usar la Plantilla CSV asignando <strong>obligatoriamente <code>product_id</code></strong> en la cuenta 1150.</li>
+                      <li><strong>Qué JAMÁS hacer ("La Aspirina"):</strong> Meter una póliza manual ciega <strong>sin <code>product_id</code></strong> o cuando el costo unitario en almacén sigue corrupto (en la próxima venta volverá a descuadrar).</li>
+                    </ul>
                   </div>
                 </div>
 
                 <div class="disaster-col-card" style="border-left: 4px solid #16A34A;">
-                  <div class="card-pill" style="color:#16A34A; background:#DCFCE7;">✅ VÍA B: PROTOCOLO BORRÓN Y CUENTA NUEVA</div>
-                  <h3>El Protocolo Blindado Vauxoo</h3>
+                  <div class="card-pill" style="color:#16A34A; background:#DCFCE7;">🔄 ESCENARIO 2: COSTOS AVCO O STOCK HISTÓRICO CORRUPTOS</div>
+                  <h3>Protocolo "Borrón y Cuenta Nueva" (Vauxoo)</h3>
                   <div class="detail-box" style="font-size:0.85rem;">
-                    <p><strong>La solución definitiva para desastres acumulados:</strong></p>
-                    <ol style="margin:8px 0 0 16px; padding:0; line-height:1.45;">
-                      <li><strong>Corte Operativo:</strong> Congelar operaciones de almacén en una fecha de corte.</li>
-                      <li><strong>Descarga a Cero:</strong> Ajuste físico llevando todas las existencias a 0.00.</li>
-                      <li><strong>Ajuste Contable a Cero:</strong> Llevar cuenta 1150 a $0 contra variación de inventario.</li>
-                      <li><strong>Congelar Fase 0:</strong> Categorías en AVCO Perpetuo y permisos bloqueados.</li>
-                      <li><strong>Carga de Conteo Físico Real:</strong> Reingreso con costos promedio auditados.</li>
+                    <p><strong>¿Cuándo aplica?</strong> Cuando hay meses/años de negativos crónicos, cambios de categoría en caliente o cientos de SKUs con costo promedio contaminado:</p>
+                    <ol style="margin:6px 0 0 16px; padding:0; line-height:1.42;">
+                      <li><strong>Corte Operativo:</strong> Congelar almacén en fecha de corte.</li>
+                      <li><strong>Descarga Física y Contable a Cero:</strong> Llevar stock y cuenta 1150 a <strong>$0.00</strong>.</li>
+                      <li><strong>Blindar Fase 0:</strong> Categorías Perpetuas AVCO, cuenta en ubicación de ajuste y candados.</li>
+                      <li><strong>Carga Inicial Limpia:</strong> Conteo físico real con costos unitarios auditados.</li>
                     </ol>
                   </div>
                 </div>
@@ -4113,7 +4117,7 @@ h1, h2, h3, h4, h5, h6 {
     
 
     <button class="thumb-btn" onclick="goToSlide(2)" id="thumb-2">
-      2. El Hook: Descuadre de $473,690 MXN
+      2. El Hook: Descuadre de $196,190 MXN
     </button>
     
 
@@ -4188,12 +4192,12 @@ h1, h2, h3, h4, h5, h6 {
     
 
     <button class="thumb-btn" onclick="goToSlide(17)" id="thumb-17">
-      17. Cuadre Perfecto al Centavo ($338,910 = $338,910)
+      17. Cuadre Perfecto al Centavo ($78,810 = $78,810)
     </button>
     
 
     <button class="thumb-btn" onclick="goToSlide(18)" id="thumb-18">
-      18. Estrategias de Saneamiento: El Parche Manual vs Borrón y Cuenta Nueva
+      18. Estrategias de Saneamiento: ¿Cuándo Regularizar vs Borrón y Cuenta Nueva?
     </button>
     
 
@@ -4910,8 +4914,8 @@ h1, h2, h3, h4, h5, h6 {
               <h4>Operación en Moneda Extranjera USD — [MON-27-4K] Monitor Profesional 27" 4K</h4>
               <p>Compra de 20 unidades a <strong>$100.00 USD</strong> con tipo de cambio oficial de <strong>18.50 MXN/USD</strong> ($1,850.00 MXN/u).</p>
               <div class="asiento-mini">
-                <div>Recepción de almacén: 20 u &times; $1,850 = $37,000.00 MXN cargados a cuenta 115.01.01.<br>
-                Factura de proveedor procesada a la misma tasa: Cero desvío cambiario contable-logístico.</div>
+                <div>Recepción física en almacén: 20 u &times; $1,850 = $37,000.00 MXN registrados en <code>stock.move</code> (sin póliza aún).<br>
+                Factura de proveedor validada a la misma tasa: <strong>Cargo 115.01.01 ($37,000) / Abono 201.01.01 ($37,000)</strong>.</div>
               </div>
               <div class="stage-memo">📌 <em>Resultado: 20 u en almacén ($37,000.00 MXN) = Saldo contable ($37,000.00 MXN).</em></div>
             </div>
@@ -5301,7 +5305,7 @@ for aml in amls_archived:
 
 product_ids = list(product_ids_set)
 
-# 3. Valor por facturar (purchase.order.line con bill_to_receive = True)
+# 3. Valor por facturar (purchase.order.line con bill_to_receive = True, convertido a moneda compañía)
 val_por_facturar = {pid: 0.0 for pid in product_ids}
 if product_ids:
     pols = env['purchase.order.line'].search([
@@ -5310,7 +5314,14 @@ if product_ids:
     ])
     for pol in pols:
         pid = pol.product_id.id
-        v = pol.amount_to_invoice_at_date or ((pol.qty_received - pol.qty_invoiced) * pol.price_unit)
+        v = (pol.qty_received - pol.qty_invoiced) * pol.price_unit
+        if pol.currency_id and pol.currency_id != pol.company_id.currency_id:
+            v = pol.currency_id._convert(
+                v,
+                pol.company_id.currency_id,
+                pol.company_id,
+                pol.order_id.date_approve or pol.order_id.date_order
+            )
         val_por_facturar[pid] = val_por_facturar.get(pid, 0.0) + v
 
 # 4. Valor en contabilidad (cuenta 115.01.01)
@@ -5595,7 +5606,7 @@ action = {
             </div>
             <div class="cron-element">
               <strong>2. Compra, Recepción y Facturación en Moneda Extranjera USD (13 min — 00:42 a 00:55):</strong>
-              <p>Producto <code>[MON-27-4K] Monitor Profesional 27" 4K</code>. Orden de compra por 20 u @ $100 USD (TC 18.50). Recepción genera entrada por $37,000.00 MXN a $1,850.00 MXN/u. Factura del proveedor recibida con el mismo TC (18.50). Saldo en almacén: 20 u @ $1,850 = $37,000 MXN = Balanza contable $37,000 MXN. Cero diferencial cambiario distorsivo.</p>
+              <p>Producto <code>[MON-27-4K] Monitor Profesional 27" 4K</code>. Orden de compra por 20 u @ $100 USD (TC 18.50). Recepción fija valoración en <code>stock.move</code> por $37,000.00 MXN ($1,850.00 MXN/u) sin generar póliza aún. La Factura del Proveedor al mismo TC (18.50) genera el asiento <code>Cargo 1150 / Abono 201</code> por $37,000 MXN. Saldo en almacén: $37,000 MXN = Balanza contable: $37,000 MXN.</p>
             </div>
           </div>
         </div>
@@ -5612,7 +5623,7 @@ action = {
               <strong>1. Los 4 Modelos Esenciales de Auditoría ("Cuadrilátero de Control" - 7 min — 00:55 a 01:02):</strong>
               <div style="margin-top:6px; padding:10px; background:#FFFFFF; border-radius:6px; border:1px solid #CBD5E1; font-size:0.88rem;">
                 <div>1. <strong>Reporte de Existencias:</strong> Stock físico $	imes$ costo unitario (Almacén).</div>
-                <div>2. <strong>Reporte de Facturas por Recibir:</strong> Mercancía recibida pendiente de facturación ($8,500 de Teclados y la compra de Cámaras Web).</div>
+                <div>2. <strong>Reporte de Facturas por Recibir:</strong> Mercancía recibida pendiente de facturación ($8,500 de Teclados y $277,500 de Cámaras Web en USD).</div>
                 <div>3. <strong>Reporte Contable (Mayor 115.01.01):</strong> Saldo oficial en Balanza y apuntes detallados.</div>
                 <div>4. <strong>Movimientos de Inventario (<code>stock.move</code>):</strong> Trazabilidad granular de causa raíz.</div>
               </div>
@@ -5620,9 +5631,9 @@ action = {
             <div class="cron-element">
               <strong>2. Los 5 Casos Clínicos de Desastres (28 min — 01:02 a 01:30):</strong>
               <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
-                <div>• <strong>Caso 1: Ajuste de Inventario sin Cuenta Contable (5 min):</strong> <code>[MOUS-OPT-USB]</code>. 100 u @ $85 = $8,500 en bodega, $0 en 1150. Brecha: -$8,500 MXN.</div>
+                <div>• <strong>Caso 1: Ajuste de Inventario sin Cuenta en Ubicación Virtual (5 min):</strong> <code>[MOUS-OPT-USB]</code> (en Contabilidad Perpetua). 100 u @ $85 = $8,500 en bodega, $0 en 1150 porque la ubicación <em>Inventory adjustment</em> viene vacía de cuenta por defecto en Odoo 19.</div>
                 <div>• <strong>Caso 2: Producto Archivado con Existencias (5 min):</strong> <code>[ROUT-WIFI4-LEG]</code>. 8 u @ $300 = $2,400 MXN vivos en 1150 pero ocultos en bodega. Brecha: +$2,400 MXN.</div>
-                <div>• <strong>Caso 3: Costo MXN Comprado en USD por Error (6 min):</strong> <code>[CAM-WEB-4K]</code>. 10 u @ $1,500 USD = $277,500 MXN recibidos y <strong>dejados sin facturar</strong>. Demo en vivo: corrección de divisa/monto en el borrador de la factura.</div>
+                <div>• <strong>Caso 3: Costo MXN Comprado en USD por Error (6 min):</strong> <code>[CAM-WEB-4K]</code>. 10 u @ $1,500 USD = $277,500 MXN recibidos y <strong>dejados sin facturar</strong>. Demo en vivo: corrección de divisa a MXN ($15,000 MXN) en la factura del proveedor.</div>
                 <div>• <strong>Caso 4: Cambio Directo de Costo desde Ficha (6 min):</strong> <code>[MEM-RAM-16GB]</code>. Coste alterado de $100 a $121 en 10 u. Bodega $1,210 vs Contabilidad $1,000. Brecha: -$210 MXN.</div>
                 <div>• <strong>Caso 5: Venta Forzada Dejando Stock Negativo (6 min):</strong> <code>[DISC-SSD-1TB]</code>. Salida forzada de 10 u sin stock. Compra tardía de 20 u @ $350. Brecha: -$1,500 MXN.</div>
               </div>
@@ -5639,18 +5650,18 @@ action = {
           </div>
           <div class="cron-block-body">
             <div class="cron-element">
-              <strong>1. Caza de la Póliza Manual & Acción de Servidor #589 (15 min — 01:30 a 01:45):</strong>
-              <p>Filtro en 1150 sin producto asignado: Caza de la póliza <strong><code>MISC/2026/09/0001</code></strong> por <strong>+$487,000.00 MXN</strong>. Ejecución de la Acción de Servidor #589 y descarga del CSV con el desglose SKU por SKU explicando el descuadre de $196,190.00 MXN al centavo. Importación de la Plantilla CSV de regularización.</p>
+              <strong>1. Caza de la Póliza Manual, Acción #589 y Cuadre Real en $78,810.00 MXN (15 min — 01:30 a 01:45):</strong>
+              <p>Caza y reversión de la póliza huérfana <strong><code>MISC/2026/09/0001</code></strong> ($487,000 MXN). Ejecución de la Acción de Servidor #589 (con conversión multimoneda). Corrección de factura de Cámara Web a MXN (-$262,500 de sobrevaluación), desarchivado de Router (+$2,400) e importación de Plantilla CSV por SKU, logrando el <strong>Cuadre Perfecto Real de $78,810.00 MXN = $78,810.00 MXN</strong> (Diferencia $0.00).</p>
             </div>
             <div class="cron-element">
-              <strong>2. Estrategias de Saneamiento: El Parche Manual vs Borrón y Cuenta Nueva (15 min — 01:45 a 02:00):</strong>
-              <div style="background:#FEF2F2; padding:10px; border-radius:6px; border-left:4px solid #B91C1C; margin-bottom:8px;">
-                <strong style="color:#991B1B;">⚠️ Vía A: El Parche Manual ("La Aspirina Destructiva"):</strong>
-                <p style="margin:4px 0 0; font-size:0.85rem; color:#7F1D1D;">Forzar pólizas a la 1150 sin mover almacén no resuelve la falla física; en la siguiente venta el costo promedio vuelve a desfasarse.</p>
+              <strong>2. Regla de Decisión en Producción: Regularización Quirúrgica vs Borrón y Cuenta Nueva (15 min — 01:45 a 02:00):</strong>
+              <div style="background:#F0FDFA; padding:10px; border-radius:6px; border-left:4px solid #0D9488; margin-bottom:8px;">
+                <strong style="color:#115E59;">🎯 Escenario 1: Almacén Sano, Contabilidad Desfasada (Regularización Quirúrgica con <code>product_id</code>):</strong>
+                <p style="margin:4px 0 0; font-size:0.85rem; color:#134E4A;">Cuando el costo promedio y stock en almacén son correctos y las diferencias están acotadas por SKU, se importa la Plantilla CSV con <code>product_id</code> obligatorio (prohibido meter asientos ciegos sin SKU).</p>
               </div>
               <div style="background:#F0FDF4; padding:10px; border-radius:6px; border-left:4px solid #16A34A;">
-                <strong style="color:#166534;">✅ Vía B: Protocolo "Borrón y Cuenta Nueva" (La Solución Blindada Vauxoo):</strong>
-                <p style="margin:4px 0 0; font-size:0.85rem; color:#14532D;">Corte operativo $ightarrow$ Ajuste llevando existencias físicas a 0 $ightarrow$ Ajuste contable llevando cuenta 1150 a $0 $ightarrow$ Blindaje de Fase 0 (categorías y permisos) $ightarrow$ Carga de conteo físico real con costos reales auditados. Cuadre perfecto desde el día uno.</p>
+                <strong style="color:#166534;">🔄 Escenario 2: Costos AVCO o Stock Corruptos (Protocolo "Borrón y Cuenta Nueva" Vauxoo):</strong>
+                <p style="margin:4px 0 0; font-size:0.85rem; color:#14532D;">Cuando hay meses de negativos o cambios de categoría en caliente: Corte operativo $ightarrow$ Ajuste llevando existencias físicas y cuenta 1150 a $0.00 $ightarrow$ Blindaje de Fase 0 $ightarrow$ Carga de conteo físico real con costos auditados.</p>
               </div>
             </div>
           </div>

@@ -217,7 +217,7 @@ for aml in amls_archived:
 
 product_ids = list(product_ids_set)
 
-# 3. Valor por facturar (purchase.order.line con bill_to_receive = True)
+# 3. Valor por facturar (purchase.order.line con bill_to_receive = True, convertido a moneda compañía)
 val_por_facturar = {pid: 0.0 for pid in product_ids}
 if product_ids:
     pols = env['purchase.order.line'].search([
@@ -226,7 +226,14 @@ if product_ids:
     ])
     for pol in pols:
         pid = pol.product_id.id
-        v = pol.amount_to_invoice_at_date or ((pol.qty_received - pol.qty_invoiced) * pol.price_unit)
+        v = (pol.qty_received - pol.qty_invoiced) * pol.price_unit
+        if pol.currency_id and pol.currency_id != pol.company_id.currency_id:
+            v = pol.currency_id._convert(
+                v,
+                pol.company_id.currency_id,
+                pol.company_id,
+                pol.order_id.date_approve or pol.order_id.date_order
+            )
         val_por_facturar[pid] = val_por_facturar.get(pid, 0.0) + v
 
 # 4. Valor en contabilidad (cuenta 115.01.01)

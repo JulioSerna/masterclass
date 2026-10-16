@@ -117,7 +117,7 @@ def get_cronograma_html(logo_light):
             </div>
             <div class="cron-element">
               <strong>2. Compra, Recepción y Facturación en Moneda Extranjera USD (13 min — 00:42 a 00:55):</strong>
-              <p>Producto <code>[MON-27-4K] Monitor Profesional 27" 4K</code>. Orden de compra por 20 u @ $100 USD (TC 18.50). Recepción genera entrada por $37,000.00 MXN a $1,850.00 MXN/u. Factura del proveedor recibida con el mismo TC (18.50). Saldo en almacén: 20 u @ $1,850 = $37,000 MXN = Balanza contable $37,000 MXN. Cero diferencial cambiario distorsivo.</p>
+              <p>Producto <code>[MON-27-4K] Monitor Profesional 27" 4K</code>. Orden de compra por 20 u @ $100 USD (TC 18.50). Recepción fija valoración en <code>stock.move</code> por $37,000.00 MXN ($1,850.00 MXN/u) sin generar póliza aún. La Factura del Proveedor al mismo TC (18.50) genera el asiento <code>Cargo 1150 / Abono 201</code> por $37,000 MXN. Saldo en almacén: $37,000 MXN = Balanza contable: $37,000 MXN.</p>
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@ def get_cronograma_html(logo_light):
               <strong>1. Los 4 Modelos Esenciales de Auditoría ("Cuadrilátero de Control" - 7 min — 00:55 a 01:02):</strong>
               <div style="margin-top:6px; padding:10px; background:#FFFFFF; border-radius:6px; border:1px solid #CBD5E1; font-size:0.88rem;">
                 <div>1. <strong>Reporte de Existencias:</strong> Stock físico $\times$ costo unitario (Almacén).</div>
-                <div>2. <strong>Reporte de Facturas por Recibir:</strong> Mercancía recibida pendiente de facturación ($8,500 de Teclados y la compra de Cámaras Web).</div>
+                <div>2. <strong>Reporte de Facturas por Recibir:</strong> Mercancía recibida pendiente de facturación ($8,500 de Teclados y $277,500 de Cámaras Web en USD).</div>
                 <div>3. <strong>Reporte Contable (Mayor 115.01.01):</strong> Saldo oficial en Balanza y apuntes detallados.</div>
                 <div>4. <strong>Movimientos de Inventario (<code>stock.move</code>):</strong> Trazabilidad granular de causa raíz.</div>
               </div>
@@ -142,9 +142,9 @@ def get_cronograma_html(logo_light):
             <div class="cron-element">
               <strong>2. Los 5 Casos Clínicos de Desastres (28 min — 01:02 a 01:30):</strong>
               <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
-                <div>• <strong>Caso 1: Ajuste de Inventario sin Cuenta Contable (5 min):</strong> <code>[MOUS-OPT-USB]</code>. 100 u @ $85 = $8,500 en bodega, $0 en 1150. Brecha: -$8,500 MXN.</div>
+                <div>• <strong>Caso 1: Ajuste de Inventario sin Cuenta en Ubicación Virtual (5 min):</strong> <code>[MOUS-OPT-USB]</code> (en Contabilidad Perpetua). 100 u @ $85 = $8,500 en bodega, $0 en 1150 porque la ubicación <em>Inventory adjustment</em> viene vacía de cuenta por defecto en Odoo 19.</div>
                 <div>• <strong>Caso 2: Producto Archivado con Existencias (5 min):</strong> <code>[ROUT-WIFI4-LEG]</code>. 8 u @ $300 = $2,400 MXN vivos en 1150 pero ocultos en bodega. Brecha: +$2,400 MXN.</div>
-                <div>• <strong>Caso 3: Costo MXN Comprado en USD por Error (6 min):</strong> <code>[CAM-WEB-4K]</code>. 10 u @ $1,500 USD = $277,500 MXN recibidos y <strong>dejados sin facturar</strong>. Demo en vivo: corrección de divisa/monto en el borrador de la factura.</div>
+                <div>• <strong>Caso 3: Costo MXN Comprado en USD por Error (6 min):</strong> <code>[CAM-WEB-4K]</code>. 10 u @ $1,500 USD = $277,500 MXN recibidos y <strong>dejados sin facturar</strong>. Demo en vivo: corrección de divisa a MXN ($15,000 MXN) en la factura del proveedor.</div>
                 <div>• <strong>Caso 4: Cambio Directo de Costo desde Ficha (6 min):</strong> <code>[MEM-RAM-16GB]</code>. Coste alterado de $100 a $121 en 10 u. Bodega $1,210 vs Contabilidad $1,000. Brecha: -$210 MXN.</div>
                 <div>• <strong>Caso 5: Venta Forzada Dejando Stock Negativo (6 min):</strong> <code>[DISC-SSD-1TB]</code>. Salida forzada de 10 u sin stock. Compra tardía de 20 u @ $350. Brecha: -$1,500 MXN.</div>
               </div>
@@ -161,18 +161,18 @@ def get_cronograma_html(logo_light):
           </div>
           <div class="cron-block-body">
             <div class="cron-element">
-              <strong>1. Caza de la Póliza Manual & Acción de Servidor #589 (15 min — 01:30 a 01:45):</strong>
-              <p>Filtro en 1150 sin producto asignado: Caza de la póliza <strong><code>MISC/2026/09/0001</code></strong> por <strong>+$487,000.00 MXN</strong>. Ejecución de la Acción de Servidor #589 y descarga del CSV con el desglose SKU por SKU explicando el descuadre de $196,190.00 MXN al centavo. Importación de la Plantilla CSV de regularización.</p>
+              <strong>1. Caza de la Póliza Manual, Acción #589 y Cuadre Real en $78,810.00 MXN (15 min — 01:30 a 01:45):</strong>
+              <p>Caza y reversión de la póliza huérfana <strong><code>MISC/2026/09/0001</code></strong> ($487,000 MXN). Ejecución de la Acción de Servidor #589 (con conversión multimoneda). Corrección de factura de Cámara Web a MXN (-$262,500 de sobrevaluación), desarchivado de Router (+$2,400) e importación de Plantilla CSV por SKU, logrando el <strong>Cuadre Perfecto Real de $78,810.00 MXN = $78,810.00 MXN</strong> (Diferencia $0.00).</p>
             </div>
             <div class="cron-element">
-              <strong>2. Estrategias de Saneamiento: El Parche Manual vs Borrón y Cuenta Nueva (15 min — 01:45 a 02:00):</strong>
-              <div style="background:#FEF2F2; padding:10px; border-radius:6px; border-left:4px solid #B91C1C; margin-bottom:8px;">
-                <strong style="color:#991B1B;">⚠️ Vía A: El Parche Manual ("La Aspirina Destructiva"):</strong>
-                <p style="margin:4px 0 0; font-size:0.85rem; color:#7F1D1D;">Forzar pólizas a la 1150 sin mover almacén no resuelve la falla física; en la siguiente venta el costo promedio vuelve a desfasarse.</p>
+              <strong>2. Regla de Decisión en Producción: Regularización Quirúrgica vs Borrón y Cuenta Nueva (15 min — 01:45 a 02:00):</strong>
+              <div style="background:#F0FDFA; padding:10px; border-radius:6px; border-left:4px solid #0D9488; margin-bottom:8px;">
+                <strong style="color:#115E59;">🎯 Escenario 1: Almacén Sano, Contabilidad Desfasada (Regularización Quirúrgica con <code>product_id</code>):</strong>
+                <p style="margin:4px 0 0; font-size:0.85rem; color:#134E4A;">Cuando el costo promedio y stock en almacén son correctos y las diferencias están acotadas por SKU, se importa la Plantilla CSV con <code>product_id</code> obligatorio (prohibido meter asientos ciegos sin SKU).</p>
               </div>
               <div style="background:#F0FDF4; padding:10px; border-radius:6px; border-left:4px solid #16A34A;">
-                <strong style="color:#166534;">✅ Vía B: Protocolo "Borrón y Cuenta Nueva" (La Solución Blindada Vauxoo):</strong>
-                <p style="margin:4px 0 0; font-size:0.85rem; color:#14532D;">Corte operativo $\rightarrow$ Ajuste llevando existencias físicas a 0 $\rightarrow$ Ajuste contable llevando cuenta 1150 a $0 $\rightarrow$ Blindaje de Fase 0 (categorías y permisos) $\rightarrow$ Carga de conteo físico real con costos reales auditados. Cuadre perfecto desde el día uno.</p>
+                <strong style="color:#166534;">🔄 Escenario 2: Costos AVCO o Stock Corruptos (Protocolo "Borrón y Cuenta Nueva" Vauxoo):</strong>
+                <p style="margin:4px 0 0; font-size:0.85rem; color:#14532D;">Cuando hay meses de negativos o cambios de categoría en caliente: Corte operativo $\rightarrow$ Ajuste llevando existencias físicas y cuenta 1150 a $0.00 $\rightarrow$ Blindaje de Fase 0 $\rightarrow$ Carga de conteo físico real con costos auditados.</p>
               </div>
             </div>
           </div>

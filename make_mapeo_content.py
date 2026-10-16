@@ -268,8 +268,8 @@ def get_mapeo_html(logo_light, doodle_underline, doodle_arrow):
               <h4>Operación en Moneda Extranjera USD — [MON-27-4K] Monitor Profesional 27" 4K</h4>
               <p>Compra de 20 unidades a <strong>$100.00 USD</strong> con tipo de cambio oficial de <strong>18.50 MXN/USD</strong> ($1,850.00 MXN/u).</p>
               <div class="asiento-mini">
-                <div>Recepción de almacén: 20 u &times; $1,850 = $37,000.00 MXN cargados a cuenta 115.01.01.<br>
-                Factura de proveedor procesada a la misma tasa: Cero desvío cambiario contable-logístico.</div>
+                <div>Recepción física en almacén: 20 u &times; $1,850 = $37,000.00 MXN registrados en <code>stock.move</code> (sin póliza aún).<br>
+                Factura de proveedor validada a la misma tasa: <strong>Cargo 115.01.01 ($37,000) / Abono 201.01.01 ($37,000)</strong>.</div>
               </div>
               <div class="stage-memo">📌 <em>Resultado: 20 u en almacén ($37,000.00 MXN) = Saldo contable ($37,000.00 MXN).</em></div>
             </div>

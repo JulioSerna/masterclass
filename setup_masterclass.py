@@ -90,36 +90,33 @@ action = {'results': results}
     print(f"   ✓ Purga completa ejecutada: {json.dumps(res)}")
 
 def setup_categories_and_partners():
-    print("🏢 2. Configurando categorías y contactos...")
-    # Categoría Perpetua AVCO
+    print("🏢 2. Configurando categorías, ubicaciones y contactos (100% Contabilidad Perpetua)...")
+    # Categoría Perpetua AVCO única para todos los productos de la Masterclass
     cat_id = 4 # Almacenable - AVCO (Perpetuo México)
     call_kw("product.category", "write", [[cat_id], {
         "property_cost_method": "average",
         "property_valuation": "real_time"
     }])
 
-    # Categoría Periódica para recrear el error del Mouse
+    # Eliminar categoría periódica residual si existiera de pruebas anteriores
     cat_periodic = call_kw("product.category", "search", [[("name", "=", "Tecnología / Periódico (Error de Configuración)")]])
-    if not cat_periodic:
-        cat_periodic_id = call_kw("product.category", "create", [{
-            "name": "Tecnología / Periódico (Error de Configuración)",
-            "property_cost_method": "average",
-            "property_valuation": "periodic"
-        }])
-    else:
-        cat_periodic_id = cat_periodic[0]
-        call_kw("product.category", "write", [[cat_periodic_id], {
-            "property_cost_method": "average",
-            "property_valuation": "periodic"
-        }])
+    if cat_periodic:
+        try:
+            call_kw("product.category", "unlink", [cat_periodic])
+        except Exception:
+            pass
+
+    # Ubicación virtual Inventory adjustment (ID 11): dejar sin cuenta contable (como viene por defecto en Odoo 19)
+    # para demostrar que aun en Contabilidad Perpetua, un ajuste sin cuenta en la ubicación virtual no genera póliza.
+    call_kw("stock.location", "write", [[11], {"valuation_account_id": False}])
 
     partner_prov_mx = 8  # Distribuidora Nacional de Insumos
     partner_prov_usd = 9 # Global Supply Tech LLC
     partner_cli = 11     # Cliente Industrial de México
 
-    return cat_id, cat_periodic_id, partner_prov_mx, partner_prov_usd, partner_cli
+    return cat_id, partner_prov_mx, partner_prov_usd, partner_cli
 
-def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
+def setup_cases(cat_id, prov_mx, prov_usd, cli):
     print("🚀 3. Creando los 7 escenarios oficiales de la Masterclass...")
 
     # -------------------------------------------------------------
@@ -196,15 +193,15 @@ def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
     call_kw("account.move", "action_post", [[b_mon]])
 
     # -------------------------------------------------------------
-    # DESASTRE 1: AJUSTE INICIAL SIN CUENTA CONTABLE (Mouse Óptico)
+    # DESASTRE 1: AJUSTE INICIAL SIN CUENTA CONTABLE EN UBICACIÓN (Mouse Óptico)
     # -------------------------------------------------------------
-    print("   -> Creando Desastre 1: Mouse Óptico (Ajuste sin póliza contable)...")
+    print("   -> Creando Desastre 1: Mouse Óptico (En Contabilidad Perpetua, ajuste sin cuenta en ubicación virtual)...")
     mous = call_kw("product.product", "create", [{
         "name": "Mouse Óptico Ergonómico USB",
         "default_code": "MOUS-OPT-USB",
         "is_storable": True,
         "active": True,
-        "categ_id": cat_periodic_id, # Permanece en periódica para que no tenga póliza contable
+        "categ_id": cat_id, # 100% Contabilidad Perpetua; no genera póliza porque la ubicación 11 no tiene cuenta asignada
         "standard_price": 85.0
     }])
     quant_m = call_kw("stock.quant", "create", [{
@@ -352,22 +349,170 @@ def setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli):
     print("🎉 ¡TODOS LOS ESCENARIOS CREADOS CON ÉXITO!")
 
 def run_server_action_and_update_downloads():
-    print("📊 4. Ejecutando Acción de Servidor para exportar CSV a Downloads...")
+    print("📊 4. Actualizando y ejecutando Acción de Servidor #589 para exportar CSV a Downloads...")
+    server_action_code = """# 1. Obtener productos activos en ubicaciones internas
+quants = env['stock.quant'].search([
+    ('location_id.usage', '=', 'internal'),
+    ('product_id.active', '=', True)
+])
+
+product_ids_set = set()
+product_data = {}
+
+for q in quants:
+    p = q.product_id
+    product_ids_set.add(p.id)
+    if p.id not in product_data:
+        product_data[p.id] = {'product': p, 'qty': 0.0, 'stock_value': 0.0}
+    product_data[p.id]['qty'] += q.quantity
+    product_data[p.id]['stock_value'] += q.value
+
+# 2. Agregar productos archivados que tengan saldo contable en la 1150
+amls_archived = env['account.move.line'].search([
+    ('account_id.code', '=', '115.01.01'),
+    ('move_id.state', '=', 'posted'),
+    ('product_id.active', '=', False),
+    ('product_id', '!=', False)
+])
+for aml in amls_archived:
+    p = aml.product_id
+    product_ids_set.add(p.id)
+    if p.id not in product_data:
+        q_arch = env['stock.quant'].search([
+            ('location_id.usage', '=', 'internal'),
+            ('product_id', '=', p.id)
+        ])
+        q_sum = sum(q_arch.mapped('quantity'))
+        v_sum = sum(q_arch.mapped('value'))
+        product_data[p.id] = {'product': p, 'qty': q_sum, 'stock_value': v_sum}
+
+product_ids = list(product_ids_set)
+
+# 3. Valor por facturar (purchase.order.line con bill_to_receive = True, convertido a moneda compañía)
+val_por_facturar = {pid: 0.0 for pid in product_ids}
+if product_ids:
+    pols = env['purchase.order.line'].search([
+        ('product_id', 'in', product_ids),
+        ('bill_to_receive', '=', True)
+    ])
+    for pol in pols:
+        pid = pol.product_id.id
+        v = (pol.qty_received - pol.qty_invoiced) * pol.price_unit
+        if pol.currency_id and pol.currency_id != pol.company_id.currency_id:
+            v = pol.currency_id._convert(
+                v,
+                pol.company_id.currency_id,
+                pol.company_id,
+                pol.order_id.date_approve or pol.order_id.date_order
+            )
+        val_por_facturar[pid] = val_por_facturar.get(pid, 0.0) + v
+
+# 4. Valor en contabilidad (cuenta 115.01.01)
+val_contabilidad = {pid: 0.0 for pid in product_ids}
+if product_ids:
+    amls = env['account.move.line'].search([
+        ('account_id.code', '=', '115.01.01'),
+        ('move_id.state', '=', 'posted'),
+        ('product_id', 'in', product_ids)
+    ])
+    for aml in amls:
+        pid = aml.product_id.id
+        val_contabilidad[pid] = val_contabilidad.get(pid, 0.0) + (aml.debit - aml.credit)
+
+# 5. Valor no reconocido: stock.move.line de ajuste de inventario sin poliza
+val_no_reconocido = {pid: 0.0 for pid in product_ids}
+if product_ids:
+    smls = env['stock.move.line'].search([
+        ('product_id', 'in', product_ids),
+        ('is_inventory', '=', True),
+        ('state', '=', 'done'),
+        ('move_id.account_move_id', '=', False)
+    ])
+    for sml in smls:
+        pid = sml.product_id.id
+        m = sml.move_id
+        if m.quantity:
+            v = (sml.quantity / m.quantity) * (m.value or (m.quantity * (m.price_unit or sml.product_id.standard_price)))
+        else:
+            v = sml.quantity * (m.price_unit or sml.product_id.standard_price)
+        
+        if sml.location_id.usage != 'internal' and sml.location_dest_id.usage == 'internal':
+            val_no_reconocido[pid] = val_no_reconocido.get(pid, 0.0) + v
+        elif sml.location_id.usage == 'internal' and sml.location_dest_id.usage != 'internal':
+            val_no_reconocido[pid] = val_no_reconocido.get(pid, 0.0) - v
+
+# 6. Generar reporte CSV
+header = [
+    "Producto",
+    "Estado",
+    "Costo",
+    "Cantidad",
+    "Valor en existencias",
+    "Valor por facturar",
+    "Valor en contabilidad",
+    "Valor no reconocido",
+    "Diferencia (Cuadre)"
+]
+
+lines = [",".join(f'"{h}"' for h in header)]
+for pid in sorted(product_ids):
+    data = product_data[pid]
+    prod = data['product']
+    name = (prod.display_name or prod.name or '').replace('"', '""')
+    status = "Activo" if prod.active else "Archivado"
+    cost = prod.standard_price or 0.0
+    qty = data['qty']
+    v_exist = data['stock_value']
+    v_fact = val_por_facturar.get(pid, 0.0)
+    v_cont = val_contabilidad.get(pid, 0.0)
+    v_norec = val_no_reconocido.get(pid, 0.0)
+    dif = v_exist - (v_fact + v_cont + v_norec)
+    
+    row = [
+        f'"{name}"',
+        f'"{status}"',
+        f'{cost:.2f}',
+        f'{qty:.2f}',
+        f'{v_exist:.2f}',
+        f'{v_fact:.2f}',
+        f'{v_cont:.2f}',
+        f'{v_norec:.2f}',
+        f'{dif:.2f}'
+    ]
+    lines.append(",".join(row))
+
+csv_content = "\\r\\n".join(lines)
+
+today_str = time.strftime('%Y-%m-%d')
+attachment = env['ir.attachment'].create({
+    'name': f'conciliacion_inventario_{today_str}.csv',
+    'raw': csv_content.encode('utf-8-sig'),
+    'mimetype': 'text/csv',
+    'res_model': 'stock.quant',
+})
+
+action = {
+    'type': 'ir.actions.act_url',
+    'url': f'/web/content/{attachment.id}?download=true',
+    'target': 'self',
+}
+"""
+    call_kw("ir.actions.server", "write", [[589], {"code": server_action_code}])
     call_kw("ir.actions.server", "run", [[589]])
     att = call_kw("ir.attachment", "search_read", [[("res_model", "=", "stock.quant")]], {"fields": ["raw"], "limit": 1, "order": "id desc"})
     if att:
         raw_csv = att[0]["raw"]
         with open("/Users/julioserna/Downloads/conciliacion_inventario.csv", "w", encoding="utf-8") as f:
             f.write(raw_csv)
-        print("   ✓ conciliation_inventario.csv actualizado en Downloads.")
+        print("   ✓ conciliacion_inventario.csv actualizado en Downloads.")
 
 if __name__ == "__main__":
     print("==================================================")
     print(" REINICIO Y RECARGA DE DATOS: MASTERCLASS ODOO 19 ")
     print("==================================================")
     clean_previous_transactions()
-    cat_id, cat_periodic_id, prov_mx, prov_usd, cli = setup_categories_and_partners()
-    setup_cases(cat_id, cat_periodic_id, prov_mx, prov_usd, cli)
+    cat_id, prov_mx, prov_usd, cli = setup_categories_and_partners()
+    setup_cases(cat_id, prov_mx, prov_usd, cli)
     run_server_action_and_update_downloads()
     print("==================================================")
     print(" INSTANCIA 100% LIMPIA Y LISTA PARA LA SESIÓN    ")
